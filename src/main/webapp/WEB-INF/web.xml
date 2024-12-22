@@ -5,16 +5,16 @@
          version="6.0">
 
         <servlet>
-            <servlet-name>HomeController</servlet-name>
-            <servlet-class>com.example.eventspherefrontend.controller.HomeController</servlet-class>
+            <servlet-name>DashboardHomeController</servlet-name>
+            <servlet-class>com.example.eventspherefrontend.controller.DashboardHomeController</servlet-class>
         </servlet>
         <servlet-mapping>
-            <servlet-name>HomeController</servlet-name>
+            <servlet-name>DashboardHomeController</servlet-name>
             <url-pattern>/pages/Home</url-pattern>
         </servlet-mapping>
         <!-- Welcome File Configuration -->
         <welcome-file-list>
-            <welcome-file>pages/Home.jsp</welcome-file>
+            <welcome-file>pages/DashboardHome.jsp</welcome-file>
         </welcome-file-list>
 
 </web-app>
