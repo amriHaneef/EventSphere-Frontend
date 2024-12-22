@@ -66,8 +66,146 @@
         </a>
     </nav>
     <!-- End of navbar  -->
+    <main id="admin_view_home_tab">
+        <div class="header">
+            <div class="left">
+                <h1>Dashboard</h1>
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="#">Admin</a>
+                    </li>
+                    /
+                    <li>
+                        <a href="#" class="active">Home</a>
+                    </li>
+                </ul>
+            </div>
 
-    <main>
+        </div>
+
+        <!-- Insights -->
+
+        <div class="insight ">
+            <div class="sales">
+                <span class="material-icons-sharp">analytics</span>
+                <div class="middle">
+                    <div class="left">
+                        <h3>Attendance for Events</h3>
+                        <p>Events: 25,024</p>
+                        <p>Students: 25,024</p>
+                    </div>
+                    <div class="progress">
+                        <svg>
+                            <circle cx='38' cy='38' r='36' style="stroke-dashoffset: 120"></circle>
+                        </svg>
+                        <div class="number">
+                            <p>45%</p>
+                        </div>
+                    </div>
+                </div>
+                <small class="text-muted">Last 24 Hours</small>
+
+            </div>
+
+            <!-- -------------------End Of Sales--------------------  -->
+
+            <!-- --------------------------------------------End Of Insight---------------------------------------------------  -->
+        </div>
+        <ul class="insights">
+            <a href="#">
+                <li>
+                    <i class="bx bx-group"></i>
+                    <span class="info">
+                            <h3>
+                                1,074
+                            </h3>
+                            <p>Users</p>
+                        </span>
+                </li>
+            </a>
+            <a href="#">
+                <li>
+                    <i class="bx bx-calendar-check"></i>
+                    <span class="info">
+                            <h3>
+                                1,074
+                            </h3>
+                            <p>Events</p>
+                        </span>
+                </li>
+            </a>
+            <a href="#">
+                <li>
+                    <i class='bx bxs-book-open'></i>
+                    <span class="info">
+                            <h3>
+                                1,074
+                            </h3>
+                            <p>Batches</p>
+                        </span>
+                </li>
+            </a>
+        </ul>
+        <!-- End of Insights  -->
+
+
+        <div class="bottom-data">
+            <div class="orders">
+                <div class="header">
+                    <i class="bx bx-calendar-check"></i>
+                    <h3>Recent Events</h3>
+                    <i class="bx bx-filter"></i>
+                    <div class="search-container">
+                        <i class="bx bx-search"></i>
+                        <label>
+                            <input type="text" class="search-bar" placeholder="Search...">
+                        </label>
+                    </div>
+                </div>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Event</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr onclick="openEventDetails()">
+                        <td>1</td>
+                        <td>
+                            <p>Mock Interview</p>
+                        </td>
+                        <td>14-08-2024</td>
+                        <td><span class="status completed">Completed</span></td>
+                    </tr>
+
+
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Reminders -->
+            <div class="reminders">
+                <div class="header">
+                    <i class="bx bxs-megaphone"></i>
+                    <h3>Recent Announcements</h3>
+                </div>
+                <ul class="task-list">
+
+                    <li class="completed">
+                        <div class="task-title">
+                            <i class="bx bx-check-circle"></i>
+                            <p>Your Meeting will start at 9 a.m.</p>
+                        </div>
+                        <i class="bx bx-dots-vertical-rounded"></i>
+                    </li>
+
+                </ul>
+            </div>
+            <!-- End of Reminders  -->
+        </div>
     </main>
 </div>
 
