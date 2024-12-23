@@ -180,7 +180,35 @@
                         <td>14-08-2024</td>
                         <td><span class="status completed">Completed</span></td>
                     </tr>
-
+                    <!-------------------------- Event Details card ------------------------------>
+                    <div class="container" id="eventDetails">
+                        <div class="card">
+                            <div class="top">
+                                <div class="title">Event Details</div>
+                            </div>
+                            <div class="info">Here, you have some details about the event that you are looking for!</div>
+                            <div class="details">
+                                <div class="plan">
+                                    <span><strong>Name:</strong> Mock Interview</span>
+                                    <i class="bx bx-check"></i>
+                                </div>
+                                <div class="plan">
+                                    <span><strong>Consultant:</strong> Mrs.Sandaruwani</span>
+                                    <i class="bx bx-check"></i>
+                                </div>
+                                <div class="plan">
+                                    <span><strong>Participated Batch:</strong> GAHDSE24.2f</span>
+                                    <i class="bx bx-check"></i>
+                                </div>
+                                <div class="plan">
+                                    <span><strong>Assigned Students: </strong> 30</span>
+                                    <i class="bx bx-check"></i>
+                                </div>
+                                <button onclick="closeEventDetails()">Done</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-------------------------- End of Event Details card ----------------------->
 
                     </tbody>
                 </table>
