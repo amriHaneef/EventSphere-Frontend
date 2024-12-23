@@ -18,6 +18,7 @@
     width: 100%;
     padding: 0px 80px;
 }
+
 .navbar {
     width: 100%;
     display: flex;
@@ -85,6 +86,8 @@
 .navbar ul li a:hover {
     background-color: #5d88d5;
 }
+
+
 .content{
     width:100%;
     min-height:100vh;
@@ -413,4 +416,182 @@
         font-size: 0.9rem;
     }
 
+}
+
+.about-section {
+    padding: 0;
+    margin: 0;
+}
+
+.about {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.about-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.about-image {
+    flex: 1;
+    max-width: 50%;
+}
+
+.about-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.about-description {
+    flex: 1;
+    max-width: 50%;
+    padding: 20px;
+    color: #000080;
+    text-align: left;
+}
+
+.about-border {
+    border: 2px solid transparent;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.about-description h2 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #f39c12;
+    text-align: center;
+}
+
+.about-description p {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #333;
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+    .about-content {
+        flex-direction: column;
+    }
+
+    .about-image,
+    .about-description {
+        max-width: 100%;
+    }
+
+    .about-description h2 {
+        font-size: 1.5rem;
+    }
+
+    .about-description p {
+        font-size: 0.9rem;
+    }
+}
+
+.contact {
+    background: url('../images/contact.jpg') no-repeat center center/cover;
+    padding: 60px 20px;
+    position: relative;
+    color: white;
+    text-align: center;
+}
+
+.contact::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+}
+
+.contact * {
+    position: relative;
+    z-index: 2;
+}
+
+.contact h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #f39c12;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.contact p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    max-width: 700px;
+    margin: 10px auto 40px auto;
+    color: #ddd;
+    text-align: center;
+}
+
+.contact-info {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.contact-item {
+    background-color: #333;
+    padding: 20px 15px;
+    border-radius: 10px;
+    width: 260px;
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.contact-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+}
+
+.contact-item i {
+    font-size: 2rem;
+    color: #f39c12;
+    margin-bottom: 10px;
+}
+
+/* Contact Item Title */
+.contact-item h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+/* Contact Item Description */
+.contact-item p {
+    font-size: 1rem;
+    color: #bbb;
+    margin: 0;
+}
+
+/* Responsive Design for Smaller Screens */
+@media (max-width: 768px) {
+    .contact-info {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .contact-item {
+        width: 100%;
+        max-width: 400px;
+    }
 }
