@@ -1,4 +1,4 @@
-package com.example.frontenddemo.controller;
+package com.example.eventspherefrontend.controller;
 
 import java.io.IOException;
 import jakarta.servlet.ServletException;

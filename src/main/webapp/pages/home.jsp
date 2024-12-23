@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Education Theme</title>
-    <link rel="stylesheet" type="text/css" href="css/home.css">
+    <title>EventSphere</title>
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/home.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
@@ -20,7 +21,7 @@
                 <li><a href="#student">Student</a></li>
                 <li><a href="#about">About Us</a></li>
                 <li><a href="#contact">Contact Us</a></li>
-                <li class="login-button" style="list-style: none;"><a class="logIn-button">LogIn</a></li>
+                <<li class="login-button" style="list-style: none;"><a href="${pageContext.request.contextPath}/login/login.jsp" class="logIn-button"> LogIn </a></li>
             </ul>
         </nav>
         <div class="content">
@@ -73,6 +74,7 @@
     </div>
 </div>
 
+<!--teacher section-->
 <section id="teacher" class="teacher-section">
     <div class="teacher">
         <div class="teacher-image">
@@ -95,11 +97,11 @@
                 <li>Get recognition for your contributions</li><br>
                 <li class="login-button" style="list-style: none;"><a href="${pageContext.request.contextPath}/login/login.jsp" class="logIn-button">LogIn</a></li>
             </ul>
-
         </div>
     </div>
 </section>
 
+<!--student section-->
 <section id="student" class="student-section">
     <div class="student">
         <div class="student-description">
@@ -125,6 +127,6 @@
         </div>
     </div>
 </section>
-
+<script src="js/home.js"></script>
 </body>
 </html>
