@@ -80,12 +80,35 @@ window.addEventListener('click', function (event) {
         closeEventDetails();
     }
 });
-
-
-
-
-
 // -------------------------End of Admin view event details form ---------------------------------
+
+
+// Function to open the modal
+function openTeacherEventDetails() {
+    const modal = document.getElementById('teacher_eventDetails');
+    modal.classList.add('show');
+}
+
+// Function to close the modal
+function closeTeacherEventDetails() {
+    const modal = document.getElementById('teacher_eventDetails');
+    modal.classList.remove('show');
+}
+
+// Close modal when clicking outside the modal content (on the overlay)
+window.addEventListener('click', function (event) {
+    const modal = document.getElementById('teacher_eventDetails');
+    // Check if the modal is visible and the click is outside the modal content (overlay)
+    if (modal.classList.contains('show') && !event.target.closest('.card')) {
+        closeTeacherEventDetails();
+    }
+});
+
+
+
+
+
+
 
 
 
