@@ -72,5 +72,59 @@
         </ul>
     </div>
 </div>
+
+<section id="teacher" class="teacher-section">
+    <div class="teacher">
+        <div class="teacher-image">
+            <img src="images/teacher.jpg" alt="Teacher Image">
+        </div>
+        <div class="teacher-description">
+            <h2>Teacher</h2>
+            <p>Teachers can share their expertise by conducting workshops, mentoring students, and fostering a love for learning.</p>
+            <h3>Roles and Responsibilities:</h3><br>
+            <ul>
+                <li>Conduct workshops and classes</li>
+                <li>Mentor students and provide guidance</li>
+                <li>Collaborate with other educators</li>
+                <li>Evaluate and provide feedback on student progress</li>
+            </ul>
+            <h3>Benefits:</h3><br>
+            <ul>
+                <li>Make a difference in students' lives</li>
+                <li>Enhance your teaching skills</li>
+                <li>Get recognition for your contributions</li><br>
+                <li class="login-button" style="list-style: none;"><a href="${pageContext.request.contextPath}/login/login.jsp" class="logIn-button">LogIn</a></li>
+            </ul>
+
+        </div>
+    </div>
+</section>
+
+<section id="student" class="student-section">
+    <div class="student">
+        <div class="student-description">
+            <h2>Student</h2>
+            <p>Students can LogIn to join educational workshops, enhance their skills, and prepare for their future careers.</p>
+            <h3>Roles and Responsibilities:</h3><br>
+            <ul>
+                <li>Participate in workshops and events</li>
+                <li>Engage in networking opportunities</li>
+                <li>Take part in skill-building sessions</li>
+                <li>Provide feedback on workshops</li>
+            </ul>
+            <h3>Benefits:</h3><br>
+            <ul>
+                <li>Gain new skills and knowledge</li>
+                <li>Access to expert advice and mentorship</li>
+                <li>Build a strong professional network</li><br>
+                <li class="login-button" style="list-style: none;"><a href="${pageContext.request.contextPath}/login/login.jsp" class="logIn-button">LogIn</a></li>
+            </ul>
+        </div>
+        <div class="student-image">
+            <img src="images/student.jpg" alt="Student Image">
+        </div>
+    </div>
+</section>
+
 </body>
 </html>

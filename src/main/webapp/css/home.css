@@ -172,3 +172,244 @@
 .feature-card a:hover {
     color: #e67e22;
 }
+
+.teacher {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color:#808080;
+    padding: 40px 20px;
+    color: #110437;
+    border-radius: 8px;
+    border: 1px solid #808080;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin: 20px auto;
+    max-width: 1200px;
+}
+
+.teacher-image img {
+    width: 200%;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.teacher-description {
+    width: 45%;
+    padding-left: 20px;
+}
+
+.teacher h2 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    color: #f39c12;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align:center;
+}
+
+.teacher p {
+    font-size: 1rem;
+    color: #1a1a1a;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+/* List Styling */
+.teacher ul {
+    list-style-type: square;
+    padding: 0 20px;
+    text-align: left;
+}
+
+.teacher ul li {
+    font-size: 1rem;
+    margin-bottom: 10px;
+    color: #000000;
+    transition: color 0.3s ease;
+}
+
+.teacher ul li:hover {
+    color: #FFFFFF;
+}
+
+.teacher a {
+    color:#FFFFFF;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+
+}
+.teacher ul li.login-button a {
+    background-color: #110437;
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-family: sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.teacher ul li.login-button a:hover {
+    background-color: #080c1e;
+    transform: scale(1.05);
+    border-color: #080c1e;
+}
+
+.teacher ul li.login-button a.active {
+    background-color:#080c1e;
+    border-color: #080c1e;
+}
+
+@media (max-width: 768px) {
+    .teacher {
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+    }
+
+    .teacher-image img {
+        width: 90%;
+        margin-bottom: 20px;
+    }
+
+    .teacher-description {
+        width: 90%;
+    }
+
+    .teacher h2 {
+        font-size: 2.5rem;
+        text-align: center;
+    }
+
+    .teacher p {
+        font-size: 0.95rem;
+    }
+
+    .teacher ul li {
+        font-size: 0.9rem;
+    }
+}
+.student {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #808080;
+    padding: 40px 20px;
+    color: #110437;
+    border-radius: 8px;
+    border: 1px solid #808080;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin: 20px auto;
+    max-width: 1200px;
+}
+
+.student-image img {
+    width: 75%;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.student-description {
+    width: 45%;
+    padding-right: 60px;
+}
+
+.student h2 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    color: #f39c12;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+.student p {
+    font-size: 1rem;
+    color: #1a1a1a;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.student ul {
+    list-style-type: square;
+    padding: 0 20px;
+    text-align: left;
+}
+
+.student ul li {
+    font-size: 1rem;
+    margin-bottom: 10px;
+    color: #000000;
+    transition: color 0.3s ease;
+}
+
+.student ul li:hover {
+    color: #FFFFFF;
+
+}
+/* Link Styling */
+.student a {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+.student ul li.login-button a {
+    background-color: #110437;
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-family: sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.student ul li.login-button a:hover {
+    background-color: #080c1e;
+    transform: scale(1.05);
+    border-color: #080c1e;
+}
+
+.student ul li.login-button a.active {
+    background-color:#080c1e;
+    border-color: #080c1e;
+}
+
+@media (max-width: 768px) {
+    .student {
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+    }
+
+    .student-image img {
+        width: 90%;
+        margin-bottom: 20px;
+    }
+
+    .student-description {
+        width: 90%;
+    }
+
+    .student h2 {
+        font-size: 1.8rem;
+        text-align: center;
+    }
+
+    .student p {
+        font-size: 0.95rem;
+    }
+
+    .student ul li {
+        font-size: 0.9rem;
+    }
+}
