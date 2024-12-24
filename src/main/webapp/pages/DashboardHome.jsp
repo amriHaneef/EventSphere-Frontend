@@ -243,9 +243,9 @@
                         </li>
                     </ul>
                 </div>
-                <a href="#" class="report">
-                    <i class="bx bx-plus"></i>
-                    <span>Add Announcements</span>
+                <a href="${pageContext.request.contextPath}/pages/Portfolio.jsp" class="report">
+                    <i class='bx bxs-edit-alt'></i>
+                    <span>Portfolio</span>
                 </a>
             </div>
 
