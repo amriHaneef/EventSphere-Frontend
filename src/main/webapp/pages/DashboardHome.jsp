@@ -18,13 +18,14 @@
         <div class="logo-name"><span>Event</span>Sphere</div>
     </a>
     <ul class="side-menu">
-        <li class="active">
-            <a href="#"><i class='bx bx-home'></i>Home</a>
+        <li>
+            <a href="${pageContext.request.contextPath}/pages/Home"><i class='bx bx-home'></i>Home</a>
         </li>
         <li>
-            <a href="#"><i class="bx bx-calendar-check"></i>Events</a>
+            <!-- Add link to events page -->
+            <a href="${pageContext.request.contextPath}/pages/events.jsp"><i class="bx bx-calendar-check"></i>Events</a>
         </li>
-        <li >
+        <li>
             <a href="#"><i class='bx bxs-megaphone'></i>Announcements</a>
         </li>
         <li>
@@ -46,6 +47,7 @@
         </li>
     </ul>
 </div>
+
 <!-- End of sidebar  -->
 
 <!-- Main content -->

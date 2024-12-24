@@ -12,9 +12,26 @@
             <servlet-name>DashboardHomeController</servlet-name>
             <url-pattern>/pages/Home</url-pattern>
         </servlet-mapping>
+
         <!-- Welcome File Configuration -->
         <welcome-file-list>
             <welcome-file>pages/DashboardHome.jsp</welcome-file>
         </welcome-file-list>
+
+    <!-- General Web Application Configuration -->
+    <display-name>Admin Events Application</display-name>
+
+    <!-- Welcome File List -->
+    <welcome-file-list>
+        <welcome-file>pages/events.jsp</welcome-file>
+    </welcome-file-list>
+    <servlet>
+        <servlet-name>EventServlet</servlet-name>
+        <servlet-class>com.example.eventspherefrontend.controller.eventcontroller</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EventServlet</servlet-name>
+        <url-pattern>/events</url-pattern>
+    </servlet-mapping>
 
 </web-app>

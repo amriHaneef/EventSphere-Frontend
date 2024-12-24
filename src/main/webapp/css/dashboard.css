@@ -179,8 +179,6 @@ body{
     color: var(--danger);
 }
 
-
-
 .content{
     position: relative;
     width: calc(100% - 230px);
