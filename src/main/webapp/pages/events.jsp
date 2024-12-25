@@ -68,6 +68,22 @@
             <canvas id="progressPieChart" width="400" height="400"></canvas> <!-- Placeholder for pie chart -->
         </div>
     </div>
+
+        <!-- Attendance Marking Panel -->
+        <h2>Attendance Marking</h2>
+        <div class="attendance-panel">
+            <ul id="attendanceList">
+                <!-- Dynamic checkboxes for marking attendance go here -->
+            </ul>
+            <button onclick="submitAttendance()">Submit Attendance</button>
+        </div>
+
+        <!-- Feedback Box -->
+        <h2>Feedback</h2>
+        <textarea id="feedbackBox" placeholder="Enter feedback for the event..."></textarea>
+        <button onclick="submitFeedback()">Submit Feedback</button>
+
+</div>
 <script src="${pageContext.request.contextPath}/js/event.js"></script>
 </body>
 </html>

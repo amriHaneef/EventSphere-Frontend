@@ -1,4 +1,4 @@
-package com.example.event.controller;
+package com.example.eventspherefrontend.controller;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
