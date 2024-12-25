@@ -100,3 +100,78 @@ body {
     max-width: 100%;
     max-height: 100%;
 }
+/* Attendance Marking Panel */
+.attendance-panel {
+    width: 50%;
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background: #f9f9f9;
+}
+
+.attendance-panel ul {
+    list-style: none;
+    padding: 0;
+}
+
+.attendance-panel li {
+    margin: 5px 0;
+    display: flex;
+    align-items: center;
+}
+
+.attendance-panel input[type="checkbox"] {
+    margin-right: 10px;
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+.attendance-panel button {
+    background: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 10px;
+    transition: background 0.3s;
+}
+
+.attendance-panel button:hover {
+    background: #0056b3;
+}
+
+/* Feedback Box */
+#feedbackBox {
+    width: 98%;
+    height: 100px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    resize: none;
+    outline: none;
+    transition: border 0.3s;
+}
+
+#feedbackBox:focus {
+    border: 1px solid #007bff;
+}
+
+#feedbackBox + button {
+    background: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+#feedbackBox + button:hover {
+    background: #007bff;
+}

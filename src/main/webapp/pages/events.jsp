@@ -68,7 +68,6 @@
             <canvas id="progressPieChart" width="400" height="400"></canvas> <!-- Placeholder for pie chart -->
         </div>
     </div>
-</div>
 <script src="${pageContext.request.contextPath}/js/event.js"></script>
 </body>
 </html>

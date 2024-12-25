@@ -1,4 +1,4 @@
-package com.example.eventspherefrontend.controller;
+package com.example.event.controller;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -39,13 +39,18 @@ public class eventcontroller extends HttpServlet {
             case "searchEvent":
                 searchEvent(request, response);
                 break;
+            case "markAttendance":
+                markAttendance(request, response);
+                break;
+            case "submitFeedback":
+                submitFeedback(request, response);
+                break;
             default:
                 response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid action: " + action);
         }
     }
 
     private void addEvent(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        // Retrieve event details from the request and process them
         String eventName = request.getParameter("eventName");
         String eventDate = request.getParameter("eventDate");
         String batch = request.getParameter("batch");
@@ -82,6 +87,35 @@ public class eventcontroller extends HttpServlet {
         // Logic to search events (e.g., database query and JSON response here)
 
         response.setContentType("application/json");
-        response.getWriter().write("[{\"eventId\":1,\"eventName\":\"Sample Event\",\"eventDate\":\"2024-12-25\",\"batch\":\"Batch A\",\"progress\":75}]");
+        response.getWriter().write("[{\"eventId\":1,\"eventName\":\"Java Workshop\",\"eventDate\":\"2024-12-25\",\"batch\":\"HDSE24.1f\",\"progress\":75}]");
+    }
+
+    private void markAttendance(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String[] attendeeIds = request.getParameterValues("attendeeIds");
+
+        if (attendeeIds == null || attendeeIds.length == 0) {
+            response.getWriter().write("No attendees marked for attendance.");
+            return;
+        }
+
+        // Logic to save attendance in the database
+        // Example: Iterate through attendeeIds and mark attendance in the database
+
+        response.getWriter().write("Attendance marked successfully for attendees: " + String.join(", ", attendeeIds));
+    }
+
+    private void submitFeedback(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String eventId = request.getParameter("eventId");
+        String feedback = request.getParameter("feedback");
+
+        if (feedback == null || feedback.trim().isEmpty()) {
+            response.getWriter().write("Feedback cannot be empty.");
+            return;
+        }
+
+        // Logic to save feedback in the database
+        // Example: Insert feedback associated with the eventId into the database
+
+        response.getWriter().write("Feedback submitted successfully for event ID: " + eventId);
     }
 }

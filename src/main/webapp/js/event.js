@@ -73,3 +73,59 @@ document.addEventListener('DOMContentLoaded', () => {
     const averageProgress = calculateAverageProgress(progressData);
     renderPieChart(averageProgress);
 });
+
+// Load attendance list dynamically
+function loadAttendance() {
+    const attendanceList = document.getElementById("attendanceList");
+    const attendees = [
+        { id: 1, name: "Amri" },
+        { id: 2, name: "Harindu" },
+        { id: 3, name: "Shan" },
+        { id: 4, name: "Adeesha" }
+    ];
+
+    attendees.forEach(attendee => {
+        const listItem = `<li>
+            <input type="checkbox" id="attendee_${attendee.id}">
+            <label for="attendee_${attendee.id}">${attendee.name}</label>
+        </li>`;
+        attendanceList.innerHTML += listItem;
+    });
+}
+
+// Submit attendance
+function submitAttendance() {
+    const selectedAttendees = [];
+    const checkboxes = document.querySelectorAll("#attendanceList input[type='checkbox']");
+    checkboxes.forEach(checkbox => {
+        if (checkbox.checked) {
+            const label = checkbox.nextElementSibling;
+            selectedAttendees.push(label.textContent);
+        }
+    });
+
+    if (selectedAttendees.length > 0) {
+        alert(`Attendance submitted for: ${selectedAttendees.join(", ")}`);
+    } else {
+        alert("Please select at least one attendee before submitting attendance.");
+    }
+}
+
+// Submit feedback
+function submitFeedback() {
+    const feedbackBox = document.getElementById("feedbackBox");
+    const feedback = feedbackBox.value.trim();
+
+    if (feedback) {
+        alert(`Feedback submitted: ${feedback}`);
+        feedbackBox.value = ""; // Clear the input field
+    } else {
+        alert("Please enter feedback before submitting.");
+    }
+}
+
+// Initialize components on page load
+window.onload = () => {
+    loadAttendance();
+};
+
