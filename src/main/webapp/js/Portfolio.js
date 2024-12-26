@@ -57,3 +57,32 @@ function experienceEditing() {
     }
 }
 
+
+
+
+
+    async function saveAsPDF() {
+    const { jsPDF } = window.jspdf;
+
+    // Select the main content to save
+    const element = document.querySelector('.main');
+
+    // Render the HTML content as a canvas using html2canvas
+    const canvas = await html2canvas(element);
+    const imgData = canvas.toDataURL('image/png');
+
+    // Create a new PDF document
+    const doc = new jsPDF();
+
+    // Add the image to the PDF
+    const pdfWidth = doc.internal.pageSize.getWidth();
+    const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+
+    doc.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+
+    // Save the PDF
+    doc.save('portfolio.pdf');
+}
+
+
+

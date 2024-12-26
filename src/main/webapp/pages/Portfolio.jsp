@@ -9,6 +9,7 @@
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/portfolio.css">
     <link href="https://cdn.jsdelivr.net/npm/material-icons@1.13.12/iconfont/material-icons.min.css" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
 <div class="main">
@@ -141,9 +142,18 @@
                 </p>
             </div>
         </div>
+
     </div>
 
 </div>
+
+<a href="${pageContext.request.contextPath}/pages/DashboardHome.jsp"  class="button-style"><i class='bx bxs-left-arrow-alt'></i> Go Back</a>
+<button onclick="saveAsPDF()" ><i class="bx bxs-download"></i> Download as PDF</button>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
 <script src="${pageContext.request.contextPath}/js/Portfolio.js"></script>
 </body>
 </html>

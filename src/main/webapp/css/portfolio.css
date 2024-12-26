@@ -219,3 +219,53 @@ h2{
     outline: 2px dashed #4CAF50;
     outline-offset: 5px;
 }
+button {
+    position: absolute;
+    right: 20px; /* Adjust as needed */
+    top: 20px;   /* Adjust as needed */
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #007BFF; /* Blue color */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+button:active {
+    background-color: #004494;
+    transform: scale(0.95);
+}
+
+a.button-style {
+    position: absolute;
+    left: 20px; /* Adjust as needed */
+    top: 20px;  /* Adjust as needed */
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #007BFF; /* Blue color */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, transform 0.2s;
+    text-decoration: none; /* Remove underline for links */
+}
+
+a.button-style:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+a.button-style:active {
+    background-color: #004494;
+    transform: scale(0.95);
+}
