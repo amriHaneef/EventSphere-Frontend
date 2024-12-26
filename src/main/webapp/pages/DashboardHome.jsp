@@ -229,7 +229,7 @@
 
 <%--        ----------------------------------------Teachers section--------------------------------------%>
 
-        <main id="teacher_view_home_tab">
+        <main id="teacher_view_home_tab" style="display: none">
             <div class="header">
                 <div class="left">
                     <h1>Dashboard</h1>
@@ -365,6 +365,173 @@
                                 <p>Your Meeting will start at 9 a.m.</p>
                             </div>
                             <i class="bx bx-dots-vertical-rounded"></i>
+                        </li>
+                    </ul>
+                </div>
+                    <!-- End of Reminders  -->
+            </div>
+        </main>
+
+
+<%--        ---------------------------------------------Students Section-----------------------------------------%>
+
+    <main id="student_view_home_tab">
+            <div class="header">
+                <div class="left">
+                    <h1>Dashboard</h1>
+                    <ul class="breadcrumb">
+                        <li>
+                            <a href="#">Student</a>
+                        </li>
+                        /
+                        <li>
+                            <a href="#" class="active">Home</a>
+                        </li>
+                    </ul>
+                </div>
+                <a href="${pageContext.request.contextPath}/pages/Portfolio.jsp" class="report">
+                    <i class='bx bxs-edit-alt'></i>
+                    <span>Portfolio</span>
+                </a>
+            </div>
+
+            <!-- Insights -->
+
+            <div class="insight ">
+                <div class="sales">
+                    <span class="material-icons-sharp">analytics</span>
+                    <div class="middle">
+                        <div class="left">
+                            <h3>Attendance for Events</h3>
+                            <p>Events: 25,024</p>
+                            <p>Students: 25,024</p>
+                        </div>
+                        <div class="progress">
+                            <svg>
+                                <circle cx='38' cy='38' r='36' style="stroke-dashoffset: 120"></circle>
+                            </svg>
+                            <div class="number">
+                                <p>45%</p>
+                            </div>
+                        </div>
+                    </div>
+                    <small class="text-muted">Last 24 Hours</small>
+                </div>
+                <!-- -------------------End Of Sales--------------------  -->
+                <!-- --------------------------------------------End Of Insight---------------------------------------------------  -->
+            </div>
+            <ul class="insights">
+                <a href="#">
+                    <li>
+                        <i class="bx bx-calendar-check"></i>
+                        <span class="info">
+                                <h3>
+                                   21
+                                </h3>
+                                <p>Events</p>
+                            </span>
+                    </li>
+                </a>
+                <a href="#">
+                    <li>
+                        <i class="bx  bxs-book-open"></i>
+                        <span class="info">
+                                <h3>
+                                    GAHDSE24.2
+                                </h3>
+                                <p>Batch</p>
+                            </span>
+                    </li>
+                </a>
+                <a href="#">
+                    <li>
+                        <i class="bx bx-group"></i>
+                        <span class="info">
+                                <h3>
+                                    30
+                                </h3>
+                                <p>Students</p>
+                            </span>
+                    </li>
+                </a>
+            </ul>
+            <!-- End of Insights  -->
+            <div class="bottom-data">
+                <div class="orders">
+                    <div class="header">
+                        <i class="bx bx-calendar-check"></i>
+                        <h3>Upcoming Events</h3>
+                        <i class="bx bx-filter"></i>
+                        <div class="search-container">
+                            <i class="bx bx-search"></i>
+                            <label>
+                                <input type="text" class="search-bar" placeholder="Search...">
+                            </label>
+                        </div>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Event</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr onclick="openStudentEventDetails()">
+                                <td>1</td>
+                                <td>
+                                    <p>Mock Interview</p>
+                                </td>
+                                <td>14-08-2024</td>
+                                <td><span class="status pending">Upcoming</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-------------------------- Event Details card ------------------------------>
+                    <div class="container" id="student_eventDetails">
+                        <div class="card">
+                            <div class="top">
+                                <div class="title">Event Details</div>
+                            </div>
+                            <div class="info">Here, you have some details about the event that you are looking for!</div>
+                            <div class="details">
+                                <div class="plan">
+                                    <span><strong>Name:</strong> Mock Interview</span>
+                                    <i class="bx bx-check"></i>
+                                </div>
+                                <div class="plan">
+                                    <span><strong>Consultant:</strong> Mrs.Sandaruwani</span>
+                                    <i class="bx bx-check"></i>
+                                </div>
+                                <div class="plan">
+                                    <span><strong>Participated Batch:</strong> GAHDSE24.2f</span>
+                                    <i class="bx bx-check"></i>
+                                </div>
+                                <div class="plan">
+                                    <span><strong>Assigned Students: </strong> 30</span>
+                                    <i class="bx bx-check"></i>
+                                </div>
+                                <button onclick="closeStudentEventDetails()">Done</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-------------------------- End of Event Details card ----------------------->
+                </div>
+                    <!-- Reminders -->
+                <div class="reminders">
+                    <div class="header">
+                        <i class="bx bx-group"></i>
+                        <h3>Batch Students</h3>
+                    </div>
+                    <ul class="task-list">
+
+                        <li class="completed">
+                            <div class="task-title">
+                                <i class="bx bx-group"></i>
+                                <p>K.T.H.De Silva</p>
+                            </div>
                         </li>
                     </ul>
                 </div>
