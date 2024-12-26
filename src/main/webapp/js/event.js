@@ -29,6 +29,56 @@ function searchEvent() {
         rows[i].style.display = match ? "" : "none";
     }
 }
+
+function addEvent() {
+    document.getElementById('popupForm').style.display = 'block';
+}
+
+function closePopup() {
+    document.getElementById('popupForm').style.display = 'none';
+}
+
+// Add form submission functionality
+document.getElementById('addEventForm').addEventListener('submit', function (event) {
+    event.preventDefault(); // Prevent form from reloading the page
+
+    // Get form data
+    const eventName = document.getElementById('eventName').value.trim();
+    const eventDate = document.getElementById('eventDate').value.trim();
+    const eventBatch = document.getElementById('eventBatch').value.trim();
+    const eventProgress = document.getElementById('eventProgress').value.trim();
+
+    // Validation logic
+    let errorMessage = '';
+    if (!eventName) {
+        errorMessage += 'Event name is required.\n';
+    }
+    if (!eventDate) {
+        errorMessage += 'Event date is required.\n';
+    }
+    if (!eventBatch) {
+        errorMessage += 'Event batch is required.\n';
+    }
+    if (!eventProgress || isNaN(eventProgress) || eventProgress < 0 || eventProgress > 100) {
+        errorMessage += 'Event progress must be a number between 0 and 100.\n';
+    }
+
+    // Check if validation failed
+    if (errorMessage) {
+        alert(errorMessage); // Display error message to the user
+        return; // Stop further execution
+    }
+
+    // Log or handle the form data (e.g., send it to the server or add to the table)
+    console.log({ eventName, eventDate, eventBatch, eventProgress });
+
+    // Close the popup after submission
+    closePopup();
+
+    // Optionally clear the form fields
+    document.getElementById('addEventForm').reset();
+});
+
 // Data for the progress of events
 const progressData = [75, 85, 80]; // Replace with actual progress values
 
