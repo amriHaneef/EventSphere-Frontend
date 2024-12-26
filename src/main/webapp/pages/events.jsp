@@ -83,6 +83,67 @@
         <textarea id="feedbackBox" placeholder="Enter feedback for the event..."></textarea>
         <button onclick="submitFeedback()">Submit Feedback</button>
 
+    <!-- Assigned  Events Table student -->
+    <section>
+        <h2>Assigned Events</h2>
+        <table id=" student_view_event_tab_table">
+            <thead>
+            <tr>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Event name</th>
+                <th>Platform</th>
+                <th>Lecturer</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>2025-01-15</td>
+                <td>10:00 AM</td>
+                <td>Web Development</td>
+                <td>Zoom</td>
+                <td>Mrs.Sandaruwani</td>
+                <td>Attended</td>
+            </tr>
+            <tr>
+                <td>2025-01-20</td>
+                <td>2:00 PM</td>
+                <td>Java Workshop</td>
+                <td>Google Meet</td>
+                <td>Mrs.thilini</td>
+                <td>Missed</td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Circular Progress Bar -->
+    <section>
+        <h2>Progress Bar</h2>
+        <div id="progressTracker">
+            <svg id="progressCircle" viewBox="0 0 36 36">
+                <path
+                        fill="none"
+                        stroke="#35519c"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        d="M18 2 a16 16 0 1 1 0 32 a16 16 0 1 1 0 -32"
+                ></path>
+                <path
+                        stroke="#4CAF50"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-dasharray="230"
+                        stroke-dashoffset="150"
+                        transform="rotate(-90 18 18)"
+                        id="progressPath"
+                ></path>
+            </svg>
+            <div id="progressText">70%</div>
+        </div>
+    </section>
+
 </div>
 <script src="${pageContext.request.contextPath}/js/event.js"></script>
 </body>

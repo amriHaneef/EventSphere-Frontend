@@ -127,5 +127,15 @@ function submitFeedback() {
 // Initialize components on page load
 window.onload = () => {
     loadAttendance();
+
+    // Example progress value
+    const progressValue = 70; // Example: 70% progress
+
+    // Part 2: Update Circular Progress Bar
+    const progressPath = document.getElementById('progressPath');
+    const progressText = document.getElementById('progressText');
+    const dashoffset = 100 - progressValue;
+    progressPath.style.strokeDashoffset = dashoffset;
+    progressText.textContent = progressValue + "%";
 };
 
