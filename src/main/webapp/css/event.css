@@ -1,26 +1,82 @@
+:root{
+    --light:#f6f6f9;
+    --primary:#1976d2;
+    --light-primary:#cfe8ff;
+    --gray:#eee;
+    --dark-gray:#aaaaaa;
+    --dark:#363949;
+    --danger:#d32f2f;
+    --light-danger:#fecdd3;
+    --warning:#fbc02d;
+    --light-warning:#fff2c6;
+    --success:#388e3c;
+    --light-success:#bbf7d0;
+}
+
+:root{
+
+    --card-border-radius: 2rem;
+    --border-radius-1: 0.4rem;
+    --border-radius-2: 0.8rem;
+    --border-radius-3: 1.2rem;
+
+    --card-padding: 1.8rem;
+    --padding-1: 1.2rem;
+
+    --box-shadow: 0 2rem 3rem var(--color-light);
+
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+.bx{
+    font-size: 1.7rem;
+}
+a{
+    text-decoration: none;
+}
+li{
+    list-style: none;
+}
+
+html {
+    overflow-x: hidden;
+}
+
+body.dark{
+    --light:#181a1e;
+    --gray:#25252c;
+    --dark:#fbfbfb;
+    --box-shadow: 0 2rem 3rem var(--color-light);
+}
+
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
+    background-color:  var(--gray);
     margin: 0;
     padding: 0;
 }
 
 .container {
-    width: 80%;
+    padding: 0 20px;
     margin: 0 auto;
-    padding: 20px;
-    background: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 1200px;
+    box-sizing: border-box;
+    box-shadow: 0 2px 4px var(--gray);
 }
 
 .search-bar {
     margin-bottom: 20px;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
 }
 
 .search-bar input {
-    width: 80%;
+    width: 45%;
+    height: 36px;
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ddd;
@@ -28,12 +84,13 @@ body {
 }
 
 .search-bar button {
-    padding: 10px 20px;
+    padding: 10px 10px;
+    height: 36px;
     font-size: 16px;
     background-color: #007bff;
     color: #fff;
     border: none;
-    border-radius: 4px;
+    border-radius: 5px;
     cursor: pointer;
 }
 
@@ -45,28 +102,47 @@ body {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
-}
-
-.event-table th, .event-table td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: left;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .event-table th {
-    background-color: #007bff;
-    color: #fff;
+    background-color: var(--primary);
+    color: var(--light);
+    padding: 10px;
+    text-align: left;
+    font-size: 16px;
 }
 
-.event-table tr:nth-child(even) {
-    background-color: #f9f9f9;
+.event-table tbody td {
+    background-color: var(--light);
+    color: var(--dark);
+    padding: 10px;
+    text-align: left;
+    font-size: 14px;
 }
+
+
+.event-table tbody tr:nth-child(even) {
+    background-color: var(--gray);
+}
+
+.event-table tbody tr:hover {
+        color: var(--dark);
+}
+
+.button-panel {
+    display: flex;
+    justify-content: flex-end; /* Align the button to the right */
+}
+
 .button-panel button {
     padding: 10px 15px;
     font-size: 14px;
     margin: 5px;
     background-color: #007bff;
-    color: #fff;
+    color: var(--gray);
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -76,6 +152,45 @@ body {
     background-color: #0056b3;
 }
 
+
+/* Popup Background */
+.popup-form {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+}
+
+/* Popup Content */
+.popup-content {
+    background-color: #aab7b8;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 30%;
+    position: relative;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Close Button */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #555;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    color: #f00;
+}
 .metrics-dashboard {
     margin-top: 20px;
     padding: 20px;
@@ -105,9 +220,9 @@ body {
     width: 50%;
     margin-bottom: 20px;
     padding: 15px;
-    border: 1px solid #ddd;
     border-radius: 5px;
-    background: #f9f9f9;
+    background:var(--gray);
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
 }
 
 .attendance-panel ul {
@@ -129,7 +244,7 @@ body {
 
 .attendance-panel button {
     background: #007bff;
-    color: #fff;
+    color: var(--gray);
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
@@ -163,7 +278,7 @@ body {
 
 #feedbackBox + button {
     background: #007bff;
-    color: #fff;
+    color: var(--gray);
     border: none;
     padding: 10px 15px;
     border-radius: 5px;
@@ -173,5 +288,6 @@ body {
 }
 
 #feedbackBox + button:hover {
-    background: #007bff;
+    background: #0056b3;
 }
+
