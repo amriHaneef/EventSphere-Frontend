@@ -71,11 +71,12 @@ body {
 .search-bar {
     margin-bottom: 20px;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
 }
 
 .search-bar input {
-    width: 90%;
+    width: 50%;
+    height: 36px;
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ddd;
@@ -105,20 +106,33 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.event-table th, .event-table td {
-    background-color: var(--light);
+.event-table th {
+    background-color: var(--primary);
+    color: var(--light);
     padding: 10px;
     text-align: left;
+    font-size: 16px;
 }
 
-.event-table th {
-    background-color: #5e86f1;
-    color: var(--gray);
+.event-table tbody td {
+    background-color: var(--light);
+    color: var(--dark);
+    padding: 10px;
+    text-align: left;
+    font-size: 14px;
 }
 
-.event-table tr:nth-child(even) {
+
+.event-table tbody tr:nth-child(even) {
     background-color: var(--gray);
 }
+
+.event-table tbody tr:hover {
+    background-color: var(--light-primary);
+    color: var(--dark);
+}
+
+
 .button-panel button {
     padding: 10px 15px;
     font-size: 14px;
@@ -147,7 +161,7 @@ body {
 
 /* Popup Content */
 .popup-content {
-    background-color: #fff;
+    background-color: #aab7b8;
     margin: 15% auto;
     padding: 20px;
     border-radius: 10px;
@@ -171,8 +185,6 @@ body {
 .close-btn:hover {
     color: #f00;
 }
-
-
 .metrics-dashboard {
     margin-top: 20px;
     padding: 20px;
@@ -299,20 +311,30 @@ table th {
     font-size: 16px;
 }
 
-table td {
-    background-color:var(--light);
-    padding: 10px;
-    text-align: center;
-    font-size: 14px;
+
+/*main .container table tbody tr td {*/
+/*    background-color:var(--light);*/
+/*    padding: 10px;*/
+/*    text-align: center;*/
+/*    font-size: 14px;*/
+/*    color: var(--dark);*/
+/*}*/
+.event-table tbody tr {
+        background-color:var(--light);
+        padding: 10px;
+        text-align: center;
+        font-size: 14px;
+        color: var(--dark);
 }
 
 table tr:nth-child(even) {
-    background-color:var(--light);
+    background-color:var(--dark);
 }
 
 table tr:hover {
     background-color:var(--light);
 }
+
 
 /* Circular Progress Bar Styles */
 #progressTracker {
@@ -341,6 +363,104 @@ table tr:hover {
 #progressTracker span {
     font-weight: bold;
     color: #080808;
+}
+
+ .insight{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4.9rem;
+
+    /* default 1.6 */
+}
+.insight > div {
+    background: var(--light);
+    color: var(--dark);
+    padding: var(--card-padding);
+    border-radius: var(--card-border-radius);
+    margin-top: 1rem;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+    transition: all 300ms ease;
+}
+
+ .insight > div:hover {
+    box-shadow: none;
+}
+
+.insight > div span{
+    background: var(--primary);
+    padding: 0.5rem;
+    border-radius: 50%;
+    color: var(--light);
+    font-size: 2rem;
+}
+
+.insight > div.expenses span{
+    background: var(--danger);
+}
+.insight > div.income span{
+    background: var(--success);
+}
+
+.insight > div .middle{
+    display: flex;
+    align-items:center ;
+    justify-content: space-between;
+}
+.insight h3{
+    margin: 1rem 0 0.6rem;
+    font-size: 1rem;
+}
+.insight .progress{
+    position: relative;
+    width: 92px;
+    height: 92px;
+    border-radius: 50%;
+
+}
+.content main .insight svg{
+    width: 7rem;
+    height: 7rem;
+    transform: rotate(-90deg);
+    transform-origin: center;
+}
+
+.insight svg circle{
+    fill: none;
+    stroke: var(--primary);
+    stroke-width: 12;
+    transform: translate(5px, 5px);
+    stroke-dasharray: 230;
+}
+
+/*.insight .sales svg circle{*/
+/*    stroke-dashoffset: -30;*/
+/*    stroke-dasharray: 200;*/
+/*}*/
+
+/*.insight .expenses svg circle{*/
+/*    stroke-dashoffset: 20;*/
+/*    stroke-dasharray: 80;*/
+/*}*/
+
+/*.insight .income svg circle{*/
+/*    stroke-dashoffset: 35;*/
+/*    stroke-dasharray: 110;*/
+/*}*/
+
+.insight .progress .number{
+    position: absolute;
+    top: 25px;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.insight small{
+    margin-top: 1.5rem;
+    display: block;
 }
 
 

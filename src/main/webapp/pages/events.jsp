@@ -4,10 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Events UI</title>
+    <title>EventSphere</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/event.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/dashboard.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Include Chart.js -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/images/favicon.ico" type="image/x-icon">
 
 </head>
@@ -68,9 +70,19 @@
         </a>
     </nav>
     <!-- End of navbar  -->
-
-
-<main>
+<main id="admin_view_event_tab" style="display: none">
+    <div class="header">
+        <div class="left">
+            <ul class="breadcrumb">
+                <li>
+                    <a href="#">Admin</a>
+                </li>
+                /
+                <li>
+                    <a href="#" class="active">Event</a>
+                </li>
+            </ul>
+        </div>
    <div class="container">
         <!-- Search Bar -->
         <div class="search-bar">
@@ -79,7 +91,7 @@
         </div>
 
     <!-- Event Table -->
-    <table class="event-table" id=" admin_view_event_tab_table">
+    <table class="event-table" id=" event_tab_table">
         <thead>
         <tr>
             <th>Event ID</th>
@@ -113,43 +125,7 @@
         </tr>
         </tbody>
     </table>
-
-    <!-- Buttons -->
-    <div class="button-panel">
-        <button onclick="addEvent()">Add Event</button>
-        <button onclick="editEvent()">Edit Event</button>
-        <button onclick="deleteEvent()">Delete Event</button>
-    </div>
-
-       <!-- Popup Form -->
-       <div id="popupForm" class="popup-form">
-           <div class="popup-content">
-               <span class="close-btn" onclick="closePopup()">&times;</span>
-               <h2>Add Event</h2><br>
-               <form id="addEventForm">
-                   <label for="eventName">Event Name:</label>
-                   <input type="text" id="eventName" name="eventName" required><br><br>
-
-                   <label for="eventDate">Date:</label>
-                   <input type="date" id="eventDate" name="eventDate" required><br><br>
-
-                   <label for="eventBatch">Batch:</label>
-                   <select id="eventBatch" name="eventBatch" required>
-                       <option value="" disabled selected>Select a batch</option>
-                       <option value="DSE23.2f">DSE23.2f</option>
-                       <option value="DSE23.3f">DSE23.3f</option>
-                       <option value="HDSE23.2f">HDSE23.2f</option>
-                       <option value="HDSE24.2f">HDSE24.2f</option>
-                   </select><br><br>
-
-                   <label for="eventProgress">Progress:</label>
-                   <input type="number" id="eventProgress" name="eventProgress" min="0" max="100" required><br><br>
-
-                   <button type="submit">Add Event</button>
-               </form>
-           </div>
-       </div>
-
+   </div>
 
        <!-- Metrics Dashboard -->
     <div class="metrics-dashboard">
@@ -158,6 +134,117 @@
             <canvas id="progressPieChart" width="400" height="400"></canvas> <!-- Placeholder for pie chart -->
         </div>
     </div>
+    </div>
+</main>
+
+    <main id="Teacher_view_event_tab" style="display: none">
+        <div class="header">
+            <div class="left">
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="#">Teacher</a>
+                    </li>
+                    /
+                    <li>
+                        <a href="#" class="active">Event</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="container">
+                <!-- Search Bar -->
+                <div class="search-bar">
+                    <input type="text" id="searchInput_techer" placeholder="Search...">
+                    <button onclick="searchEvent()">Search</button>
+                </div>
+
+            <!-- Buttons -->
+            <div class="button-panel">
+                <button onclick="addEvent()">Add Event</button>
+                <button onclick="editEvent()">Edit Event</button>
+                <button onclick="deleteEvent()">Delete Event</button>
+            </div>
+
+
+            <section>
+                <!-- Popup Form -->
+                <div id="popupForm" class="popup-form">
+                    <div class="popup-content">
+                        <span class="close-btn" onclick="closePopup()">&times;</span>
+                        <h2>Add Event</h2><br>
+                        <form id="addEventForm">
+                            <label for="eventType">Event Type:</label>
+                            <select id="eventType" name="eventType" required>
+                                <option value="" disabled selected>Select a event name</option>
+                                <option value="Session-Workshop">Session/Workshop</option>
+                                <option value="mock interviews">Mock Interviews</option>
+                            </select><br><br>
+
+                            <label for="eventBatch">Batch:</label>
+                            <select id="eventBatch" name="eventBatch" required>
+                                <option value="" disabled selected>Select a batch</option>
+                                <option value="DSE23.2f">DSE23.2f</option>
+                                <option value="DSE23.3f">DSE23.3f</option>
+                                <option value="HDSE23.2f">HDSE23.2f</option>
+                                <option value="HDSE24.2f">HDSE24.2f</option>
+                            </select><br><br>
+
+                            <label for="studentId">Student ID:</label>
+                            <select id="studentId" name="studentId" required>
+                                <option value="" disabled selected>Select a student Index</option>
+                                <option value="DSE23.2f">DSE232F-001</option>
+                                <option value="DSE23.3f">DSE232F-002</option>
+                                <option value="DSE23.2f">DSE232F-003</option>
+                                <option value="DSE24.2f">DSE232F-004</option>
+                            </select><br><br>
+
+                            <label for="eventDate">Date:</label>
+                            <input type="date" id="eventDate" name="eventDate" required><br><br>
+
+                            <label for="eventProgress">Progress:</label>
+                            <input type="number" id="eventProgress" name="eventProgress" min="0" max="100" required><br><br>
+
+                            <button type="submit">Add Event</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Event Table -->
+            <table class="event-table" id=" Teacher_view_event_tab_table">
+                <thead>
+                <tr>
+                    <th>Event ID</th>
+                    <th>Event Name</th>
+                    <th>Date</th>
+                    <th>Batch</th>
+                    <th>Progress</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Java Workshop</td>
+                    <td>2024-12-25</td>
+                    <td>HDSE24.1f</td>
+                    <td>75%</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Python Bootcamp</td>
+                    <td>2024-12-20</td>
+                    <td>DSE23.2f</td>
+                    <td>85%</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Web Development</td>
+                    <td>2024-12-22</td>
+                    <td>HDSE24.2f</td>
+                    <td>80%</td>
+                </tr>
+                </tbody>
+            </table>
 
         <!-- Attendance Marking Panel -->
         <div class="attendance-panel">
@@ -168,15 +255,37 @@
             <button onclick="submitAttendance()">Submit Attendance</button>
         </div>
 
+
         <!-- Feedback Box -->
         <h2>Feedback</h2>
         <textarea id="feedbackBox" placeholder="Enter feedback for the event..."></textarea>
         <button onclick="submitFeedback()">Submit Feedback</button>
+        </div>
+        </div>
+    </main>
 
-    <!-- Assigned  Events Table student -->
-    <section>
-        <h2>Assigned Events</h2><br>
-        <table id=" student_view_event_tab_table">
+    <main id="Student_view_event_tab" >
+        <div class="header">
+            <div class="left">
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="#">Student/Event</a>
+                    </li>
+                </ul><br>
+            </div>
+        </div>
+
+            <div class="container">
+                <!-- Search Bar -->
+                <div class="search-bar">
+                    <input type="text" id="searchInput_student" placeholder="Search...">
+                    <button onclick="searchEvent()">Search</button>
+                </div>
+            </div>
+
+            <!-- Assigned  Events Table student -->
+            <h2>Assigned Events</h2><br>
+            <table class="event-table" id=" student_view_event_tab_table">
             <thead>
             <tr>
                 <th>Date</th>
@@ -210,30 +319,27 @@
 
     <!-- Circular Progress Bar -->
     <section>
-        <h2>Progress Bar</h2>
-        <div id="progressTracker">
-            <svg id="progressCircle" viewBox="0 0 36 36">
-                <path
-                        fill="none"
-                        stroke="#35519c"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        d="M18 2 a16 16 0 1 1 0 32 a16 16 0 1 1 0 -32"
-                ></path>
-                <path
-                        stroke="#4CAF50"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-dasharray="230"
-                        stroke-dashoffset="150"
-                        transform="rotate(-90 18 18)"
-                        id="progressPath"
-                ></path>
-            </svg>
-            <div id="progressText">70%</div>
+        <div class="insight ">
+            <div class="sales">
+                <span class="material-icons-sharp">analytics
+                </span>
+                <div class="middle">
+                    <div class="left"><br>
+                        <h1>Student</h1>
+                        <h3>Progress</h3>
+                    </div>
+                    <div class="progress">
+                        <svg>
+                            <circle cx='38' cy='38' r='36' style="stroke-dashoffset: 80"></circle>
+                        </svg>
+                        <div class="number">
+                            <p>81%</p>
+                        </div>
+                    </div>
+                </div>
+        </div>
         </div>
     </section>
-   </div>
 </main>
 </div>
 <script src="${pageContext.request.contextPath}/js/dashboard.js"></script>
