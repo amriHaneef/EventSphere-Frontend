@@ -1,26 +1,82 @@
+:root{
+    --light:#f6f6f9;
+    --primary:#1976d2;
+    --light-primary:#cfe8ff;
+    --gray:#eee;
+    --dark-gray:#aaaaaa;
+    --dark:#363949;
+    --danger:#d32f2f;
+    --light-danger:#fecdd3;
+    --warning:#fbc02d;
+    --light-warning:#fff2c6;
+    --success:#388e3c;
+    --light-success:#bbf7d0;
+}
+
+:root{
+
+    --card-border-radius: 2rem;
+    --border-radius-1: 0.4rem;
+    --border-radius-2: 0.8rem;
+    --border-radius-3: 1.2rem;
+
+    --card-padding: 1.8rem;
+    --padding-1: 1.2rem;
+
+    --box-shadow: 0 2rem 3rem var(--color-light);
+
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+.bx{
+    font-size: 1.7rem;
+}
+a{
+    text-decoration: none;
+}
+li{
+    list-style: none;
+}
+
+html {
+    overflow-x: hidden;
+}
+
+body.dark{
+    --light:#181a1e;
+    --gray:#25252c;
+    --dark:#fbfbfb;
+    --box-shadow: 0 2rem 3rem var(--color-light);
+}
+
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
+    background-color:  var(--gray);
     margin: 0;
     padding: 0;
 }
 
 .container {
-    width: 80%;
+    padding: 0 20px;
     margin: 0 auto;
-    padding: 20px;
-    background: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 1200px;
+    box-sizing: border-box;
+    box-shadow: 0 2px 4px var(--gray);
 }
 
 .search-bar {
     margin-bottom: 20px;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
 }
 
 .search-bar input {
-    width: 80%;
+    width: 50%;
+    height: 36px;
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ddd;
@@ -28,12 +84,13 @@ body {
 }
 
 .search-bar button {
-    padding: 10px 20px;
+    padding: 10px 10px;
+    height: 36px;
     font-size: 16px;
     background-color: #007bff;
     color: #fff;
     border: none;
-    border-radius: 4px;
+    border-radius: 5px;
     cursor: pointer;
 }
 
@@ -45,28 +102,43 @@ body {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
-}
-
-.event-table th, .event-table td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: left;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .event-table th {
-    background-color: #007bff;
-    color: #fff;
+    background-color: var(--primary);
+    color: var(--light);
+    padding: 10px;
+    text-align: left;
+    font-size: 16px;
 }
 
-.event-table tr:nth-child(even) {
-    background-color: #f9f9f9;
+.event-table tbody td {
+    background-color: var(--light);
+    color: var(--dark);
+    padding: 10px;
+    text-align: left;
+    font-size: 14px;
 }
+
+
+.event-table tbody tr:nth-child(even) {
+    background-color: var(--gray);
+}
+
+.event-table tbody tr:hover {
+    color: var(--dark);
+}
+
+
 .button-panel button {
     padding: 10px 15px;
     font-size: 14px;
     margin: 5px;
     background-color: #007bff;
-    color: #fff;
+    color: var(--gray);
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -77,15 +149,19 @@ body {
 }
 
 .metrics-dashboard {
-    margin-top: 20px;
-    padding: 20px;
-    background: #848f9b  ;
-    border: 1px solid #505459;
-    border-radius: 4px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    width: 50%;
+    height: 50%;
+    text-align: center;
+    place-items: center;
     justify-content: center;
+    background: var(--light);
+    color: var(--dark);
+    padding: var(--card-padding);
+    border-radius: var(--card-border-radius);
+    margin-top: 1rem;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+    transition: all 300ms ease;
+
 }
 
 #metrics {
@@ -100,3 +176,37 @@ body {
     max-width: 100%;
     max-height: 100%;
 }
+
+/* Feedback Box */
+#feedbackBox {
+    width: 98%;
+    height: 100px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    resize: none;
+    outline: none;
+    transition: border 0.3s;
+}
+
+#feedbackBox:focus {
+    border: 1px solid #007bff;
+}
+
+#feedbackBox + button {
+    background: #007bff;
+    color: var(--gray);
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+#feedbackBox + button:hover {
+    background: #0056b3;
+}
+

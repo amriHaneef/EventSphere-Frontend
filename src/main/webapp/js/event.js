@@ -73,3 +73,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const averageProgress = calculateAverageProgress(progressData);
     renderPieChart(averageProgress);
 });
+
+// Submit feedback
+function submitFeedback() {
+    const feedbackBox = document.getElementById("feedbackBox");
+    const feedback = feedbackBox.value.trim();
+
+    if (feedback) {
+        alert(`Feedback submitted: ${feedback}`);
+        feedbackBox.value = ""; // Clear the input field
+    } else {
+        alert("Please enter feedback before submitting.");
+    }
+}
+
