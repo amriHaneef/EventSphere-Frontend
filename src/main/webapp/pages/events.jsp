@@ -10,6 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Include Chart.js -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/images/favicon.ico" type="image/x-icon">
 
 </head>
@@ -87,13 +88,14 @@
                 </div>
 
                 <!-- Event Table -->
+                <!-- Event Table -->
                 <table class="event-table" id=" event_tab_table">
                     <thead>
                     <tr>
                         <th>Event ID</th>
                         <th>Event Name</th>
                         <th>Date</th>
-                        <th>Batch</th>
+                        <th>Event Type</th>
                         <th>Progress</th>
                     </tr>
                     </thead>
@@ -102,21 +104,21 @@
                         <td>1</td>
                         <td>Java Workshop</td>
                         <td>2024-12-25</td>
-                        <td>HDSE24.1f</td>
+                        <td>Session/workshop</td>
                         <td>75%</td>
                     </tr>
                     <tr>
                         <td>2</td>
                         <td>Python Bootcamp</td>
                         <td>2024-12-20</td>
-                        <td>DSE23.2f</td>
+                        <td>Session/workshop</td>
                         <td>85%</td>
                     </tr>
                     <tr>
                         <td>3</td>
                         <td>Web Development</td>
                         <td>2024-12-22</td>
-                        <td>HDSE24.2f</td>
+                        <td>Session/workshop</td>
                         <td>80%</td>
                     </tr>
                     </tbody>
@@ -130,10 +132,18 @@
                     <canvas id="progressPieChart" width="400" height="400"></canvas> <!-- Placeholder for pie chart -->
                 </div>
             </div><br>
-                <!-- Feedback Box -->
-                <h2>Feedback</h2>
-                <textarea id="feedbackBox" placeholder="Enter feedback for the event..."></textarea>
-                <button onclick="submitFeedback()">Submit Feedback</button>
+
+            <!-- Feedback Box -->
+            <section>
+                <div class="feedback">
+                    <h2 id="feedbackHeading"><i class="fa fa-comment-dots"></i> Feedback</h2>
+                    <div class="feedback-box">
+                        <textarea id="feedbackBox_student" placeholder="Enter feedback for the event..."></textarea>
+                        <button onclick="submitFeedback()">Submit Feedback</button>
+                    </div>
+                </div>
+            </section>
+
         </div>
     </main>
 </div>

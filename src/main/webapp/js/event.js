@@ -47,7 +47,7 @@ const renderPieChart = (averageProgress) => {
             labels: ['Completed', 'Remaining'],
             datasets: [{
                 data: [averageProgress, 100 - averageProgress],
-                backgroundColor: ['#4caf50', '#f44336'], // Green and red colors
+                backgroundColor: ['#061b3c', '#69a3ed'],
             }]
         },
         options: {

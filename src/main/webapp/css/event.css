@@ -60,6 +60,13 @@ body {
     padding: 0;
 }
 
+#admin_view_event_tab .header .left .breadcrumb li a {
+    color: #007BFF;
+    font-size: 26px;
+    text-decoration: none;
+}
+
+
 .container {
     padding: 0 20px;
     margin: 0 auto;
@@ -178,35 +185,52 @@ body {
 }
 
 /* Feedback Box */
-#feedbackBox {
-    width: 98%;
+.feedback {
+    font-family: Arial, sans-serif;
+}
+
+#feedbackHeading {
+    color:var(--dark);
+    transition: color 0.3s ease;
+}
+
+.feedback-box {
+    width: 95%;
+    margin: 20px 0;
+    padding: 20px;
+    background: var(--light);
+    border-radius: 10px;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+    font-family: Arial, sans-serif;
+    text-align: center;
+    float: left;
+    margin-left: 20px;
+
+}
+
+.feedback-box textarea {
+    width: 100%;
     height: 100px;
     padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
+    border: 1px solid #ccc;
     border-radius: 5px;
-    font-size: 14px;
+    font-size: 16px;
     resize: none;
     outline: none;
-    transition: border 0.3s;
+    margin-bottom: 15px;
 }
 
-#feedbackBox:focus {
-    border: 1px solid #007bff;
-}
-
-#feedbackBox + button {
-    background: #007bff;
-    color: var(--gray);
+.feedback-box button {
+    background-color: #007BFF;
+    color: var(--light);
+    padding: 10px 20px;
     border: none;
-    padding: 10px 15px;
     border-radius: 5px;
+    font-size: 16px;
     cursor: pointer;
-    font-weight: bold;
-    transition: background 0.3s;
+    transition: background-color 0.3s ease;
 }
 
-#feedbackBox + button:hover {
-    background: #0056b3;
+.feedback-box button:hover {
+    background-color: #0056b3;
 }
-
