@@ -1,3 +1,30 @@
+// Inside announcement.js
+document.addEventListener('DOMContentLoaded', function() {
+    console.log("DOM fully loaded and parsed");  // Debugging line
+    const searchBar = document.getElementById('search-bar');
+    if (searchBar) {
+        searchBar.addEventListener('input', function () {
+            const filter = this.value.toLowerCase();
+            const rows = document.querySelectorAll('tbody tr');
+
+            rows.forEach(row => {
+                const cells = Array.from(row.querySelectorAll('td'));
+                const rowContent = cells.map(cell => cell.textContent.toLowerCase()).join(' ');
+
+                if (rowContent.includes(filter)) {
+                    row.style.display = ''; // Show the row
+                } else {
+                    row.style.display = 'none'; // Hide the row
+                }
+            });
+        });
+    } else {
+        console.error('Element #search-bar not found');
+    }
+});
+
+
+
 // Get the elements
 const deleteButton = document.querySelector('.delete');
 const popupOverlay = document.querySelector('.popup-overlay');
@@ -30,3 +57,8 @@ okBtn.addEventListener('click', () => {
     popupOverlay.style.display = 'none';
     popupOverlay.style.opacity = '0';
 });
+
+
+
+
+

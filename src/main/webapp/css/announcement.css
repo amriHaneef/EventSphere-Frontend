@@ -157,31 +157,23 @@ body.dark{
 .content main .bottom-data .header .search-container {
     position: relative;
     display: inline-block;
+    left: -100px;
 }
 
 .content main .bottom-data .header .search-bar {
     position: absolute;
     top: 0;
-    left: 100%; /* Initially placed outside the container */
+    left: -150px; /* Adjust position to make it fit inside the container */
     width: 200px;
     height: 30px;
     padding: 5px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    opacity: 0;
-    pointer-events: none; /* Prevent interactions when hidden */
-    transform: scaleX(0); /* Hide with scaling */
-    transform-origin: left;
+    opacity: 1; /* Make it visible */
+    pointer-events: auto; /* Allow interactions */
+    transform: scaleX(1); /* Keep it fully visible */
     transition: transform 0.3s ease, opacity 0.3s ease;
 }
-
-.content main .bottom-data .header .search-container:hover .search-bar {
-    opacity: 1;
-    pointer-events: auto;
-    transform: scaleX(1); /* Show the search bar */
-    left: -200px; /* Adjust position based on design */
-}
-
 
 /* --------------------------------- */
 

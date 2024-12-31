@@ -117,11 +117,9 @@
                 <div class="header">
                     <i class="bx bxs-megaphone"></i>
                     <h3>Recent Announcements</h3>
-                    <i class="bx bx-filter"></i>
                     <div class="search-container">
-                        <i class="bx bx-search"></i>
                         <label>
-                            <input type="text" class="search-bar" placeholder="Search...">
+                            <input type="text" id="search-bar" class="search-bar" placeholder="Search...">
                         </label>
                     </div>
                 </div>
@@ -180,8 +178,9 @@
     </main>
 </div>
 
-<script src="${pageContext.request.contextPath}/js/dashboard.js"></script>
+
 <script src="${pageContext.request.contextPath}/js/announcement.js"></script>
+<script src="${pageContext.request.contextPath}/js/dashboard.js"></script>
 </body>
 </html>
 
