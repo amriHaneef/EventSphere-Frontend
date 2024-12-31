@@ -25,7 +25,7 @@
             <a href="#"><i class="bx bx-calendar-check"></i>Events</a>
         </li>
         <li >
-            <a href="#"><i class='bx bxs-megaphone'></i>Announcements</a>
+            <a href="${pageContext.request.contextPath}/pages/announcement"><i class='bx bxs-megaphone'></i>Announcements</a>
         </li>
         <li>
             <a href="#"><i class='bx bxs-book-open'></i>Batches</a>
