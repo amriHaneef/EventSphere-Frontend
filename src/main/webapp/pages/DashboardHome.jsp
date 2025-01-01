@@ -28,7 +28,7 @@
             <a href="#"><i class='bx bxs-megaphone'></i>Announcements</a>
         </li>
         <li>
-            <a href="#"><i class='bx bxs-book-open'></i>Batches</a>
+            <a href="${pageContext.request.contextPath}/pages/batch.jsp"><i class='bx bxs-book-open'></i>Batches</a>
         </li>
         <li>
             <a href="#"><i class="bx bx-group"></i>Users</a>

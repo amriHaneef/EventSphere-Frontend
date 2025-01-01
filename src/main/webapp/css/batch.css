@@ -1,0 +1,361 @@
+:root{
+    --light:#f6f6f9;
+    --primary:#1976d2;
+    --light-primary:#cfe8ff;
+    --gray:#eee;
+    --dark-gray:#aaaaaa;
+    --dark:#363949;
+    --danger:#d32f2f;
+    --light-danger:#fecdd3;
+    --warning:#fbc02d;
+    --light-warning:#fff2c6;
+    --success:#388e3c;
+    --light-success:#bbf7d0;
+}
+
+:root{
+
+    --card-border-radius: 2rem;
+    --border-radius-1: 0.4rem;
+    --border-radius-2: 0.8rem;
+    --border-radius-3: 1.2rem;
+
+    --card-padding: 1.8rem;
+    --padding-1: 1.2rem;
+
+    --box-shadow: 0 2rem 3rem var(--color-light);
+
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+.bx{
+    font-size: 1.7rem;
+}
+a{
+    text-decoration: none;
+}
+li{
+    list-style: none;
+}
+
+html {
+    overflow-x: hidden;
+}
+
+body.dark{
+    --light:#181a1e;
+    --gray:#25252c;
+    --dark:#fbfbfb;
+    --box-shadow: 0 2rem 3rem var(--color-light);
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    background-color:  var(--gray);
+    margin: 0;
+    padding: 0;
+}
+
+#admin_view_batch_tab .header .breadcrumb li a {
+    color: #007BFF;
+    font-size: 26px;
+    text-decoration: none;
+}
+
+button {
+    background-color:  #0056b3;
+    cursor: pointer;
+    border: none;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.batch-container-box {
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    color: var(--light);
+}
+
+.header-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.header-box input {
+    width: 50%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.header-box button {
+    width: 20%;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: var(--light);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    justify-content: flex-end;
+}
+
+.header-box button:hover {
+    background-color:  #0056b3;
+}
+
+.batch-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+}
+
+.batch-table th, .batch-table td {
+    padding: 12px 15px;
+    text-align: left;
+}
+
+.batch-table th {
+    background-color: var(--primary);
+    color: var(--light);
+    padding: 10px;
+    text-align: left;
+    font-size: 16px;
+}
+
+.batch-table td button {
+    margin-right: 10px;
+}
+
+
+
+.batch-table tbody td {
+    background-color: var(--light);
+    color: var(--dark);
+    padding: 10px;
+    text-align: left;
+    font-size: 14px;
+}
+
+
+
+.icon-btn {
+    padding: 8px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 36px;
+    height: 36px;
+    margin-right: 8px;
+}
+
+.edit-btn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.delete-btn {
+    background-color: #f44336;
+    color: white;
+}
+
+.icon-btn:hover {
+    opacity: 0.8;
+}
+
+.batch-table td {
+    vertical-align: middle;
+}
+
+.icon-btn i {
+    margin: 0;
+}
+
+.event-table td {
+    vertical-align: middle;
+}
+
+.icon-btn i {
+    margin: 0;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4); /* Overlay effect */
+}
+
+.modal-content {
+    background-color:  #6b86ae;
+    margin: 10% auto; /* Center vertically */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.close-btn {
+    color: #000409 ;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color:#f44336;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+/* General Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    margin: 0 auto;
+    padding-top: 20px;
+}
+
+h2, h3, h4 {
+    color: #333;
+}
+
+h2 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Batch Creation Form  */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+label {
+    font-size: 1rem;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+input[type="text"],
+input[type="date"],
+select,
+button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 12px;
+    font-size: 1rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+button {
+    background-color:  #0056b3;
+    cursor: pointer;
+    border: none;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.batch-container-box {
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    color: var(--light);
+}
+
+.header-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.header-box input {
+    width: 60%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.header-box button {
+    width: 20%;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: var(--light);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    justify-content: flex-end;
+}
+
+.header-box button:hover {
+    background-color:  #0056b3;
+}
+
+.batch-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.batch-table th, .batch-table td {
+    padding: 12px 15px;
+    text-align: left;
+}
+
+.batch-table th {
+    background-color: var(--primary);
+    color: var(--light);
+}
+
+.batch-table td button {
+    margin-right: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+

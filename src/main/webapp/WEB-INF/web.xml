@@ -17,4 +17,16 @@
             <welcome-file>pages/DashboardHome.jsp</welcome-file>
         </welcome-file-list>
 
+    <servlet>
+        <servlet-name>BatchController</servlet-name>
+        <servlet-class>com.example.eventspherefrontend.controller.BatchController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BatchController</servlet-name>
+        <url-pattern>/pages/batch</url-pattern>
+    </servlet-mapping>
+    <!-- Welcome File Configuration -->
+    <welcome-file-list>
+        <welcome-file>pages/batch.jsp</welcome-file>
+    </welcome-file-list>
 </web-app>
