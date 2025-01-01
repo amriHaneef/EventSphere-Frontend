@@ -1,4 +1,14 @@
+<%@ page import="java.lang.String" %>
+
+<%
+    String role = (String) session.getAttribute("role");
+    if (role == null) {
+        role = "admin"; // Default to empty string
+    }
+%>
+
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,7 +29,7 @@
     </a>
     <ul class="side-menu">
         <li class="active">
-            <a href="#"><i class='bx bx-home'></i>Home</a>
+            <a href="${pageContext.request.contextPath}/pages/Home"><i class='bx bx-home'></i>Home</a>
         </li>
         <li>
             <a href="#"><i class="bx bx-calendar-check"></i>Events</a>
@@ -30,12 +40,24 @@
         <li>
             <a href="#"><i class='bx bxs-book-open'></i>Batches</a>
         </li>
+        <%
+            if ("admin".equalsIgnoreCase(role)) {
+        %>
         <li>
-            <a href="#"><i class="bx bx-group"></i>Users</a>
+            <a href="${pageContext.request.contextPath}/pages/users"><i class="bx bx-group"></i>Users</a>
         </li>
+        <%
+            }
+        %>
+        <%
+            if ("teacher".equalsIgnoreCase(role)) {
+        %>
         <li>
-            <a href="#"><i class="bx bx-group"></i>Students</a>
+            <a href=""><i class="bx bx-group"></i>Students</a>
         </li>
+        <%
+            }
+        %>
         <li>
             <a href="#"><i class="bx bx-cog"></i>My Account</a>
         </li>

@@ -15,6 +15,16 @@
         <!-- Welcome File Configuration -->
         <welcome-file-list>
             <welcome-file>pages/DashboardHome.jsp</welcome-file>
+            <welcome-file>pages/Users.jsp</welcome-file>
         </welcome-file-list>
+
+        <servlet>
+            <servlet-name>usersController</servlet-name>
+            <servlet-class>com.example.eventspherefrontend.controller.usersController</servlet-class>
+        </servlet>
+        <servlet-mapping>
+            <servlet-name>usersController</servlet-name>
+            <url-pattern>/pages/users</url-pattern>
+        </servlet-mapping>
 
 </web-app>
