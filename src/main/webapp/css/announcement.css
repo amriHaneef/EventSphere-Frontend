@@ -97,26 +97,13 @@ body.dark{
     justify-content: center;
     grid-gap: 10px;
     font-weight: 500;
-}
-
-/* ------------------ Modal USer add Styles -------------------------------------- */
-
-
-/* General Button Style */
-.content main .header .btn {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
     cursor: pointer;
+    transition: all 0.5s ease-in-out;
+}
+.content main .header .report:hover{
+    background: #3b67ad;
 }
 
-.content main .header .btn:hover {
-    background-color: #0056b3;
-}
-
-/* -------------------------------------------------------- */
 
 
 
@@ -320,7 +307,112 @@ body.dark{
 }
 
 
+/*-----------------------------------------------------------------------------*/
 
+/* Popup form styles */
+
+.announcement-background {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.popup-announcement {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--light);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 2px 4px 8px 3px var(--dark);
+    width: 400px;
+    max-width: 90%;
+}
+.popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.popup-header h2 {
+    margin: 0;
+    font-size: 20px;
+    color: var(--dark);
+}
+
+.popup-header .close-btn {
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--light);
+}
+
+.popup-header .close-btn:hover {
+    color: #ff0000;
+}
+
+.popup-announcement form {
+    display: flex;
+    flex-direction: column;
+}
+
+.popup-announcement form label {
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: var(--dark);
+}
+
+.popup-announcement form input,
+.popup-announcement form select {
+    margin-bottom: 15px;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: var(--gray);
+    color: var(--dark);
+}
+
+.popup-announcement form .buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.popup-announcement form .buttons button {
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.popup-announcement form .buttons .cancel {
+    background-color: #ff4d4d;
+    color: var(--light);
+}
+
+.popup-announcement form .buttons .cancel:hover {
+    background-color: #cc0000;
+
+}
+
+.popup-announcement form .buttons .submit-btn {
+    background-color: #28a745;
+    color: var(--light);
+}
+
+.popup-announcement form .buttons .submit-btn:hover {
+    background-color: #1e7e34;
+}
+
+/*-----------------------------------------------------------------------------*/
 
 
 @media screen and (max-width:768px) {

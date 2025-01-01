@@ -102,13 +102,40 @@
             <%
                 if ("admin".equalsIgnoreCase(role) || "teacher".equalsIgnoreCase(role)) {
             %>
-            <a class="report" onclick="openModal(event)">
+            <a class="report">
                 <i class="bx bx-plus"></i>
                 <span>Add Announcements</span>
             </a>
             <%
                 }
             %>
+            <div class="announcement-background">
+                <div class="popup-announcement">
+                    <div class="popup-header">
+                        <h2>Add Announcement</h2>
+                        <span class="close-btn">&times;</span>
+                    </div>
+                    <form id="announcementForm">
+                        <label for="announcementName">Announcement Name</label>
+                        <input type="text" id="announcementName" name="announcementName" placeholder="Enter name" required>
+
+                        <label for="announcementDate">Date</label>
+                        <input type="date" id="announcementDate" name="announcementDate" required>
+
+                        <label for="batches">Assign Batches</label>
+                        <select id="batches" name="batches" multiple>
+                            <option value="batch1">Batch 1</option>
+                            <option value="batch2">Batch 2</option>
+                            <option value="batch3">Batch 3</option>
+                        </select>
+
+                        <div class="buttons">
+                            <button type="button" class="cancel">Cancel</button>
+                            <button type="submit" class="submit-btn">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
 
         </div>
 

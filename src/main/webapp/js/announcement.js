@@ -1,4 +1,6 @@
-// Inside announcement.js
+
+// -------------------------------------------------search bar process-----------------------------------------------
+
 document.addEventListener('DOMContentLoaded', function() {
     console.log("DOM fully loaded and parsed");  // Debugging line
     const searchBar = document.getElementById('search-bar');
@@ -22,6 +24,39 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error('Element #search-bar not found');
     }
 });
+// ----------------------------------------------------------- end of search bar process-------------------------------------------------
+
+
+
+// --------------------------------------Add Announcements--------------------------------------------------
+const reportButton = document.querySelector('.report');
+const announcementBackground = document.querySelector('.announcement-background');
+const closeButton = document.querySelector('.close-btn');
+const cancelButton = document.querySelector('.cancel');
+
+// Show popup
+reportButton.addEventListener('click', () => {
+    announcementBackground.style.display = 'block';
+});
+
+// Close popup
+const closePopup = () => {
+    announcementBackground.style.display = 'none';
+};
+
+closeButton.addEventListener('click', closePopup);
+cancelButton.addEventListener('click', closePopup);
+
+// Submit form
+const form = document.querySelector('#announcementForm');
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    // Process form data here
+    console.log('Form submitted!');
+    closePopup();
+});
+// -------------------------------------------End of Add Announcements------------------------------
+
 
 
 

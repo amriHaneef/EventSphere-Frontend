@@ -34,7 +34,7 @@ public class announcementController extends HttpServlet {
 
 
         // Example: Retrieve user role (e.g., from database or session)
-        String userRole = "admin"; // This should be dynamically retrieved
+        String userRole = "student"; // This should be dynamically retrieved
 
         // Set the role in the request or session
         HttpSession session = request.getSession();
