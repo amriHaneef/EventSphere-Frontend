@@ -1,0 +1,5 @@
+# Ensure all text files use LF endings in the repository
+* text=auto
+
+# Enforce LF line endings for XML files
+*.xml text eol=lf
