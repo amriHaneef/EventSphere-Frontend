@@ -68,14 +68,10 @@
     </nav>
     <!-- End of navbar  -->
 
-    <main id="main-content">
-        <h1>hello</h1>
+    <main>
     </main>
 </div>
-<script>
-    const pageContextPath = "${pageContext.request.contextPath}";
-</script>
-<script src="${pageContext.request.contextPath}/js/students.js"></script>
+
 <script src="${pageContext.request.contextPath}/js/dashboard.js"></script>
 </body>
 </html>

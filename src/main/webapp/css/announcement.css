@@ -1,0 +1,433 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root{
+    --light:#f6f6f9;
+    --primary:#1976d2;
+    --light-primary:#cfe8ff;
+    --gray:#eee;
+    --dark-gray:#aaaaaa;
+    --dark:#363949;
+    --danger:#d32f2f;
+    --light-danger:#fecdd3;
+    --warning:#fbc02d;
+    --light-warning:#fff2c6;
+    --success:#388e3c;
+    --light-success:#bbf7d0;
+    --color-light: rgba(132,139,200,0.18);
+    --box-shadow: 1px 2px 3px 3px var(--color-light);
+}
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+.bx{
+    font-size: 1.7rem;
+}
+a{
+    text-decoration: none;
+}
+li{
+    list-style: none;
+}
+
+html{
+    overflow-x: hidden;
+}
+
+body.dark{
+    --light:#181a1e;
+    --gray:#25252c;
+    --dark:#fbfbfb;
+    --box-shadow: 0 2rem 3rem var(--color-light);
+}
+
+
+.content main .header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    grid-gap: 16px;
+    flex-wrap: wrap;
+}
+
+.content main .header .left h1{
+    font-size: 36px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--dark);
+}
+
+.content main .header .left .breadcrumb{
+    display: flex;
+    align-items: center;
+    grid-gap: 16px;
+}
+
+.content main .header .left .breadcrumb li{
+    color: var(--dark);
+}
+
+.content main .header .left .breadcrumb li a{
+    color: var(--dark-gray);
+    pointer-events: none;
+}
+
+.content main .header .left .breadcrumb li a.active{
+    color: var(--primary);
+    pointer-events: none;
+}
+
+.content main .header .report{
+    height: 36px;
+    padding: 0 16px;
+    border-radius: 36px;
+    background: var(--primary);
+    color: var(--light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-gap: 10px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.5s ease-in-out;
+}
+ .header .report:hover{
+    background: #3b67ad;
+}
+
+
+
+
+ .bottom-data{
+    display: flex;
+    flex-wrap: wrap;
+    grid-gap: 24px;
+    margin-top: 24px;
+    width: 100%;
+    color: var(--dark);
+}
+
+ .bottom-data>div{
+    border-radius: 20px;
+    background: var(--light);
+    padding: 24px;
+    overflow-x: auto;
+}
+
+ .bottom-data .header{
+    display: flex;
+    align-items: center;
+    grid-gap: 16px;
+    margin-bottom: 24px;
+}
+
+ .bottom-data .header h3{
+    margin-right: auto;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+ .bottom-data .header .bx{
+    cursor: pointer;
+}
+/* --------------------------------- */
+
+ .bottom-data .header .search-container {
+    position: relative;
+    display: inline-block;
+    left: -100px;
+}
+
+ .bottom-data .header .search-bar {
+    position: absolute;
+    top: 0;
+    left: -150px; /* Adjust position to make it fit inside the container */
+    width: 200px;
+    height: 30px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    opacity: 1; /* Make it visible */
+    pointer-events: auto; /* Allow interactions */
+    transform: scaleX(1); /* Keep it fully visible */
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* --------------------------------- */
+
+ .bottom-data .orders{
+    flex-grow: 1;
+    flex-basis: 500px;
+}
+
+ .bottom-data .orders table{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+ .bottom-data .orders table th{
+    padding-bottom: 12px;
+    font-size: 13px;
+    text-align: left;
+    border-bottom: 1px solid var(--gray);
+}
+
+ .bottom-data .orders table td{
+    padding: 16px 0;
+}
+
+ .bottom-data .orders table tr td:first-child{
+    display:flex ;
+    align-items: center;
+    grid-gap: 12px;
+    padding-left: 6px;
+}
+
+
+ .bottom-data .orders table tbody tr{
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.bottom-data .orders table tbody tr:hover{
+    background: var(--gray);
+}
+
+.bottom-data .orders table tbody tr button.delete {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+ .bottom-data .orders table tbody tr button.delete i.bin{
+    color: var(--light-danger);
+    font-size: 1.5rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+
+}
+ .bottom-data .orders table tbody tr button.delete i.bin:hover{
+    color: var(--danger);
+    font-size: 1.5rem;
+    transform: scale(1.2); /* Slightly enlarge icon on hover */
+    box-shadow: 0 4px 8px rgba(255, 0, 0, 0.2); /* Glow effect */
+}
+/* Popup Overlay */
+.bottom-data .orders .popup-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: opacity 0.3s ease;
+}
+
+/* Popup Content Box */
+.bottom-data .orders .popup-content {
+    background-color: var(--light);
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    box-shadow: 2px 3px 4px 3px #181a1e;
+    transition: all 0.3s ease;
+}
+
+/* Close Icon */
+.bottom-data .orders .popup-close {
+    font-size: 2rem;
+    color: var(--dark);
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.bottom-data .orders .popup-close:hover {
+    color: var(--primary);
+}
+
+/* Popup Text */
+.bottom-data .orders .popup-content p {
+    font-size: 1.2rem;
+    color: var(--dark);
+    margin: 20px 0;
+}
+
+/* Popup Buttons */
+ .bottom-data .orders .popup-buttons {
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+}
+
+.bottom-data .orders .popup-buttons button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: var(--border-radius-1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+ .bottom-data .orders .popup-buttons .cancel-btn {
+    background-color: var(--gray);
+    color: var(--dark);
+}
+
+.bottom-data .orders .popup-buttons .cancel-btn:hover {
+    background-color: var(--dark-gray);
+    transform: scale(1.05);
+}
+
+ .bottom-data .orders .popup-buttons .ok-btn {
+    background-color: var(--danger);
+    color: var(--light);
+}
+
+ .bottom-data .orders .popup-buttons .ok-btn:hover {
+    background-color: var(--light-danger);
+    transform: scale(1.05);
+}
+
+
+/*-----------------------------------------------------------------------------*/
+
+/* Popup form styles */
+
+.announcement-background {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.popup-announcement {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--light);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 2px 4px 8px 3px var(--dark);
+    width: 400px;
+    max-width: 90%;
+}
+.popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.popup-header h2 {
+    margin: 0;
+    font-size: 20px;
+    color: var(--dark);
+}
+
+.popup-header .close-btn {
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--light);
+}
+
+.popup-header .close-btn:hover {
+    color: #ff0000;
+}
+
+.popup-announcement form {
+    display: flex;
+    flex-direction: column;
+}
+
+.popup-announcement form label {
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: var(--dark);
+}
+
+.popup-announcement form input,
+.popup-announcement form select {
+    margin-bottom: 15px;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: var(--gray);
+    color: var(--dark);
+}
+
+.popup-announcement form .buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.popup-announcement form .buttons button {
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.popup-announcement form .buttons .cancel {
+    background-color: #ff4d4d;
+    color: var(--light);
+}
+
+.popup-announcement form .buttons .cancel:hover {
+    background-color: #cc0000;
+
+}
+
+.popup-announcement form .buttons .submit-btn {
+    background-color: #28a745;
+    color: var(--light);
+}
+
+.popup-announcement form .buttons .submit-btn:hover {
+    background-color: #1e7e34;
+}
+
+/*-----------------------------------------------------------------------------*/
+
+
+@media screen and (max-width:768px) {
+    .sidebar{
+        width: 220px;
+    }
+
+    .content{
+        width: calc(100% - 60px);
+        left: 220px;
+    }
+
+}
+
+@media screen and (max-width: 576px) {
+
+    .content nav form.show~.notify, .content nav form.show~.profile{
+        display: none;
+    }
+
+
+
+}

@@ -11,10 +11,12 @@
         <servlet-mapping>
             <servlet-name>DashboardHomeController</servlet-name>
             <url-pattern>/pages/Home</url-pattern>
+
         </servlet-mapping>
         <!-- Welcome File Configuration -->
         <welcome-file-list>
             <welcome-file>pages/DashboardHome.jsp</welcome-file>
+            <welcome-file>pages/announcement.jsp</welcome-file>
             <welcome-file>pages/students.jsp</welcome-file>
         </welcome-file-list>
         <servlet>
@@ -25,5 +27,15 @@
             <servlet-name>studentController</servlet-name>
             <url-pattern>/pages/students</url-pattern>
         </servlet-mapping>
+
+    <servlet>
+        <servlet-name>announcementController</servlet-name>
+        <servlet-class>com.example.eventspherefrontend.controller.announcementController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>announcementController</servlet-name>
+        <url-pattern>/pages/announcement</url-pattern>
+    </servlet-mapping>
+
 
 </web-app>
