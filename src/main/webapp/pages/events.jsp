@@ -80,16 +80,14 @@
                     </li>
                 </ul>
             </div>
-            <div class="container">
-                <!-- Search Bar -->
-                <div class="search-bar">
-                    <input type="text" id="searchInput" placeholder="Search...">
-                    <button onclick="searchEvent()">Search</button>
+            <div class="batch-container-box">
+                <!-- Search Box -->
+                <div class="header-box">
+                    <input type="text" id="eventSearch" onkeyup="searchEvent()" placeholder="Search for Event ID or Name...">
                 </div>
 
                 <!-- Event Table -->
-                <!-- Event Table -->
-                <table class="event-table" id=" event_tab_table">
+                <table class="event-table" id="event_tab_table">
                     <thead>
                     <tr>
                         <th>Event ID</th>
@@ -123,9 +121,8 @@
                     </tr>
                     </tbody>
                 </table>
-            </div>
 
-            <!-- Metrics Dashboard -->
+                <!-- Metrics Dashboard -->
             <div class="metrics-dashboard">
                 <h3>Event Metrics</h3>
                 <div id="metrics">
@@ -144,6 +141,7 @@
                 </div>
             </section>
 
+        </div>
         </div>
     </main>
 </div>

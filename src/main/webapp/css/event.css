@@ -66,44 +66,27 @@ body {
     text-decoration: none;
 }
 
-
-.container {
-    padding: 0 20px;
-    margin: 0 auto;
-    max-width: 1200px;
-    box-sizing: border-box;
-    box-shadow: 0 2px 4px var(--gray);
+.batch-container-box {
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    color: var(--light);
 }
 
-.search-bar {
-    margin-bottom: 20px;
+.header-box {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
-.search-bar input {
+.header-box input {
     width: 50%;
-    height: 36px;
     padding: 10px;
     font-size: 16px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-
-.search-bar button {
-    padding: 10px 10px;
-    height: 36px;
-    font-size: 16px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
     border-radius: 5px;
-    cursor: pointer;
 }
 
-.search-bar button:hover {
-    background-color: #0056b3;
-}
 
 .event-table {
     width: 100%;

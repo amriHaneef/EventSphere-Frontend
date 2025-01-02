@@ -86,4 +86,26 @@ function submitFeedback() {
         alert("Please enter feedback before submitting.");
     }
 }
+function searchEvent() {
+    const searchInput = document.getElementById("eventSearch").value.toLowerCase();
+    const table = document.getElementById("event_tab_table");
+    const rows = table.getElementsByTagName("tr");
 
+    for (let i = 1; i < rows.length; i++) { // Start from 1 to skip the header row
+        const cells = rows[i].getElementsByTagName("td");
+        let match = false;
+
+        // Check Event ID and Event Name columns for a match
+        if (cells.length > 0) {
+            const eventID = cells[0].textContent.toLowerCase(); // Event ID
+            const eventName = cells[1].textContent.toLowerCase(); // Event Name
+
+            if (eventID.includes(searchInput) || eventName.includes(searchInput)) {
+                match = true;
+            }
+        }
+
+        // Show or hide the row based on the match
+        rows[i].style.display = match ? "" : "none";
+    }
+}
