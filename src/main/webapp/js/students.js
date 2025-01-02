@@ -1,11 +1,11 @@
 // Function to reinitialize event listeners related to students
 const reinitializeStudentListeners = () => {
-    initializeSearchBar();
+    initializeStudentSearchBar();
     initializeEditStudent();
 };
 
 // Initialize Search Bar functionality
-const initializeSearchBar = () => {
+const initializeStudentSearchBar = () => {
     const searchBar = document.getElementById('search-bar');
     if (searchBar) {
         searchBar.addEventListener('input', function () {

@@ -1,24 +1,35 @@
 // Reinitialize the event listeners after DOM content is loaded
 const reinitializeAnnouncementListeners = () => {
-    initializeSearchBar();
+    initializeAnnouncementSearchBar();
     initializeAddAnnouncements();
     initializeDeleteAnnouncements();
 };
 
 // Initialize Search Bar functionality
-const initializeSearchBar = () => {
+const initializeAnnouncementSearchBar = () => {
     const searchBar = document.getElementById('search-bar');
     if (searchBar) {
+        console.log("Search bar found and initializing...");
         searchBar.addEventListener('input', function () {
-            const filter = this.value.toLowerCase();
+            const filter = this.value.toLowerCase().trim();
             const rows = document.querySelectorAll('tbody tr');
+
             rows.forEach(row => {
-                const rowContent = row.textContent.toLowerCase();
-                row.style.display = rowContent.includes(filter) ? '' : 'none';
+                const cells = Array.from(row.querySelectorAll('td'));
+                const rowContent = cells.map(cell => cell.textContent.toLowerCase().trim()).join(' ');
+
+                if (rowContent.includes(filter)) {
+                    row.style.display = ''; // Show the row
+                } else {
+                    row.style.display = 'none'; // Hide the row
+                }
             });
         });
+    } else {
+        console.error('Search bar not found!');
     }
 };
+
 
 // Initialize Add Announcements functionality
 const initializeAddAnnouncements = () => {
