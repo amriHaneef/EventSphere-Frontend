@@ -128,6 +128,7 @@
                 <div id="metrics">
                     <canvas id="progressPieChart" width="400" height="400"></canvas> <!-- Placeholder for pie chart -->
                 </div>
+            </div>
             </div><br>
 
             <!-- Feedback Box -->
@@ -141,7 +142,6 @@
                 </div>
             </section>
 
-        </div>
         </div>
     </main>
 </div>
