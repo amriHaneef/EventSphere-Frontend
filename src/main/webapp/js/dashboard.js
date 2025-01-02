@@ -31,4 +31,23 @@ toggler.addEventListener('change', function() {
 });
 
 
+document.addEventListener("DOMContentLoaded", function () {
+    const announcementsLink = document.getElementById("announcements-link");
+    const mainContent = document.getElementById("main-content");
+
+    announcementsLink.addEventListener("click", function (e) {
+        e.preventDefault(); // Prevent the default behavior of the link
+
+        // Load the announcement page dynamically
+        fetch(`${pageContextPath}/pages/announcement`)
+            .then(response => response.text())
+            .then(html => {
+                mainContent.innerHTML = html; // Replace main content with the new HTML
+                // Now, initialize or reinitialize the JavaScript related to announcements
+                reinitializeAnnouncementListeners();  // This should contain the JS for handling dynamic actions
+            })
+            .catch(error => console.error("Error loading announcements:", error));
+    });
+});
+
 

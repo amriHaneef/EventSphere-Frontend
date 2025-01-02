@@ -1,99 +1,93 @@
+// Reinitialize the event listeners after DOM content is loaded
+const reinitializeAnnouncementListeners = () => {
+    initializeSearchBar();
+    initializeAddAnnouncements();
+    initializeDeleteAnnouncements();
+};
 
-// -------------------------------------------------search bar process-----------------------------------------------
-
-document.addEventListener('DOMContentLoaded', function() {
-    console.log("DOM fully loaded and parsed");  // Debugging line
+// Initialize Search Bar functionality
+const initializeSearchBar = () => {
     const searchBar = document.getElementById('search-bar');
     if (searchBar) {
         searchBar.addEventListener('input', function () {
             const filter = this.value.toLowerCase();
             const rows = document.querySelectorAll('tbody tr');
-
             rows.forEach(row => {
-                const cells = Array.from(row.querySelectorAll('td'));
-                const rowContent = cells.map(cell => cell.textContent.toLowerCase()).join(' ');
-
-                if (rowContent.includes(filter)) {
-                    row.style.display = ''; // Show the row
-                } else {
-                    row.style.display = 'none'; // Hide the row
-                }
+                const rowContent = row.textContent.toLowerCase();
+                row.style.display = rowContent.includes(filter) ? '' : 'none';
             });
         });
-    } else {
-        console.error('Element #search-bar not found');
     }
-});
-// ----------------------------------------------------------- end of search bar process-------------------------------------------------
-
-
-
-// --------------------------------------Add Announcements--------------------------------------------------
-const reportButton = document.querySelector('.report');
-const announcementBackground = document.querySelector('.announcement-background');
-const closeButton = document.querySelector('.close-btn');
-const cancelButton = document.querySelector('.cancel');
-
-// Show popup
-reportButton.addEventListener('click', () => {
-    announcementBackground.style.display = 'block';
-});
-
-// Close popup
-const closePopup = () => {
-    announcementBackground.style.display = 'none';
 };
 
-closeButton.addEventListener('click', closePopup);
-cancelButton.addEventListener('click', closePopup);
+// Initialize Add Announcements functionality
+const initializeAddAnnouncements = () => {
+    const reportButton = document.querySelector('.report');
+    const announcementBackground = document.querySelector('.announcement-background');
+    const closeButton = document.querySelector('.close-btn');
+    const cancelButton = document.querySelector('.cancel');
+    const form = document.querySelector('#announcementForm');
 
-// Submit form
-const form = document.querySelector('#announcementForm');
-form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    // Process form data here
-    console.log('Form submitted!');
-    closePopup();
-});
-// -------------------------------------------End of Add Announcements------------------------------
+    if (reportButton && announcementBackground) {
+        reportButton.addEventListener('click', () => {
+            announcementBackground.style.display = 'block';
+        });
+    }
 
+    const closePopup = () => {
+        if (announcementBackground) {
+            announcementBackground.style.display = 'none';
+        }
+    };
 
+    if (closeButton) {
+        closeButton.addEventListener('click', closePopup);
+    }
 
+    if (cancelButton) {
+        cancelButton.addEventListener('click', closePopup);
+    }
 
-// Get the elements
-const deleteButton = document.querySelector('.delete');
-const popupOverlay = document.querySelector('.popup-overlay');
-const closeBtn = document.querySelector('.popup-close');
-const cancelBtn = document.querySelector('.cancel-btn');
-const okBtn = document.querySelector('.ok-btn');
+    if (form) {
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            console.log('Form submitted!');
+            closePopup();
+        });
+    }
+};
 
-// Show popup when delete button is clicked
-deleteButton.addEventListener('click', () => {
-    popupOverlay.style.display = 'flex';
-    popupOverlay.style.opacity = '1';
-});
+// Initialize Delete Announcements functionality
+const initializeDeleteAnnouncements = () => {
+    const deleteButtons = document.querySelectorAll('.delete');
+    const popupOverlay = document.querySelector('.popup-overlay');
+    const closeBtn = document.querySelector('.popup-close');
+    const cancelBtn = document.querySelector('.cancel-btn');
+    const okBtn = document.querySelector('.ok-btn');
 
-// Close the popup when close icon is clicked
-closeBtn.addEventListener('click', () => {
-    popupOverlay.style.display = 'none';
-    popupOverlay.style.opacity = '0';
-});
+    deleteButtons.forEach((deleteButton) => {
+        deleteButton.addEventListener('click', () => {
+            popupOverlay.style.display = 'flex';
+            popupOverlay.style.opacity = '1';
+        });
+    });
 
-// Cancel button hides the popup
-cancelBtn.addEventListener('click', () => {
-    popupOverlay.style.display = 'none';
-    popupOverlay.style.opacity = '0';
-});
+    closeBtn.addEventListener('click', () => {
+        popupOverlay.style.display = 'none';
+        popupOverlay.style.opacity = '0';
+    });
 
-// OK button for confirmation action (add the delete logic here)
-okBtn.addEventListener('click', () => {
-    // Your delete logic goes here
-    console.log('Announcement Deleted');
-    popupOverlay.style.display = 'none';
-    popupOverlay.style.opacity = '0';
-});
+    cancelBtn.addEventListener('click', () => {
+        popupOverlay.style.display = 'none';
+        popupOverlay.style.opacity = '0';
+    });
 
+    okBtn.addEventListener('click', () => {
+        console.log('Announcement Deleted');
+        popupOverlay.style.display = 'none';
+        popupOverlay.style.opacity = '0';
+    });
+};
 
-
-
-
+// Call this function to initialize all necessary functionalities
+document.addEventListener('DOMContentLoaded', reinitializeAnnouncementListeners);

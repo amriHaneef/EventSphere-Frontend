@@ -24,8 +24,8 @@
         <li>
             <a href="#"><i class="bx bx-calendar-check"></i>Events</a>
         </li>
-        <li >
-            <a href="${pageContext.request.contextPath}/pages/announcement"><i class='bx bxs-megaphone'></i>Announcements</a>
+        <li id="announcements-link">
+            <a href="#"><i class='bx bxs-megaphone'></i>Announcements</a>
         </li>
         <li>
             <a href="#"><i class='bx bxs-book-open'></i>Batches</a>
@@ -67,10 +67,14 @@
     </nav>
     <!-- End of navbar  -->
 
-    <main>
+    <main id="main-content">
+        <!-- Content will be loaded here dynamically -->
     </main>
 </div>
-
+<script>
+    const pageContextPath = "${pageContext.request.contextPath}";
+</script>
+<script src="${pageContext.request.contextPath}/js/announcement.js"></script>
 <script src="${pageContext.request.contextPath}/js/dashboard.js"></script>
 </body>
 </html>

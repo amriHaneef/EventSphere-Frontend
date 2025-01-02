@@ -45,11 +45,6 @@ body.dark{
     --box-shadow: 0 2rem 3rem var(--color-light);
 }
 
-.content main{
-    width: 100%;
-    padding: 36px 24px;
-    max-height: calc(100vh - 56px);
-}
 
 .content main .header{
     display: flex;
@@ -100,14 +95,14 @@ body.dark{
     cursor: pointer;
     transition: all 0.5s ease-in-out;
 }
-.content main .header .report:hover{
+ .header .report:hover{
     background: #3b67ad;
 }
 
 
 
 
-.content main .bottom-data{
+ .bottom-data{
     display: flex;
     flex-wrap: wrap;
     grid-gap: 24px;
@@ -116,38 +111,38 @@ body.dark{
     color: var(--dark);
 }
 
-.content main .bottom-data>div{
+ .bottom-data>div{
     border-radius: 20px;
     background: var(--light);
     padding: 24px;
     overflow-x: auto;
 }
 
-.content main .bottom-data .header{
+ .bottom-data .header{
     display: flex;
     align-items: center;
     grid-gap: 16px;
     margin-bottom: 24px;
 }
 
-.content main .bottom-data .header h3{
+ .bottom-data .header h3{
     margin-right: auto;
     font-size: 24px;
     font-weight: 600;
 }
 
-.content main .bottom-data .header .bx{
+ .bottom-data .header .bx{
     cursor: pointer;
 }
 /* --------------------------------- */
 
-.content main .bottom-data .header .search-container {
+ .bottom-data .header .search-container {
     position: relative;
     display: inline-block;
     left: -100px;
 }
 
-.content main .bottom-data .header .search-bar {
+ .bottom-data .header .search-bar {
     position: absolute;
     top: 0;
     left: -150px; /* Adjust position to make it fit inside the container */
@@ -164,28 +159,28 @@ body.dark{
 
 /* --------------------------------- */
 
-.content main .bottom-data .orders{
+ .bottom-data .orders{
     flex-grow: 1;
     flex-basis: 500px;
 }
 
-.content main .bottom-data .orders table{
+ .bottom-data .orders table{
     width: 100%;
     border-collapse: collapse;
 }
 
-.content main .bottom-data .orders table th{
+ .bottom-data .orders table th{
     padding-bottom: 12px;
     font-size: 13px;
     text-align: left;
     border-bottom: 1px solid var(--gray);
 }
 
-.content main .bottom-data .orders table td{
+ .bottom-data .orders table td{
     padding: 16px 0;
 }
 
-.content main .bottom-data .orders table tr td:first-child{
+ .bottom-data .orders table tr td:first-child{
     display:flex ;
     align-items: center;
     grid-gap: 12px;
@@ -193,35 +188,35 @@ body.dark{
 }
 
 
-.content main .bottom-data .orders table tbody tr{
+ .bottom-data .orders table tbody tr{
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
-.content main .bottom-data .orders table tbody tr:hover{
+.bottom-data .orders table tbody tr:hover{
     background: var(--gray);
 }
 
-.content main .bottom-data .orders table tbody tr button.delete {
+.bottom-data .orders table tbody tr button.delete {
     background: none;
     border: none;
     padding: 0;
     cursor: pointer;
 }
-.content main .bottom-data .orders table tbody tr button.delete i.bin{
+ .bottom-data .orders table tbody tr button.delete i.bin{
     color: var(--light-danger);
     font-size: 1.5rem;
     transition: color 0.3s ease, transform 0.3s ease;
 
 }
-.content main .bottom-data .orders table tbody tr button.delete i.bin:hover{
+ .bottom-data .orders table tbody tr button.delete i.bin:hover{
     color: var(--danger);
     font-size: 1.5rem;
     transform: scale(1.2); /* Slightly enlarge icon on hover */
     box-shadow: 0 4px 8px rgba(255, 0, 0, 0.2); /* Glow effect */
 }
 /* Popup Overlay */
-.content main .bottom-data .orders .popup-overlay {
+.bottom-data .orders .popup-overlay {
     display: none;
     position: fixed;
     top: 0;
@@ -236,7 +231,7 @@ body.dark{
 }
 
 /* Popup Content Box */
-.content main .bottom-data .orders .popup-content {
+.bottom-data .orders .popup-content {
     background-color: var(--light);
     padding: 30px;
     border-radius: 10px;
@@ -249,7 +244,7 @@ body.dark{
 }
 
 /* Close Icon */
-.content main .bottom-data .orders .popup-close {
+.bottom-data .orders .popup-close {
     font-size: 2rem;
     color: var(--dark);
     position: absolute;
@@ -259,25 +254,25 @@ body.dark{
     transition: color 0.3s ease;
 }
 
-.content main .bottom-data .orders .popup-close:hover {
+.bottom-data .orders .popup-close:hover {
     color: var(--primary);
 }
 
 /* Popup Text */
-.content main .bottom-data .orders .popup-content p {
+.bottom-data .orders .popup-content p {
     font-size: 1.2rem;
     color: var(--dark);
     margin: 20px 0;
 }
 
 /* Popup Buttons */
-.content main .bottom-data .orders .popup-buttons {
+ .bottom-data .orders .popup-buttons {
     display: flex;
     justify-content: space-around;
     gap: 10px;
 }
 
-.content main .bottom-data .orders .popup-buttons button {
+.bottom-data .orders .popup-buttons button {
     padding: 10px 20px;
     font-size: 1rem;
     border: none;
@@ -286,22 +281,22 @@ body.dark{
     transition: all 0.3s ease;
 }
 
-.content main .bottom-data .orders .popup-buttons .cancel-btn {
+ .bottom-data .orders .popup-buttons .cancel-btn {
     background-color: var(--gray);
     color: var(--dark);
 }
 
-.content main .bottom-data .orders .popup-buttons .cancel-btn:hover {
+.bottom-data .orders .popup-buttons .cancel-btn:hover {
     background-color: var(--dark-gray);
     transform: scale(1.05);
 }
 
-.content main .bottom-data .orders .popup-buttons .ok-btn {
+ .bottom-data .orders .popup-buttons .ok-btn {
     background-color: var(--danger);
     color: var(--light);
 }
 
-.content main .bottom-data .orders .popup-buttons .ok-btn:hover {
+ .bottom-data .orders .popup-buttons .ok-btn:hover {
     background-color: var(--light-danger);
     transform: scale(1.05);
 }
