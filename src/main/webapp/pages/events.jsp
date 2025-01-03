@@ -1,4 +1,10 @@
+<%@ page import="java.util.List" %>
+<%@ page import="java.lang.String" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%
+    String role = (String) session.getAttribute("role");
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -269,60 +275,82 @@
             <div class="left">
                 <ul class="breadcrumb">
                     <li>
-                        <a href="#">Student/Event</a>
+                        <a href="#">Student</a>
+                    </li>
+                    /
+                    <li>
+                        <a href="#" class="active">Event</a>
                     </li>
                 </ul><br>
             </div>
         </div>
 
-        <div class="container">
-            <!-- Search Bar -->
-            <div class="search-bar">
-                <input type="text" id="searchInput_student" placeholder="Search...">
-                <button onclick="searchEvent()">Search</button>
+        <div class="bottom-data">
+            <div class="orders">
+                <div class="header">
+                    <i class="bx bxs-megaphone"></i>
+                    <h3>Recent Announcements</h3>
+                    <div class="search-container">
+                        <label>
+                            <input type="text" id="search-bar" class="search-bar" placeholder="Search...">
+                        </label>
+                    </div>
+                </div>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Announcement By</th>
+                        <th>Date</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <%
+                        // Retrieve and safely cast announcements
+                        Object announcementsObject = request.getAttribute("announcements");
+                        if (announcementsObject instanceof List) {
+                            List<String[]> announcements = (List<String[]>) announcementsObject;
+                            for (String[] announcement : announcements) {
+                    %>
+                    <tr>
+                        <td><%= announcement[0] %></td>
+                        <td><%= announcement[1] %></td>
+                        <td><%= announcement[2] %></td>
+
+                        <%
+                            if  ("admin".equalsIgnoreCase(role) || "teacher".equalsIgnoreCase(role)) {
+                        %>
+                        <td>
+                            <button class="delete">
+                                <i class="bx bxs-trash bin"></i>
+                            </button>
+                        </td>
+                        <%
+                            }
+                        %></tr>
+                    <%
+                            }
+                        }
+                    %>
+                    </tbody>
+                </table>
+                <!-- Popup Form -->
+                <div class="popup-overlay">
+                    <div class="popup-content">
+                        <span class="popup-close">&times;</span>
+                        <p>Do you want to delete this announcement?</p>
+                        <div class="popup-buttons">
+                            <button class="cancel-btn">Cancel</button>
+                            <button class="ok-btn">OK</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- Assigned  Events Table student -->
-        <div class="assigned-event">
-            <h2>
-                <span class="material-icons-sharp">event</span> Assigned Events
-            </h2>
-            <br>
-            <table class="event-table" id="student_view_event_tab_table">
-                <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>Event name</th>
-                    <th>Platform</th>
-                    <th>Lecturer</th>
-                    <th>Status</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>2025-01-15</td>
-                    <td>10:00 AM</td>
-                    <td>Web Development</td>
-                    <td>Zoom</td>
-                    <td>Mrs.Sandaruwani</td>
-                    <td>Attended</td>
-                </tr>
-                <tr>
-                    <td>2025-01-20</td>
-                    <td>2:00 PM</td>
-                    <td>Java Workshop</td>
-                    <td>Google Meet</td>
-                    <td>Mrs.Thilini</td>
-                    <td>Missed</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        </section>
 
-        <!-- Circular Progress Bar -->
+            <!-- Circular Progress Bar -->
         <section>
             <div class="insight ">
                 <div class="sales">
@@ -344,7 +372,8 @@
                     </div>
                 </div>
             </div>
-        </section><br>
+        </section>
+        <br>
 
                     <!-- Feedback Box -->
         <section>
@@ -356,7 +385,6 @@
                 </div>
             </div>
         </section>
-
     </main>
 </div>
 <script src="${pageContext.request.contextPath}/js/dashboard.js"></script>
