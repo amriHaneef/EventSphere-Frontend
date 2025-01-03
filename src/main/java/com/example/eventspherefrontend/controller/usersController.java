@@ -22,8 +22,6 @@ public class usersController extends HttpServlet {
         users.add(new String[]{"001", "John Doe","JohnDoe@gmail.com", "24-12-2002","GAHDSE24.2"});
         // Adding multiple users
         users.add(new String[]{"002", "John Doe","JohnDoe@gmail.com", "03-01-2000","GADSE21.3"});
-        users.add(new String[]{"003", "Alice Smith","AliceSmith@gmail.com", "20-05-1999","GAHDSE23.2"});
-        users.add(new String[]{"004", "Bob Johnson","BobJohnson@gmail.com", "25-02-2004","GADSE24.1"});
 
         // Add students to the request
         request.setAttribute("users", users);

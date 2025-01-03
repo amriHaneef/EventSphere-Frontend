@@ -1,11 +1,3 @@
-<%@ page import="java.lang.String" %>
-
-<%
-    String role = (String) session.getAttribute("role");
-    if (role == null) {
-        role = "admin"; // Default to empty string
-    }
-%>
 
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
@@ -31,34 +23,22 @@
         <li class="active">
             <a href="${pageContext.request.contextPath}/pages/Home"><i class='bx bx-home'></i>Home</a>
         </li>
-        <li>
+        <li id="events-link">
             <a href="#"><i class="bx bx-calendar-check"></i>Events</a>
         </li>
-        <li >
+        <li id="announcements-link">
             <a href="#"><i class='bx bxs-megaphone'></i>Announcements</a>
         </li>
-        <li>
+        <li id="batches-link">
             <a href="#"><i class='bx bxs-book-open'></i>Batches</a>
         </li>
-        <%
-            if ("admin".equalsIgnoreCase(role)) {
-        %>
-        <li>
-            <a href="${pageContext.request.contextPath}/pages/users"><i class="bx bx-group"></i>Users</a>
+        <li id="users-link">
+            <a href="#"><i class="bx bx-group"></i>Users</a>
         </li>
-        <%
-            }
-        %>
-        <%
-            if ("teacher".equalsIgnoreCase(role)) {
-        %>
-        <li>
-            <a href=""><i class="bx bx-group"></i>Students</a>
+        <li id="students-link">
+            <a href="#"><i class="bx bx-group"></i>Students</a>
         </li>
-        <%
-            }
-        %>
-        <li>
+        <li id="accounts-link">
             <a href="#"><i class="bx bx-cog"></i>My Account</a>
         </li>
     </ul>
@@ -89,10 +69,16 @@
     </nav>
     <!-- End of navbar  -->
 
-    <main>
+    <main id="main-content">
+        <h1>hello</h1>
     </main>
 </div>
-
+<script>
+    const pageContextPath = "${pageContext.request.contextPath}";
+</script>
+<script src="${pageContext.request.contextPath}/js/students.js"></script>
+<script src="${pageContext.request.contextPath}/js/announcement.js"></script>
+<script src="${pageContext.request.contextPath}/js/Users.js"></script>
 <script src="${pageContext.request.contextPath}/js/dashboard.js"></script>
 </body>
 </html>

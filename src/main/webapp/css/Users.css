@@ -333,6 +333,141 @@ body.no-scroll {
     overflow-x: auto;
 }
 
+.content main .data {
+    display: flex;
+    flex-wrap: wrap;
+    grid-gap: 24px;
+    margin-top: 24px;
+    width: 100%; /* Set to full width of the parent container */
+    max-width: 1200px; /* Adjust maximum width as needed */
+    color: var(--dark);
+    margin-left: auto; /* Center align if constrained */
+    margin-right: auto; /* Center align if constrained */
+}
+
+.content main .data > div {
+    flex-grow: 1;
+    flex-basis: calc(50% - 12px); /* Adjust for two equal columns with spacing */
+    border-radius: 20px;
+    background: var(--light);
+    padding: 24px;
+    overflow-x: auto;
+}
+
+/*-----------------------------------------------------------------------------*/
+/* Batch Container */
+
+.content main .data .batch-container {
+    flex-grow: 1;
+    flex-basis: 500px;
+    border-radius: 20px;
+    background: var(--light);
+    padding: 24px;
+    overflow-x: auto;
+    box-shadow: 2px 2px 2px 2px #181a1e;
+    transition: all 0.3s ease-out;
+}
+
+.content main .data .batch-container .header {
+    cursor: pointer;
+    padding: 12px;
+    background:none;
+    border: none;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    margin-bottom: 12px; /* Add spacing between batches */
+}
+
+.content main .data .batch-container:hover {
+    box-shadow: 1px 1px 1px 1px #181a1e;
+}
+
+.content main .data .batch-container table {
+    display: none;
+}
+
+.content main .data .batch-container table.hidden {
+    display: none;
+}
+
+.content main .data .batch-container table.visible {
+    display: block;
+}
+
+/* Table Styling */
+.content main .data .batch-container table.student-details {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.content main .data .batch-container table th {
+    padding-bottom: 12px;
+    margin: 15px 32px;
+    font-size: 13px;
+    text-align: left;
+    border-bottom: 1px solid var(--gray);
+}
+
+.content main .data .batch-container table td {
+    padding: 14px 18px;
+}
+
+.content main .data .batch-container table.student-details tr td:first-child {
+    display:flex ;
+    align-items: center;
+    grid-gap: 12px;
+    padding-left: 6px;
+}
+
+.content main .data .batch-container table.student-details tbody tr {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.content main .data .batch-container table.student-details tbody tr:hover {
+    background: var(--gray);
+}
+
+.content main .data .batch-container table.student-details tbody tr button.edit,
+.content main .data .batch-container table.student-details tbody tr button.delete {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.content main .data .batch-container table tbody tr button.edit i.write {
+    color: var(--light-success);
+    font-size: 1.5rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.content main .data .batch-container table tbody tr button.edit i.write:hover {
+    color: var(--success);
+    font-size: 1.5rem;
+    transform: scale(1.2); /* Slightly enlarge icon on hover */
+    box-shadow: 0 4px 8px rgba(0, 255, 0, 0.2); /* Glow effect */
+}
+
+.content main .data .batch-container table tbody tr button.delete i.bin {
+    color: var(--light-danger);
+    font-size: 1.5rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.content main .data .batch-container table tbody tr button.delete i.bin:hover {
+    color: var(--danger);
+    font-size: 1.5rem;
+    transform: scale(1.2); /* Slightly enlarge icon on hover */
+    box-shadow: 0 4px 8px rgba(255, 0, 0, 0.2); /* Glow effect */
+}
+
+
+
+/*----------------------------------------------------------------------*/
+
+
+
 .content main .bottom-data .header{
     display: flex;
     align-items: center;
@@ -412,7 +547,8 @@ body.no-scroll {
     background: var(--gray);
 }
 
-.content main .bottom-data .orders table tbody tr button.edit {
+.content main .bottom-data .orders table tbody tr button.edit,
+.content main .bottom-data .orders table tbody tr button.delete{
     background: none;
     border: none;
     padding: 0;
@@ -431,6 +567,19 @@ body.no-scroll {
     box-shadow: 0 4px 8px rgba(0, 255, 0, 0.2); /* Glow effect */
 }
 
+.content main .bottom-data .orders table tbody tr button.delete i.bin{
+    color: var(--light-danger);
+    font-size: 1.5rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+
+}
+
+.content main .bottom-data .orders table tbody tr button.delete i.bin:hover{
+    color: var(--danger);
+    font-size: 1.5rem;
+    transform: scale(1.2); /* Slightly enlarge icon on hover */
+    box-shadow: 0 4px 8px rgba(255, 0, 0, 0.2); /* Glow effect */
+}
 
 /* Popup Overlay */
 .popup-overlay {
@@ -568,7 +717,6 @@ body.no-scroll {
 }
 
 /*-----------------------------------------------------------------------------*/
-
 
 
 @media screen and (max-width:768px) {
