@@ -31,6 +31,16 @@ toggler.addEventListener('change', function() {
 });
 
 
+document.querySelector('.notif').addEventListener('click', function (e) {
+    e.preventDefault();
+    const miniCart = document.querySelector('.mini-cart');
+    miniCart.style.opacity = miniCart.style.opacity === '1' ? '0' : '1';
+    miniCart.style.visibility = miniCart.style.visibility === 'visible' ? 'hidden' : 'visible';
+});
+
+
+
+
 document.addEventListener("DOMContentLoaded", function () {
 
 

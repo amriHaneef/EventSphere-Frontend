@@ -6,10 +6,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/dashboard.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
     <title>EventSphere</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/dashboard.css">
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/images/favicon.ico" type="image/x-icon">
 </head>
 <body>
@@ -58,7 +58,7 @@
 
         <input type="checkbox" id="theme-toggle" hidden>
         <label for="theme-toggle" class="theme-toggle"></label>
-        <div class="announcements">
+        <div class="announcements-notification">
             <a href="#" class="notif">
                 <i class="bx bx-bell"></i>
                 <span class="count">12</span>
@@ -110,6 +110,8 @@
         <h1>hello</h1>
     </main>
 </div>
+
+
 <script>
     const pageContextPath = "${pageContext.request.contextPath}";
 </script>
