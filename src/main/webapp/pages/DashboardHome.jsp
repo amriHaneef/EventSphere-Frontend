@@ -1,3 +1,4 @@
+
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <!DOCTYPE html>
@@ -77,6 +78,7 @@
 </script>
 <script src="${pageContext.request.contextPath}/js/students.js"></script>
 <script src="${pageContext.request.contextPath}/js/announcement.js"></script>
+<script src="${pageContext.request.contextPath}/js/Users.js"></script>
 <script src="${pageContext.request.contextPath}/js/dashboard.js"></script>
 </body>
 </html>
