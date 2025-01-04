@@ -58,16 +58,53 @@
 
         <input type="checkbox" id="theme-toggle" hidden>
         <label for="theme-toggle" class="theme-toggle"></label>
+        <div class="announcements">
+            <a href="#" class="notif">
+                <i class="bx bx-bell"></i>
+                <span class="count">12</span>
+            </a>
+            <div class="mini-cart">
+                <div class="cartcontent">
+                    <div class="cart-head">
+                        <h1><i class="bx bxs-megaphone"></i> Announcements</h1>
+                    </div>
+                    <div class="cart-body">
+                        <ul class="products mini">
+                            <li class="item">
+                                <div class="item-content">
+                                    <p>Mock Interview on 2024/12/30.</p>
+                                </div>
+                            </li>
+                            <li class="item">
+                                <div class="item-content">
+                                    <p>Mock Interview on 2024/12/30.</p>
+                                </div>
+                            </li>
+                            <li class="item">
+                                <div class="item-content">
+                                    <p>Mock Interview on 2024/12/30.</p>
+                                </div>
+                            </li>
+                            <li class="item">
+                                <div class="item-content">
+                                    <p>Mock Interview on 2024/12/30.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
 
-        <a href="#" class="notif">
-            <i class="bx bx-bell"></i>
-            <span class="count">12</span>
-        </a>
+                    <div class="cart-footer">
+                        <div class="actions">
+                            <a href="#" class="primary-button">Done</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <a href="#" class="profile">
             <img src="${pageContext.request.contextPath}/images/noprofil.jpg" alt="profile_image">
         </a>
-    </nav>
-    <!-- End of navbar  -->
+    </nav><!-- End of navbar  -->
 
     <main id="main-content">
         <h1>hello</h1>
