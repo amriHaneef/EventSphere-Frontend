@@ -145,22 +145,3 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
-document.addEventListener("DOMContentLoaded", function() {
-    // Add the event listener after the DOM is fully loaded
-    document.getElementById("batch1").addEventListener("click", function() {
-        toggleBatchDetails('batchDetails1');
-    });
-
-    function toggleBatchDetails(batchId) {
-        const batchDetails = document.getElementById(batchId);
-        if (batchDetails) {
-            if (batchDetails.style.display === "none" || batchDetails.style.display === "") {
-                batchDetails.style.display = "block";
-            } else {
-                batchDetails.style.display = "none";
-            }
-        } else {
-            console.error(`Element with ID ${batchId} not found.`);
-        }
-    }
-});
