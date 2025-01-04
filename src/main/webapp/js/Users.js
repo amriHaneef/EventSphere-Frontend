@@ -4,6 +4,7 @@ const reinitializeUsersListeners = () => {
     initializeEditUser();
     initializeAddUserModal();
     initializeBatchToggle(); // Add batch toggle initialization
+    initializeDeleteUsers();
 };
 
 // ------------------------------------------------- Search Bar Process -------------------------------------------------
@@ -12,7 +13,7 @@ const initializeUserSearchBar = () => {
     if (searchBar) {
         searchBar.addEventListener('input', function () {
             const filter = this.value.toLowerCase();
-            const rows = document.querySelectorAll('tbody tr');
+            const rows = document.querySelectorAll('.teacher-details tr');
 
             rows.forEach(row => {
                 const cells = Array.from(row.querySelectorAll('td'));
@@ -31,9 +32,9 @@ const initializeUserSearchBar = () => {
 };
 // ------------------------------------------------ End of Search Bar Process ------------------------------------------
 
-// -------------------------------------------------- Edit Student Process ---------------------------------------------
+// -------------------------------------------------- Edit User Process ---------------------------------------------
 const initializeEditUser = () => {
-    const editButtons = document.querySelectorAll('.edit'); // Replace delete with edit button
+    const editButtons = document.querySelectorAll('.edit'); // Edit buttons
     const popupOverlay = document.querySelector('.popup-overlay');
     const closeBtn = document.querySelector('.popup-close');
     const cancelBtn = document.querySelector('.cancel');
@@ -74,7 +75,7 @@ const initializeEditUser = () => {
         popupOverlay.style.opacity = '0';
     });
 };
-// ------------------------------------------------ End of Edit Student Process ----------------------------------------
+// ------------------------------------------------ End of Edit User Process ----------------------------------------
 
 // ------------------------ Add User Popup Modal Form ------------------------------------------------
 const initializeAddUserModal = () => {
@@ -132,29 +133,70 @@ function closeModal() {
 // ---------------------- End of Add User Popup Modal Form -------------------------------------------
 
 // --------------------------- Batch Toggle Process --------------------------------------------------
-const initializeBatchToggle = () => {
-    const batchButton = document.getElementById("batch1");
-    if (batchButton) {
-        batchButton.addEventListener("click", () => {
-            toggleBatchDetails('batchDetails1');
+function initializeBatchToggle() {
+    const batchHeaders = document.querySelectorAll(".student-head");
+    batchHeaders.forEach((header) => {
+        const batchId = header.dataset.batchId; // Use dataset for cleaner code
+
+        if (!batchId) {
+            console.error("Missing data-batch-id attribute on header:", header);
+            return; // Skip this header if no batch ID is found
+        }
+
+        header.addEventListener("click", () => {
+            toggleBatchDetails(batchId);
         });
-    } else {
-        console.error('Element #batch1 not found.');
-    }
-};
+    });
+}
 
 function toggleBatchDetails(batchId) {
     const batchDetails = document.getElementById(batchId);
     if (batchDetails) {
-        if (batchDetails.style.display === "none" || batchDetails.style.display === "") {
-            batchDetails.style.display = "block";
-        } else {
-            batchDetails.style.display = "none";
-        }
+        batchDetails.classList.toggle("hidden");
+        // Check computed styles
+        const computedStyle = window.getComputedStyle(batchDetails);
+        console.log("Computed display property:", computedStyle.display);
     } else {
         console.error(`Element with ID ${batchId} not found.`);
     }
 }
+
+
+//delete Icon
+const initializeDeleteUsers = () => {
+    const deleteButtons = document.querySelectorAll('.delete');
+    const deleteOverlay = document.querySelector('.delete-overlay');
+    const closeBtn = document.querySelector('.delete-close');
+    const cancelBtn = document.querySelector('.cancel-btn-delete');
+    const okBtn = document.querySelector('.ok-btn-delete');
+
+    deleteButtons.forEach((deleteButton) => {
+        deleteButton.addEventListener('click', () => {
+            deleteOverlay.style.display = 'flex';
+            deleteOverlay.style.opacity = '1';
+        });
+    });
+
+    closeBtn.addEventListener('click', () => {
+        deleteOverlay.style.display = 'none';
+        deleteOverlay.style.opacity = '0';
+    });
+
+    cancelBtn.addEventListener('click', () => {
+        deleteOverlay.style.display = 'none';
+        deleteOverlay.style.opacity = '0';
+    });
+
+    okBtn.addEventListener('click', () => {
+        console.log('Announcement Deleted');
+        deleteOverlay.style.display = 'none';
+        deleteOverlay.style.opacity = '0';
+    });
+};
+
+
+
+
 // ------------------------ End of Batch Toggle Process ----------------------------------------------
 
 document.addEventListener('DOMContentLoaded', reinitializeUsersListeners);

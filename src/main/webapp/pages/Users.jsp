@@ -53,6 +53,9 @@
                   <label for="birthday">Birthday:</label>
                   <input type="date" name="birthday" id="birthday" required>
 
+                  <label for="age">Age:</label>
+                  <input type="number" name="age" id="age" min="16" max="100" required>
+
                   <label for="phone">Number:</label>
                   <input type="text" name="" id="phone" minlength="11" maxlength="11" required>
 
@@ -88,61 +91,82 @@
     </div>
 
   <div class="data">
-
       <div class="batch-container">
-          <div class="header" onclick="toggleBatchDetails('batch-1')">
+          <%
+              // Retrieve and safely cast batches
+              Object batchesObject = request.getAttribute("batches");
+              if (batchesObject instanceof List) {
+                  List<String[]> batches = (List<String[]>) batchesObject;
+                  for (String[] batch : batches) {
+                      String assignedBatch = batch[0];
+          %>
+          <div class="header student-head" data-batch-id="batch-<%= batch[0].replaceAll("[^a-zA-Z0-9-_]", "_") %>">
               <div class="batch" >
-                  <h3>Batch: GAHDSE23.1</h3>
+                  <h3>Batch: <%= batch[0] %></h3>
               </div>
           </div>
-          <table id="batch-1" class="student-details hidden">
+          <table id="batch-<%= batch[0].replaceAll("[^a-zA-Z0-9-_]", "_") %>" class="student-details hidden">
               <thead>
-              <tr>
-                  <th>ID</th>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Birthday</th>
-                  <th>Birthday</th>
-                  <th>Birthday</th>
-                  <th>Birthday</th>
-                  <th>Birthday</th>
-                  <th>Birthday</th>
-              </tr>
+                  <tr>
+                      <th>ID</th>
+                      <th>Name</th>
+                      <th>Email</th>
+                      <th>Birthday</th>
+                      <th>Batch</th>
+                      <th>Age</th>
+                      <th>Phone</th>
+                      <th></th>
+                      <th></th>
+                  </tr>
               </thead>
               <tbody>
-              <tr>
-                  <td>101</td>
-                  <td>John Doe</td>
-                  <td>john@example.com</td>
-                  <td>2000-01-15</td>
-                  <td>2000-01-15</td>
-                  <td>2000-01-15</td>
-                  <td>2000-01-15</td>
-                  <td>2000-01-15</td>
-                  <td>2000-01-15</td>
-              </tr>
-              <tr>
-                  <td>102</td>
-                  <td>Jane Smith</td>
-                  <td>jane@example.com</td>
-                  <td>2001-03-22</td>
-                  <td>2001-03-22</td>
-                  <td>2001-03-22</td>
-                  <td>2001-03-22</td>
-                  <td>2001-03-22</td>
-                  <td>2001-03-22</td>
-              </tr>
+              <%
+                  // Retrieve and safely cast students
+                  Object studentsObject = request.getAttribute("students");
+                  if (studentsObject instanceof List) {
+                      List<String[]> students = (List<String[]>) studentsObject;
+                      for (String[] student : students) {
+                          String studentBatch = student[4];
+                          if (assignedBatch.equals(studentBatch)){
+              %>
+                <tr>
+                  <td><%= student[0] %></td>
+                  <td><%= student[1] %></td>
+                  <td><%= student[2] %></td>
+                  <td><%= student[3] %></td>
+                  <td><%= student[4] %></td>
+                  <td><%= student[5] %></td>
+                  <td><%= student[6] %></td>
+                  <td>
+                      <button class="edit">
+                          <i class="bx bx-edit write"></i>
+                      </button>
+                  </td>
+                  <td>
+                      <button class="delete">
+                          <i class="bx bxs-trash bin"></i>
+                      </button>
+                  </td>
+                </tr>
+                <%
+                            }
+                        }
+                    }
+                %>
               </tbody>
           </table>
+          <%
+                  }
+              }
+          %>
       </div>
-
   </div>
 
     <div class="bottom-data">
         <div class="orders">
             <div class="header">
                   <i class="bx bx-group"></i>
-                  <h3>User Details</h3>
+                  <h3>Teacher Details</h3>
                   <div class="search-container">
                 <label>
                     <input type="text" id="search-bar" class="search-bar" placeholder="Search...">
@@ -155,12 +179,11 @@
             <th>Name</th>
             <th>Email</th>
             <th>Birthday</th>
-            <th>Batch</th>
             <th></th>
             <th></th>
           </tr>
           </thead>
-          <tbody>
+          <tbody class="teacher-details">
           <%
             // Retrieve and safely cast students
             Object usersObject = request.getAttribute("users");
@@ -173,7 +196,6 @@
             <td><%= user[1] %></td>
             <td><%= user[2] %></td>
             <td><%= user[3] %></td>
-            <td><%= user[4] %></td>
             <td>
               <button class="edit">
                 <i class="bx bx-edit write"></i>
@@ -191,6 +213,16 @@
           %>
           </tbody>
             </table>
+            </div>
+            <div class="delete-overlay">
+                <div class="delete-content">
+                    <span class="delete-close">&times;</span>
+                    <p>Do you want to delete this announcement?</p>
+                    <div class="delete-buttons">
+                        <button class="cancel-btn-delete">Cancel</button>
+                        <button class="ok-btn-delete">OK</button>
+                    </div>
+                </div>
             </div>
             <!-- Popup Form -->
             <div class="popup-overlay">
