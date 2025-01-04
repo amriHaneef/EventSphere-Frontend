@@ -4,27 +4,17 @@
          xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
          version="6.0">
 
-        <servlet>
-            <servlet-name>DashboardHomeController</servlet-name>
-            <servlet-class>com.example.eventspherefrontend.controller.DashboardHomeController</servlet-class>
-        </servlet>
-        <servlet-mapping>
-            <servlet-name>DashboardHomeController</servlet-name>
-            <url-pattern>/pages/Home</url-pattern>
-        </servlet-mapping>
+    <!-- Servlet for DashboardHomeController -->
+    <servlet>
+        <servlet-name>DashboardHomeController</servlet-name>
+        <servlet-class>com.example.eventspherefrontend.controller.DashboardHomeController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DashboardHomeController</servlet-name>
+        <url-pattern>/pages/Home</url-pattern>
+    </servlet-mapping>
 
-        <!-- Welcome File Configuration -->
-        <welcome-file-list>
-            <welcome-file>pages/DashboardHome.jsp</welcome-file>
-        </welcome-file-list>
-
-    <!-- General Web Application Configuration -->
-    <display-name>Admin Events Application</display-name>
-
-    <!-- Welcome File List -->
-    <welcome-file-list>
-        <welcome-file>pages/events.jsp</welcome-file>
-    </welcome-file-list>
+    <!-- Servlet for EventServlet -->
     <servlet>
         <servlet-name>EventServlet</servlet-name>
         <servlet-class>com.example.eventspherefrontend.controller.eventcontroller</servlet-class>
@@ -33,5 +23,25 @@
         <servlet-name>EventServlet</servlet-name>
         <url-pattern>/events</url-pattern>
     </servlet-mapping>
+
+    <!-- Servlet for EventDetailController -->
+    <servlet>
+        <servlet-name>eventDetailController</servlet-name>
+        <servlet-class>com.example.eventspherefrontend.controller.eventcontroller</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>eventDetailController</servlet-name>
+        <url-pattern>/event</url-pattern>
+    </servlet-mapping>
+
+    <!-- Welcome File Configuration -->
+    <welcome-file-list>
+        <welcome-file>pages/DashboardHome.jsp</welcome-file>
+        <welcome-file>pages/events.jsp</welcome-file>
+        <welcome-file>pages/EventDetail.jsp</welcome-file>
+    </welcome-file-list>
+
+    <!-- General Web Application Configuration -->
+    <display-name>Admin Events Application</display-name>
 
 </web-app>

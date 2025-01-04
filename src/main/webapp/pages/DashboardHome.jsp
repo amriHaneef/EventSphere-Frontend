@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,26 +19,25 @@
         <div class="logo-name"><span>Event</span>Sphere</div>
     </a>
     <ul class="side-menu">
-        <li>
+        <li class="active">
             <a href="${pageContext.request.contextPath}/pages/Home"><i class='bx bx-home'></i>Home</a>
         </li>
-        <li>
-            <!-- Add link to events page -->
-            <a href="${pageContext.request.contextPath}/pages/events.jsp"><i class="bx bx-calendar-check"></i>Events</a>
+        <li id="events-link">
+            <a href="#"><i class="bx bx-calendar-check"></i>Events</a>
         </li>
-        <li>
+        <li id="announcements-link">
             <a href="#"><i class='bx bxs-megaphone'></i>Announcements</a>
         </li>
-        <li>
+        <li id="batches-link">
             <a href="#"><i class='bx bxs-book-open'></i>Batches</a>
         </li>
-        <li>
+        <li id="users-link">
             <a href="#"><i class="bx bx-group"></i>Users</a>
         </li>
-        <li>
+        <li id="students-link">
             <a href="#"><i class="bx bx-group"></i>Students</a>
         </li>
-        <li>
+        <li id="accounts-link">
             <a href="#"><i class="bx bx-cog"></i>My Account</a>
         </li>
     </ul>
@@ -47,7 +47,6 @@
         </li>
     </ul>
 </div>
-
 <!-- End of sidebar  -->
 
 <!-- Main content -->
@@ -69,10 +68,16 @@
     </nav>
     <!-- End of navbar  -->
 
-    <main>
+    <main id="main-content">
+        <h1>hello</h1>
     </main>
 </div>
-
+<script>
+    const pageContextPath = "${pageContext.request.contextPath}";
+</script>
+<script src="${pageContext.request.contextPath}/js/event.js"></script>
+<script src="${pageContext.request.contextPath}/js/students.js"></script>
+<script src="${pageContext.request.contextPath}/js/announcement.js"></script>
 <script src="${pageContext.request.contextPath}/js/dashboard.js"></script>
 </body>
 </html>

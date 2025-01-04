@@ -1,191 +1,170 @@
-function addEvent() {
-    alert("Add Event functionality to be implemented.");
-}
-
-function editEvent() {
-    alert("Edit Event functionality to be implemented.");
-}
-
-function deleteEvent() {
-    alert("Delete Event functionality to be implemented.");
-}
-
-function searchEvent() {
-    const searchInput = document.getElementById("searchInput").value.toLowerCase();
-    const table = document.getElementById("eventTable");
-    const rows = table.getElementsByTagName("tr");
-
-    for (let i = 1; i < rows.length; i++) {
-        let cells = rows[i].getElementsByTagName("td");
-        let match = false;
-
-        for (let j = 0; j < cells.length; j++) {
-            if (cells[j].innerHTML.toLowerCase().includes(searchInput)) {
-                match = true;
-                break;
-            }
-        }
-
-        rows[i].style.display = match ? "" : "none";
-    }
-}
-
-function addEvent() {
-    document.getElementById('popupForm').style.display = 'block';
-}
-
-function closePopup() {
-    document.getElementById('popupForm').style.display = 'none';
-}
-
-// Add form submission functionality
-document.getElementById('addEventForm').addEventListener('submit', function (event) {
-    event.preventDefault(); // Prevent form from reloading the page
-
-    // Get form data
-    const eventName = document.getElementById('eventName').value.trim();
-    const eventDate = document.getElementById('eventDate').value.trim();
-    const eventBatch = document.getElementById('eventBatch').value.trim();
-    const eventProgress = document.getElementById('eventProgress').value.trim();
-
-    // Validation logic
-    let errorMessage = '';
-    if (!eventName) {
-        errorMessage += 'Event name is required.\n';
-    }
-    if (!eventDate) {
-        errorMessage += 'Event date is required.\n';
-    }
-    if (!eventBatch) {
-        errorMessage += 'Event batch is required.\n';
-    }
-    if (!eventProgress || isNaN(eventProgress) || eventProgress < 0 || eventProgress > 100) {
-        errorMessage += 'Event progress must be a number between 0 and 100.\n';
-    }
-
-    // Check if validation failed
-    if (errorMessage) {
-        alert(errorMessage); // Display error message to the user
-        return; // Stop further execution
-    }
-
-    // Log or handle the form data (e.g., send it to the server or add to the table)
-    console.log({ eventName, eventDate, eventBatch, eventProgress });
-
-    // Close the popup after submission
-    closePopup();
-
-    // Optionally clear the form fields
-    document.getElementById('addEventForm').reset();
-});
-
-// Data for the progress of events
-const progressData = [75, 85, 80]; // Replace with actual progress values
-
-// Calculate average progress
-const calculateAverageProgress = (data) => {
-    const totalProgress = data.reduce((acc, curr) => acc + curr, 0);
-    return totalProgress / data.length;
+// Reinitialize the event listeners after DOM content is loaded
+const reinitializeEventContentListeners = () => {
+    initializeEventSearchBar();
+    initializeAddEvents();
+    initializeDeleteEvents();
+    initializeEditEvent();
 };
 
-// Render the pie chart
-const renderPieChart = (averageProgress) => {
-    const ctx = document.getElementById('progressPieChart').getContext('2d');
-    new Chart(ctx, {
-        type: 'pie',
-        data: {
-            labels: ['Completed', 'Remaining'],
-            datasets: [{
-                data: [averageProgress, 100 - averageProgress],
-                backgroundColor: ['#4caf50', '#f44336'], // Green and red colors
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    position: 'top',
-                },
-                tooltip: {
-                    callbacks: {
-                        label: (tooltipItem) => {
-                            return tooltipItem.label + ': ' + tooltipItem.raw + '%';
-                        }
-                    }
+// Initialize Search Bar functionality
+const initializeEventSearchBar = () => {
+    const searchBar = document.getElementById('search-bar');
+    if (searchBar) {
+        console.log("Search bar found and initializing...");
+        searchBar.addEventListener('input', function () {
+            const filter = this.value.toLowerCase().trim();
+            const rows = document.querySelectorAll('tbody tr');
+
+            rows.forEach(row => {
+                const cells = Array.from(row.querySelectorAll('td'));
+                const rowContent = cells.map(cell => cell.textContent.toLowerCase().trim()).join(' ');
+
+                if (rowContent.includes(filter)) {
+                    row.style.display = ''; // Show the row
+                } else {
+                    row.style.display = 'none'; // Hide the row
                 }
-            }
+            });
+        });
+    } else {
+        console.error('Search bar not found!');
+    }
+};
+
+
+// Initialize Add event functionality
+const initializeAddEvents = () => {
+    const reportButton = document.querySelector('.report');
+    const eventBackground = document.querySelector('.event-background');
+    const closeButton = document.querySelector('.close-btn');
+    const cancelButton = document.querySelector('.cancel');
+    const eventform = document.querySelector('#event-form');
+
+    if (reportButton && eventBackground) {
+        reportButton.addEventListener('click', () => {
+            eventBackground.style.display = 'block';
+        });
+    }
+
+    const closePopup = () => {
+        if (eventBackground) {
+            eventBackground.style.display = 'none';
         }
+    };
+
+    if (closeButton) {
+        closeButton.addEventListener('click', closePopup);
+    }
+
+    if (cancelButton) {
+        cancelButton.addEventListener('click', closePopup);
+    }
+
+    if (eventform) {
+        eventform.addEventListener('submit', (e) => {
+            e.preventDefault();
+            console.log('Form submitted!');
+            closePopup();
+        });
+    }
+};
+
+// Initialize Delete event functionality
+const initializeDeleteEvents = () => {
+    const deleteButtons = document.querySelectorAll('.delete');
+    const popupOverlay = document.querySelector('.popup-overlay');
+    const closeBtn = document.querySelector('.popup-close');
+    const cancelBtn = document.querySelector('.cancel-btn');
+    const okBtn = document.querySelector('.ok-btn');
+
+    deleteButtons.forEach((deleteButton) => {
+        deleteButton.addEventListener('click', () => {
+            popupOverlay.style.display = 'flex';
+            popupOverlay.style.opacity = '1';
+        });
+    });
+
+    closeBtn.addEventListener('click', () => {
+        popupOverlay.style.display = 'none';
+        popupOverlay.style.opacity = '0';
+    });
+
+    cancelBtn.addEventListener('click', () => {
+        popupOverlay.style.display = 'none';
+        popupOverlay.style.opacity = '0';
+    });
+
+    okBtn.addEventListener('click', () => {
+        console.log('Event Deleted');
+        popupOverlay.style.display = 'none';
+        popupOverlay.style.opacity = '0';
     });
 };
 
-// Initialize the pie chart
-document.addEventListener('DOMContentLoaded', () => {
-    const averageProgress = calculateAverageProgress(progressData);
-    renderPieChart(averageProgress);
-});
+// Initialize edite event functionality
+const initializeEditEvent = () => {
+    const editButtons = document.querySelectorAll('.edit'); // Ensure this targets your edit buttons
+    const popupOverlay = document.querySelector('.edit-event');
+    const closeBtn = document.querySelector('.event-close');
+    const cancelBtn = document.querySelector('.cancel');
+    const editForm = document.querySelector('#editForm');
 
-// Load attendance list dynamically
-function loadAttendance() {
-    const attendanceList = document.getElementById("attendanceList");
-    const attendees = [
-        { id: 1, name: "Amri" },
-        { id: 2, name: "Harindu" },
-        { id: 3, name: "Shan" },
-        { id: 4, name: "Adeesha" }
-    ];
+    // Show popup when edit button is clicked
+    editButtons.forEach((editButton) => {
+        editButton.addEventListener('click', (event) => {
+            const row = event.target.closest('tr'); // Find the row associated with the button
+            const eventId = row.querySelector('td:nth-child(1)').textContent;
+            const eventName = row.querySelector('td:nth-child(2)').textContent;
+            const eventDate = row.querySelector('td:nth-child(3)').textContent;
+            const eventTime = row.querySelector('td:nth-child(4)').textContent;
+            const eventPlatform = row.querySelector('td:nth-child(5)').textContent;
 
-    attendees.forEach(attendee => {
-        const listItem = `<li>
-            <input type="checkbox" id="attendee_${attendee.id}">
-            <label for="attendee_${attendee.id}">${attendee.name}</label>
-        </li>`;
-        attendanceList.innerHTML += listItem;
-    });
-}
+            // Populate the form with existing data
+            document.querySelector('#student-id').value = eventId;
+            document.querySelector('#student-name').value = eventName;
+            document.querySelector('#student-date').value = eventDate;
+            document.querySelector('#student-time').value = eventTime;
+            document.querySelector('#student-platform').value = eventPlatform;
 
-// Submit attendance
-function submitAttendance() {
-    const selectedAttendees = [];
-    const checkboxes = document.querySelectorAll("#attendanceList input[type='checkbox']");
-    checkboxes.forEach(checkbox => {
-        if (checkbox.checked) {
-            const label = checkbox.nextElementSibling;
-            selectedAttendees.push(label.textContent);
-        }
+            // Show the popup
+            popupOverlay.style.display = 'flex';
+            popupOverlay.style.opacity = '1';
+        });
     });
 
-    if (selectedAttendees.length > 0) {
-        alert(`Attendance submitted for: ${selectedAttendees.join(", ")}`);
-    } else {
-        alert("Please select at least one attendee before submitting attendance.");
-    }
-}
+    // Close the popup when the close icon is clicked
+    closeBtn.addEventListener('click', () => {
+        popupOverlay.style.display = 'none';
+        popupOverlay.style.opacity = '0';
+    });
 
-// Submit feedback
-function submitFeedback() {
-    const feedbackBox = document.getElementById("feedbackBox");
-    const feedback = feedbackBox.value.trim();
+    // Cancel button hides the popup
+    cancelBtn.addEventListener('click', () => {
+        popupOverlay.style.display = 'none';
+        popupOverlay.style.opacity = '0';
+    });
 
-    if (feedback) {
-        alert(`Feedback submitted: ${feedback}`);
-        feedbackBox.value = ""; // Clear the input field
-    } else {
-        alert("Please enter feedback before submitting.");
-    }
-}
+    // Handle form submission (Save the edited event)
+    editForm.addEventListener('submit', (e) => {
+        e.preventDefault();
 
-// Initialize components on page load
-window.onload = () => {
-    loadAttendance();
+        const updatedEvent = {
+            id: document.querySelector('#student-id').value,
+            name: document.querySelector('#student-name').value,
+            date: document.querySelector('#student-date').value,
+            time: document.querySelector('#student-time').value,
+            platform: document.querySelector('#student-platform').value
+        };
 
-    // Example progress value
-    const progressValue = 70; // Example: 70% progress
+        console.log('Event updated:', updatedEvent);
 
-    // Part 2: Update Circular Progress Bar
-    const progressPath = document.getElementById('progressPath');
-    const progressText = document.getElementById('progressText');
-    const dashoffset = 100 - progressValue;
-    progressPath.style.strokeDashoffset = dashoffset;
-    progressText.textContent = progressValue + "%";
+        // Add the code here to save the updated event (e.g., make an AJAX request to update the backend)
+
+        // Close the popup after saving
+        popupOverlay.style.display = 'none';
+        popupOverlay.style.opacity = '0';
+    });
 };
 
+// Call this function to initialize all necessary functionalities
+document.addEventListener('DOMContentLoaded', reinitializeEventContentListeners);

@@ -16,20 +16,19 @@ public class eventcontroller extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        // Prepare the list of announcements
-        List<String[]> announcements = new ArrayList<>();
-        announcements.add(new String[]{"Mock Interview", "John Doe", "14-08-2024",});
-        // Adding multiple announcements
-        announcements.add(new String[]{"Mock Interview", "John Doe", "14-08-2024"});
-        announcements.add(new String[]{"Hackathon", "Alice Smith", "15-08-2024"});
-        announcements.add(new String[]{"Seminar", "Bob Johnson", "16-08-2024"});
+        // Prepare the list of events
+        List<String[]> events = new ArrayList<>();
+        events.add(new String[]{"01", "Mock Interview", "14-08-2024","9.30 A.M","Zoom","Mrs.Sandaruwani","Done"});
+        // Adding multiple events
+        events.add(new String[]{"02", "Mock Interview", "14-08-2024","9.30 A.M","Zoom","Mrs.Sandaruwani","Done"});
+        events.add(new String[]{"03", "Mock Interview", "14-08-2024","9.30 A.M","Zoom","Mrs.Sandaruwani","Done"});
 
         // Add announcements to the request
-        request.setAttribute("announcements", announcements);
+        request.setAttribute("events", events);
 
 
         // Example: Retrieve user role (e.g., from database or session)
-        String userRole = "admin"; // This should be dynamically retrieved
+        String userRole = "teacher"; // This should be dynamically retrieved
 
         // Set the role in the request or session
         HttpSession session = request.getSession();
@@ -89,8 +88,8 @@ public class eventcontroller extends HttpServlet {
         String eventId = request.getParameter("eventId");
         String eventName = request.getParameter("eventName");
         String eventDate = request.getParameter("eventDate");
-        String batch = request.getParameter("batch");
-        String progress = request.getParameter("progress");
+        String time = request.getParameter("time");
+        String platform = request.getParameter("platform");
 
         // Logic to edit the event (e.g., database logic here)
 
@@ -111,7 +110,7 @@ public class eventcontroller extends HttpServlet {
         // Logic to search events (e.g., database query and JSON response here)
 
         response.setContentType("application/json");
-        response.getWriter().write("[{\"eventId\":1,\"eventName\":\"Java Workshop\",\"eventDate\":\"2024-12-25\",\"batch\":\"HDSE24.1f\",\"progress\":75}]");
+        response.getWriter().write("[{\"eventId\":1,\"eventName\":\"Java Workshop\",\"eventDate\":\"2024-12-25\",\"time\":\"9.30 A.M\",\"platform\":Zoom}]");
     }
 
     private void markAttendance(HttpServletRequest request, HttpServletResponse response) throws IOException {
