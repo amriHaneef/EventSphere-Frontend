@@ -23,7 +23,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>BatchController</servlet-name>
-        <url-pattern>/pages/batch</url-pattern>
+        <url-pattern>/pages/batches</url-pattern>
     </servlet-mapping>
     <!-- Welcome File Configuration -->
     <welcome-file-list>

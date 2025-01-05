@@ -1,3 +1,4 @@
+
 :root{
     --light:#f6f6f9;
     --primary:#1976d2;
@@ -23,7 +24,7 @@
     --card-padding: 1.8rem;
     --padding-1: 1.2rem;
 
-    --box-shadow: 0 2rem 3rem var(--color-light);
+
 
 }
 *{
@@ -50,9 +51,8 @@ body.dark{
     --light:#181a1e;
     --gray:#25252c;
     --dark:#fbfbfb;
-    --box-shadow: 0 2rem 3rem var(--color-light);
-}
 
+}
 
 body {
     font-family: Arial, sans-serif;
@@ -60,302 +60,568 @@ body {
     margin: 0;
     padding: 0;
 }
-
-#admin_view_batch_tab .header .breadcrumb li a {
-    color: #007BFF;
-    font-size: 26px;
-    text-decoration: none;
-}
-
-button {
-    background-color:  #0056b3;
-    cursor: pointer;
-    border: none;
-    font-size: 1rem;
-    transition: background-color 0.3s ease;
-}
-
-.batch-container-box {
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    color: var(--light);
-}
-
-.header-box {
+.content main .header{
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    justify-content: space-between;
+    grid-gap: 16px;
+    flex-wrap: wrap;
 }
 
-.header-box input {
-    width: 50%;
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 5px;
+.content main .header .left h1{
+    font-size: 36px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--dark);
 }
 
-.header-box button {
-    width: 20%;
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #007bff;
+.content main .header .left .breadcrumb{
+    display: flex;
+    align-items: center;
+    grid-gap: 16px;
+}
+
+.content main .header .left .breadcrumb li{
+    color: var(--dark);
+}
+
+.content main .header .left .breadcrumb li a{
+    color: var(--dark-gray);
+    pointer-events: none;
+}
+
+.content main .header .left .breadcrumb li a.active{
+    color: var(--primary);
+    pointer-events: none;
+}
+.content main .header .left .breadcrumb li a.active{
+    color: var(--primary);
+    pointer-events: none;
+}
+
+.content main .header .report{
+    height: 36px;
+    padding: 0 16px;
+    border-radius: 36px;
+    background: var(--primary);
     color: var(--light);
-    border: none;
-    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-gap: 10px;
+    font-weight: 500;
     cursor: pointer;
-    justify-content: flex-end;
+    transition: all 0.5s ease-in-out;
+}
+.header .report:hover{
+    background: #3b67ad;
 }
 
-.header-box button:hover {
-    background-color:  #0056b3;
+
+/* --------------------------------- */
+.bottom-data{
+    display: flex;
+    flex-wrap: wrap;
+    grid-gap: 24px;
+    margin-top: 24px;
+    width: 100%;
+    color: var(--dark);
 }
 
-.batch-table {
+.bottom-data>div{
+    border-radius: 20px;
+    background: var(--light);
+    padding: 24px;
+    overflow-x: auto;
+}
+
+.bottom-data .header{
+    display: flex;
+    align-items: center;
+    grid-gap: 16px;
+    margin-bottom: 24px;
+}
+
+.bottom-data .header h3{
+    margin-right: auto;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.bottom-data .header .bx{
+    cursor: pointer;
+}
+/* --------------------------------- */
+
+.bottom-data .header .search-container {
+    position: relative;
+    display: inline-block;
+    left: -100px;
+}
+
+.bottom-data .header .search-bar {
+    position: absolute;
+    top: 0;
+    left: -150px; /* Adjust position to make it fit inside the container */
+    width: 200px;
+    height: 30px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    opacity: 1; /* Make it visible */
+    pointer-events: auto; /* Allow interactions */
+    transform: scaleX(1); /* Keep it fully visible */
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+
+.bottom-data .orders{
+    flex-grow: 1;
+    flex-basis: 500px;
+}
+
+.bottom-data .orders table{
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 20px;
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-
 }
 
-.batch-table th, .batch-table td {
-    padding: 12px 15px;
+.bottom-data .orders table th{
+    padding-bottom: 12px;
+    font-size: 13px;
     text-align: left;
+    border-bottom: 1px solid var(--gray);
 }
 
-.batch-table th {
-    background-color: var(--primary);
-    color: var(--light);
-    padding: 10px;
-    text-align: left;
-    font-size: 16px;
+.bottom-data .orders table td{
+    padding: 16px 0;
 }
 
-.batch-table td button {
-    margin-right: 10px;
-}
-
-
-
-.batch-table tbody td {
-    background-color: var(--light);
-    color: var(--dark);
-    padding: 10px;
-    text-align: left;
-    font-size: 14px;
-}
-
-
-
-.icon-btn {
-    padding: 8px;
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 16px;
-    display: inline-flex;
-    justify-content: center;
+.bottom-data .orders table tr td:first-child{
+    display:flex ;
     align-items: center;
-    width: 36px;
-    height: 36px;
-    margin-right: 8px;
+    grid-gap: 12px;
+    padding-left: 6px;
 }
 
-.edit-btn {
-    background-color: #4CAF50;
-    color: white;
+
+.bottom-data .orders table tbody tr{
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-.delete-btn {
-    background-color: #f44336;
-    color: white;
+.bottom-data .orders table tbody tr:hover{
+    background: var(--gray);
 }
 
-.icon-btn:hover {
-    opacity: 0.8;
+.bottom-data .orders table tbody tr button.delete,
+.bottom-data .orders table tbody tr button.edit{
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+.bottom-data .orders table tbody tr button.delete i.bin{
+    color: var(--light-danger);
+    font-size: 1.5rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+
+}
+.bottom-data .orders table tbody tr button.delete i.bin:hover{
+    color: var(--danger);
+    font-size: 1.5rem;
+    transform: scale(1.2); /* Slightly enlarge icon on hover */
+    box-shadow: 0 4px 8px rgba(255, 0, 0, 0.2); /* Glow effect */
 }
 
-.batch-table td {
-    vertical-align: middle;
+.bottom-data .orders table tbody tr button.edit i.write{
+    color: var(--light-success);
+    font-size: 1.5rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+
+}
+.bottom-data .orders table tbody tr button.edit i.write:hover{
+    color: var(--success);
+    font-size: 1.5rem;
+    transform: scale(1.2); /* Slightly enlarge icon on hover */
+    box-shadow: 0 4px 8px rgba(255, 0, 0, 0.2); /* Glow effect */
 }
 
-.icon-btn i {
-    margin: 0;
-}
-
-.event-table td {
-    vertical-align: middle;
-}
-
-.icon-btn i {
-    margin: 0;
-}
-
-/* Modal Styles */
-.modal {
+/* Popup Overlay */
+.bottom-data .orders .popup-overlay {
     display: none;
     position: fixed;
-    z-index: 1000;
-    left: 0;
     top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4); /* Overlay effect */
+    background-color: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: opacity 0.3s ease;
 }
 
-.modal-content {
-    background-color:  #6b86ae;
-    margin: 10% auto; /* Center vertically */
-    padding: 20px;
-    border: 1px solid #888;
-    width: 50%;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.close-btn {
-    color: #000409 ;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close-btn:hover,
-.close-btn:focus {
-    color:#f44336;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-
-/* General Styling */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
-    margin: 0;
-    padding: 0;
-}
-
-.container {
-    margin: 0 auto;
-    padding-top: 20px;
-}
-
-h2, h3, h4 {
-    color: #333;
-}
-
-h2 {
-    text-align: center;
-    font-size: 24px;
-    margin-bottom: 20px;
-}
-
-/* Batch Creation Form  */
-form {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-bottom: 20px;
-}
-
-label {
-    font-size: 1rem;
-    margin-bottom: 8px;
-    color: #333;
-}
-
-input[type="text"],
-input[type="date"],
-select,
-button {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 12px;
-    font-size: 1rem;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-}
-
-button {
-    background-color:  #0056b3;
-    cursor: pointer;
-    border: none;
-    font-size: 1rem;
-    transition: background-color 0.3s ease;
-}
-
-.batch-container-box {
-    padding: 20px;
+/* Popup Content Box */
+.bottom-data .orders .popup-content {
+    background-color: var(--light);
+    padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    box-shadow: 2px 3px 4px 3px #181a1e;
+    transition: all 0.3s ease;
+}
+
+/* Close Icon */
+.bottom-data .orders .popup-close {
+    font-size: 2rem;
+    color: var(--dark);
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.bottom-data .orders .popup-close:hover {
+    color: var(--primary);
+}
+
+/* Popup Text */
+.bottom-data .orders .popup-content p {
+    font-size: 1.2rem;
+    color: var(--dark);
+    margin: 20px 0;
+}
+
+/* Popup Buttons */
+.bottom-data .orders .popup-buttons {
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+}
+
+.bottom-data .orders .popup-buttons button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: var(--border-radius-1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.bottom-data .orders .popup-buttons .cancel-btn {
+    background-color: var(--gray);
+    color: var(--dark);
+}
+
+.bottom-data .orders .popup-buttons .cancel-btn:hover {
+    background-color: var(--dark-gray);
+    transform: scale(1.05);
+}
+
+.bottom-data .orders .popup-buttons .ok-btn {
+    background-color: var(--danger);
     color: var(--light);
 }
 
-.header-box {
+.bottom-data .orders .popup-buttons .ok-btn:hover {
+    background-color: var(--light-danger);
+    transform: scale(1.05);
+}
+
+
+/*---------------------------------------------------------------------------------------------*/
+/* Feedback Box */
+.feedback {
+    font-family: Arial, sans-serif;
+}
+
+#feedbackHeading {
+    color:var(--dark);
+    transition: color 0.3s ease;
+}
+
+.feedback-box {
+    width: 95%;
+    margin: 20px 0;
+    padding: 20px;
+    background: var(--light);
+    border-radius: 10px;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+    font-family: Arial, sans-serif;
+    text-align: center;
+    float: left;
+}
+
+.feedback-box textarea {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    resize: none;
+    outline: none;
+    margin-bottom: 15px;
+}
+
+.feedback-box button {
+    background-color: #007BFF;
+    color: var(--light);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.feedback-box button:hover {
+    background-color: #0056b3;
+}
+
+
+/*-----------------------------------------------------------------------------*/
+
+/* Popup form styles */
+
+.event-background {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.popup-event {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--light);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 2px 4px 8px 3px var(--dark);
+    width: 400px;
+    max-width: 90%;
+}
+.popup-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
 }
 
-.header-box input {
-    width: 60%;
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 5px;
+.popup-header h2 {
+    margin: 0;
+    font-size: 20px;
+    color: var(--dark);
+    align-items: center;
 }
 
-.header-box button {
-    width: 20%;
+.popup-header .close-btn {
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--dark);
+}
+
+.popup-header .close-btn:hover {
+    color: #ff0000;
+}
+
+.popup-event-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.popup-event-form label {
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: var(--dark);
+}
+
+.popup-event-form input,
+.popup-event-form select {
+    margin-bottom: 15px;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: var(--gray);
+    color: var(--dark);
+}
+
+.popup-event-form .buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.popup-event-form.buttons button {
     padding: 10px 20px;
-    font-size: 16px;
-    background-color: #007bff;
-    color: var(--light);
+    font-size: 14px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    justify-content: flex-end;
+    transition: background-color 0.3s;
 }
 
-.header-box button:hover {
-    background-color:  #0056b3;
+.popup-event-form .buttons .cancel {
+    background-color: #ff4d4d;
+    color: var(--light);
 }
 
-.batch-table {
+.popup-event-form .buttons .cancel:hover {
+    background-color: #cc0000;
+
+}
+
+.popup-event-form .buttons .submit-btn {
+    background-color: #28a745;
+    color: var(--light);
+}
+
+.popup-event-form .buttons .submit-btn:hover {
+    background-color: #1e7e34;
+}
+
+/*-----------------------------------------------------------------------------*/
+/* Popup Overlay */
+.edit-event {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    border-collapse: collapse;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease, display 0.3s ease; /* Smooth transition for opacity */
+}
+
+/* Popup Content */
+.event-content {
+    background-color: var(--light);
+    color: var(--dark);
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    animation: slideIn 0.3s ease-in-out;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Close Button */
+.popup-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--light);
+}
+
+.popup-close:hover {
+    color: #d9534f; /* Red color on hover */
+}
+
+/* Title */
+.popup-content h3 {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+/* Form */
+#editForm {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Form Group */
+/* Form Group Styling */
+.form-group {
+    display: flex;
+    flex-direction: column; /* Stack label and input vertically */
+    margin-bottom: 15px;
+}
+
+/* Label Styling */
+.form-group label {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 4px; /* Space between label and input */
+}
+
+/* Input Styling */
+.form-group input {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    background-color: var(--gray);
+    color: var(--dark);
+    transition: border-color 0.3s ease;
+}
+
+/* Focus Styling for Inputs */
+.form-group input:focus {
+    border-color: var(--dark-gray);
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Light blue glow */
+}
+
+
+
+/* Buttons */
+.popup-buttons {
+    display: flex;
+    justify-content: space-between;
     margin-top: 20px;
 }
 
-.batch-table th, .batch-table td {
-    padding: 12px 15px;
-    text-align: left;
+.popup-buttons button {
+    width: 48%;
+    padding: 10px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
-.batch-table th {
-    background-color: var(--primary);
+.popup-buttons .cancel {
+    background-color: #f44336; /* Red for Cancel */
     color: var(--light);
 }
 
-.batch-table td button {
-    margin-right: 10px;
+.popup-buttons .cancel:hover {
+    background-color: #e53935;
 }
 
+.popup-buttons .ok-btn {
+    background-color: #4caf50; /* Green for OK */
+    color: var(--light);
+}
 
-
-
-
-
-
-
-
-
-
-
+.popup-buttons .ok-btn:hover {
+    background-color: #388e3c;
+}
