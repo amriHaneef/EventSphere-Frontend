@@ -100,8 +100,6 @@
                         <th>Lecturer</th>
                         <th>Status</th>
                         <th></th>
-
-
                     </tr>
                     </thead>
                     <tbody>
@@ -112,7 +110,7 @@
                             List<String[]> events = (List<String[]>) eventsObject;
                             for (String[] event : events) {
                     %>
-                    <tr onclick="window.location='EventDetail.jsp'">
+                    <tr>
                         <td><%= event[0] %></td>
                         <td><%= event[1] %></td>
                         <td><%= event[2] %></td>
@@ -120,9 +118,14 @@
                         <td><%= event[4] %></td>
                         <td><%= event[5] %></td>
                         <td><%= event[6] %></td>
+                        <td>
+                            <button class="view" onclick="window.location='${pageContext.request.contextPath}/pages/EventDetail.jsp?id=<%= event[0] %>'">
+                                <i class="bx bx-show"></i>
+                            </button>
+                        </td>
 
                         <%
-                            if  ("admin".equalsIgnoreCase(role) || "teacher".equalsIgnoreCase(role)) {
+                            if ("admin".equalsIgnoreCase(role) || "teacher".equalsIgnoreCase(role)) {
                         %>
                         <td>
                             <button class="delete">
@@ -191,6 +194,10 @@
             <div class="form-group">
                 <label for="student-platform">Platform:</label>
                 <input type="text" id="student-platform" class="form-control" name="platform" required>
+            </div>
+            <div class="form-group">
+                <label for="lecturer">lecturer:</label>
+                <input type="text" id="lecturer" class="form-control" name="lecturer" required>
             </div>
             <div class="popup-buttons">
                 <button type="button" class="cancel">Cancel</button>

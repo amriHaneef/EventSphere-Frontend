@@ -353,8 +353,6 @@ body {
     font-family: Arial, sans-serif;
     text-align: center;
     float: left;
-    margin-left: 20px;
-
 }
 
 .feedback-box textarea {
@@ -514,7 +512,7 @@ body {
     color: var(--dark);
     padding: 20px;
     border-radius: 8px;
-    width: 400px;
+    width: 300px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     animation: slideIn 0.3s ease-in-out;
 }
@@ -569,7 +567,7 @@ body {
 .form-group label {
     font-size: 1rem;
     font-weight: bold;
-    margin-bottom: 8px; /* Space between label and input */
+    margin-bottom: 4px; /* Space between label and input */
 }
 
 /* Input Styling */
