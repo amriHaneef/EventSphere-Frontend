@@ -1,16 +1,23 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.lang.String" %>
+<%
+
+    String role = "teacher";
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/dashboard.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/DashboardHome.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
     <title>EventSphere</title>
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/images/favicon.ico" type="image/x-icon">
 </head>
-<body>
+<body data-role="<%= role %>">
 <!-- Sidebar -->
 <div class="sidebar ">
     <a href="#" class="logo">
@@ -104,13 +111,13 @@
         </a>
     </nav>
     <!-- End of navbar  -->
-    <main id="admin_view_home_tab" style="display: none">
+    <main id="main-content">
         <div class="header">
             <div class="left">
                 <h1>Dashboard</h1>
                 <ul class="breadcrumb">
                     <li>
-                        <a href="#">Admin</a>
+                        <a href="#"><%= role %></a>
                     </li>
                     /
                     <li>
@@ -118,6 +125,16 @@
                     </li>
                 </ul>
             </div>
+            <%
+                if("student".equalsIgnoreCase(role) ){
+            %>
+            <a href="${pageContext.request.contextPath}/pages/Portfolio.jsp" class="report">
+                <i class='bx bxs-edit-alt'></i>
+                <span>Portfolio</span>
+            </a>
+            <%
+                }
+            %>
         </div>
 
         <!-- Insights -->
@@ -158,7 +175,7 @@
                 </li>
             </a>
             <a href="#">
-                <li>
+                <li >
                     <i class="bx bx-calendar-check"></i>
                     <span class="info">
                                 <h3>
@@ -186,11 +203,9 @@
                 <div class="header">
                     <i class="bx bx-calendar-check"></i>
                     <h3>Recent Events</h3>
-                    <i class="bx bx-filter"></i>
                     <div class="search-container">
-                        <i class="bx bx-search"></i>
                         <label>
-                            <input type="text" class="search-bar" placeholder="Search...">
+                            <input type="text" id="search-bar" class="search-bar" placeholder="Search...">
                         </label>
                     </div>
                 </div>
@@ -204,14 +219,27 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr onclick="openEventDetails()">
-                        <td>1</td>
+                    <%
+                        // Retrieve and safely cast events
+                        Object eventsObject = request.getAttribute("events");
+                        if (eventsObject instanceof List) {
+                            List<String[]> events = (List<String[]>) eventsObject;
+                            for (String[] event : events) {
+                    %>
+                    <tr onclick="openEventDetails(this)">
+                        <td><%= event[0] %></td>
                         <td>
-                            <p>Mock Interview</p>
+                            <p><%= event[1] %></p>
                         </td>
-                        <td>14-08-2024</td>
+                        <td><%= event[2] %></td>
+                        <td style="display: none"><%= event[3] %></td>
+                        <td style="display: none"><%= event[4] %></td>
                         <td><span class="status completed">Completed</span></td>
                     </tr>
+                    <%
+                            }
+                        }
+                    %>
                     <!-------------------------- Event Details card ------------------------------>
                     <div class="container" id="eventDetails">
                         <div class="card">
@@ -221,19 +249,19 @@
                             <div class="info">Here, you have some details about the event that you are looking for!</div>
                             <div class="details">
                                 <div class="plan">
-                                    <span><strong>Name:</strong> Mock Interview</span>
+                                    <span><strong>Name:</strong> </span>
                                     <i class="bx bx-check"></i>
                                 </div>
                                 <div class="plan">
-                                    <span><strong>Consultant:</strong> Mrs.Sandaruwani</span>
+                                    <span><strong>Consultant:</strong></span>
                                     <i class="bx bx-check"></i>
                                 </div>
                                 <div class="plan">
-                                    <span><strong>Participated Batch:</strong> GAHDSE24.2f</span>
+                                    <span><strong>Participated Batch:</strong></span>
                                     <i class="bx bx-check"></i>
                                 </div>
                                 <div class="plan">
-                                    <span><strong>Assigned Students: </strong> 30</span>
+                                    <span><strong>Assigned Students: </strong> </span>
                                     <i class="bx bx-check"></i>
                                 </div>
                                 <button onclick="closeEventDetails()">Done</button>
@@ -251,326 +279,24 @@
                     <h3>Recent Announcements</h3>
                 </div>
                 <ul class="task-list">
-
+                    <%
+                        // Retrieve and safely cast announcements
+                        Object announcementsObject = request.getAttribute("announcements");
+                        if (announcementsObject instanceof List) {
+                            List<String[]> announcements = (List<String[]>) announcementsObject;
+                            for (String[] announcement : announcements) {
+                    %>
                     <li class="completed">
                         <div class="task-title">
                             <i class="bx bx-check-circle"></i>
-                            <p>Your Meeting will start at 9 a.m.</p>
+                            <p><%= announcement[0] %> On <%= announcement[2] %></p>
                         </div>
                         <i class="bx bx-dots-vertical-rounded"></i>
                     </li>
-                </ul>
-            </div>
-            <!-- End of Reminders  -->
-        </div>
-    </main>
-
-    <%--        ----------------------------------------Teachers section--------------------------------------%>
-
-    <main id="teacher_view_home_tab" style="display: none">
-        <div class="header">
-            <div class="left">
-                <h1>Dashboard</h1>
-                <ul class="breadcrumb">
-                    <li>
-                        <a href="#">Lecturer</a>
-                    </li>
-                    /
-                    <li>
-                        <a href="#" class="active">Home</a>
-                    </li>
-                </ul>
-            </div>
-            <a href="${pageContext.request.contextPath}/pages/Portfolio.jsp" class="report">
-                <i class='bx bxs-edit-alt'></i>
-                <span>Portfolio</span>
-            </a>
-        </div>
-
-        <!-- Insights -->
-
-        <div class="insight ">
-            <div class="sales">
-                <span class="material-icons-sharp">analytics</span>
-                <div class="middle">
-                    <div class="left">
-                        <h3>Attendance for Events</h3>
-                        <p>Events: 25,024</p>
-                        <p>Students: 25,024</p>
-                    </div>
-                    <div class="progress">
-                        <svg>
-                            <circle cx='38' cy='38' r='36' style="stroke-dashoffset: 120"></circle>
-                        </svg>
-                        <div class="number">
-                            <p>45%</p>
-                        </div>
-                    </div>
-                </div>
-                <small class="text-muted">Last 24 Hours</small>
-            </div>
-            <!-- -------------------End Of Sales--------------------  -->
-            <!-- --------------------------------------------End Of Insight---------------------------------------------------  -->
-        </div>
-        <ul class="insights">
-            <a href="#">
-                <li>
-                    <i class="bx bx-calendar-check"></i>
-                    <span class="info">
-                                <h3>
-                                    1,074
-                                </h3>
-                                <p>Events</p>
-                            </span>
-                </li>
-            </a>
-        </ul>
-        <!-- End of Insights  -->
-        <div class="bottom-data">
-            <div class="orders">
-                <div class="header">
-                    <i class="bx bx-calendar-check"></i>
-                    <h3>Upcoming Events</h3>
-                    <i class="bx bx-filter"></i>
-                    <div class="search-container">
-                        <i class="bx bx-search"></i>
-                        <label>
-                            <input type="text" class="search-bar" placeholder="Search...">
-                        </label>
-                    </div>
-                </div>
-                <table>
-                    <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Event</th>
-                        <th>Date</th>
-                        <th>Status</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr onclick="openTeacherEventDetails()">
-                        <td>1</td>
-                        <td>
-                            <p>Mock Interview</p>
-                        </td>
-                        <td>14-08-2024</td>
-                        <td><span class="status pending">Upcoming</span></td>
-                    </tr>
-                    </tbody>
-                </table>
-                <!-------------------------- Event Details card ------------------------------>
-                <div class="container" id="teacher_eventDetails">
-                    <div class="card">
-                        <div class="top">
-                            <div class="title">Event Details</div>
-                        </div>
-                        <div class="info">Here, you have some details about the event that you are looking for!</div>
-                        <div class="details">
-                            <div class="plan">
-                                <span><strong>Name:</strong> Mock Interview</span>
-                                <i class="bx bx-check"></i>
-                            </div>
-                            <div class="plan">
-                                <span><strong>Consultant:</strong> Mrs.Sandaruwani</span>
-                                <i class="bx bx-check"></i>
-                            </div>
-                            <div class="plan">
-                                <span><strong>Participated Batch:</strong> GAHDSE24.2f</span>
-                                <i class="bx bx-check"></i>
-                            </div>
-                            <div class="plan">
-                                <span><strong>Assigned Students: </strong> 30</span>
-                                <i class="bx bx-check"></i>
-                            </div>
-                            <button onclick="closeTeacherEventDetails()">Done</button>
-                        </div>
-                    </div>
-                </div>
-                <!-------------------------- End of Event Details card ----------------------->
-            </div>
-            <!-- Reminders -->
-            <div class="reminders">
-                <div class="header">
-                    <i class="bx bxs-megaphone"></i>
-                    <h3>Recent Announcements</h3>
-                </div>
-                <ul class="task-list">
-
-                    <li class="completed">
-                        <div class="task-title">
-                            <i class="bx bx-check-circle"></i>
-                            <p>Your Meeting will start at 9 a.m.</p>
-                        </div>
-                        <i class="bx bx-dots-vertical-rounded"></i>
-                    </li>
-                </ul>
-            </div>
-            <!-- End of Reminders  -->
-        </div>
-    </main>
-
-
-    <%--        ---------------------------------------------Students Section-----------------------------------------%>
-
-    <main id="student_view_home_tab">
-        <div class="header">
-            <div class="left">
-                <h1>Dashboard</h1>
-                <ul class="breadcrumb">
-                    <li>
-                        <a href="#">Student</a>
-                    </li>
-                    /
-                    <li>
-                        <a href="#" class="active">Home</a>
-                    </li>
-                </ul>
-            </div>
-            <a href="${pageContext.request.contextPath}/pages/Portfolio.jsp" class="report">
-                <i class='bx bxs-edit-alt'></i>
-                <span>Portfolio</span>
-            </a>
-        </div>
-
-        <!-- Insights -->
-
-        <div class="insight ">
-            <div class="sales">
-                <span class="material-icons-sharp">analytics</span>
-                <div class="middle">
-                    <div class="left">
-                        <h3>Attendance for Events</h3>
-                        <p>Events: 25,024</p>
-                        <p>Students: 25,024</p>
-                    </div>
-                    <div class="progress">
-                        <svg>
-                            <circle cx='38' cy='38' r='36' style="stroke-dashoffset: 120"></circle>
-                        </svg>
-                        <div class="number">
-                            <p>45%</p>
-                        </div>
-                    </div>
-                </div>
-                <small class="text-muted">Last 24 Hours</small>
-            </div>
-            <!-- -------------------End Of Sales--------------------  -->
-            <!-- --------------------------------------------End Of Insight---------------------------------------------------  -->
-        </div>
-        <ul class="insights">
-            <a href="#">
-                <li>
-                    <i class="bx bx-calendar-check"></i>
-                    <span class="info">
-                                <h3>
-                                   21
-                                </h3>
-                                <p>Events</p>
-                            </span>
-                </li>
-            </a>
-            <a href="#">
-                <li>
-                    <i class="bx  bxs-book-open"></i>
-                    <span class="info">
-                                <h3>
-                                    GAHDSE24.2
-                                </h3>
-                                <p>Batch</p>
-                            </span>
-                </li>
-            </a>
-            <a href="#">
-                <li>
-                    <i class="bx bx-group"></i>
-                    <span class="info">
-                                <h3>
-                                    30
-                                </h3>
-                                <p>Students</p>
-                            </span>
-                </li>
-            </a>
-        </ul>
-        <!-- End of Insights  -->
-        <div class="bottom-data">
-            <div class="orders">
-                <div class="header">
-                    <i class="bx bx-calendar-check"></i>
-                    <h3>Upcoming Events</h3>
-                    <i class="bx bx-filter"></i>
-                    <div class="search-container">
-                        <i class="bx bx-search"></i>
-                        <label>
-                            <input type="text" class="search-bar" placeholder="Search...">
-                        </label>
-                    </div>
-                </div>
-                <table>
-                    <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Event</th>
-                        <th>Date</th>
-                        <th>Status</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr onclick="openStudentEventDetails()">
-                        <td>1</td>
-                        <td>
-                            <p>Mock Interview</p>
-                        </td>
-                        <td>14-08-2024</td>
-                        <td><span class="status pending">Upcoming</span></td>
-                    </tr>
-                    </tbody>
-                </table>
-                <!-------------------------- Event Details card ------------------------------>
-                <div class="container" id="student_eventDetails">
-                    <div class="card">
-                        <div class="top">
-                            <div class="title">Event Details</div>
-                        </div>
-                        <div class="info">Here, you have some details about the event that you are looking for!</div>
-                        <div class="details">
-                            <div class="plan">
-                                <span><strong>Name:</strong> Mock Interview</span>
-                                <i class="bx bx-check"></i>
-                            </div>
-                            <div class="plan">
-                                <span><strong>Consultant:</strong> Mrs.Sandaruwani</span>
-                                <i class="bx bx-check"></i>
-                            </div>
-                            <div class="plan">
-                                <span><strong>Participated Batch:</strong> GAHDSE24.2f</span>
-                                <i class="bx bx-check"></i>
-                            </div>
-                            <div class="plan">
-                                <span><strong>Assigned Students: </strong> 30</span>
-                                <i class="bx bx-check"></i>
-                            </div>
-                            <button onclick="closeStudentEventDetails()">Done</button>
-                        </div>
-                    </div>
-                </div>
-                <!-------------------------- End of Event Details card ----------------------->
-            </div>
-            <!-- Reminders -->
-            <div class="reminders">
-                <div class="header">
-                    <i class="bx bx-group"></i>
-                    <h3>Batch Students</h3>
-                </div>
-                <ul class="task-list">
-
-                    <li class="completed">
-                        <div class="task-title">
-                            <i class="bx bx-group"></i>
-                            <p>K.T.H.De Silva</p>
-                        </div>
-                    </li>
+                    <%
+                            }
+                        }
+                    %>
                 </ul>
             </div>
             <!-- End of Reminders  -->
@@ -583,6 +309,7 @@
 <script src="${pageContext.request.contextPath}/js/students.js"></script>
 <script src="${pageContext.request.contextPath}/js/announcement.js"></script>
 <script src="${pageContext.request.contextPath}/js/Users.js"></script>
+<script src="${pageContext.request.contextPath}/js/DashboardHome.js"></script>
 <script src="${pageContext.request.contextPath}/js/dashboard.js"></script>
 </body>
 </html>

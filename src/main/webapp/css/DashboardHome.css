@@ -1,0 +1,662 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root{
+    --light:#f6f6f9;
+    --primary:#1976d2;
+    --light-primary:#cfe8ff;
+    --gray:#eee;
+    --dark-gray:#aaaaaa;
+    --dark:#363949;
+    --danger:#d32f2f;
+    --light-danger:#fecdd3;
+    --warning:#fbc02d;
+    --light-warning:#fff2c6;
+    --success:#388e3c;
+    --light-success:#bbf7d0;
+    --color-light: rgba(132,139,200,0.18);
+    --box-shadow: 1px 2px 3px 3px var(--color-light);
+}
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+.bx{
+    font-size: 1.7rem;
+}
+a{
+    text-decoration: none;
+}
+li{
+    list-style: none;
+}
+
+html{
+    overflow-x: hidden;
+}
+
+body.dark{
+    --light:#181a1e;
+    --gray:#25252c;
+    --dark:#fbfbfb;
+    --box-shadow: 0 2rem 3rem var(--color-light);
+}
+
+.content main{
+    width: 100%;
+    padding: 36px 24px;
+    max-height: calc(100vh - 56px);
+}
+
+.content main .header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    grid-gap: 16px;
+    flex-wrap: wrap;
+}
+
+.content main .header .left h1{
+    font-size: 36px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--dark);
+}
+
+.content main .header .left .breadcrumb{
+    display: flex;
+    align-items: center;
+    grid-gap: 16px;
+}
+
+.content main .header .left .breadcrumb li{
+    color: var(--dark);
+}
+
+.content main .header .left .breadcrumb li a{
+    color: var(--dark-gray);
+    pointer-events: none;
+}
+
+.content main .header .left .breadcrumb li a.active{
+    color: var(--primary);
+    pointer-events: none;
+}
+.content main .header .report{
+    height: 36px;
+    padding: 0 16px;
+    border-radius: 36px;
+    background: var(--primary);
+    color: var(--light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-gap: 10px;
+    font-weight: 500;
+}
+
+.content main .header .report:hover{
+    background: #3b67ad;
+}
+
+
+/* General Button Style */
+.content main .header .btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.content main .header .btn:hover {
+    background-color: #0056b3;
+}
+
+/* -------------------------------------------------------- */
+
+.content main .insights{
+    display: grid;
+    grid-template-columns: repeat(4, minmax(240px, 1fr));
+    grid-gap: 24px;
+    margin-top: 36px;
+
+}
+
+
+.content main .insights li{
+    padding: 24px;
+    background: var(--light);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    grid-gap: 24px;
+    cursor: pointer;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+    transition: all 300ms ease;
+}
+
+.content main .insights li:hover{
+    box-shadow: none;
+}
+
+.content main .insights li .bx{
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+    font-size: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.content main .insights li:nth-child(1) .bx{
+    background: var(--light-primary);
+    color: var(--primary);
+}
+
+.content main .insights li:nth-child(2) .bx{
+    background: var(--light-warning);
+    color: var(--warning);
+}
+
+.content main .insights li:nth-child(3) .bx{
+    background: var(--light-success);
+    color: var(--success);
+}
+
+.content main .insights li:nth-child(4) .bx{
+    background: var(--light-danger);
+    color: var(--danger);
+}
+
+.content main .insights li .info h3{
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--dark);
+}
+
+.content main .insights li .info p{
+    color: var(--dark);
+}
+
+
+/* PERCENTAGE CALCULATION SECTION  */
+.content main .insights{
+    display: grid;
+    grid-template-columns: repeat(4, minmax(240px, 1fr));
+    grid-gap: 24px;
+    margin-top: 36px;
+
+}
+
+
+.content main .insights li{
+    padding: 24px;
+    background: var(--light);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    grid-gap: 24px;
+    cursor: pointer;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+    transition: all 300ms ease;
+}
+
+.content main .insights li:hover{
+    box-shadow: none;
+}
+
+.content main .insights li .bx{
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+    font-size: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.content main .insights li:nth-child(1) .bx{
+    background: var(--light-primary);
+    color: var(--primary);
+}
+
+.content main .insights li:nth-child(2) .bx{
+    background: var(--light-warning);
+    color: var(--warning);
+}
+
+.content main .insights li:nth-child(3) .bx{
+    background: var(--light-success);
+    color: var(--success);
+}
+
+.content main .insights li:nth-child(4) .bx{
+    background: var(--light-danger);
+    color: var(--danger);
+}
+
+.content main .insights li .info h3{
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--dark);
+}
+
+.content main .insights li .info p{
+    color: var(--dark);
+}
+
+
+/* PERCENTAGE CALCULATION SECTION  */
+
+
+.content main .insight{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4.9rem;
+
+    /* default 1.6 */
+}
+.content main .insight > div {
+    background: var(--light);
+    color: var(--dark);
+    padding: var(--card-padding);
+    border-radius: var(--card-border-radius);
+    margin-top: 1rem;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+    transition: all 300ms ease;
+}
+
+.content main .insight > div:hover {
+    box-shadow: none;
+}
+
+.content main .insight > div span{
+    background: var(--primary);
+    padding: 0.5rem;
+    border-radius: 50%;
+    color: var(--light);
+    font-size: 2rem;
+}
+
+.content main .insight > div.expenses span{
+    background: var(--danger);
+}
+.content main .insight > div.income span{
+    background: var(--success);
+}
+
+.content main .insight > div .middle{
+    display: flex;
+    align-items:center ;
+    justify-content: space-between;
+}
+.content main .insight h3{
+    margin: 1rem 0 0.6rem;
+    font-size: 1rem;
+}
+.content main .insight .progress{
+    position: relative;
+    width: 92px;
+    height: 92px;
+    border-radius: 50%;
+
+}
+.content main .insight svg{
+    width: 7rem;
+    height: 7rem;
+    transform: rotate(-90deg);
+    transform-origin: center;
+}
+
+.content main .insight svg circle{
+    fill: none;
+    stroke: var(--primary);
+    stroke-width: 12;
+    transform: translate(5px, 5px);
+    stroke-dasharray: 230;
+
+}
+
+/* main .insights .sales svg circle{
+     stroke-dashoffset: 600;
+}
+
+main .insights .expenses svg circle{
+    stroke-dashoffset: 0;
+}
+
+main .insights .income svg circle{
+    stroke-dashoffset: 115;
+} */
+
+.content main .insight .progress .number{
+    position: absolute;
+    top: 25px;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content main .insight small{
+    margin-top: 1.5rem;
+    display: block;
+}
+
+
+/* END OF PERCENTAGE CALCULATION SECTION  */
+
+
+
+
+
+
+
+
+
+
+
+
+.content main .bottom-data{
+    display: flex;
+    flex-wrap: wrap;
+    grid-gap: 24px;
+    margin-top: 24px;
+    width: 100%;
+    color: var(--dark);
+}
+
+.content main .bottom-data>div{
+    border-radius: 20px;
+    background: var(--light);
+    padding: 24px;
+    overflow-x: auto;
+}
+
+.content main .bottom-data .header{
+    display: flex;
+    align-items: center;
+    grid-gap: 16px;
+    margin-bottom: 24px;
+}
+
+.content main .bottom-data .header h3{
+    margin-right: auto;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.content main .bottom-data .header .bx{
+    cursor: pointer;
+}
+/* --------------------------------- */
+
+/* --------------------------------- */
+
+.bottom-data .header .search-container {
+    position: relative;
+    display: inline-block;
+    left: -100px;
+}
+
+.bottom-data .header .search-bar {
+    position: absolute;
+    top: 0;
+    left: -150px; /* Adjust position to make it fit inside the container */
+    width: 200px;
+    height: 30px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    opacity: 1; /* Make it visible */
+    pointer-events: auto; /* Allow interactions */
+    transform: scaleX(1); /* Keep it fully visible */
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* --------------------------------- */
+
+
+/* --------------------------------- */
+
+.content main .bottom-data .orders{
+    flex-grow: 1;
+    flex-basis: 500px;
+}
+
+.content main .bottom-data .orders table{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.content main .bottom-data .orders table th{
+    padding-bottom: 12px;
+    font-size: 13px;
+    text-align: left;
+    border-bottom: 1px solid var(--gray);
+}
+
+.content main .bottom-data .orders table td{
+    padding: 16px 0;
+}
+
+.content main .bottom-data .orders table tr td:first-child{
+    display:flex ;
+    align-items: center;
+    grid-gap: 12px;
+    padding-left: 6px;
+}
+
+.content main .bottom-data .orders table td img{
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.content main .bottom-data .orders table tbody tr{
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.content main .bottom-data .orders table tbody tr:hover{
+    background: var(--gray);
+}
+
+.content main .bottom-data .orders table tr td .status{
+    font-size: 10px;
+    padding: 6px 16px;
+    color: var(--light);
+    border-radius: 20px;
+    font-weight: 700;
+}
+
+.content main .bottom-data .orders table tr td .status.completed{
+    background: var(--success);
+}
+
+.content main .bottom-data .orders table tr td .status.process{
+    background: var(--primary);
+}
+
+.content main .bottom-data .orders table tr td .status.pending{
+    background: var(--warning);
+}
+
+
+/* -------------------------------------Event details form--------------------------------------------------------------- */
+
+
+#eventDetails{
+    visibility: hidden; /* Start as hidden */
+    opacity: 0; /* Fully transparent */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Ensure modal appears above other content */
+    overflow-y: auto;   /* Allow scrolling if modal content is too large */
+    transition: visibility 0.3s, opacity 0.3s; /* Smooth transition */
+}
+
+#eventDetails.show{
+    visibility: visible;
+    opacity: 1;
+}
+
+.content main .bottom-data .orders .container .card{
+    position: relative;
+    width: calc(30% - 20px);
+    background: var(--gray);
+    text-align: center;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 150px auto;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    transform: scale(0.7); /* Start small */
+    opacity: 0;
+    transition: transform 0.4s ease-out, opacity 0.4s ease-out;
+}
+.content main .bottom-data .orders .container.show .card{
+    transform: scale(1); /* Scale up */
+    opacity: 1;
+}
+
+.content main .bottom-data .orders .container .card .top{
+    height: 130px;
+    color: #ccc;
+    padding: 12px 0 0 0;
+    background: var(--primary);
+    clip-path: polygon(0 0, 100% 0, 100% 53%, 49% 100%, 0 53%);
+}
+
+.content main .bottom-data .orders .container .card .top .title{
+    font-size: 27px;
+    font-weight: 600;
+}
+
+.content main .bottom-data .orders .container .card .top .price-sec{
+    margin-top: -10px;
+}
+
+.content main .bottom-data .orders .container .card .top .price-sec .price{
+    font-size: 45px;
+}
+.content main .bottom-data .orders .container .card .info{
+    font-size: 16px;
+    margin-top: 20px;
+    color: var(--dark);
+}
+
+.content main .bottom-data .orders .container .card .details .plan{
+    margin-top: 25px;
+    font-size: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.content main .bottom-data .orders .container .card .details .plan::before{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    left: 0;
+    top: -12px;
+}
+
+.content main .bottom-data .orders .container .card .plan i{
+    color: var(--success);
+}
+
+.content main .bottom-data .orders .container .card .plan i.bx-time{
+    color: var(--danger);
+}
+
+
+.content main .bottom-data .orders .container .card button{
+    outline: none;
+    border: none;
+    height: 42px;
+    display: block;
+    margin-top: 30px;
+    width: 100%;
+    border-radius: 3px;
+    letter-spacing: 1px;
+    font-size: 18px;
+    color: #ccc;
+    cursor: pointer;
+    background: var(--light-danger);
+    transition: all 0.3s ease;
+}
+
+.content main .bottom-data .orders .container .card button:hover{
+    filter: brightness(90%);
+    background: var(--danger);
+}
+
+/* --------------------------------------End of event details form-------------------------------------------------------------- */
+
+.content main .bottom-data .reminders{
+    flex-grow: 1;
+    flex-basis: 300px;
+}
+
+.content main .bottom-data .reminders .task-list{
+    width: 100%;
+}
+
+.content main .bottom-data .reminders .task-list li{
+    width: 100%;
+    margin-bottom: 16px;
+    background: var(--gray);
+    padding: 14px 10px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.content main .bottom-data .reminders .task-list li .task-title{
+    display: flex;
+    align-items: center;
+}
+
+.content main .bottom-data .reminders .task-list li .task-title p{
+    margin-left: 6px;
+}
+
+
+.content main .bottom-data .reminders .task-list li .bx{
+    cursor: pointer;
+}
+
+.content main .bottom-data .reminders .task-list li.completed{
+    border-left: 10px solid var(--success);
+}
+
+.content main .bottom-data .reminders .task-list li.not-completed{
+    border-left: 10px solid var(--danger);
+}
+
+.content main .bottom-data .reminders .task-list li:last-child{
+    margin-bottom: 0;
+}
+
+
+
