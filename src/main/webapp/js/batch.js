@@ -1,14 +1,14 @@
 
 // Reinitialize the event listeners after DOM content is loaded
 const reinitializeBatchesListeners = () => {
-    initializeEventSearchBar();
-    initializeAddEvents();
-    initializeDeleteEvents();
-    initializeEditEvent();
+    initializeBatchSearchBar();
+    initializeAddBatches();
+    initializeDeleteBatches();
+    initializeEditBatches();
 };
 
 // Initialize Search Bar functionality
-const initializeEventSearchBar = () => {
+const initializeBatchSearchBar = () => {
     const searchBar = document.getElementById('search-bar');
     if (searchBar) {
         console.log("Search bar found and initializing...");
@@ -33,8 +33,8 @@ const initializeEventSearchBar = () => {
 };
 
 
-// Initialize Add event functionality
-const initializeAddEvents = () => {
+// Initialize Add batch functionality
+const initializeAddBatches = () => {
     const reportButton = document.querySelector('.report');
     const eventBackground = document.querySelector('.event-background');
     const closeButton = document.querySelector('.close-btn');
@@ -70,8 +70,8 @@ const initializeAddEvents = () => {
     }
 };
 
-// Initialize Delete event functionality
-const initializeDeleteEvents = () => {
+// Initialize Delete batch functionality
+const initializeDeleteBatches = () => {
     const deleteButtons = document.querySelectorAll('.delete');
     const popupOverlay = document.querySelector('.popup-overlay');
     const closeBtn = document.querySelector('.popup-close');
@@ -102,30 +102,30 @@ const initializeDeleteEvents = () => {
     });
 };
 
-// Initialize edite event functionality
-const initializeEditEvent = () => {
+// Initialize edite batch functionality
+const initializeEditBatches = () => {
     const editButtons = document.querySelectorAll('.edit'); // Ensure this targets your edit buttons
-    const popupOverlay = document.querySelector('.edit-event');
-    const closeBtn = document.querySelector('.event-close');
+    const popupOverlay = document.querySelector('.edit-batch');
+    const closeBtn = document.querySelector('.batch-close');
     const cancelBtn = document.querySelector('.cancel');
     const editForm = document.querySelector('#editForm');
 
     // Show popup when edit button is clicked
     editButtons.forEach((editButton) => {
-        editButton.addEventListener('click', (event) => {
-            const row = event.target.closest('tr'); // Find the row associated with the button
-            const eventId = row.querySelector('td:nth-child(1)').textContent;
-            const eventName = row.querySelector('td:nth-child(2)').textContent;
-            const eventDate = row.querySelector('td:nth-child(3)').textContent;
-            const eventTime = row.querySelector('td:nth-child(4)').textContent;
-            const eventPlatform = row.querySelector('td:nth-child(5)').textContent;
+        editButton.addEventListener('click', (batch) => {
+            const row = batch.target.closest('tr'); // Find the row associated with the button
+            const batchId = row.querySelector('td:nth-child(1)').textContent;
+            const batchName = row.querySelector('td:nth-child(2)').textContent;
+            const startDate = row.querySelector('td:nth-child(3)').textContent;
+            const endDate = row.querySelector('td:nth-child(4)').textContent;
+            const lecturer = row.querySelector('td:nth-child(5)').textContent;
 
             // Populate the form with existing data
-            document.querySelector('#student-id').value = eventId;
-            document.querySelector('#student-name').value = eventName;
-            document.querySelector('#student-date').value = eventDate;
-            document.querySelector('#student-time').value = eventTime;
-            document.querySelector('#student-platform').value = eventPlatform;
+            document.querySelector('#student-id').value = batchId;
+            document.querySelector('#student-name').value = batchName;
+            document.querySelector('#student-date').value = startDate;
+            document.querySelector('#student-time').value = endDate;
+            document.querySelector('#student-platform').value = lecturer;
 
             // Show the popup
             popupOverlay.style.display = 'flex';
@@ -152,9 +152,9 @@ const initializeEditEvent = () => {
         const updatedEvent = {
             id: document.querySelector('#student-id').value,
             name: document.querySelector('#student-name').value,
-            date: document.querySelector('#student-date').value,
-            time: document.querySelector('#student-time').value,
-            platform: document.querySelector('#student-platform').value
+            date: document.querySelector('#student-start-date').value,
+            time: document.querySelector('#student-end-date').value,
+            platform: document.querySelector('#lecturer').value
         };
 
         console.log('Event updated:', updatedEvent);
@@ -167,5 +167,7 @@ const initializeEditEvent = () => {
     });
 };
 
+
+
 // Call this function to initialize all necessary functionalities
-document.addEventListener('DOMContentLoaded', reinitializeEventContentListeners);
+document.addEventListener('DOMContentLoaded', reinitializeBatchesListeners );

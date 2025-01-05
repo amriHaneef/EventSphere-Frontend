@@ -19,9 +19,12 @@ public class BatchController extends HttpServlet {
 
         // Prepare the list of batches
         List<String[]> batches = new ArrayList<>();
-        batches.add(new String[]{"1", "DSE232f", "2025-12-25", "2025-12-25", "Mrs.Sandaruwani"});
-        batches.add(new String[]{"2", "DSE232f", "2025-12-25", "2025-12-25", "Mrs.Sandaruwani"});
-        batches.add(new String[]{"3", "DSE232f", "2025-12-25", "2025-12-25", "Mrs.Sandaruwani"});
+        batches.add(new String[]{"1", "DSE232f", "2025-12-25", "2026-12-25", "Mrs.Sandaruwani","dse23.2f-001","Amri Haneef","30"});
+        batches.add(new String[]{"2", "DSE232f", "2025-12-25", "2026-12-25", "Mrs.Thilini","dse23.2f-002","Harindu da Silva","36"});
+        batches.add(new String[]{"3", "DSE232f", "2025-12-25", "2026-12-25", "Mrs.Sandaruwani","dse23.2f-003","Shan Indeewa","40"});
+        batches.add(new String[]{"4", "DSE232f", "2025-12-25", "2026-12-25", "Mrs.Thilini","dse23.2f-004","Adeesha Nanayakkara","35"});
+        batches.add(new String[]{"4", "DSE232f", "2025-12-25", "2026-12-25", "Mrs.Sandaruwani","dse23.2f-005","Niduli Wijesiriwardana","50"});
+        batches.add(new String[]{"5", "DSE232f", "2025-12-25", "2026-12-25", "Mrs.Thilini","dse23.2f-006","Induwara Bhagya","60"});
 
 
         // Add announcements to the request
@@ -29,7 +32,7 @@ public class BatchController extends HttpServlet {
 
 
         // Example: Retrieve user role (e.g., from database or session)
-        String userRole = "teacher"; // This should be dynamically retrieved
+        String userRole = "admin"; // This should be dynamically retrieved
 
         // Set the role in the request or session
         HttpSession session = request.getSession();

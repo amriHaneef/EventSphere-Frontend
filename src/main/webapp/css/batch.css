@@ -23,9 +23,6 @@
 
     --card-padding: 1.8rem;
     --padding-1: 1.2rem;
-
-
-
 }
 *{
     margin: 0;
@@ -492,7 +489,7 @@ body {
 
 /*-----------------------------------------------------------------------------*/
 /* Popup Overlay */
-.edit-event {
+.edit-batch {
     display: none; /* Hidden by default */
     position: fixed;
     top: 0;
@@ -508,7 +505,7 @@ body {
 }
 
 /* Popup Content */
-.event-content {
+.batch-content {
     background-color: var(--light);
     color: var(--dark);
     padding: 20px;
