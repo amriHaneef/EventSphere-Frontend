@@ -5,6 +5,14 @@
 
     String role = "teacher";
 %>
+
+<%
+    String redirected = request.getParameter("redirected");
+    if (redirected == null) {
+        String contextPath = request.getContextPath();
+        response.sendRedirect(contextPath + "/pages/Home?redirected=true");
+    }
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,7 +25,8 @@
     <title>EventSphere</title>
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/images/favicon.ico" type="image/x-icon">
 </head>
-<body data-role="<%= role %>">
+<body data-role="<%= role %>" >
+
 <!-- Sidebar -->
 <div class="sidebar ">
     <a href="#" class="logo">
