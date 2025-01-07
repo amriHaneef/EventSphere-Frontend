@@ -27,12 +27,12 @@ public class BatchController extends HttpServlet {
         batches.add(new String[]{"5", "DSE232f", "2025-12-25", "2026-12-25", "Mrs.Thilini","dse23.2f-006","Induwara Bhagya","60"});
 
 
-        // Add announcements to the request
+        // Add batch to the request
         request.setAttribute("batches", batches);
 
 
         // Example: Retrieve user role (e.g., from database or session)
-        String userRole = "admin"; // This should be dynamically retrieved
+        String userRole = "teacher"; // This should be dynamically retrieved
 
         // Set the role in the request or session
         HttpSession session = request.getSession();
