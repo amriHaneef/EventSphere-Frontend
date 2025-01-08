@@ -1,4 +1,3 @@
-
 :root{
     --light:#f6f6f9;
     --primary:#1976d2;
@@ -148,7 +147,6 @@ body {
 .bottom-data .header .bx{
     cursor: pointer;
 }
-/* --------------------------------- */
 
 .bottom-data .header .search-container {
     position: relative;
@@ -159,18 +157,17 @@ body {
 .bottom-data .header .search-bar {
     position: absolute;
     top: 0;
-    left: -150px; /* Adjust position to make it fit inside the container */
+    left: -150px;
     width: 200px;
     height: 30px;
     padding: 5px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    opacity: 1; /* Make it visible */
-    pointer-events: auto; /* Allow interactions */
-    transform: scaleX(1); /* Keep it fully visible */
+    opacity: 1;
+    pointer-events: auto;
+    transform: scaleX(1);
     transition: transform 0.3s ease, opacity 0.3s ease;
 }
-
 
 .bottom-data .orders{
     flex-grow: 1;
@@ -199,7 +196,6 @@ body {
     grid-gap: 12px;
     padding-left: 6px;
 }
-
 
 .bottom-data .orders table tbody tr{
     cursor: pointer;
@@ -271,8 +267,7 @@ body {
     transition: all 0.3s ease;
 }
 
-/* Close Icon */
-.bottom-data .orders .popup-close {
+.bottom-data .orders .popup-close-delete {
     font-size: 2rem;
     color: var(--dark);
     position: absolute;
@@ -282,8 +277,8 @@ body {
     transition: color 0.3s ease;
 }
 
-.bottom-data .orders .popup-close:hover {
-    color: var(--primary);
+.bottom-data .orders .popup-close-delete:hover {
+    color: var(--danger);
 }
 
 /* Popup Text */
@@ -293,7 +288,6 @@ body {
     margin: 20px 0;
 }
 
-/* Popup Buttons */
 .bottom-data .orders .popup-buttons {
     display: flex;
     justify-content: space-around;
@@ -309,12 +303,12 @@ body {
     transition: all 0.3s ease;
 }
 
-.bottom-data .orders .popup-buttons .cancel-btn {
+.bottom-data .orders .popup-buttons .cancel-btn-delete {
     background-color: var(--gray);
     color: var(--dark);
 }
 
-.bottom-data .orders .popup-buttons .cancel-btn:hover {
+.bottom-data .orders .popup-buttons .cancel-btn-delete:hover {
     background-color: var(--dark-gray);
     transform: scale(1.05);
 }
@@ -329,8 +323,6 @@ body {
     transform: scale(1.05);
 }
 
-
-/*---------------------------------------------------------------------------------------------*/
 /* Feedback Box */
 .feedback {
     font-family: Arial, sans-serif;
@@ -380,114 +372,85 @@ body {
     background-color: #0056b3;
 }
 
-
-/*-----------------------------------------------------------------------------*/
-
-/* Popup form styles */
-
-.event-background {
-    display: none;
+.add-batch-popup {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     z-index: 1000;
 }
 
-.popup-event {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: var(--light);
+.popup-container {
+    background: #fff;
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 2px 4px 8px 3px var(--dark);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     width: 400px;
     max-width: 90%;
-}
-.popup-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
+    position: relative;
 }
 
-.popup-header h2 {
-    margin: 0;
-    font-size: 20px;
-    color: var(--dark);
-    align-items: center;
+.popup-container h3 {
+    text-align: center;
+    margin-top: 0;
 }
 
-.popup-header .close-btn {
-    font-size: 24px;
-    cursor: pointer;
-    color: var(--dark);
-}
-
-.popup-header .close-btn:hover {
-    color: #ff0000;
-}
-
-.popup-event-form {
-    display: flex;
-    flex-direction: column;
-}
-
-.popup-event-form label {
-    margin-bottom: 8px;
-    font-weight: bold;
-    color: var(--dark);
-}
-
-.popup-event-form input,
-.popup-event-form select {
+.popup-container .form-group {
     margin-bottom: 15px;
-    padding: 10px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: var(--gray);
-    color: var(--dark);
 }
 
-.popup-event-form .buttons {
+.popup-container label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.popup-container input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.popup-buttons {
     display: flex;
     justify-content: space-between;
+    margin-top: 15px;
 }
 
-.popup-event-form.buttons button {
-    padding: 10px 20px;
-    font-size: 14px;
+.save-btn {
+    background-color: #4caf50;
+    color: white;
     border: none;
-    border-radius: 5px;
+    padding: 10px 15px;
+    border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s;
 }
 
-.popup-event-form .buttons .cancel {
-    background-color: #ff4d4d;
-    color: var(--light);
+.cancel-btn {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
-.popup-event-form .buttons .cancel:hover {
-    background-color: #cc0000;
-
+.popup-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    background: none;
+    border: none;
 }
 
-.popup-event-form .buttons .submit-btn {
-    background-color: #28a745;
-    color: var(--light);
-}
-
-.popup-event-form .buttons .submit-btn:hover {
-    background-color: #1e7e34;
-}
-
-/*-----------------------------------------------------------------------------*/
 /* Popup Overlay */
 .edit-batch {
     display: none;
@@ -526,7 +489,6 @@ body {
     }
 }
 
-/* Close Button */
 .popup-close {
     position: absolute;
     top: 10px;
@@ -537,38 +499,32 @@ body {
 }
 
 .popup-close:hover {
-    color: #d9534f; /* Red color on hover */
+    color: #d9534f;
 }
 
-/* Title */
 .popup-content h3 {
     text-align: center;
     font-size: 1.2rem;
     margin-bottom: 20px;
 }
 
-/* Form */
-#editForm {
+#editFormbatch {
     display: flex;
     flex-direction: column;
 }
 
-/* Form Group */
-/* Form Group Styling */
 .form-group {
     display: flex;
     flex-direction: column;
     margin-bottom: 15px;
 }
 
-/* Label Styling */
 .form-group label {
     font-size: 1rem;
     font-weight: bold;
     margin-bottom: 4px;
 }
 
-/* Input Styling */
 .form-group input {
     padding: 10px;
     font-size: 1rem;
@@ -580,15 +536,11 @@ body {
     transition: border-color 0.3s ease;
 }
 
-/* Focus Styling for Inputs */
 .form-group input:focus {
     border-color: var(--dark-gray);
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
-
-
-/* Buttons */
 .popup-buttons {
     display: flex;
     justify-content: space-between;

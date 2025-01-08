@@ -5,7 +5,6 @@
     String role = (String) session.getAttribute("role");
 %>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/batch.css">
-<link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
@@ -28,6 +27,37 @@
     </a>
     <% } %>
 </div>
+
+
+<div class="add-batch-popup" >
+    <div class="popup-container">
+        <span class="popup-close">&times;</span>
+        <h3>Add Batch Details</h3>
+        <form id="addBatchForm">
+            <div class="form-group">
+                <label for="batchname">Batch Name:</label>
+                <input type="text" id="batchname" name="batchName" required>
+            </div>
+            <div class="form-group">
+                <label for="startdate">Start Date:</label>
+                <input type="date" id="startdate" name="startDate" required>
+            </div>
+            <div class="form-group">
+                <label for="enddate">End Date:</label>
+                <input type="date" id="enddate" name="endDate" required>
+            </div>
+            <div class="form-group">
+                <label for="lecturer">Lecturer:</label>
+                <input type="text" id="lecturer" name="lecturer" required>
+            </div>
+            <div class="popup-buttons">
+                <button type="button" class="cancel-btn">Cancel</button>
+                <button type="submit" class="save-btn">Save</button>
+            </div>
+        </form>
+    </div>
+</div>
+
 
 <div class="bottom-data">
     <div class="orders">
@@ -103,11 +133,6 @@
                 <td><%= batch[0] %></td>
                 <td><%= batch[1] %></td>
                 <td><%= batch[7]%></td>
-                <td>
-                    <button class="assign">
-                        <i class="bx bxs-user-check"></i>
-                    </button>
-                </td>
             </tr>
             <%
                 }
@@ -153,13 +178,13 @@
         <p>No data available for the current role.</p>
         <% } %>
 
-        <!-- Popup Form -->
+        <!-- Popup delete Form -->
         <div class="popup-overlay">
             <div class="popup-content">
-                <span class="popup-close">&times;</span>
+                <span class="popup-close-delete">&times;</span>
                 <p>Do you want to delete this batch?</p>
                 <div class="popup-buttons">
-                    <button class="cancel-btn">Cancel</button>
+                    <button class="cancel-btn-delete">Cancel</button>
                     <button class="ok-btn">OK</button>
                 </div>
             </div>
@@ -167,35 +192,32 @@
     </div>
 </div>
 
-     <br>
-
-        <!-- Popup Form -->
+        <!-- Popup edit Form -->
         <div class="edit-batch">
             <div class="batch-content">
                 <span class="batch-close">&times;</span>
                 <h3>Edit Batch Details</h3>
-                <form id="editForm">
+                <form id="editFormbatch">
                     <div class="form-group">
-                        <label for="student-id">Batch ID:</label>
-                        <input type="text" id="student-id" class="form-control" name="id" required disabled>
+                        <label for="batch-id">Batch ID:</label>
+                        <input type="text" id="batch-id" class="form-control" name="id" required disabled>
                     </div>
                     <div class="form-group">
-                        <label for="student-name">Batch Name:</label>
-                        <input type="text" id="student-name" class="form-control" name="name" required>
+                        <label for="batch-name">Batch Name:</label>
+                        <input type="text" id="batch-name" class="form-control" name="name" required>
                     </div>
                     <div class="form-group">
-                        <label for="student-date">Start Date:</label>
-                        <input type="date" id="student-date" class="form-control" name="date" required>
+                        <label for="start-date">Start Date:</label>
+                        <input type="date" id="start-date" class="form-control" name="startDate" required>
                     </div>
                     <div class="form-group">
-                        <label for="student-time">End Date:</label>
-                        <input type="date" id="student-time" class="form-control" name="time" required>
+                        <label for="end-date">End Date:</label>
+                        <input type="date" id="end-date" class="form-control" name="endDate" required>
                     </div>
                     <div class="form-group">
-                        <label for="student-platform">lecturer:</label>
-                        <input type="text" id="student-platform" class="form-control" name="platform" required>
+                        <label for="lecture">Lecturer:</label>
+                        <input type="text" id="lecture" class="form-control" name="lecture" required>
                     </div>
-
                     <div class="popup-buttons">
                         <button type="button" class="cancel">Cancel</button>
                         <button type="submit" class="ok-btn">Save</button>
@@ -204,13 +226,12 @@
             </div>
         </div>
 
-
         <!-- Feedback Box -->
         <section>
             <div class="feedback">
                 <h2 id="feedbackHeading"><i class="fa fa-comment-dots"></i> Feedback</h2>
                 <div class="feedback-box">
-                    <textarea id="feedbackBox_student" placeholder="Enter feedback for the batch..."></textarea>
+                    <textarea id="feedbackBox_batch" placeholder="Enter feedback for the batch..."></textarea>
                     <button onclick="submitFeedback()">Submit Feedback</button>
                 </div>
             </div>
