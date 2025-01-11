@@ -45,4 +45,13 @@
             <url-pattern>/pages/users</url-pattern>
         </servlet-mapping>
 
+    <servlet>
+        <servlet-name>PortfolioController</servlet-name>
+        <servlet-class>com.example.eventspherefrontend.controller.PortfolioController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PortfolioController</servlet-name>
+        <url-pattern>/pages/portfolio</url-pattern>
+    </servlet-mapping>
+
 </web-app>
