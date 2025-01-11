@@ -1,13 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Get the role value from the data attribute of the body element
-    const role = document.body.getAttribute('data-role');  // Correctly access 'data-role' from <body>
-
-    console.log('User role:', role);
-    // Now you can check if the role is 'teacher' (you wrote 'admin' but it's 'teacher' in this case)
-    if (role === 'teacher') {
-        console.log("User is a teacher!");
-        // You can add your teacher-specific logic here
-    }
 
     // Example: Row click event handling
     // Assuming that the rows are clickable and call openEventDetails()

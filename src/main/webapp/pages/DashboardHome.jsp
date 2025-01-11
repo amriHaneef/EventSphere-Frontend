@@ -2,16 +2,15 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.lang.String" %>
 <%
-
-    String role = "teacher";
-%>
-
-<%
     String redirected = request.getParameter("redirected");
     if (redirected == null) {
         String contextPath = request.getContextPath();
         response.sendRedirect(contextPath + "/pages/Home?redirected=true");
     }
+%>
+
+<%
+    String role = (String) session.getAttribute("role");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,7 +24,7 @@
     <title>EventSphere</title>
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/images/favicon.ico" type="image/x-icon">
 </head>
-<body data-role="<%= role %>" >
+<body >
 
 <!-- Sidebar -->
 <div class="sidebar ">
@@ -126,7 +125,7 @@
                 <h1>Dashboard</h1>
                 <ul class="breadcrumb">
                     <li>
-                        <a href="#"><%= role %></a>
+                        <a href="#">${sessionScope.role}</a>
                     </li>
                     /
                     <li>
@@ -135,7 +134,7 @@
                 </ul>
             </div>
             <%
-                if("student".equalsIgnoreCase(role) ){
+                if("student".equalsIgnoreCase(role)){
             %>
             <a href="${pageContext.request.contextPath}/pages/Portfolio.jsp" class="report">
                 <i class='bx bxs-edit-alt'></i>
