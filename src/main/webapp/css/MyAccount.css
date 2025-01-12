@@ -96,12 +96,26 @@ body.dark{
 
 
 .content main .bottom-data .container1 {
+    display: block;
     background: var(--light);
     width: 75%;
     height: 75vh;
     margin: 0 auto;
     position: relative;
+    transform: translateY(-20px);
+    animation: fadeInSlide 0.5s ease-out forwards; /* Add animation */
     box-shadow: 2px 5px 20px rgba(119, 119, 119, 0.5);
+}
+
+@keyframes fadeInSlide {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .content main .bottom-data .container1 .leftbox {
@@ -111,7 +125,7 @@ body.dark{
     position: absolute;
     width: 20%;
     height: 80vh;
-    background: var(--primary);
+    background: var(--success);
     box-shadow: 3px 3px 10px rgba(119, 119, 119, 0.5);
 }
 .content main .bottom-data .container1 .leftbox nav {
@@ -176,7 +190,7 @@ body.dark{
 .content main .bottom-data .container1 .rightbox p {
     border-width: 1px;
     border-style: solid;
-    border-image: linear-gradient(to right, var(--primary), rgba(126, 211, 134, 0.5)) 1 0%;
+    border-image: linear-gradient(to right, var(--success), rgba(126, 211, 134, 0.5)) 1 0%;
     border-top: 0;
     width: 80%;
     font-size: 13px;
@@ -202,13 +216,153 @@ body.dark{
     border: none;
     color: var(--dark-gray);
     padding: 5px;
-    background: var(--light-primary);
+    background: var(--success);
     border-radius: 5px;
     transition: background-color 0.3s ease-out;
 }
 
 .content main .bottom-data .container1 .rightbox .btn:hover {
-    background-color: var(--primary);
+    background-color: #225C26FF;
 }
+
+/* Popup Overlay */
+.change-overlay {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease, display 0.3s ease; /* Smooth transition for opacity */
+}
+
+/* Popup Content */
+.change-content {
+    background-color: var(--light);
+    color: var(--dark);
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    animation: slideIn 0.3s ease-in-out;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Close Button */
+.change-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--light);
+}
+
+.change-close:hover {
+    color: #d9534f; /* Red color on hover */
+}
+
+/* Title */
+.change-content h3 {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: var(--dark-gray);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Form */
+#changeForm {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Form Group */
+/* Form Group Styling */
+.form-group {
+    display: flex;
+    flex-direction: column; /* Stack label and input vertically */
+    margin-bottom: 15px;
+}
+
+/* Label Styling */
+.form-group label {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 8px; /* Space between label and input */
+}
+
+/* Input Styling */
+.form-group input {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    background-color: var(--gray);
+    color: var(--dark);
+    transition: border-color 0.3s ease;
+}
+
+/* Focus Styling for Inputs */
+.form-group input:focus {
+    border-color: var(--dark-gray);
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Light blue glow */
+}
+
+
+
+/* Buttons */
+.popup-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.popup-buttons button {
+    width: 48%;
+    padding: 10px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.popup-buttons .change-cancel {
+    background-color: #f44336; /* Red for Cancel */
+    color: var(--light);
+}
+
+.popup-buttons .change-cancel:hover {
+    background-color: #e53935;
+}
+
+.popup-buttons .ok-btn {
+    background-color: #4caf50; /* Green for OK */
+    color: var(--light);
+}
+
+.popup-buttons .ok-btn:hover {
+    background-color: #388e3c;
+}
+
+/*-----------------------------------------------------------------------------*/
 
 

@@ -44,11 +44,38 @@
                     <h2>Email</h2>
                     <p><input type="email" placeholder="example@example.com "> <button class="btn">update</button></p>
                     <h2>Password</h2>
-                    <p><input type="password" placeholder="********">  <button class="btn">Change</button></p>
+                    <p><input type="password" placeholder="********">  <button class="btn change">Change</button></p>
                 </div>
             </div>
         </div>
+
+        <!-- Popup Form -->
+        <div class="change-overlay">
+            <div class="change-content">
+                <span class="change-close">&times;</span>
+                <h3>Change Your Password Here!</h3>
+                <form id="changeForm">
+                    <div class="form-group">
+                        <label for="current-password">Current Password:</label>
+                        <input type="password" id="current-password" class="form-control" name="current-password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="new-password">New Password:</label>
+                        <input type="password" id="new-password" class="form-control" name="new-password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="re-enter-new-password">Re Enter New Password:</label>
+                        <input type="password" id="re-enter-new-password" class="form-control" name="re-enter-new-password" required>
+                    </div>
+                    <div class="popup-buttons">
+                        <button type="button" class="change-cancel">Cancel</button>
+                        <button type="submit" class="ok-btn">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
+
 </div>
 
 <script>
