@@ -314,6 +314,7 @@
 <script>
     const pageContextPath = "${pageContext.request.contextPath}";
 </script>
+<script src="${pageContext.request.contextPath}/js/MyAccount.js"></script>
 <script src="${pageContext.request.contextPath}/js/students.js"></script>
 <script src="${pageContext.request.contextPath}/js/announcement.js"></script>
 <script src="${pageContext.request.contextPath}/js/Users.js"></script>

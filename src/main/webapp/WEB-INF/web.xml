@@ -54,4 +54,13 @@
         <url-pattern>/pages/portfolio</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>MyAccountController</servlet-name>
+        <servlet-class>com.example.eventspherefrontend.controller.MyAccountController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MyAccountController</servlet-name>
+        <url-pattern>/pages/accounts</url-pattern>
+    </servlet-mapping>
+
 </web-app>
