@@ -38,8 +38,6 @@ public class eventcontroller extends HttpServlet {
         request.getRequestDispatcher("/pages/events.jsp").forward(request, response);
     }
 
-
-
     private void submitFeedback(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String eventId = request.getParameter("eventId");
         String feedback = request.getParameter("feedback");

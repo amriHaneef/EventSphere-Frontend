@@ -161,15 +161,15 @@ body {
 .bottom-data .header .search-bar {
     position: absolute;
     top: 0;
-    left: -150px; /* Adjust position to make it fit inside the container */
+    left: -150px;
     width: 200px;
     height: 30px;
     padding: 5px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    opacity: 1; /* Make it visible */
-    pointer-events: auto; /* Allow interactions */
-    transform: scaleX(1); /* Keep it fully visible */
+    opacity: 1;
+    pointer-events: auto;
+    transform: scaleX(1);
     transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
@@ -228,8 +228,8 @@ body {
 .bottom-data .orders table tbody tr button.delete i.bin:hover{
     color: var(--danger);
     font-size: 1.5rem;
-    transform: scale(1.2); /* Slightly enlarge icon on hover */
-    box-shadow: 0 4px 8px rgba(255, 0, 0, 0.2); /* Glow effect */
+    transform: scale(1.2);
+    box-shadow: 0 4px 8px rgba(255, 0, 0, 0.2);
 }
 
 .bottom-data .orders table tbody tr button.edit i.write{
@@ -241,8 +241,8 @@ body {
 .bottom-data .orders table tbody tr button.edit i.write:hover{
     color: var(--success);
     font-size: 1.5rem;
-    transform: scale(1.2); /* Slightly enlarge icon on hover */
-    box-shadow: 0 4px 8px rgba(255, 0, 0, 0.2); /* Glow effect */
+    transform: scale(1.2);
+    box-shadow: 0 4px 8px rgba(255, 0, 0, 0.2);
 }
 
 /* Popup Overlay */
@@ -341,6 +341,7 @@ body {
 #feedbackHeading {
     color:var(--dark);
     transition: color 0.3s ease;
+    float: left;
 }
 
 .feedback-box {
@@ -384,10 +385,90 @@ body {
 
 
 /*-----------------------------------------------------------------------------*/
+.add-event-popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--light);
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: slideIn 0.3s ease-in-out;
+}
 
-/* Popup form styles */
+.popup-container {
+    background-color: var(--light);
+    color: var(--dark);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 400px;
+    max-width: 90%;
+    position: relative;
+}
 
-.event-background {
+.popup-container h3 {
+    text-align: center;
+    margin-top: 0;
+}
+
+.popup-container .form-group {
+    margin-bottom: 15px;
+}
+
+.popup-container label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.popup-container input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.popup-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.save-btn {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.cancel-btn {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.popup-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+
+/*-----------------------------------------------------------------------------*/
+/* Popup Overlay edit event */
+.edit-event {
     display: none;
     position: fixed;
     top: 0;
@@ -396,114 +477,10 @@ body {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 1000;
-}
-
-.popup-event {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: var(--light);
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 2px 4px 8px 3px var(--dark);
-    width: 400px;
-    max-width: 90%;
-}
-.popup-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.popup-header h2 {
-    margin: 0;
-    font-size: 20px;
-    color: var(--dark);
-    align-items: center;
-}
-
-.popup-header .close-btn {
-    font-size: 24px;
-    cursor: pointer;
-    color: var(--dark);
-}
-
-.popup-header .close-btn:hover {
-    color: #ff0000;
-}
-
-.popup-event-form {
-    display: flex;
-    flex-direction: column;
-}
-
-.popup-event-form label {
-    margin-bottom: 8px;
-    font-weight: bold;
-    color: var(--dark);
-}
-
-.popup-event-form input,
-.popup-event-form select {
-    margin-bottom: 15px;
-    padding: 10px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: var(--gray);
-    color: var(--dark);
-}
-
-.popup-event-form .buttons {
-    display: flex;
-    justify-content: space-between;
-}
-
-.popup-event-form.buttons button {
-    padding: 10px 20px;
-    font-size: 14px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.popup-event-form .buttons .cancel {
-    background-color: #ff4d4d;
-    color: var(--light);
-}
-
-.popup-event-form .buttons .cancel:hover {
-    background-color: #cc0000;
-
-}
-
-.popup-event-form .buttons .submit-btn {
-    background-color: #28a745;
-    color: var(--light);
-}
-
-.popup-event-form .buttons .submit-btn:hover {
-    background-color: #1e7e34;
-}
-
-/*-----------------------------------------------------------------------------*/
-/* Popup Overlay */
-.edit-event {
-    display: none; /* Hidden by default */
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-    z-index: 1000;
     align-items: center;
     justify-content: center;
     opacity: 0;
-    transition: opacity 0.3s ease, display 0.3s ease; /* Smooth transition for opacity */
+    transition: opacity 0.3s ease, display 0.3s ease;
 }
 
 /* Popup Content */
@@ -539,7 +516,7 @@ body {
 }
 
 .popup-close:hover {
-    color: #d9534f; /* Red color on hover */
+    color: #d9534f;
 }
 
 /* Title */
@@ -555,11 +532,10 @@ body {
     flex-direction: column;
 }
 
-/* Form Group */
 /* Form Group Styling */
 .form-group {
     display: flex;
-    flex-direction: column; /* Stack label and input vertically */
+    flex-direction: column;
     margin-bottom: 15px;
 }
 
@@ -567,7 +543,7 @@ body {
 .form-group label {
     font-size: 1rem;
     font-weight: bold;
-    margin-bottom: 4px; /* Space between label and input */
+    margin-bottom: 4px;
 }
 
 /* Input Styling */
@@ -585,10 +561,8 @@ body {
 /* Focus Styling for Inputs */
 .form-group input:focus {
     border-color: var(--dark-gray);
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Light blue glow */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
-
-
 
 /* Buttons */
 .popup-buttons {
@@ -608,7 +582,7 @@ body {
 }
 
 .popup-buttons .cancel {
-    background-color: #f44336; /* Red for Cancel */
+    background-color: #f44336;
     color: var(--light);
 }
 
@@ -617,10 +591,167 @@ body {
 }
 
 .popup-buttons .ok-btn {
-    background-color: #4caf50; /* Green for OK */
+    background-color: #4caf50;
     color: var(--light);
 }
 
 .popup-buttons .ok-btn:hover {
     background-color: #388e3c;
 }
+
+/* Styling for the Event Details Section */
+.event-details {
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    max-width: 600px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+    font-family: 'Arial', sans-serif;
+}
+
+table.attendance {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Arial', sans-serif;
+}
+
+table.attendance th,
+table.attendance td {
+    padding: 12px 15px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+table.attendance th {
+    background-color: #fff;
+    color: black;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+table.attendance td {
+    background-color: #fff;
+    color: #555;
+    font-size: 14px;
+}
+
+table.attendance tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+table.attendance tr:hover {
+    background-color: #e9f7fe;
+}
+
+table.attendance td:first-child {
+    font-weight: bold;
+    color: #007BFF;
+}
+
+table.attendance td:last-child {
+    text-align: right;
+}
+
+/* Responsive Design for Mobile */
+@media screen and (max-width: 600px) {
+    div {
+        padding: 15px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    table.attendance th,
+    table.attendance td {
+        padding: 10px 8px;
+        font-size: 12px;
+    }
+}
+
+#markAttendanceBtn{
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#markAttendanceBtn:hover {
+    background-color: #45a049;
+}
+
+/* Popup overlay */
+.popupOverlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+/* Popup content */
+.popupContent {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 40%;
+    text-align: center;
+}
+
+.popupContent h3 {
+    margin-top: 0;
+}
+
+.popupContent select,
+.popupContent input {
+    width: 80%;
+    margin: 10px auto;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.popupButtons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.popupButtons button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.popupButtons .mark-btn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.popupButtons .close-btn {
+    background-color: #f44336;
+    color: white;
+}
+
+.popupButtons button:hover {
+    opacity: 0.9;
+}
+

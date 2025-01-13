@@ -31,43 +31,45 @@ const initializeEventSearchBar = () => {
     }
 };
 
-
-// Initialize Add event functionality
+// Initialize Add Batch functionality
 const initializeAddEvents = () => {
-    const reportButton = document.querySelector('.report');
-    const eventBackground = document.querySelector('.event-background');
-    const closeButton = document.querySelector('.close-btn');
-    const cancelButton = document.querySelector('.cancel');
-    const eventform = document.querySelector('#event-form');
+    const addButton = document.querySelector('.report');
+    const addEventPopup = document.querySelector('.add-event-popup');
+    const closeAddPopupButton = document.querySelector('.popup-close');
+    const cancelAddPopupButton = document.querySelector('.cancel-btn');
+    const addEventForm = document.querySelector('#addeventForm');
 
-    if (reportButton && eventBackground) {
-        reportButton.addEventListener('click', () => {
-            eventBackground.style.display = 'block';
+    if (addButton && addEventPopup) {
+        addButton.addEventListener('click', () => {
+            addEventPopup.style.display = 'flex';
         });
     }
 
+    // Close the popup
     const closePopup = () => {
-        if (eventBackground) {
-            eventBackground.style.display = 'none';
+        if ( addEventPopup) {
+            addEventPopup.style.display = 'none'; // Hide the popup
         }
     };
 
-    if (closeButton) {
-        closeButton.addEventListener('click', closePopup);
+    if (closeAddPopupButton) {
+        closeAddPopupButton.addEventListener('click', closePopup);
     }
 
-    if (cancelButton) {
-        cancelButton.addEventListener('click', closePopup);
+    if (cancelAddPopupButton) {
+        cancelAddPopupButton.addEventListener('click', closePopup);
     }
 
-    if (eventform) {
-        eventform.addEventListener('submit', (e) => {
-            e.preventDefault();
-            console.log('Form submitted!');
+    // Handle form submission
+    if ( addEventPopup) {
+        addEventPopup.addEventListener('submit', (e) => {
+            e.preventDefault(); // Prevent default form submission
+            console.log('Add Event Form submitted!');
             closePopup();
         });
     }
 };
+
 
 // Initialize Delete event functionality
 const initializeDeleteEvents = () => {
@@ -165,6 +167,27 @@ const initializeEditEvent = () => {
         popupOverlay.style.opacity = '0';
     });
 };
+// Show popup when button is clicked
+document.getElementById('markAttendanceBtn').addEventListener('click', () => {
+    document.getElementById('popupOverlay').style.display = 'flex';
+});
+
+// Close popup
+document.getElementById('closePopupBtn').addEventListener('click', () => {
+    document.getElementById('popupOverlay').style.display = 'none';
+});
+
+// Handle form submission
+document.getElementById('attendanceForm').addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    const batch = document.getElementById('batch').value;
+    const student = document.getElementById('student').value;
+    const mockDetails = document.getElementById('mockDetails').value;
+
+    alert(`Attendance marked successfully:\nBatch: ${batch}\nStudent: ${student}\nDetails: ${mockDetails}`);
+    document.getElementById('popupOverlay').style.display = 'none';
+});
 
 // Call this function to initialize all necessary functionalities
 document.addEventListener('DOMContentLoaded', reinitializeEventContentListeners);
