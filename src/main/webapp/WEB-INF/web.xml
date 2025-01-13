@@ -4,27 +4,29 @@
          xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
          version="6.0">
 
-        <servlet>
-            <servlet-name>DashboardHomeController</servlet-name>
-            <servlet-class>com.example.eventspherefrontend.controller.DashboardHomeController</servlet-class>
-        </servlet>
-        <servlet-mapping>
-            <servlet-name>DashboardHomeController</servlet-name>
-            <url-pattern>/pages/Home</url-pattern>
 
-        </servlet-mapping>
-        <!-- Welcome File Configuration -->
-        <welcome-file-list>
-            <welcome-file>pages/DashboardHome.jsp</welcome-file>
-        </welcome-file-list>
-        <servlet>
-            <servlet-name>studentController</servlet-name>
-            <servlet-class>com.example.eventspherefrontend.controller.studentController</servlet-class>
-        </servlet>
-        <servlet-mapping>
-            <servlet-name>studentController</servlet-name>
-            <url-pattern>/pages/students</url-pattern>
-        </servlet-mapping>
+    <!-- Welcome File Configuration -->
+    <welcome-file-list>
+        <welcome-file>/pages/home.jsp</welcome-file>
+    </welcome-file-list>
+
+    <servlet>
+        <servlet-name>DashboardHomeController</servlet-name>
+        <servlet-class>com.example.eventspherefrontend.controller.DashboardHomeController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DashboardHomeController</servlet-name>
+        <url-pattern>/pages/Home</url-pattern>
+
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>studentController</servlet-name>
+        <servlet-class>com.example.eventspherefrontend.controller.studentController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>studentController</servlet-name>
+        <url-pattern>/pages/students</url-pattern>
+    </servlet-mapping>
 
     <servlet>
         <servlet-name>announcementController</servlet-name>
@@ -36,14 +38,14 @@
     </servlet-mapping>
 
 
-        <servlet>
-            <servlet-name>usersController</servlet-name>
-            <servlet-class>com.example.eventspherefrontend.controller.usersController</servlet-class>
-        </servlet>
-        <servlet-mapping>
-            <servlet-name>usersController</servlet-name>
-            <url-pattern>/pages/users</url-pattern>
-        </servlet-mapping>
+    <servlet>
+        <servlet-name>usersController</servlet-name>
+        <servlet-class>com.example.eventspherefrontend.controller.usersController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>usersController</servlet-name>
+        <url-pattern>/pages/users</url-pattern>
+    </servlet-mapping>
 
     <servlet>
         <servlet-name>PortfolioController</servlet-name>
@@ -71,4 +73,15 @@
         <servlet-name>BatchController</servlet-name>
         <url-pattern>/pages/batches</url-pattern>
     </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>HomeController</servlet-name>
+        <servlet-class>com.example.eventspherefrontend.controller.HomeController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>HomeController</servlet-name>
+        <url-pattern>/pages/home</url-pattern>
+    </servlet-mapping>
+
 </web-app>
