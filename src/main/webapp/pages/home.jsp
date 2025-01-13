@@ -123,7 +123,7 @@
             </ul>
         </div>
         <div class="student-image">
-            <img src="images/student.jpg" alt="Student Image">
+            <img src="${pageContext.request.contextPath}/images/student.jpg" alt="Student Image">
         </div>
     </div>
 </section>
@@ -133,7 +133,7 @@
     <div class="about">
         <div class="about-content">
             <div class="about-image">
-                <img src="images/aboutus2.jpg" alt="About Us Image">
+                <img src="${pageContext.request.contextPath}/images/aboutus.jpg" alt="About Us Image">
             </div>
             <div class="about-description">
                 <h2>About Us</h2>
