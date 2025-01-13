@@ -21,7 +21,7 @@
                 <li><a href="#student">Student</a></li>
                 <li><a href="#about">About Us</a></li>
                 <li><a href="#contact">Contact Us</a></li>
-                <li class="login-button" style="list-style: none;"><a href="${pageContext.request.contextPath}/login/login.jsp" class="logIn-button"> LogIn </a></li>
+                <li class="login-button"><a href="${pageContext.request.contextPath}/pages/login" class="logIn-button">LogIn</a></li>
             </ul>
         </nav>
         <div class="content">
@@ -95,7 +95,7 @@
                 <li>Make a difference in students' lives</li>
                 <li>Enhance your teaching skills</li>
                 <li>Get recognition for your contributions</li><br>
-                <li class="login-button" style="list-style: none;"><a href="${pageContext.request.contextPath}/login/login.jsp" class="logIn-button">LogIn</a></li>
+                <li class="login-button" style="list-style: none;"><a href="${pageContext.request.contextPath}/pages/login" class="logIn-button">LogIn</a></li>
             </ul>
         </div>
     </div>
@@ -119,7 +119,7 @@
                 <li>Gain new skills and knowledge</li>
                 <li>Access to expert advice and mentorship</li>
                 <li>Build a strong professional network</li><br>
-                <li class="login-button" style="list-style: none;"><a href="${pageContext.request.contextPath}/login/login.jsp" class="logIn-button">LogIn</a></li>
+                <li class="login-button" style="list-style: none;"><a href="${pageContext.request.contextPath}/pages/login" class="logIn-button">LogIn</a></li>
             </ul>
         </div>
         <div class="student-image">
