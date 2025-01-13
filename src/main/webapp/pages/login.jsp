@@ -19,7 +19,7 @@
         <h3>Hello, Again</h3>
         <small>We are happy to have you back</small>
       </div>
-      <form action="validateLogin.jsp" method="post">
+      <form action="" method="post">
         <div class="input-group">
           <div class="input-field">
             <input type="text" id="username" name="username" class="input-box" required>

@@ -3,7 +3,7 @@
 * {
     margin: 0;
     padding: 0;
-    font-family: "Poppins";
+    font-family: "Poppins", serif;
     box-sizing: border-box;
 }
 
@@ -19,7 +19,7 @@ body {
 .container {
     position: relative;
     width: 360px;
-    height: 640px;
+    height: 540px;
     background: rgba(0, 0, 0, 0.75);
     border-radius: 20px;
     display: flex;
@@ -64,7 +64,7 @@ body {
     flex-direction: row;
     position: absolute;
     width: 350px;
-    height: 630px;
+    height: 530px;
     inset: 5px;
     background-color: rgb(200, 180, 200);
     border-radius: 16px;
@@ -92,7 +92,8 @@ body {
 
 .top-header h3 {
     font-size: 22px;
-    font-weight: 600;
+    font-weight: bold;
+    letter-spacing: 3px;
     margin-bottom: 8px;
 }
 

@@ -1,4 +1,4 @@
-package com.example.frontenddemo.controller;
+package com.example.eventspherefrontend.controller;
 
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -8,9 +8,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebServlet("/LoginController")
+@WebServlet(name = "LoginController", urlPatterns = "/pages/login")
 public class LoginController extends HttpServlet {
-    private static final long serialVersionUID = 1L;
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -38,6 +37,10 @@ public class LoginController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.sendRedirect("login.jsp");
+
+
+        // Forward the request to students.jsp
+        request.getRequestDispatcher("/pages/login.jsp").forward(request, response);
     }
+
 }
