@@ -323,66 +323,20 @@ body {
     transform: scale(1.05);
 }
 
-/* Feedback Box */
-.feedback {
-    font-family: Arial, sans-serif;
-}
-
-#feedbackHeading {
-    color:var(--dark);
-    transition: color 0.3s ease;
-}
-
-.feedback-box {
-    width: 95%;
-    margin: 20px 0;
-    padding: 20px;
-    background: var(--light);
-    border-radius: 10px;
-    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
-    font-family: Arial, sans-serif;
-    text-align: center;
-    float: left;
-}
-
-.feedback-box textarea {
-    width: 100%;
-    height: 100px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-    resize: none;
-    outline: none;
-    margin-bottom: 15px;
-}
-
-.feedback-box button {
-    background-color: #007BFF;
-    color: var(--light);
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.feedback-box button:hover {
-    background-color: #0056b3;
-}
+/*---------------------------------------- batch add popup------------------------------------------------*/
 
 .add-batch-popup {
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
     align-items: center;
     justify-content: center;
     z-index: 1000;
+    animation: slideIn 0.3s ease-in-out;
 }
 
 .popup-container {
@@ -451,29 +405,31 @@ body {
     border: none;
 }
 
+
+/*----------------------------------------------------edit batch-------------------------------------------------------*/
 /* Popup Overlay */
-.edit-batch {
-    display: none;
+.edit-overlay {
+    display: none; /* Hidden by default */
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
     z-index: 1000;
     align-items: center;
     justify-content: center;
     opacity: 0;
-    transition: opacity 0.3s ease, display 0.3s ease;
+    transition: opacity 0.3s ease, display 0.3s ease; /* Smooth transition for opacity */
 }
 
 /* Popup Content */
-.batch-content {
+.edit-content {
     background-color: var(--light);
     color: var(--dark);
     padding: 20px;
     border-radius: 8px;
-    width: 300px;
+    width: 400px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     animation: slideIn 0.3s ease-in-out;
 }
@@ -489,7 +445,8 @@ body {
     }
 }
 
-.popup-close {
+/* Close Button */
+.edit-close {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -498,33 +455,39 @@ body {
     color: var(--light);
 }
 
-.popup-close:hover {
-    color: #d9534f;
+.edit-close:hover {
+    color: #d9534f; /* Red color on hover */
 }
 
-.popup-content h3 {
+/* Title */
+.edit-content h3 {
     text-align: center;
     font-size: 1.2rem;
     margin-bottom: 20px;
 }
 
-#editFormbatch {
+/* Form */
+#editForm {
     display: flex;
     flex-direction: column;
 }
 
+/* Form Group */
+/* Form Group Styling */
 .form-group {
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Stack label and input vertically */
     margin-bottom: 15px;
 }
 
+/* Label Styling */
 .form-group label {
     font-size: 1rem;
     font-weight: bold;
-    margin-bottom: 4px;
+    margin-bottom: 8px; /* Space between label and input */
 }
 
+/* Input Styling */
 .form-group input {
     padding: 10px;
     font-size: 1rem;
@@ -536,18 +499,22 @@ body {
     transition: border-color 0.3s ease;
 }
 
+/* Focus Styling for Inputs */
 .form-group input:focus {
     border-color: var(--dark-gray);
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Light blue glow */
 }
 
-.popup-buttons {
+
+
+/* Buttons */
+.edit-buttons {
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
 }
 
-.popup-buttons button {
+.edit-buttons button {
     width: 48%;
     padding: 10px;
     font-size: 1rem;
@@ -557,20 +524,23 @@ body {
     transition: background-color 0.3s;
 }
 
-.popup-buttons .cancel {
-    background-color: #f44336;
+.edit-buttons .edit-cancel {
+    background-color: #f44336; /* Red for Cancel */
     color: var(--light);
 }
 
-.popup-buttons .cancel:hover {
+.edit-buttons .edit-cancel:hover {
     background-color: #e53935;
 }
 
-.popup-buttons .ok-btn {
-    background-color: #4caf50;
+.edit-buttons .ok-btn {
+    background-color: #4caf50; /* Green for OK */
     color: var(--light);
 }
 
-.popup-buttons .ok-btn:hover {
+.edit-buttons .ok-btn:hover {
     background-color: #388e3c;
 }
+
+/*-----------------------------------------------------------------------------*/
+

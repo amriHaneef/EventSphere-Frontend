@@ -70,9 +70,9 @@
                 </label>
             </div>
         </div>
-
-        <% if ("admin".equalsIgnoreCase(role)) { %>
-        <!-- Admin Table -->
+        <%
+            if ("admin".equalsIgnoreCase(role) || "teacher".equalsIgnoreCase(role) ) {
+        %>
         <table>
             <thead>
             <tr>
@@ -80,8 +80,15 @@
                 <th>Batch Name</th>
                 <th>Start Date</th>
                 <th>End Date</th>
+                <th>Assign Students</th>
+                <%
+                    if ("admin".equalsIgnoreCase(role) ) {
+                %>
                 <th>Lecturer</th>
                 <th>Actions</th>
+                <%
+                    }
+                %>
             </tr>
             </thead>
             <tbody>
@@ -96,55 +103,32 @@
                 <td><%= batch[1] %></td>
                 <td><%= batch[2] %></td>
                 <td><%= batch[3] %></td>
+                <td><%= batch[7] %></td>
+                <%
+                    if ("admin".equalsIgnoreCase(role)) {
+                %>
                 <td><%= batch[4] %></td>
                 <td>
-                    <button class="delete"><i class="bx bxs-trash bin"></i></button>
                     <button class="edit"><i class="bx bx-edit write"></i></button>
+                    <button class="delete"><i class="bx bxs-trash bin"></i></button>
                 </td>
+                <%
+                    }
+                %>
             </tr>
             <%
+                    }
                 }
-            } else {
             %>
-            <tr>
-                <td colspan="6">No batches available.</td>
-            </tr>
-            <% } %>
             </tbody>
         </table>
-        <% } else if ("teacher".equalsIgnoreCase(role)) { %>
-        <!-- Teacher Table -->
-        <table>
-            <thead>
-            <tr>
-                <th>Batch ID</th>
-                <th>Batch Name</th>
-                <th>Assign Students</th>
-            </tr>
-            </thead>
-            <tbody>
-            <%
-                Object teacherBatches = request.getAttribute("batches");
-                if (teacherBatches instanceof List) {
-                    List<String[]> batches = (List<String[]>) teacherBatches;
-                    for (String[] batch : batches) {
-            %>
-            <tr>
-                <td><%= batch[0] %></td>
-                <td><%= batch[1] %></td>
-                <td><%= batch[7]%></td>
-            </tr>
-            <%
-                }
-            } else {
-            %>
-            <tr>
-                <td colspan="8">No batches available.</td>
-            </tr>
-            <% } %>
-            </tbody>
-        </table>
-        <% } else if ("student".equalsIgnoreCase(role)) { %>
+        <%
+            }
+        %>
+
+        <%
+            if ("student".equalsIgnoreCase(role)) {
+        %>
         <!-- Student Table -->
         <table>
             <thead>
@@ -174,9 +158,9 @@
             <% } %>
             </tbody>
         </table>
-        <% } else { %>
-        <p>No data available for the current role.</p>
-        <% } %>
+        <%
+            }
+        %>
 
         <!-- Popup delete Form -->
         <div class="popup-overlay">
@@ -192,50 +176,43 @@
     </div>
 </div>
 
-        <!-- Popup edit Form -->
-        <div class="edit-batch">
-            <div class="batch-content">
-                <span class="batch-close">&times;</span>
-                <h3>Edit Batch Details</h3>
-                <form id="editFormbatch">
-                    <div class="form-group">
-                        <label for="batch-id">Batch ID:</label>
-                        <input type="text" id="batch-id" class="form-control" name="id" required disabled>
-                    </div>
-                    <div class="form-group">
-                        <label for="batch-name">Batch Name:</label>
-                        <input type="text" id="batch-name" class="form-control" name="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="start-date">Start Date:</label>
-                        <input type="date" id="start-date" class="form-control" name="startDate" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="end-date">End Date:</label>
-                        <input type="date" id="end-date" class="form-control" name="endDate" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="lecture">Lecturer:</label>
-                        <input type="text" id="lecture" class="form-control" name="lecture" required>
-                    </div>
-                    <div class="popup-buttons">
-                        <button type="button" class="cancel">Cancel</button>
-                        <button type="submit" class="ok-btn">Save</button>
-                    </div>
-                </form>
+<!-- Popup Form -->
+<div class="edit-overlay">
+    <div class="edit-content">
+        <span class="edit-close">&times;</span>
+        <h3>Edit Student Details</h3>
+        <form id="editForm">
+            <div class="form-group">
+                <label for="batch-id">Batch ID</label>
+                <input type="text" id="batch-id" class="form-control" name="id" required disabled>
             </div>
-        </div>
-
-        <!-- Feedback Box -->
-        <section>
-            <div class="feedback">
-                <h2 id="feedbackHeading"><i class="fa fa-comment-dots"></i> Feedback</h2>
-                <div class="feedback-box">
-                    <textarea id="feedbackBox_batch" placeholder="Enter feedback for the batch..."></textarea>
-                    <button onclick="submitFeedback()">Submit Feedback</button>
-                </div>
+            <div class="form-group">
+                <label for="batch-name">Batch Name</label>
+                <input type="text" id="batch-name" class="form-control" name="batch-name" required>
             </div>
-        </section>
+            <div class="form-group">
+                <label for="start-date">Start Date</label>
+                <input type="email" id="start-date" class="form-control" name="start-date" required>
+            </div>
+            <div class="form-group">
+                <label for="end-date">End Date</label>
+                <input type="text" id="end-date" class="form-control" name="end-date" required>
+            </div>
+            <div class="form-group">
+                <label for="students">Assigned Students</label>
+                <input type="text" id="students" class="form-control" name="students" required disabled>
+            </div>
+            <div class="form-group">
+                <label for="lecturers">Lecturer</label>
+                <input type="text" id="lecturers" class="form-control" name="lecturers" required >
+            </div>
+            <div class="edit-buttons">
+                <button type="button" class="edit-cancel">Cancel</button>
+                <button type="submit" class="ok-btn">Save</button>
+            </div>
+        </form>
+    </div>
+</div>
 
 
 <script>

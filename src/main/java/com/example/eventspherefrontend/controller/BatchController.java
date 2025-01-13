@@ -39,20 +39,4 @@ public class BatchController extends HttpServlet {
         request.getRequestDispatcher("/pages/batch.jsp").forward(request, response);
     }
 
-
-
-    private void SubmitFeedback(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String eventId = request.getParameter("batchId");
-        String feedback = request.getParameter("feedback");
-
-        if (feedback == null || feedback.trim().isEmpty()) {
-            response.getWriter().write("Feedback cannot be empty.");
-            return;
-        }
-
-        // Logic to save feedback in the database
-        // Example: Insert feedback associated with the eventId into the database
-
-        response.getWriter().write("Feedback submitted successfully for event ID: " + eventId);
-    }
 }

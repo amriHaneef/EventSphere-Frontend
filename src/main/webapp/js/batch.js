@@ -38,10 +38,9 @@ const initializeAddBatches = () => {
     const cancelAddPopupButton = document.querySelector('.cancel-btn');
     const addBatchForm = document.querySelector('#addBatchForm');
 
-    // Show the popup on button click
     if (addButton && addBatchPopup) {
         addButton.addEventListener('click', () => {
-            addBatchPopup.style.display = 'flex'; // Display the popup
+            addBatchPopup.style.display = 'flex';
         });
     }
 
@@ -69,8 +68,6 @@ const initializeAddBatches = () => {
         });
     }
 };
-
-document.addEventListener('DOMContentLoaded', initializeAddBatches);
 
 
 // Initialize Delete Batch functionality
@@ -108,60 +105,51 @@ const initializeDeleteBatches = () => {
 };
 
 // Initialize Edit Batch functionality
+// -------------------------------------------------- Edit User Process ---------------------------------------------
 const initializeEditBatches = () => {
-    const editButtons = document.querySelectorAll('.edit');
-    const editPopup = document.querySelector('.edit-batch');
-    const closeBtn = document.querySelector('.batch-close');
-    const cancelBtn = document.querySelector('.cancel');
-    const editForm = document.querySelector('#editFormbatch');
+    const editButtons = document.querySelectorAll('.edit'); // Edit buttons
+    const popupOverlay = document.querySelector('.edit-overlay');
+    const closeBtn = document.querySelector('.edit-close');
+    const cancelBtn = document.querySelector('.edit-cancel');
+    const editForm = document.querySelector('#editForm');
 
+    // Show popup when edit button is clicked
     editButtons.forEach((editButton) => {
         editButton.addEventListener('click', (event) => {
-            const row = event.target.closest('tr');
-            if (!row) return;
+            const row = event.target.closest('tr'); // Find the row associated with the button
+            const id = row.querySelector('td:nth-child(1)').textContent;
+            const name = row.querySelector('td:nth-child(2)').textContent;
+            const start_date = row.querySelector('td:nth-child(3)').textContent;
+            const end_date = row.querySelector('td:nth-child(4)').textContent;
+            const assigned_students = row.querySelector('td:nth-child(5)').textContent;
+            const lecturer = row.querySelector('td:nth-child(6)').textContent;
 
-            const batchId = row.querySelector('td:nth-child(1)').textContent;
-            const batchName = row.querySelector('td:nth-child(2)').textContent;
-            const startDate = row.querySelector('td:nth-child(3)').textContent;
-            const endDate = row.querySelector('td:nth-child(4)').textContent;
-            const lecturer = row.querySelector('td:nth-child(5)').textContent;
+            // Populate the form with existing data
+            document.querySelector('#batch-id').value = id;
+            document.querySelector('#batch-name').value = name;
+            document.querySelector('#start-date').value = start_date;
+            document.querySelector('#end-date').value = end_date;
+            document.querySelector('#students').value = assigned_students;
+            document.querySelector('#lecturers').value = lecturer;
 
-            document.querySelector('#batch-id').value = batchId;
-            document.querySelector('#batch-name').value = batchName;
-            document.querySelector('#start-date').value = startDate;
-            document.querySelector('#end-date').value = endDate;
-            document.querySelector('#lecture').value = lecturer;
-
-            editPopup.style.display = 'flex';
+            // Show the popup
+            popupOverlay.style.display = 'flex';
+            popupOverlay.style.opacity = '1';
         });
     });
 
-    const closePopup = () => {
-        editPopup.style.display = 'none';
-    };
+    // Close the popup when the close icon is clicked
+    closeBtn.addEventListener('click', () => {
+        popupOverlay.style.display = 'none';
+        popupOverlay.style.opacity = '0';
+    });
 
-    if (closeBtn) {
-        closeBtn.addEventListener('click', closePopup);
-    }
-
-    if (cancelBtn) {
-        cancelBtn.addEventListener('click', closePopup);
-    }
-
-    if (editForm) {
-        editForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const updatedBatch = {
-                id: document.querySelector('#batch-id').value,
-                name: document.querySelector('#batch-name').value,
-                startDate: document.querySelector('#start-date').value,
-                endDate: document.querySelector('#end-date').value,
-                lecturer: document.querySelector('#lecture').value,
-            };
-            console.log('Batch updated:', updatedBatch);
-            closePopup();
-        });
-    }
+    // Cancel button hides the popup
+    cancelBtn.addEventListener('click', () => {
+        popupOverlay.style.display = 'none';
+        popupOverlay.style.opacity = '0';
+    });
 };
+// ------------------------------------------------ End of Edit User Process ----------------------------------------
 
 document.addEventListener('DOMContentLoaded', reinitializeBatchesListeners);
