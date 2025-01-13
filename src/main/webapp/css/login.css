@@ -225,6 +225,14 @@ i {
     box-shadow: 2px 0px 12px rgba(0, 0, 0, 0.1);
 }
 
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+
 
 .body{
     position: relative;

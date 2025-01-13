@@ -19,8 +19,8 @@
         <h3>Hello, Again</h3>
         <small>We are happy to have you back</small>
       </div>
-      <form action="" method="post">
-        <div class="input-group">
+      <form action="${pageContext.request.contextPath}/pages/login" method="post">
+      <div class="input-group">
           <div class="input-field">
             <input type="text" id="username" name="username" class="input-box" required>
             <label for="username">Username</label>
@@ -35,6 +35,11 @@
               </div>
             </div>
           </div>
+        <% if (request.getAttribute("errorMessage") != null) { %>
+        <div class="error-message">
+          <%= request.getAttribute("errorMessage") %>
+        </div>
+        <% } %>
           <div class="remember">
             <input type="checkbox" name="rememberMe" id="rememberMe">
             <label for="rememberMe">Remember Me</label>
