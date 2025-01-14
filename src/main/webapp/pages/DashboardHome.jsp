@@ -1,6 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page import="com.example.eventspherefrontend.model.Event" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.lang.String" %>
+<%@ page import="com.example.eventspherefrontend.model.Announcement" %>
 <%
     String redirected = request.getParameter("redirected");
     if (redirected == null) {
@@ -10,7 +12,12 @@
 %>
 
 <%
-    String role = (String) session.getAttribute("role");
+    String username = (String) session.getAttribute("username");
+    String role = (String) session.getAttribute("role"); // Get the role from the session
+
+    if (role == null) {
+        role = "guest"; // Default role if none is set
+    }
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,12 +52,24 @@
         <li id="batches-link">
             <a href="#"><i class='bx bxs-book-open'></i>Batches</a>
         </li>
+        <%
+            if("admin".equalsIgnoreCase(role)){
+        %>
         <li id="users-link">
             <a href="#"><i class="bx bx-group"></i>Users</a>
         </li>
+        <%
+            }
+        %>
+        <%
+            if("teacher".equalsIgnoreCase(role)){
+        %>
         <li id="students-link">
             <a href="#"><i class="bx bx-group"></i>Students</a>
         </li>
+        <%
+            }
+        %>
         <li id="accounts-link">
             <a href="#"><i class="bx bx-cog"></i>My Account</a>
         </li>
@@ -228,25 +247,21 @@
                     </thead>
                     <tbody>
                     <%
-                        // Retrieve and safely cast events
-                        Object eventsObject = request.getAttribute("events");
-                        if (eventsObject instanceof List) {
-                            List<String[]> events = (List<String[]>) eventsObject;
-                            for (String[] event : events) {
+                        List<Event> events = (List<Event>) request.getAttribute("events");
+
+                        for (Event event : events) {
                     %>
-                    <tr onclick="openEventDetails(this)">
-                        <td><%= event[0] %></td>
+                    <tr onclick="openEventDetails(<%= event.getId() %>)">
+                        <td><%= event.getId() %></td>
                         <td>
-                            <p><%= event[1] %></p>
+                            <p><%= event.getTitle() %></p>
                         </td>
-                        <td><%= event[2] %></td>
-                        <td style="display: none"><%= event[3] %></td>
-                        <td style="display: none"><%= event[4] %></td>
-                        <td><span class="status completed">Completed</span></td>
+                        <td><%= event.getType()%></td>
+                        <td><%= event.getTimePeriod()%></td>
+                        <td><span class="status completed"><%=event.getStatus()%> </span></td>
                     </tr>
                     <%
                             }
-                        }
                     %>
                     <!-------------------------- Event Details card ------------------------------>
                     <div class="container" id="eventDetails">
@@ -288,21 +303,20 @@
                 </div>
                 <ul class="task-list">
                     <%
-                        // Retrieve and safely cast announcements
-                        Object announcementsObject = request.getAttribute("announcements");
-                        if (announcementsObject instanceof List) {
-                            List<String[]> announcements = (List<String[]>) announcementsObject;
-                            for (String[] announcement : announcements) {
+                        // Retrieve the List<Announcement> from request attributes
+                        List<Announcement> announcements = (List<Announcement>) request.getAttribute("announcements");
+
+                        // Iterate through the List<Announcement>
+                        for (Announcement announcement : announcements) {
                     %>
                     <li class="completed">
                         <div class="task-title">
                             <i class="bx bx-check-circle"></i>
-                            <p><%= announcement[0] %> On <%= announcement[2] %></p>
+                            <p><%= announcement.getTitle() %> On <%= announcement.getCreatedAt() %></p>
                         </div>
                         <i class="bx bx-dots-vertical-rounded"></i>
                     </li>
                     <%
-                            }
                         }
                     %>
                 </ul>
