@@ -3,7 +3,7 @@ name: Deploy JSP Frontend to AWS EC2
 on:
   push:
     branches:
-      - main  # Trigger the workflow when changes are pushed to the main branch
+      - main
 
 jobs:
   deploy:
@@ -24,13 +24,15 @@ jobs:
       # Step 3: Save EC2 private key to file
       - name: Save Private Key
         run: |
-          echo "${{ secrets.AWS_PRIVATE_KEY }}" > private_key.pem
+          echo "${{ secrets.AWS_PRIVATE_KEY }}" | tr -d '\r' > private_key.pem
           chmod 600 private_key.pem
+
       # Step 4: Add EC2 host to known hosts
       - name: Add EC2 Host to Known Hosts
         run: |
           mkdir -p ~/.ssh
-          ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
+          ssh-keyscan -H "${{ secrets.HOST }}" >> ~/.ssh/known_hosts
+
       # Step 5: Set execute permissions for Maven Wrapper
       - name: Set Permissions for mvnw
         run: chmod +x ./mvnw
@@ -39,14 +41,12 @@ jobs:
       - name: Build Project
         run: ./mvnw clean package -DskipTests
 
-      # Step 7: Deploy JSP files to Tomcat
-      # Debug SSH Connection
+      # Step 7: Debug SSH Connection
       - name: Debug SSH Connection
         env:
           HOST: ${{ secrets.HOST }}
           USER: ${{ secrets.USER }}
         run: ssh -i private_key.pem $USER@$HOST echo "SSH connection successful"
-
 
       # Step 8: Delete all existing WAR files in Tomcat webapps directory
       - name: Delete Existing WAR Files
@@ -55,19 +55,17 @@ jobs:
           USER: ${{ secrets.USER }}
         run: |
           ssh -o StrictHostKeyChecking=no -i private_key.pem $USER@$HOST << EOF
-            echo "Deleting all existing WAR files in the webapps directory"
             sudo rm -rf /opt/tomcat/webapps/*.war
           EOF
+
       # Step 9: Deploy to AWS EC2
       - name: Deploy to AWS EC2
         env:
           HOST: ${{ secrets.HOST }}
           USER: ${{ secrets.USER }}
         run: |
-          # Copy the WAR file to the Tomcat webapps directory
           scp -o StrictHostKeyChecking=no -i private_key.pem ./target/EventSphere-Frontend-1.0-SNAPSHOT.war $USER@$HOST:/opt/tomcat/webapps/
-      
-          # Restart Tomcat to load the new deployment
           ssh -o StrictHostKeyChecking=no -i private_key.pem $USER@$HOST << EOF
             sudo systemctl restart tomcat
-          EOF
+          EOF
+
