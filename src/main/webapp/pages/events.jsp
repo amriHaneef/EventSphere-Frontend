@@ -9,6 +9,8 @@
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
 
 <div class="header">
     <div class="left">
@@ -66,6 +68,8 @@
     </div>
 </div>
 
+<div id="eventTable">
+
 <div class="bottom-data">
     <div class="orders">
         <div class="header">
@@ -105,11 +109,7 @@
                 <td><%= event[4] %></td>
                 <td><%= event[5] %></td>
                 <td><%= event[6] %></td>
-                <td>
-                    <button class="view" onclick="window.location='${pageContext.request.contextPath}/pages/EventDetail.jsp?id=<%= event[0] %>'">
-                        <i class="bx bx-show"></i>
-                    </button>
-                </td>
+
                 <%
                     if ("admin".equalsIgnoreCase(role) || "teacher".equalsIgnoreCase(role)) {
                 %>
@@ -125,6 +125,12 @@
                     <button class="edit">
                         <i class="bx bx-edit write"></i>
                     </button>
+                </td>
+                <td>
+                    <button class="view" onclick="showEventDetails('<%= event[0] %>')">
+                        <i class="bx bx-show eye"></i>
+                    </button>
+
                 </td>
                 <%
                     }
@@ -142,14 +148,63 @@
         <br>
         <div class="popup-overlay">
             <div class="popup-content">
-                <span class="popup-close">&times;</span>
-                <p>Do you want to delete this announcement?</p>
+                <span class="delete-close">&times;</span>
+                <p>Do you want to delete this event?</p>
                 <div class="popup-buttons">
-                    <button class="cancel-btn">Cancel</button>
+                    <button class="cancel-Btn">Cancel</button>
                     <button class="ok-btn">OK</button>
                 </div>
             </div>
         </div>
+    </div>
+</div>
+
+
+<!-- Popup Form -->
+<div class="edit-Overlay">
+    <div class="edit-Content">
+        <span class="edit-Close">&times;</span>
+        <h3>Edit Student Details</h3>
+        <form id="editeventForm">
+            <div class="form-group">
+                <label for="event-id">Event Id:</label>
+                <input type="text" id="event-id" class="form-control" name="eventid" required>
+            </div>
+            <div class="form-group">
+                <label for="event-name">Event Name:</label>
+                <input type="text" id="event-name" class="form-control" name="eventName" required>
+            </div>
+            <div class="form-group">
+                <label for="event-date">Date:</label>
+                <input type="date" id="event-date" class="form-control" name="Date" required>
+            </div>
+            <div class="form-group">
+                <label for="event-time">Time:</label>
+                <input type="Text" id="event-time" class="form-control" name="time" required>
+            </div>
+            <div class="form-group">
+                <label for="event-Platform">Platform:</label>
+                <input type="text" id="event-Platform" class="form-control" name="platform" required>
+            </div>
+            <div class="form-group">
+                <label for="lecturer-name">Lecturer:</label>
+                <input type="text" id="lecturer-name" class="form-control" name="lecturername" required>
+            </div>
+            <div class="form-group">
+                <label for="event-status">Status:</label>
+                <select id="event-status"  class="form-control" name="eventstatus" required>
+                    <option value="" disabled selected>Select a status</option>
+                    <option value="status1">Schedule</option>
+                    <option value="Status2">Done</option>
+                </select>
+            </div>
+
+            <div class="edit-buttons">
+                <button type="button" class="Cancel-Btn">Cancel</button>
+                <button type="submit" class="save-Btn">Save</button>
+            </div>
+
+        </form>
     </div>
 </div>
 
@@ -165,93 +220,72 @@
         </div>
     </div>
 </section>
-
-<br><br><br><br><br><br><br><br><br><br><br>
+</div>
 <!-- Event Details Section  -->
-<div class ="event-details">
-    <h2>Event Details</h2>
-    <%
-        String eventId = request.getParameter("eventId");
-        String eventName = "Mock Interview";
-        String eventType = "Mock Interview";
-        String eventDate = "20/02/2025";
-        String eventTime = "9:30 A.M.";
-        String platform = "Zoom";
-        String lecturer = "Mrs. Sandaruwani";
-        String status = "N/A";
-    %>
+<div id="eventDetails" style="display: none">
+        <div class ="event-details" >
+            <h2>Event Details</h2>
+            <button id="backevent" onclick="backToEvent()">
+                <i class="fas fa-arrow-left"></i>
+            </button>
 
-    <table class="attendance">
-        <tr>
-            <th>Event ID</th>
-            <td><%= eventId != null ? eventId : "N/A" %></td>
-        </tr>
-        <tr>
-            <th>Event Name</th>
-            <td><%= eventName %></td>
-        </tr>
-        <tr>
-            <th>Event Type</th>
-            <td><%= eventType %></td>
-        </tr>
-        <tr>
-            <th>Date</th>
-            <td><%= eventDate %></td>
-        </tr>
-        <tr>
-            <th>Time</th>
-            <td><%= eventTime %></td>
-        </tr>
-        <tr>
-            <th>Platform</th>
-            <td><%= platform %></td>
-        </tr>
-        <tr>
-            <th>Lecturer</th>
-            <td><%= lecturer %></td>
-        </tr>
-        <tr>
-            <th>Status</th>
-            <td><%= status %></td>
-        </tr>
-    </table>
-    <br>
-
+            <table class="attendance">
+                <tr>
+                    <th>Event ID</th>
+                    <td id="detail-event-id">N/A</td>
+                </tr>
+                <tr>
+                    <th>Event Name</th>
+                    <td id="detail-event-name">N/A</td>
+                </tr>
+                <tr>
+                    <th>Event Type</th>
+                    <td id="detail-event-type">N/A</td>
+                </tr>
+                <tr>
+                    <th>Date</th>
+                    <td id="detail-event-date">N/A</td>
+                </tr>
+                <tr>
+                    <th>Time</th>
+                    <td id="detail-event-time">N/A</td>
+                </tr>
+                <tr>
+                    <th>Platform</th>
+                    <td id="detail-event-platform">N/A</td>
+                </tr>
+                <tr>
+                    <th>Lecturer</th>
+                    <td id="detail-event-lecturer">N/A</td>
+                </tr>
+                <tr>
+                    <th>Status</th>
+                    <td id="detail-event-status">N/A</td>
+                </tr>
+        </table>
+        </div>
     <!-- Button to open popup -->
-    <button id="markAttendanceBtn">Mark Attendance</button>
-</div>
-<!-- Popup structure -->
-<div class="popupOverlay" id="popupAtendanceOverlay">
-    <div class="popupContent">
-        <h3>Mark Attendance</h3>
-        <form id="attendanceForm">
-            <label for="batch">Select Batch:</label>
-            <select id="batch" name="batch" required>
-                <option value="" disabled selected>Select a batch</option>
-                <option value="Batch1">Batch 1</option>
-                <option value="Batch2">Batch 2</option>
-                <option value="Batch3">Batch 3</option>
-            </select>
-
-            <label for="student">Student Index:</label>
-            <select id="student" name="student" required>
-                <option value="" disabled selected>Select a student</option>
-                <option value="Student1">Student 1</option>
-                <option value="Student2">Student 2</option>
-                <option value="Student3">Student 3</option>
-            </select><br>
-
-            <label for="mockDetails">Mock Details:</label>
-            <input type="text" id="mockDetails" name="mockDetails" placeholder="Enter mock details" required>
-
-            <div class="popupButtons">
-                <button type="button" class="close-btn" id="closePopupBtn">Close</button>
-                <button type="submit" class="mark-btn">Mark Attendance</button>
-            </div>
-        </form>
+    <button id="markAttendanceBtn" onclick="showAttendancePopup()">Mark Attendance</button>
+    <!-- Attendance Popup Form -->
+    <div class="attendance-popup">
+        <div class="popup-container">
+            <span class="attendance-close">&times;</span>
+            <h3>Mark Attendance</h3>
+            <form id="attendanceForm">
+                <div id="studentListContainer">
+                    <!-- Students will be dynamically loaded here -->
+                </div>
+                <div class="attendance-button">
+                    <button type="button" class="cancelBtn">Cancel</button>
+                    <button type="submit" class="saveBtn">Save Attendance</button>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
+
+</div>
+</div>
 <script>
     const pageContextPath = "${pageContext.request.contextPath}";
 </script>

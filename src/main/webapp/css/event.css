@@ -213,12 +213,28 @@ body {
 }
 
 .bottom-data .orders table tbody tr button.delete,
+.bottom-data .orders table tbody tr button.view,
 .bottom-data .orders table tbody tr button.edit{
     background: none;
     border: none;
     padding: 0;
     cursor: pointer;
 }
+
+.bottom-data .orders table tbody tr button.view i.eye{
+    color: var(--light-primary);
+    font-size: 1.5rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+
+}
+.bottom-data .orders table tbody tr button.view i.eye:hover{
+    color: var(--primary);
+    font-size: 1.5rem;
+    transform: scale(1.2);
+    box-shadow: 0 4px 8px rgba(255, 0, 0, 0.2);
+}
+
+
 .bottom-data .orders table tbody tr button.delete i.bin{
     color: var(--light-danger);
     font-size: 1.5rem;
@@ -274,7 +290,7 @@ body {
 }
 
 /* Close Icon */
-.bottom-data .orders .popup-close {
+.bottom-data .orders .delete-close {
     font-size: 2rem;
     color: var(--dark);
     position: absolute;
@@ -284,8 +300,8 @@ body {
     transition: color 0.3s ease;
 }
 
-.bottom-data .orders .popup-close:hover {
-    color: var(--primary);
+.bottom-data .orders .delete-close:hover {
+    color: var(--danger);
 }
 
 /* Popup Text */
@@ -311,12 +327,12 @@ body {
     transition: all 0.3s ease;
 }
 
-.bottom-data .orders .popup-buttons .cancel-btn {
+.bottom-data .orders .popup-buttons .cancel-Btn {
     background-color: var(--gray);
     color: var(--dark);
 }
 
-.bottom-data .orders .popup-buttons .cancel-btn:hover {
+.bottom-data .orders .popup-buttons .cancel-Btn:hover {
     background-color: var(--dark-gray);
     transform: scale(1.05);
 }
@@ -336,6 +352,7 @@ body {
 /* Feedback Box */
 .feedback {
     font-family: Arial, sans-serif;
+    position: relative;
 }
 
 #feedbackHeading {
@@ -383,8 +400,9 @@ body {
     background-color: #0056b3;
 }
 
-
 /*-----------------------------------------------------------------------------*/
+
+/*add event style*/
 .add-event-popup {
     display: none;
     position: fixed;
@@ -468,7 +486,7 @@ body {
 
 /*-----------------------------------------------------------------------------*/
 /* Popup Overlay edit event */
-.edit-event {
+.edit-Overlay {
     display: none;
     position: fixed;
     top: 0;
@@ -479,20 +497,22 @@ body {
     z-index: 1000;
     align-items: center;
     justify-content: center;
-    opacity: 0;
-    transition: opacity 0.3s ease, display 0.3s ease;
+    animation: slideIn 0.3s ease-in-out;
 }
 
 /* Popup Content */
-.event-content {
+.edit-Content {
     background-color: var(--light);
     color: var(--dark);
     padding: 20px;
     border-radius: 8px;
-    width: 300px;
+    width: 400px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     animation: slideIn 0.3s ease-in-out;
+    max-width: 90%;
+    position: relative;
 }
+
 
 @keyframes slideIn {
     from {
@@ -505,8 +525,7 @@ body {
     }
 }
 
-/* Close Button */
-.popup-close {
+.edit-Close {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -515,38 +534,33 @@ body {
     color: var(--light);
 }
 
-.popup-close:hover {
+.edit-Close:hover {
     color: #d9534f;
 }
 
-/* Title */
-.popup-content h3 {
+.edit-Content h3 {
     text-align: center;
     font-size: 1.2rem;
     margin-bottom: 20px;
 }
 
-/* Form */
-#editForm {
+#editeventForm {
     display: flex;
     flex-direction: column;
 }
 
-/* Form Group Styling */
 .form-group {
     display: flex;
     flex-direction: column;
     margin-bottom: 15px;
 }
 
-/* Label Styling */
 .form-group label {
     font-size: 1rem;
     font-weight: bold;
     margin-bottom: 4px;
 }
 
-/* Input Styling */
 .form-group input {
     padding: 10px;
     font-size: 1rem;
@@ -558,20 +572,19 @@ body {
     transition: border-color 0.3s ease;
 }
 
-/* Focus Styling for Inputs */
 .form-group input:focus {
     border-color: var(--dark-gray);
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
-/* Buttons */
-.popup-buttons {
+
+.edit-buttons {
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
 }
 
-.popup-buttons button {
+.edit-buttons  button {
     width: 48%;
     padding: 10px;
     font-size: 1rem;
@@ -581,21 +594,21 @@ body {
     transition: background-color 0.3s;
 }
 
-.popup-buttons .cancel {
+.edit-buttons  .Cancel-Btn {
     background-color: #f44336;
     color: var(--light);
 }
 
-.popup-buttons .cancel:hover {
+.edit-buttons .Cancel-Btn:hover {
     background-color: #e53935;
 }
 
-.popup-buttons .ok-btn {
+.edit-buttons .save-Btn {
     background-color: #4caf50;
     color: var(--light);
 }
 
-.popup-buttons .ok-btn:hover {
+.edit-buttons .save-Btn:hover {
     background-color: #388e3c;
 }
 
@@ -603,80 +616,63 @@ body {
 .event-details {
     margin: 20px auto;
     padding: 20px;
-    border: 1px solid #ddd;
     border-radius: 10px;
-    background-color: #f9f9f9;
+    background-color: var(--light);
     max-width: 600px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-h2 {
+#eventDetails h2 {
     text-align: center;
-    color: #333;
+    color:var(--dark);
     font-size: 24px;
     margin-bottom: 20px;
     font-family: 'Arial', sans-serif;
 }
 
-table.attendance {
+#eventDetails table.attendance {
     width: 100%;
     border-collapse: collapse;
     font-family: 'Arial', sans-serif;
 }
 
-table.attendance th,
-table.attendance td {
+#eventDetails table.attendance th,
+#eventDetails table.attendance td {
     padding: 12px 15px;
     text-align: left;
     border: 1px solid #ddd;
 }
 
-table.attendance th {
-    background-color: #fff;
-    color: black;
+#eventDetails table.attendance th {
+    background-color:var(--light);
+    color: var(--dark);
     font-size: 16px;
     font-weight: bold;
 }
 
-table.attendance td {
-    background-color: #fff;
-    color: #555;
+#eventDetails table.attendance td {
+    background-color: var(--light);
+    color: var(--dark);
     font-size: 14px;
 }
 
-table.attendance tr:nth-child(even) {
+#eventDetails table.attendance tr:nth-child(even) {
     background-color: #f2f2f2;
 }
 
-table.attendance tr:hover {
+#eventDetails table.attendance tr:hover {
     background-color: #e9f7fe;
 }
 
-table.attendance td:first-child {
+#eventDetails table.attendance td:first-child {
     font-weight: bold;
     color: #007BFF;
 }
 
-table.attendance td:last-child {
+#eventDetails table.attendance td:last-child {
     text-align: right;
 }
 
-/* Responsive Design for Mobile */
-@media screen and (max-width: 600px) {
-    div {
-        padding: 15px;
-    }
-
-    h2 {
-        font-size: 20px;
-    }
-
-    table.attendance th,
-    table.attendance td {
-        padding: 10px 8px;
-        font-size: 12px;
-    }
-}
 
 #markAttendanceBtn{
     display: block;
@@ -693,65 +689,101 @@ table.attendance td:last-child {
     background-color: #45a049;
 }
 
-/* Popup overlay */
-.popupOverlay {
-    display: none;
+#backevent{
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px 0;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.attendance-popup {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.7);
+    display: none;
     justify-content: center;
     align-items: center;
+    z-index: 9999;
 }
 
-/* Popup content */
-.popupContent {
-    background-color: white;
+.popup-container {
+    background-color: #fff;
+    width: 400px;
     padding: 20px;
     border-radius: 8px;
-    width: 40%;
-    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
 }
 
-.popupContent h3 {
-    margin-top: 0;
-}
-
-.popupContent select,
-.popupContent input {
-    width: 80%;
-    margin: 10px auto;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-.popupButtons {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-}
-
-.popupButtons button {
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
+.attendance-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
     cursor: pointer;
 }
 
-.popupButtons .mark-btn {
-    background-color: #4CAF50;
-    color: white;
+h3 {
+    margin-top: 0;
+    text-align: center;
+    font-size: 22px;
+    color: #333;
 }
 
-.popupButtons .close-btn {
+.form-group {
+    margin-bottom: 15px;
+}
+
+#studentListContainer {
+    max-height: 200px;
+    overflow-y: auto;
+    margin-bottom: 15px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.attendance-button {
+    display: flex;
+    justify-content: space-between;
+}
+
+.attendance-button .cancelBtn{
     background-color: #f44336;
     color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
 }
 
-.popupButtons button:hover {
-    opacity: 0.9;
+.attendance-button .cancelBtn:hover {
+    background-color: #d32f2f;
 }
 
+.attendance-button .saveBtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.attendance-button .saveBtn:hover {
+    background-color: #388e3c;
+}

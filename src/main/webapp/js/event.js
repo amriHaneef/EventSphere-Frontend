@@ -31,7 +31,7 @@ const initializeEventSearchBar = () => {
     }
 };
 
-// Initialize Add Batch functionality
+// Initialize Add Events functionality
 const initializeAddEvents = () => {
     const addButton = document.querySelector('.report');
     const addEventPopup = document.querySelector('.add-event-popup');
@@ -45,9 +45,8 @@ const initializeAddEvents = () => {
         });
     }
 
-    // Close the popup
     const closePopup = () => {
-        if ( addEventPopup) {
+        if (addEventPopup) {
             addEventPopup.style.display = 'none'; // Hide the popup
         }
     };
@@ -60,23 +59,21 @@ const initializeAddEvents = () => {
         cancelAddPopupButton.addEventListener('click', closePopup);
     }
 
-    // Handle form submission
-    if ( addEventPopup) {
-        addEventPopup.addEventListener('submit', (e) => {
-            e.preventDefault(); // Prevent default form submission
+    if (addEventForm) {
+        addEventForm.addEventListener('submit', (e) => {
+            e.preventDefault();
             console.log('Add Event Form submitted!');
             closePopup();
         });
     }
 };
 
-
-// Initialize Delete event functionality
+// Initialize Delete Events functionality
 const initializeDeleteEvents = () => {
     const deleteButtons = document.querySelectorAll('.delete');
     const popupOverlay = document.querySelector('.popup-overlay');
-    const closeBtn = document.querySelector('.popup-close');
-    const cancelBtn = document.querySelector('.cancel-btn');
+    const closeBtn = document.querySelector('.delete-close');
+    const cancelBtn = document.querySelector('.cancel-Btn');
     const okBtn = document.querySelector('.ok-btn');
 
     deleteButtons.forEach((deleteButton) => {
@@ -103,30 +100,34 @@ const initializeDeleteEvents = () => {
     });
 };
 
-// Initialize edite event functionality
+// Initialize Edit event functionality
 const initializeEditEvent = () => {
-    const editButtons = document.querySelectorAll('.edit'); // Ensure this targets your edit buttons
-    const popupOverlay = document.querySelector('.edit-event');
-    const closeBtn = document.querySelector('.event-close');
-    const cancelBtn = document.querySelector('.cancel');
-    const editForm = document.querySelector('#editForm');
+    const editButtons = document.querySelectorAll('.edit');
+    const popupOverlay = document.querySelector('.edit-Overlay');
+    const closeBtn = document.querySelector('.edit-Close');
+    const cancelBtn = document.querySelector('.Cancel-Btn');
+    const editeventForm = document.querySelector('#editeventForm');
 
     // Show popup when edit button is clicked
     editButtons.forEach((editButton) => {
         editButton.addEventListener('click', (event) => {
             const row = event.target.closest('tr'); // Find the row associated with the button
-            const eventId = row.querySelector('td:nth-child(1)').textContent;
-            const eventName = row.querySelector('td:nth-child(2)').textContent;
-            const eventDate = row.querySelector('td:nth-child(3)').textContent;
-            const eventTime = row.querySelector('td:nth-child(4)').textContent;
-            const eventPlatform = row.querySelector('td:nth-child(5)').textContent;
+            const id = row.querySelector('td:nth-child(1)').textContent;
+            const name = row.querySelector('td:nth-child(2)').textContent;
+            const date = row.querySelector('td:nth-child(3)').textContent;
+            const time = row.querySelector('td:nth-child(4)').textContent;
+            const platform = row.querySelector('td:nth-child(5)').textContent;
+            const lecturer = row.querySelector('td:nth-child(6)').textContent
+            const status = row.querySelector('td:nth-child(7)').textContent;
 
             // Populate the form with existing data
-            document.querySelector('#student-id').value = eventId;
-            document.querySelector('#student-name').value = eventName;
-            document.querySelector('#student-date').value = eventDate;
-            document.querySelector('#student-time').value = eventTime;
-            document.querySelector('#student-platform').value = eventPlatform;
+            document.querySelector('#event-id').value = id;
+            document.querySelector('#event-name').value = name;
+            document.querySelector('#event-date').value = date;
+            document.querySelector('#event-time').value = time;
+            document.querySelector('#event-Platform').value = platform;
+            document.querySelector('#lecturer-name').value = lecturer;
+            document.querySelector('#event-status').value = status;
 
             // Show the popup
             popupOverlay.style.display = 'flex';
@@ -137,57 +138,104 @@ const initializeEditEvent = () => {
     // Close the popup when the close icon is clicked
     closeBtn.addEventListener('click', () => {
         popupOverlay.style.display = 'none';
-        popupOverlay.style.opacity = '0';
     });
 
     // Cancel button hides the popup
     cancelBtn.addEventListener('click', () => {
         popupOverlay.style.display = 'none';
-        popupOverlay.style.opacity = '0';
-    });
-
-    // Handle form submission (Save the edited event)
-    editForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-
-        const updatedEvent = {
-            id: document.querySelector('#student-id').value,
-            name: document.querySelector('#student-name').value,
-            date: document.querySelector('#student-date').value,
-            time: document.querySelector('#student-time').value,
-            platform: document.querySelector('#student-platform').value
-        };
-
-        console.log('Event updated:', updatedEvent);
-
-        // Add the code here to save the updated event (e.g., make an AJAX request to update the backend)
-
-        // Close the popup after saving
-        popupOverlay.style.display = 'none';
-        popupOverlay.style.opacity = '0';
     });
 };
-// Show popup when button is clicked
-document.getElementById('markAttendanceBtn').addEventListener('click', () => {
-    document.getElementById('popupOverlay').style.display = 'flex';
+
+
+function backToEvent(){
+    document.getElementById("eventTable").style.display= "block";
+    document.getElementById("eventDetails").style.display= "none";
+}
+function showEventDetails(eventId) {
+
+    document.getElementById("eventTable").style.display= "none";
+    document.getElementById("eventDetails").style.display= "block";
+    // Example data retrieval logic (replace with actual server-side logic)
+    const eventDetails = {
+        eventId: eventId,
+        eventName: "Mock Interview",
+        eventType: "Mock Interview",
+        eventDate: "20/02/2025",
+        eventTime: "9:30 A.M.",
+        platform: "Zoom",
+        lecturer: "Mrs. Sandaruwani",
+        status: "Scheduled"
+    };
+
+    // Populate the event details table
+    document.getElementById("detail-event-id").innerText = eventDetails.eventId;
+    document.getElementById("detail-event-name").innerText = eventDetails.eventName;
+    document.getElementById("detail-event-type").innerText = eventDetails.eventType;
+    document.getElementById("detail-event-date").innerText = eventDetails.eventDate;
+    document.getElementById("detail-event-time").innerText = eventDetails.eventTime;
+    document.getElementById("detail-event-platform").innerText = eventDetails.platform;
+    document.getElementById("detail-event-lecturer").innerText = eventDetails.lecturer;
+    document.getElementById("detail-event-status").innerText = eventDetails.status;
+
+    // Show the event details container
+    document.querySelector(".event-details-container").style.display = "block";
+}
+
+// Function to open the attendance popup
+function showAttendancePopup(eventId) {
+    fetchStudentsForEvent(eventId);
+    document.querySelector('.attendance-popup').style.display = 'block';
+}
+
+// Function to close the attendance popup
+document.querySelector('.attendance-close').addEventListener('click', function() {
+    document.querySelector('.attendance-popup').style.display = 'none';
 });
 
-// Close popup
-document.getElementById('closePopupBtn').addEventListener('click', () => {
-    document.getElementById('popupOverlay').style.display = 'none';
-});
+// Fetch the students list for the specific event
+function fetchStudentsForEvent(eventId) {
 
-// Handle form submission
-document.getElementById('attendanceForm').addEventListener('submit', (event) => {
+    const students = [
+        { id: 1, name: 'Student A' },
+        { id: 2, name: 'Student B' },
+        { id: 3, name: 'Student C' }
+    ];
+
+    // Generate the HTML for the student list with checkboxes
+    let studentListHTML = '';
+    students.forEach(student => {
+        studentListHTML += `
+            <div class="student-item">
+                <input type="checkbox" id="student-${student.id}" name="attendance" value="${student.id}">
+                <label for="student-${student.id}">${student.name}</label>
+            </div>
+        `;
+    });
+
+    // Add the generated list to the container
+    document.getElementById('studentListContainer').innerHTML = studentListHTML;
+}
+
+// Handle the form submission
+document.getElementById('attendanceForm').addEventListener('submit', function(event) {
     event.preventDefault();
 
-    const batch = document.getElementById('batch').value;
-    const student = document.getElementById('student').value;
-    const mockDetails = document.getElementById('mockDetails').value;
+    // Get the selected students (attendance marked as checked)
+    const selectedStudents = [];
+    document.querySelectorAll('input[name="attendance"]:checked').forEach(checkbox => {
+        selectedStudents.push(checkbox.value);
+    });
 
-    alert(`Attendance marked successfully:\nBatch: ${batch}\nStudent: ${student}\nDetails: ${mockDetails}`);
-    document.getElementById('popupOverlay').style.display = 'none';
+    // Log or process the selected students
+    console.log('Attendance marked for students:', selectedStudents);
+
+    // Optionally, send the data to the backend to save attendance
+    // Example: submitAttendance(eventId, selectedStudents);
+
+    // Close the popup after submitting
+    document.querySelector('.attendance-popup').style.display = 'none';
 });
 
-// Call this function to initialize all necessary functionalities
+
+// Initialize all functionalities on DOM content load
 document.addEventListener('DOMContentLoaded', reinitializeEventContentListeners);
