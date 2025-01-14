@@ -56,7 +56,7 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no -i private_key.pem $USER@$HOST << EOF
             echo "Deleting all existing WAR files in the webapps directory"
-            sudo rm -rf /opt/tomcat10/webapps/*.war
+            sudo rm -rf /opt/tomcat/webapps/*.war
           EOF
       # Step 9: Deploy to AWS EC2
       - name: Deploy to AWS EC2
@@ -69,5 +69,5 @@ jobs:
       
           # Restart Tomcat to load the new deployment
           ssh -o StrictHostKeyChecking=no -i private_key.pem $USER@$HOST << EOF
-            sudo systemctl restart tomcat10
+            sudo systemctl restart tomcat
           EOF
