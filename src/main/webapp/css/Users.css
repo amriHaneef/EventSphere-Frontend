@@ -1,0 +1,899 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root{
+    --light:#f6f6f9;
+    --primary:#1976d2;
+    --light-primary:#cfe8ff;
+    --gray:#eee;
+    --dark-gray:#aaaaaa;
+    --dark:#363949;
+    --danger:#d32f2f;
+    --light-danger:#fecdd3;
+    --warning:#fbc02d;
+    --light-warning:#fff2c6;
+    --success:#388e3c;
+    --light-success:#bbf7d0;
+    --color-light: rgba(132,139,200,0.18);
+    --box-shadow: 1px 2px 3px 3px var(--color-light);
+}
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+.bx{
+    font-size: 1.7rem;
+}
+a{
+    text-decoration: none;
+}
+li{
+    list-style: none;
+}
+
+html{
+    overflow-x: hidden;
+}
+
+body.dark{
+    --light:#181a1e;
+    --gray:#25252c;
+    --dark:#fbfbfb;
+    --box-shadow: 0 2rem 3rem var(--color-light);
+}
+
+.content main{
+    width: 100%;
+    padding: 36px 24px;
+    max-height: calc(100vh - 56px);
+}
+
+.content main .header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    grid-gap: 16px;
+    flex-wrap: wrap;
+}
+
+.content main .header .left h1{
+    font-size: 36px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--dark);
+}
+
+.content main .header .left .breadcrumb{
+    display: flex;
+    align-items: center;
+    grid-gap: 16px;
+}
+
+.content main .header .left .breadcrumb li{
+    color: var(--dark);
+}
+
+.content main .header .left .breadcrumb li a{
+    color: var(--dark-gray);
+    pointer-events: none;
+}
+
+.content main .header .left .breadcrumb li a.active{
+    color: var(--primary);
+    pointer-events: none;
+}
+.content main .header .report{
+    height: 36px;
+    padding: 0 16px;
+    border-radius: 36px;
+    background: var(--primary);
+    color: var(--light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-gap: 10px;
+    font-weight: 500;
+}
+
+/*---------------------------------Modal-------------------------------------*/
+
+
+.content main .header .modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Ensure modal appears above other content */
+    animation: slideIn 0.3s ease-in-out;
+    /* overflow-y: auto; Allow scrolling if modal content is too large */
+}
+
+.content main .header .modal-dialog {
+    width: 80%;
+    max-width: 800px;
+    background-color: var(--light);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.content main .header .modal-content {
+    padding: 20px;
+    max-height: 90vh; /* Restrict content height */
+    overflow-y: auto; /* Enable scrolling if content is too long */
+}
+
+/* Modal Header */
+.content main .header .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--dark);
+}
+
+.content main .header .modal-header .modal-title {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.content main .header .modal-header .close {
+    font-size: 30px;
+    cursor: pointer;
+}
+
+/* Modal Body */
+.content main .header .modal-body {
+    margin-top: 15px;
+    color: var(--dark);
+}
+.content main .header .modal-body form {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 0;
+    color: var(--dark);
+}
+.content main .header .modal-body form .imgholder{
+    width: 200px;
+    height: 200px;
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    background: var(--light);
+}
+
+.content main .header .imgholder .upload{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: var(--dark);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.content main .header .imgholder .upload i{
+    color: var(--light);
+    font-size: 35px;
+}
+
+.content main .header .imgholder:hover .upload{
+    display: flex;
+}
+
+.content main .header .imgholder .upload input{
+    display: none;
+}
+
+.content main .header .modal-body form .inputField{
+    flex-basis: 68%;
+    border-left: 5px groove var(--primary);
+    padding-left: 20px;
+}
+
+.content main .header form .inputField > div{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    color: var(--dark);
+}
+
+.content main .header form .inputField > div label{
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--dark);
+}
+
+
+.content main .header form .inputField > div input{
+    width: 75%;
+    padding: 10px;
+    border: none;
+    outline: none;
+    background: transparent;
+    border-bottom: 2px solid blue;
+    color: var(--dark);
+}
+
+#userForm form .inputField > div label::after{
+    content: "*";
+    color: red;
+}
+
+
+
+
+.content main .header .inputField input,
+.content main .header .inputField select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: var(--gray);
+    color: var(--dark);
+}
+
+.content main .header .inputField select {
+    background-color: var(--gray);
+    cursor: pointer;
+    color: var(--dark);
+}
+
+/* Modal Footer */
+.content main .header .modal-footer .submit{
+    font-size: 18px;
+    color: var(--light);
+}
+.content main .header .modal-footer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.content main .header .btn-secondary {
+    background-color: var(--light-danger);
+    color: var(--light);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.content main .header .btn-secondary:hover {
+    background-color: var(--danger);
+    color: var(--light);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+.content main .header .submit {
+    background-color: var(--light-success);
+    color: var(--light);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.content main .header .submit:hover {
+    background-color: var(--success);
+    color: var(--light);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+
+/* Modal Show */
+.content main .header .modal.show {
+    display: flex;
+}
+
+/* Prevent body scroll when modal is open */
+body.no-scroll {
+    overflow: hidden;
+}
+
+/* Popup Overlay */
+.bottom-data .orders .delete-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: opacity 0.3s ease;
+    animation: fadeInSlide 0.5s ease-out forwards; /* Add animation */
+}
+
+/* Popup Content Box */
+.bottom-data .orders .delete-content {
+    background-color: var(--light);
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    box-shadow: 2px 3px 4px 3px #181a1e;
+    transition: all 0.3s ease;
+}
+
+/* Close Icon */
+.bottom-data .orders .delete-close {
+    font-size: 2rem;
+    color: var(--dark);
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.bottom-data .orders .delete-close:hover {
+    color: var(--primary);
+}
+
+/* Popup Text */
+.bottom-data .orders .delete-content p {
+    font-size: 1.2rem;
+    color: var(--dark);
+    margin: 20px 0;
+}
+
+/* Popup Buttons */
+.bottom-data .orders .delete-buttons {
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+}
+
+.bottom-data .orders .delete-buttons button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: var(--border-radius-1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.bottom-data .orders .delete-buttons .cancel-btn-delete {
+    background-color: var(--gray);
+    color: var(--dark);
+}
+
+.bottom-data .orders .delete-buttons .cancel-btn-delete:hover {
+    background-color: var(--dark-gray);
+    transform: scale(1.05);
+}
+
+.bottom-data .orders .delete-buttons .ok-btn-delete {
+    background-color: var(--danger);
+    color: var(--light);
+}
+
+.bottom-data .orders .delete-buttons .ok-btn-delete:hover {
+    background-color: var(--light-danger);
+    transform: scale(1.05);
+}
+
+
+/*-----------------------------------------------------------------------------*/
+
+
+/*---------------------------------Modal-------------------------------------*/
+
+
+
+.content main .bottom-data{
+    display: flex;
+    flex-wrap: wrap;
+    grid-gap: 24px;
+    margin-top: 24px;
+    width: 100%;
+    color: var(--dark);
+}
+
+.content main .bottom-data>div{
+    border-radius: 20px;
+    background: var(--light);
+    padding: 24px;
+    overflow-x: auto;
+}
+
+.content main .data {
+    display: flex;
+    flex-wrap: wrap;
+    grid-gap: 24px;
+    margin-top: 24px;
+    width: 100%; /* Set to full width of the parent container */
+    max-width: 1200px; /* Adjust maximum width as needed */
+    color: var(--dark);
+    margin-left: auto; /* Center align if constrained */
+    margin-right: auto; /* Center align if constrained */
+}
+
+.content main .data > div {
+    flex-grow: 1;
+    flex-basis: calc(50% - 12px); /* Adjust for two equal columns with spacing */
+    border-radius: 20px;
+    background: var(--light);
+    padding: 24px;
+    overflow-x: auto;
+}
+
+/*-----------------------------------------------------------------------------*/
+/* Batch Container */
+
+.content main .data .batch-container {
+    flex-grow: 1;
+    flex-basis: 500px;
+    border-radius: 20px;
+    background: var(--light);
+    padding: 24px;
+    overflow-x: auto;
+    box-shadow: 2px 2px 2px 2px #181a1e;
+    transition: all 0.3s ease-out;
+}
+
+.content main .data .batch-container:hover {
+    box-shadow: 1px 1px 1px 1px #181a1e;
+}
+
+.content main .data .batch-container .header .batch {
+    cursor: pointer;
+    padding: 12px;
+    background:var(--light);
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    animation: fadeInSlide 0.5s ease-out forwards; /* Add animation */
+    width: 100%;
+    box-shadow: 1px 2px 2px 1px var(--dark-gray);
+    margin-bottom: 10px; /* Add spacing between batches */
+}
+.content main .data .batch-container .header .batch:hover{
+    background-color: var(--gray);
+    box-shadow: 1px 1px 1px 1px var(--dark-gray);
+}
+
+/* Fade out and slide up effect when disappearing */
+@keyframes fadeOutSlide {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }50%{
+        opacity: .5;
+        transform: translateY(-10px);
+         }
+    100% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+}
+
+/* Apply fade-out animation before hiding */
+.content main .data .batch-container table.student-details.hidden {
+    animation: fadeOutSlide 0.5s ease-out forwards; /* Fade out before hiding */
+}
+
+
+.content main .data .batch-container table.student-details.hidden {
+    display: none !important;
+}
+
+
+.content main .data .batch-container table.student-details.visible {
+    display: block;
+}
+
+/* Table Styling */
+.content main .data .batch-container table.student-details {
+    width: 100%;
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeInSlide 0.5s ease-out forwards; /* Add animation */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: var(--light);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+@keyframes fadeInSlide {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+.content main .data .batch-container table.student-details th {
+    padding-bottom: 12px;
+    padding-top: 10px;
+    margin: 18px 35px;
+    background: var(--primary);
+    font-size: 15px;
+    text-align: center;
+    align-items: center;
+    border-bottom: 1px solid var(--gray);
+}
+
+.content main .data .batch-container table.student-details td {
+    text-align: center;
+    padding: 14px 18px;
+    color: var(--dark);
+    font-size: 14px;
+}
+
+.content main .data .batch-container table.student-details tr td:first-child {
+    display:flex ;
+    align-items: center;
+    grid-gap: 12px;
+    padding-left: 6px;
+}
+
+.content main .data .batch-container table.student-details tbody tr {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.content main .data .batch-container table.student-details tbody tr:hover {
+    background: var(--gray);
+}
+
+.content main .data .batch-container table.student-details tbody tr button.edit,
+.content main .data .batch-container table.student-details tbody tr button.delete {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.content main .data .batch-container table tbody tr button.edit i.write {
+    color: var(--light-success);
+    font-size: 1.5rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.content main .data .batch-container table tbody tr button.edit i.write:hover {
+    color: var(--success);
+    font-size: 1.5rem;
+    transform: scale(1.2); /* Slightly enlarge icon on hover */
+    box-shadow: 0 4px 8px rgba(0, 255, 0, 0.2); /* Glow effect */
+}
+
+.content main .data .batch-container table tbody tr button.delete i.bin {
+    color: var(--light-danger);
+    font-size: 1.5rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.content main .data .batch-container table tbody tr button.delete i.bin:hover {
+    color: var(--danger);
+    font-size: 1.5rem;
+    transform: scale(1.2); /* Slightly enlarge icon on hover */
+    box-shadow: 0 4px 8px rgba(255, 0, 0, 0.2); /* Glow effect */
+}
+
+
+
+/*----------------------------------------------------------------------*/
+
+
+
+.content main .bottom-data .header{
+    display: flex;
+    align-items: center;
+    grid-gap: 16px;
+    margin-bottom: 24px;
+}
+
+.content main .bottom-data .header h3{
+    margin-right: auto;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.content main .bottom-data .header .bx{
+    cursor: pointer;
+}
+/* --------------------------------- */
+
+.content main .bottom-data .header .search-container {
+    position: relative;
+    display: inline-block;
+    left: -100px;
+}
+
+.content main .bottom-data .header .search-bar {
+    position: absolute;
+    top: 0;
+    left: -150px; /* Adjust position to make it fit inside the container */
+    width: 200px;
+    height: 30px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    opacity: 1; /* Make it visible */
+    pointer-events: auto; /* Allow interactions */
+    transform: scaleX(1); /* Keep it fully visible */
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* --------------------------------- */
+
+.content main .bottom-data .orders{
+    flex-grow: 1;
+    flex-basis: 500px;
+}
+
+.content main .bottom-data .orders table{
+    width: 100%;
+    border-collapse: collapse;
+    animation: fadeInSlide 0.5s ease-out forwards; /* Add animation */
+}
+
+.content main .bottom-data .orders table th{
+    padding-bottom: 12px;
+    font-size: 15px;
+    text-align: center;
+    border-bottom: 1px solid var(--gray);
+}
+
+.content main .bottom-data .orders table td{
+    padding: 16px 0;
+    text-align: center;
+    font-size: 14px;
+    color: var(--dark);
+}
+
+.content main .bottom-data .orders table tr td:first-child{
+    display:flex ;
+    align-items: center;
+    grid-gap: 12px;
+    padding-left: 6px;
+}
+
+
+.content main .bottom-data .orders table tbody tr{
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.content main .bottom-data .orders table tbody tr:hover{
+    background: var(--gray);
+}
+
+.content main .bottom-data .orders table tbody tr button.edit,
+.content main .bottom-data .orders table tbody tr button.delete{
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+.content main .bottom-data .orders table tbody tr button.edit i.write{
+    color: var(--light-success);
+    font-size: 1.5rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+
+}
+.content main .bottom-data .orders table tbody tr button.edit i.write:hover{
+    color: var(--success);
+    font-size: 1.5rem;
+    transform: scale(1.2); /* Slightly enlarge icon on hover */
+    box-shadow: 0 4px 8px rgba(0, 255, 0, 0.2); /* Glow effect */
+}
+
+.content main .bottom-data .orders table tbody tr button.delete i.bin{
+    color: var(--light-danger);
+    font-size: 1.5rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+
+}
+
+.content main .bottom-data .orders table tbody tr button.delete i.bin:hover{
+    color: var(--danger);
+    font-size: 1.5rem;
+    transform: scale(1.2); /* Slightly enlarge icon on hover */
+    box-shadow: 0 4px 8px rgba(255, 0, 0, 0.2); /* Glow effect */
+}
+
+/* Popup Overlay */
+.popup-overlay {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease, display 0.3s ease; /* Smooth transition for opacity */
+}
+
+/* Popup Content */
+.popup-content {
+    background-color: var(--light);
+    color: var(--dark);
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    animation: slideIn 0.3s ease-in-out;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Close Button */
+.popup-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--light);
+}
+
+.popup-close:hover {
+    color: #d9534f; /* Red color on hover */
+}
+
+/* Title */
+.popup-content h3 {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+/* Form */
+#editForm {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Form Group */
+/* Form Group Styling */
+.form-group {
+    display: flex;
+    flex-direction: column; /* Stack label and input vertically */
+    margin-bottom: 15px;
+}
+
+/* Label Styling */
+.form-group label {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 8px; /* Space between label and input */
+}
+
+/* Input Styling */
+.form-group input {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    background-color: var(--gray);
+    color: var(--dark);
+    transition: border-color 0.3s ease;
+}
+
+/* Focus Styling for Inputs */
+.form-group input:focus {
+    border-color: var(--dark-gray);
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Light blue glow */
+}
+
+
+
+/* Buttons */
+.popup-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.popup-buttons button {
+    width: 48%;
+    padding: 10px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.popup-buttons .cancel {
+    background-color: #f44336; /* Red for Cancel */
+    color: var(--light);
+}
+
+.popup-buttons .cancel:hover {
+    background-color: #e53935;
+}
+
+.popup-buttons .ok-btn {
+    background-color: #4caf50; /* Green for OK */
+    color: var(--light);
+}
+
+.popup-buttons .ok-btn:hover {
+    background-color: #388e3c;
+}
+
+/*-----------------------------------------------------------------------------*/
+
+
+@media screen and (max-width:768px) {
+    .sidebar{
+        width: 220px;
+    }
+
+    .content{
+        width: calc(100% - 60px);
+        left: 220px;
+    }
+
+}
+
+@media screen and (max-width: 576px) {
+
+    .content nav form.show~.notify, .content nav form.show~.profile{
+        display: none;
+    }
+
+    .popup-content {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .popup-buttons button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .popup-buttons button:last-child {
+        margin-bottom: 0;
+    }
+
+
+}

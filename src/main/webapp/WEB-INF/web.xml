@@ -3,4 +3,92 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
          version="6.0">
+
+    <!-- Welcome File Configuration -->
+    <welcome-file-list>
+        <welcome-file>/pages/home.jsp</welcome-file>
+    </welcome-file-list>
+
+    <servlet>
+        <servlet-name>DashboardHomeController</servlet-name>
+        <servlet-class>com.example.eventspherefrontend.controller.DashboardHomeController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DashboardHomeController</servlet-name>
+        <url-pattern>/pages/Home</url-pattern>
+
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>studentController</servlet-name>
+        <servlet-class>com.example.eventspherefrontend.controller.studentController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>studentController</servlet-name>
+        <url-pattern>/pages/students</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>announcementController</servlet-name>
+        <servlet-class>com.example.eventspherefrontend.controller.announcementController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>announcementController</servlet-name>
+        <url-pattern>/pages/announcement</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>usersController</servlet-name>
+        <servlet-class>com.example.eventspherefrontend.controller.usersController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>usersController</servlet-name>
+        <url-pattern>/pages/users</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>PortfolioController</servlet-name>
+        <servlet-class>com.example.eventspherefrontend.controller.PortfolioController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PortfolioController</servlet-name>
+        <url-pattern>/pages/portfolio</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>MyAccountController</servlet-name>
+        <servlet-class>com.example.eventspherefrontend.controller.MyAccountController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MyAccountController</servlet-name>
+        <url-pattern>/pages/accounts</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>BatchController</servlet-name>
+        <servlet-class>com.example.eventspherefrontend.controller.BatchController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BatchController</servlet-name>
+        <url-pattern>/pages/batches</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>HomeController</servlet-name>
+        <servlet-class>com.example.eventspherefrontend.controller.HomeController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>HomeController</servlet-name>
+        <url-pattern>/pages/home</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>LoginController</servlet-name>
+        <servlet-class>com.example.eventspherefrontend.controller.LoginController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoginController</servlet-name>
+        <url-pattern>/pages/login</url-pattern>
+    </servlet-mapping>
 </web-app>

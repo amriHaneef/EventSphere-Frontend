@@ -1,0 +1,369 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root{
+    --light:#f6f6f9;
+    --primary:#1976d2;
+    --light-primary:#cfe8ff;
+    --gray:#eee;
+    --dark-gray:#aaaaaa;
+    --dark:#363949;
+    --danger:#d32f2f;
+    --light-danger:#fecdd3;
+    --warning:#fbc02d;
+    --light-warning:#fff2c6;
+    --success:#388e3c;
+    --light-success:#bbf7d0;
+    --color-light: rgba(132,139,200,0.18);
+    --box-shadow: 1px 2px 3px 3px var(--color-light);
+}
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+.bx{
+    font-size: 1.7rem;
+}
+a{
+    text-decoration: none;
+}
+li{
+    list-style: none;
+}
+
+html{
+    overflow-x: hidden;
+}
+
+body.dark{
+    --light:#181a1e;
+    --gray:#25252c;
+    --dark:#fbfbfb;
+    --box-shadow: 0 2rem 3rem var(--color-light);
+}
+
+.content main{
+    width: 100%;
+    padding: 36px 24px;
+    max-height: calc(100vh - 56px);
+}
+
+.content main .header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    grid-gap: 16px;
+    flex-wrap: wrap;
+}
+
+.content main .header .left h1{
+    font-size: 36px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--dark);
+}
+
+.content main .header .left .breadcrumb{
+    display: flex;
+    align-items: center;
+    grid-gap: 16px;
+}
+
+.content main .header .left .breadcrumb li{
+    color: var(--dark);
+}
+
+.content main .header .left .breadcrumb li a{
+    color: var(--dark-gray);
+    pointer-events: none;
+}
+
+.content main .header .left .breadcrumb li a.active{
+    color: var(--primary);
+    pointer-events: none;
+}
+
+.content main .bottom-data{
+    display: flex;
+    flex-wrap: wrap;
+    grid-gap: 24px;
+    margin-top: 24px;
+    width: 80%;
+}
+
+
+.content main .bottom-data .container1 {
+    display: block;
+    background: var(--light);
+    width: 75%;
+    height: 75vh;
+    margin: 0 auto;
+    position: relative;
+    transform: translateY(-20px);
+    animation: fadeInSlide 0.5s ease-out forwards; /* Add animation */
+    box-shadow: 2px 5px 20px rgba(119, 119, 119, 0.5);
+}
+
+@keyframes fadeInSlide {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.content main .bottom-data .container1 .leftbox {
+    float: left;
+    top: -3%;
+    left: 5%;
+    position: absolute;
+    width: 20%;
+    height: 80vh;
+    background: #4bceae;
+    box-shadow: 3px 3px 10px rgba(119, 119, 119, 0.5);
+}
+.content main .bottom-data .container1 .leftbox nav {
+    display: flex;
+    flex-direction: column; /* Stack nav items vertically */
+    align-items: center; /* Center nav items horizontally */
+}
+
+.content main .bottom-data .container1 .leftbox nav a i{
+    list-style: none;
+    margin-bottom: 10px;
+    color: var(--dark);
+    font-size: 1.5em;
+    display: block;
+    transition: all 0.3s ease-in-out;
+}
+
+.content main .bottom-data .container1 .leftbox nav a i:hover {
+    color: #3fb6a8;
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+.content main .bottom-data .container1 .leftbox nav a:first-child {
+    margin-top: 10px;
+}
+
+.content main .bottom-data .container1 .leftbox nav a.active {
+    color: #3fb6a8;
+}
+
+.content main .bottom-data .container1 .rightbox {
+    float: right;
+    width: 70%;
+    height: 100%;
+}
+
+.content main .bottom-data .container1 .rightbox .profile {
+    position: absolute;
+    width: 70%;
+}
+
+.content main .bottom-data .container1 .rightbox h1 {
+    color: var(--dark-gray);
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 40px;
+    margin-bottom: 35px;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+}
+
+.content main .bottom-data .container1 .rightbox h2 {
+    color: var(--dark-gray);
+    width: 80%;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 15px;
+    margin-left: 2px;
+}
+
+.content main .bottom-data .container1 .rightbox p {
+    border-width: 1px;
+    border-style: solid;
+    border-image: linear-gradient(to right, #4bceae, rgba(126, 211, 134, 0.5)) 1 0%;
+    border-top: 0;
+    width: 80%;
+    font-size: 13px;
+    padding: 7px 0;
+    margin-bottom: 15px;
+    color: var(--dark);
+}
+.content main .bottom-data .container1 .rightbox input{
+    border: none;
+    width: 80%;
+    height: 25px;
+    background-color: transparent;
+    border-radius: 5px;
+    margin-top: 5px;
+    color: var(--dark-gray);
+    font-size: 13px;
+}
+
+.content main .bottom-data .container1 .rightbox .btn {
+    float: right;
+    text-transform: uppercase;
+    font-size: 12px;
+    border: none;
+    color: var(--dark);
+    padding: 5px;
+    background: #4bceae;
+    border-radius: 5px;
+    transition: all 0.3s ease-out;
+}
+
+.content main .bottom-data .container1 .rightbox .btn:hover {
+    background-color: #47c2a5;
+    color: var(--light);
+}
+
+/* Popup Overlay */
+.change-overlay {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease, display 0.3s ease; /* Smooth transition for opacity */
+}
+
+/* Popup Content */
+.change-content {
+    background-color: var(--light);
+    color: var(--dark);
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    animation: slideIn 0.3s ease-in-out;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Close Button */
+.change-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--light);
+}
+
+.change-close:hover {
+    color: #d9534f; /* Red color on hover */
+}
+
+/* Title */
+.change-content h3 {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: var(--dark-gray);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Form */
+#changeForm {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Form Group */
+/* Form Group Styling */
+.form-group {
+    display: flex;
+    flex-direction: column; /* Stack label and input vertically */
+    margin-bottom: 15px;
+}
+
+/* Label Styling */
+.form-group label {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 8px; /* Space between label and input */
+}
+
+/* Input Styling */
+.form-group input {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    background-color: var(--gray);
+    color: var(--dark);
+    transition: border-color 0.3s ease;
+}
+
+/* Focus Styling for Inputs */
+.form-group input:focus {
+    border-color: var(--dark-gray);
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Light blue glow */
+}
+
+
+
+/* Buttons */
+.popup-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.popup-buttons button {
+    width: 48%;
+    padding: 10px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.popup-buttons .change-cancel {
+    background-color: #f44336; /* Red for Cancel */
+    color: var(--light);
+}
+
+.popup-buttons .change-cancel:hover {
+    background-color: #e53935;
+}
+
+.popup-buttons .ok-btn {
+    background-color: #4caf50; /* Green for OK */
+    color: var(--light);
+}
+
+.popup-buttons .ok-btn:hover {
+    background-color: #388e3c;
+}
+
+/*-----------------------------------------------------------------------------*/
+
+
