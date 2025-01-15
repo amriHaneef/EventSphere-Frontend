@@ -1,6 +1,10 @@
 
 package com.example.eventspherefrontend.controller;
 
+import com.example.eventspherefrontend.model.Batch;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -8,30 +12,73 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.lang.reflect.Type;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "BatchController", urlPatterns = "/pages/batches")
 public class BatchController extends HttpServlet {
+    private static final String BATCHES_API_URL = "http://13.60.250.63:8081/batch/getAll";
+
+
+    private final Gson gson = new GsonBuilder()
+            .create();
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        String jwtToken = (String) session.getAttribute("jwtToken");
 
-        // Prepare the list of batches
-        List<String[]> batches = new ArrayList<>();
-        batches.add(new String[]{"1", "DSE232f", "2025-12-25", "2026-12-25", "Mrs.Sandaruwani","dse23.2f-001","Amri Haneef","30"});
-        batches.add(new String[]{"2", "DSE232f", "2025-12-25", "2026-12-25", "Mrs.Thilini","dse23.2f-002","Harindu da Silva","36"});
-        batches.add(new String[]{"3", "DSE232f", "2025-12-25", "2026-12-25", "Mrs.Sandaruwani","dse23.2f-003","Shan Indeewa","40"});
-        batches.add(new String[]{"4", "DSE232f", "2025-12-25", "2026-12-25", "Mrs.Thilini","dse23.2f-004","Adeesha Nanayakkara","35"});
-        batches.add(new String[]{"4", "DSE232f", "2025-12-25", "2026-12-25", "Mrs.Sandaruwani","dse23.2f-005","Niduli Wijesiriwardana","50"});
-        batches.add(new String[]{"5", "DSE232f", "2025-12-25", "2026-12-25", "Mrs.Thilini","dse23.2f-006","Induwara Bhagya","60"});
+        if (jwtToken == null) {
+            response.sendRedirect(request.getContextPath() + "/login.jsp");
+            return;
+        }
 
+        List<Batch> batches = fetchBatchesFromApi(BATCHES_API_URL, jwtToken, new TypeToken<List<Batch>>() {}.getType());
 
-        // Add batch to the request
+        if (batches == null) {
+            batches = new ArrayList<>();
+        }
+
         request.setAttribute("batches", batches);
 
-
         request.getRequestDispatcher("/pages/batch.jsp").forward(request, response);
+    }
+
+
+
+    private <T> List<T> fetchBatchesFromApi(String apiUrl, String jwtToken, Type type) {
+        List<T> data = new ArrayList<>();
+        try {
+            URL url = new URL(apiUrl);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty("Accept", "application/json");
+            connection.setRequestProperty("Authorization", "Bearer " + jwtToken);
+
+            if (connection.getResponseCode() == 200) {
+                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                StringBuilder jsonResponse = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    jsonResponse.append(line);
+                }
+                reader.close();
+
+                data = gson.fromJson(jsonResponse.toString(), type);
+            } else {
+                System.out.println("Failed to fetch data. HTTP response code: " + connection.getResponseCode());
+            }
+            connection.disconnect();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return data;
     }
 
 }

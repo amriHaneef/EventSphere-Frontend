@@ -84,7 +84,7 @@ public class LoginController extends HttpServlet {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             JsonNode jsonNode = objectMapper.readTree(payload);
-            return jsonNode.get("role").asText(); // Extract the role from the decoded payload
+            return   jsonNode.get("role").asText();// Extract the role from the decoded payload
         } catch (IOException e) {
             e.printStackTrace();
             return null; // In case of failure to decode, return null or handle appropriately

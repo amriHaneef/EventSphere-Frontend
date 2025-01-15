@@ -1,8 +1,10 @@
 <%@ page import="java.util.List" %>
+<%@ page import="com.example.eventspherefrontend.model.Batch" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%
     String role = (String) session.getAttribute("role");
+    String name = (String) session.getAttribute("username");
 %>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/batch.css">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
@@ -80,7 +82,7 @@
                 <th>Batch Name</th>
                 <th>Start Date</th>
                 <th>End Date</th>
-                <th>Assign Students</th>
+                <th>Status</th>
                 <%
                     if ("admin".equalsIgnoreCase(role) ) {
                 %>
@@ -93,21 +95,44 @@
             </thead>
             <tbody>
             <%
-                Object adminBatches = request.getAttribute("batches");
-                if (adminBatches instanceof List) {
-                    List<String[]> batches = (List<String[]>) adminBatches;
-                    for (String[] batch : batches) {
+                // Retrieve the List<Batch> from request attributes
+                List<Batch> batches = (List<Batch>) request.getAttribute("batches");
+
+                // Iterate through the List<Batch>
+                for (Batch batch : batches) {
+                    if ("teacher".equalsIgnoreCase(role)) {
+                        if(name.equals(batch.getConsultantName())){
             %>
             <tr>
-                <td><%= batch[0] %></td>
-                <td><%= batch[1] %></td>
-                <td><%= batch[2] %></td>
-                <td><%= batch[3] %></td>
-                <td><%= batch[7] %></td>
+                <td><%= batch.getId() %></td>
+                <td><%= batch.getName() %></td>
+                <td><%= batch.getStartDate().substring(0, 10) %></td>
+                <td><%= batch.getCreatedAt().substring(0, 10) %></td>
+                <td><%= batch.getStatus() %></td>
                 <%
                     if ("admin".equalsIgnoreCase(role)) {
                 %>
-                <td><%= batch[4] %></td>
+                <td><%= batch.getConsultantName() %></td>
+                <td>
+                    <button class="edit"><i class="bx bx-edit write"></i></button>
+                    <button class="delete"><i class="bx bxs-trash bin"></i></button>
+                </td>
+                <%
+                            }
+                %>
+                <%
+                            }
+                    }else{
+                %>
+                <td><%= batch.getId() %></td>
+                <td><%= batch.getName() %></td>
+                <td><%= batch.getStartDate().substring(0, 10) %></td>
+                <td><%= batch.getCreatedAt().substring(0, 10) %></td>
+                <td><%= batch.getStatus() %></td>
+                <%
+                    if ("admin".equalsIgnoreCase(role)) {
+                %>
+                <td><%= batch.getConsultantName() %></td>
                 <td>
                     <button class="edit"><i class="bx bx-edit write"></i></button>
                     <button class="delete"><i class="bx bxs-trash bin"></i></button>

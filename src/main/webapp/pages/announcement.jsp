@@ -39,15 +39,18 @@
                 <h2>Add Announcement</h2>
                 <span class="close-btn">&times;</span>
             </div>
-            <form id="announcementForm">
-                <label for="announcementName">Announcement Name</label>
-                <input type="text" id="announcementName" name="announcementName" placeholder="Enter name" required>
+            <form id="announcementForm" action="${pageContext.request.contextPath}/pages/announcement" method="post">
+                <label for="announcementName">Announcement Title</label>
+                <input type="text" id="announcementName" name="announcementTitle" placeholder="Enter name" required>
+
+                <label for="announcementContent">Announcement Content</label>
+                <input type="text" id="announcementContent" name="announcementContent" placeholder="Enter name" required>
 
                 <label for="announcementDate">Date</label>
                 <input type="date" id="announcementDate" name="announcementDate" required>
 
                 <label for="batches">Assign Batches</label>
-                <select id="batches" name="batches" multiple>
+                <select id="batches" name="batchIds" multiple>
                     <option value="batch1">Batch 1</option>
                     <option value="batch2">Batch 2</option>
                     <option value="batch3">Batch 3</option>
