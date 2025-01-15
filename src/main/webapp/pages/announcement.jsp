@@ -1,5 +1,7 @@
+
 <%@ page import="java.util.List" %>
 <%@ page import="java.lang.String" %>
+<%@ page import="com.example.eventspherefrontend.model.Announcement" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/announcement.css">
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -74,24 +76,28 @@
         <table>
             <thead>
             <tr>
+                <th>ID</th>
+                <th></th>
                 <th>Title</th>
-                <th>Announcement By</th>
-                <th>Date</th>
+                <th>Content</th>
+                <th>Created Date</th>
                 <th></th>
             </tr>
             </thead>
             <tbody>
             <%
-                // Retrieve and safely cast announcements
-                Object announcementsObject = request.getAttribute("announcements");
-                if (announcementsObject instanceof List) {
-                    List<String[]> announcements = (List<String[]>) announcementsObject;
-                    for (String[] announcement : announcements) {
+                // Retrieve the List<Announcement> from request attributes
+                List<Announcement> announcements = (List<Announcement>) request.getAttribute("announcements");
+
+                // Iterate through the List<Announcement>
+                for (Announcement announcement : announcements) {
             %>
             <tr>
-                <td><%= announcement[0] %></td>
-                <td><%= announcement[1] %></td>
-                <td><%= announcement[2] %></td>
+                <td><%= announcement.getId() %></td>
+                <td></td>
+                <td><%= announcement.getTitle() %></td>
+                <td><%= announcement.getContent()  %></td>
+                <td><%= announcement.getCreatedAt().substring(0, 10) %></td>
 
                 <%
                     if  ("admin".equalsIgnoreCase(role) || "teacher".equalsIgnoreCase(role)) {
@@ -105,8 +111,8 @@
                     }
                 %></tr>
             <%
-                    }
                 }
+
             %>
             </tbody>
         </table>
@@ -128,4 +134,3 @@
 </script>
 <script src="${pageContext.request.contextPath}/js/announcement.js"></script>
 <script src="${pageContext.request.contextPath}/js/dashboard.js"></script>
-

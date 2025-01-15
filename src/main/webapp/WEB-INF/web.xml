@@ -28,11 +28,11 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>announcementController</servlet-name>
-        <servlet-class>com.example.eventspherefrontend.controller.announcementController</servlet-class>
+        <servlet-name>AnnouncementController</servlet-name>
+        <servlet-class>com.example.eventspherefrontend.controller.AnnouncementController</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>announcementController</servlet-name>
+        <servlet-name>AnnouncementController</servlet-name>
         <url-pattern>/pages/announcement</url-pattern>
     </servlet-mapping>
 
