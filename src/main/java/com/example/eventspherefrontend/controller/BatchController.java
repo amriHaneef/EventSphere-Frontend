@@ -30,11 +30,6 @@ public class BatchController extends HttpServlet {
         // Add batch to the request
         request.setAttribute("batches", batches);
 
-        String userRole = "admin"; // This should be dynamically retrieved
-
-        // Set the role in the request or session
-        HttpSession session = request.getSession();
-        session.setAttribute("role", userRole);
 
         request.getRequestDispatcher("/pages/batch.jsp").forward(request, response);
     }

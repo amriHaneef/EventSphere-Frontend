@@ -33,13 +33,6 @@ public class announcementController extends HttpServlet {
         request.setAttribute("announcements", announcements);
 
 
-        // Example: Retrieve user role (e.g., from database or session)
-        String userRole = "admin"; // This should be dynamically retrieved
-
-        // Set the role in the request or session
-        HttpSession session = request.getSession();
-        session.setAttribute("role", userRole);
-
         // Forward the request to announcement.jsp
         request.getRequestDispatcher("/pages/announcement.jsp").forward(request, response);
     }

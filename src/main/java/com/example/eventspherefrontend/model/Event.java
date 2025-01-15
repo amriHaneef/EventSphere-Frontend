@@ -1,7 +1,6 @@
 package com.example.eventspherefrontend.model;
 
-import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Date;
 
 public class Event {
     private int id;
@@ -10,18 +9,17 @@ public class Event {
     private String timePeriod;
     private String sessionLink;
     private String platform;
-    private int coordinatorId;
-    private String coordinatorName;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+    private int coordinatorId; // To store the ID of the coordinator
+    private String coordinatorName; // Optional: To store the name of the coordinator
+    private String createdAt; // Changed to Date type
+    private String updatedAt; // Changed to Date type
     private String status;
-    private LocalDateTime eventDate;
-    private List<String> eventids;
+    private String eventDate; // Changed to Date type
 
     // Constructors
     public Event() {}
 
-    public Event(int id, String title, String type, String timePeriod, String sessionLink, String platform, int coordinatorId, String coordinatorName, LocalDateTime createdAt, LocalDateTime updatedAt, String status, LocalDateTime eventDate) {
+    public Event(int id, String title, String type, String timePeriod, String sessionLink, String platform, int coordinatorId, String coordinatorName, String createdAt, String updatedAt, String status, String eventDate) {
         this.id = id;
         this.title = title;
         this.type = type;
@@ -101,19 +99,19 @@ public class Event {
         this.coordinatorName = coordinatorName;
     }
 
-    public LocalDateTime getCreatedAt() {
+    public String getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
+    public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
 
-    public LocalDateTime getUpdatedAt() {
+    public String getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(LocalDateTime updatedAt) {
+    public void setUpdatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
     }
 
@@ -125,22 +123,13 @@ public class Event {
         this.status = status;
     }
 
-    public LocalDateTime getEventDate() {
+    public String getEventDate() {
         return eventDate;
     }
 
-    public void setEventDate(LocalDateTime eventDate) {
+    public void setEventDate(String eventDate) {
         this.eventDate = eventDate;
     }
-
-    public List<String> geteventids() {
-        return eventids;
-    }
-
-    public void seteventids(List<String> eventids) {
-        this.eventids = eventids;
-    }
-
 
     // toString
     @Override

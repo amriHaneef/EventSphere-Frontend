@@ -19,6 +19,8 @@
         role = "guest"; // Default role if none is set
     }
 %>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,8 +32,20 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
     <title>EventSphere</title>
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/images/favicon.ico" type="image/x-icon">
+    <script>
+        const role = "<%= role != null ? role : "guest" %>"; // Pass role from server-side
+        console.log("Role from JSP:", role);
+    </script>
 </head>
 <body >
+
+<%
+    // Retrieve the List<Announcement> from request attributes
+    List<Announcement> announcements = (List<Announcement>) request.getAttribute("announcements");
+%>
+<%
+    List<Event> events = (List<Event>) request.getAttribute("events");
+%>
 
 <!-- Sidebar -->
 <div class="sidebar ">
@@ -52,27 +66,16 @@
         <li id="batches-link">
             <a href="#"><i class='bx bxs-book-open'></i>Batches</a>
         </li>
-        <%
-            if("admin".equalsIgnoreCase(role)){
-        %>
         <li id="users-link">
             <a href="#"><i class="bx bx-group"></i>Users</a>
         </li>
-        <%
-            }
-        %>
-        <%
-            if("teacher".equalsIgnoreCase(role)){
-        %>
         <li id="students-link">
             <a href="#"><i class="bx bx-group"></i>Students</a>
         </li>
-        <%
-            }
-        %>
         <li id="accounts-link">
             <a href="#"><i class="bx bx-cog"></i>My Account</a>
         </li>
+
     </ul>
     <ul class="side-menu">
         <li>
@@ -80,6 +83,7 @@
         </li>
     </ul>
 </div>
+
 <!-- End of sidebar  -->
 
 <!-- Main content -->
@@ -102,26 +106,18 @@
                     </div>
                     <div class="cart-body">
                         <ul class="products mini">
+                            <%
+                                // Iterate through the List<Announcement>
+                                for (Announcement announcement : announcements) {
+                            %>
                             <li class="item">
                                 <div class="item-content">
-                                    <p>Mock Interview on 2024/12/30.</p>
+                                    <p><%= announcement.getTitle() %> on <%= announcement.getCreatedAt().substring(0, 10) %>.</p>
                                 </div>
                             </li>
-                            <li class="item">
-                                <div class="item-content">
-                                    <p>Mock Interview on 2024/12/30.</p>
-                                </div>
-                            </li>
-                            <li class="item">
-                                <div class="item-content">
-                                    <p>Mock Interview on 2024/12/30.</p>
-                                </div>
-                            </li>
-                            <li class="item">
-                                <div class="item-content">
-                                    <p>Mock Interview on 2024/12/30.</p>
-                                </div>
-                            </li>
+                            <%
+                                }
+                            %>
                         </ul>
                     </div>
 
@@ -229,7 +225,14 @@
             <div class="orders">
                 <div class="header">
                     <i class="bx bx-calendar-check"></i>
-                    <h3>Recent Events</h3>
+                    <h3>Events</h3>
+                    <div class="date-selection">
+                        <form id="date-form" action="${pageContext.request.contextPath}/pages/Home" method="post">
+                            <input type="date" name="eventDate" class="date-input" id="date-input" value="${eventDate}">
+                            <button type="submit" class="date-btn" id="submit-btn">submit</button>
+                        </form>
+                    </div>
+                    <div id="message"></div>
                     <div class="search-container">
                         <label>
                             <input type="text" id="search-bar" class="search-bar" placeholder="Search...">
@@ -247,21 +250,30 @@
                     </thead>
                     <tbody>
                     <%
-                        List<Event> events = (List<Event>) request.getAttribute("events");
-
-                        for (Event event : events) {
+                        if (events != null && !events.isEmpty()) {
+                            for (Event event : events) {
                     %>
-                    <tr onclick="openEventDetails(<%= event.getId() %>)">
+                    <tr onclick="openEventDetails(this)">
                         <td><%= event.getId() %></td>
                         <td>
                             <p><%= event.getTitle() %></p>
                         </td>
-                        <td><%= event.getType()%></td>
-                        <td><%= event.getTimePeriod()%></td>
+                        <td><%= event.getEventDate().substring(0, 10) %></td>
+                        <td style="display: none"><%= event.getPlatform()%></td>
                         <td><span class="status completed"><%=event.getStatus()%> </span></td>
                     </tr>
                     <%
                             }
+                        }else{
+                    %>
+                    <tr>
+                        <td></td>
+                        <td colspan="1" style="text-align: center;  ">No Events Found on ${eventDate} <i class="bx bx-search" style="font-size: 14px;"></i></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <%
+                        }
                     %>
                     <!-------------------------- Event Details card ------------------------------>
                     <div class="container" id="eventDetails">
@@ -276,15 +288,15 @@
                                     <i class="bx bx-check"></i>
                                 </div>
                                 <div class="plan">
-                                    <span><strong>Consultant:</strong></span>
+                                    <span><strong>Date:</strong></span>
                                     <i class="bx bx-check"></i>
                                 </div>
                                 <div class="plan">
-                                    <span><strong>Participated Batch:</strong></span>
+                                    <span><strong>Platform:</strong></span>
                                     <i class="bx bx-check"></i>
                                 </div>
                                 <div class="plan">
-                                    <span><strong>Assigned Students: </strong> </span>
+                                    <span><strong>Status: </strong> </span>
                                     <i class="bx bx-check"></i>
                                 </div>
                                 <button onclick="closeEventDetails()">Done</button>
@@ -303,16 +315,13 @@
                 </div>
                 <ul class="task-list">
                     <%
-                        // Retrieve the List<Announcement> from request attributes
-                        List<Announcement> announcements = (List<Announcement>) request.getAttribute("announcements");
-
                         // Iterate through the List<Announcement>
                         for (Announcement announcement : announcements) {
                     %>
                     <li class="completed">
                         <div class="task-title">
                             <i class="bx bx-check-circle"></i>
-                            <p><%= announcement.getTitle() %> On <%= announcement.getCreatedAt() %></p>
+                            <p><%= announcement.getTitle() %> On <%= announcement.getCreatedAt().substring(0, 10)  %></p>
                         </div>
                         <i class="bx bx-dots-vertical-rounded"></i>
                     </li>
@@ -328,11 +337,12 @@
 <script>
     const pageContextPath = "${pageContext.request.contextPath}";
 </script>
+<script src="${pageContext.request.contextPath}/js/DashboardHome.js"></script>
 <script src="${pageContext.request.contextPath}/js/MyAccount.js"></script>
+<script src="${pageContext.request.contextPath}/js/batch.js"></script>
 <script src="${pageContext.request.contextPath}/js/students.js"></script>
 <script src="${pageContext.request.contextPath}/js/announcement.js"></script>
 <script src="${pageContext.request.contextPath}/js/Users.js"></script>
-<script src="${pageContext.request.contextPath}/js/DashboardHome.js"></script>
 <script src="${pageContext.request.contextPath}/js/dashboard.js"></script>
 </body>
 </html>

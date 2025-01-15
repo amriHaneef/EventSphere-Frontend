@@ -40,7 +40,19 @@ document.querySelector('.notif').addEventListener('click', function (e) {
 
 
 
+
 document.addEventListener("DOMContentLoaded", function () {
+
+    console.log("Role in JavaScript:", role);
+
+    if (role.toLowerCase() === "admin") {
+        document.getElementById("students-link").style.display = "none";
+    } else if (role.toLowerCase() === "teacher") {
+        document.getElementById("users-link").style.display = "none";
+    } else if (role.toLowerCase() === "student") {
+        document.getElementById("students-link").style.display = "none";
+        document.getElementById("users-link").style.display = "none";
+    }
 
 
     const eventsLink = document.getElementById("events-link");
@@ -101,6 +113,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const usersContent = document.getElementById("main-content");
 
     usersLink.addEventListener("click", function (e) {
+
+        console.log('Users link clicked');
         e.preventDefault(); // Prevent the default behavior of the link
 
         // Load the announcement page dynamically
@@ -119,6 +133,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const studentsContent = document.getElementById("main-content");
 
     studentsLink.addEventListener("click", function (e) {
+        console.log('students link clicked');
         e.preventDefault(); // Prevent the default behavior of the link
 
         // Load the student page dynamically
@@ -149,6 +164,8 @@ document.addEventListener("DOMContentLoaded", function () {
             })
             .catch(error => console.error("Error loading accounts:", error));
     });
+
+
 
 
 
