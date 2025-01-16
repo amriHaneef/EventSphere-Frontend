@@ -38,7 +38,7 @@
     </script>
 </head>
 <body >
-
+<input type="hidden" id="pageContextPath" value="${pageContext.request.contextPath}">
 <%
     // Retrieve the List<Announcement> from request attributes
     List<Announcement> announcements = (List<Announcement>) request.getAttribute("announcements");
@@ -107,6 +107,7 @@
                     <div class="cart-body">
                         <ul class="products mini">
                             <%
+                                if (announcements != null) {
                                 // Iterate through the List<Announcement>
                                 for (Announcement announcement : announcements) {
                             %>
@@ -116,6 +117,7 @@
                                 </div>
                             </li>
                             <%
+                                    }
                                 }
                             %>
                         </ul>
@@ -315,6 +317,7 @@
                 </div>
                 <ul class="task-list">
                     <%
+                        if (announcements != null) {
                         // Iterate through the List<Announcement>
                         for (Announcement announcement : announcements) {
                     %>
@@ -326,6 +329,7 @@
                         <i class="bx bx-dots-vertical-rounded"></i>
                     </li>
                     <%
+                            }
                         }
                     %>
                 </ul>

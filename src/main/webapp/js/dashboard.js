@@ -55,6 +55,55 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
+    // Get the query parameters from the URL
+    const urlParams = new URLSearchParams(window.location.search);
+
+    if (urlParams.get("success") === "announcement") {
+        const announcementsLink = document.getElementById("announcements-link");
+
+        // Log the element to check if it's correctly selected
+        console.log("Announcements link:", announcementsLink);
+
+        if (announcementsLink) {
+            // Remove active class from all other links
+            const sideLinks = document.querySelectorAll('.sidebar .side-menu li a:not(.logout)');
+            sideLinks.forEach(item => {
+                const li = item.parentElement;
+                li.classList.remove('active');
+            });
+            announcementsLink.classList.add('active'); // Add active class directly to the <li> element
+            console.log("Active class added.");
+
+            // Optionally, load the announcement page
+            loadAnnouncementPage();
+        } else {
+            console.error("Announcements link not found!");
+        }
+    }
+
+// Function to load the announcement page dynamically
+    function loadAnnouncementPage() {
+        const announcementsContent = document.getElementById("main-content");
+
+        // Dynamically use context path from the hidden input
+        const contextPath = document.getElementById("pageContextPath").value;
+
+        fetch(`${contextPath}/pages/announcement`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Failed to load announcements. Status: " + response.status);
+                }
+                return response.text();
+            })
+            .then(html => {
+                announcementsContent.innerHTML = html;
+            })
+            .catch(error => console.error("Error loading announcements:", error));
+    }
+
+
+
+
     const eventsLink = document.getElementById("events-link");
     const eventContent = document.getElementById("main-content");
 

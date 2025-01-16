@@ -46,21 +46,12 @@
                 <label for="announcementContent">Announcement Content</label>
                 <input type="text" id="announcementContent" name="announcementContent" placeholder="Enter name" required>
 
-                <label for="announcementDate">Date</label>
-                <input type="date" id="announcementDate" name="announcementDate" required>
-
-                <label for="batches">Assign Batches</label>
-                <select id="batches" name="batchIds" multiple>
-                    <option value="batch1">Batch 1</option>
-                    <option value="batch2">Batch 2</option>
-                    <option value="batch3">Batch 3</option>
-                </select>
-
                 <div class="buttons">
                     <button type="button" class="cancel">Cancel</button>
-                    <button type="submit" class="submit-btn">Submit</button>
+                    <button type="submit" name="submit" class="submit-btn" value="submit">Submit</button>
                 </div>
             </form>
+            <div id="successMessage" style="display:none; color: green;"></div>
         </div>
     </div>
 </div>
@@ -88,10 +79,11 @@
             </tr>
             </thead>
             <tbody>
+
             <%
                 // Retrieve the List<Announcement> from request attributes
                 List<Announcement> announcements = (List<Announcement>) request.getAttribute("announcements");
-
+                if (announcements != null && !announcements.isEmpty()) {
                 // Iterate through the List<Announcement>
                 for (Announcement announcement : announcements) {
             %>
@@ -107,13 +99,14 @@
                 %>
                 <td>
                     <button class="delete">
-                        <i class="bx bxs-trash bin"></i>
+                        <i class="bx bx-plus add"></i>
                     </button>
                 </td>
                 <%
                     }
                 %></tr>
             <%
+                }
                 }
 
             %>

@@ -37,7 +37,6 @@ const initializeAddAnnouncements = () => {
     const announcementBackground = document.querySelector('.announcement-background');
     const closeButton = document.querySelector('.close-btn');
     const cancelButton = document.querySelector('.cancel');
-    const form = document.querySelector('#announcementForm');
 
     if (reportButton && announcementBackground) {
         reportButton.addEventListener('click', () => {
@@ -59,13 +58,6 @@ const initializeAddAnnouncements = () => {
         cancelButton.addEventListener('click', closePopup);
     }
 
-    if (form) {
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            console.log('Form submitted!');
-            closePopup();
-        });
-    }
 };
 
 // Initialize Delete Announcements functionality
@@ -99,6 +91,3 @@ const initializeDeleteAnnouncements = () => {
         popupOverlay.style.opacity = '0';
     });
 };
-
-// Call this function to initialize all necessary functionalities
-document.addEventListener('DOMContentLoaded', reinitializeAnnouncementListeners);

@@ -16,7 +16,6 @@ public class usersController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-
         // Prepare the list of users
         List<String[]> users = new ArrayList<>();
         users.add(new String[]{"001", "John Doe","JohnDoe@gmail.com", "24-12-2002"});

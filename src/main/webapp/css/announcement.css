@@ -203,14 +203,14 @@ body.dark{
     padding: 0;
     cursor: pointer;
 }
- .bottom-data .orders table tbody tr button.delete i.bin{
-    color: var(--light-danger);
+ .bottom-data .orders table tbody tr button.delete i.add{
+    color: var(--primary);
     font-size: 1.5rem;
     transition: color 0.3s ease, transform 0.3s ease;
 
 }
- .bottom-data .orders table tbody tr button.delete i.bin:hover{
-    color: var(--danger);
+ .bottom-data .orders table tbody tr button.delete i.add:hover{
+    color: #125293FF;
     font-size: 1.5rem;
     transform: scale(1.2); /* Slightly enlarge icon on hover */
     box-shadow: 0 4px 8px rgba(255, 0, 0, 0.2); /* Glow effect */
