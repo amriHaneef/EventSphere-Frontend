@@ -151,26 +151,24 @@ function backToEvent(){
     document.getElementById("eventTable").style.display= "block";
     document.getElementById("eventDetails").style.display= "none";
 }
-function showEventDetails(eventId) {
+function showEventDetails(eventId, eventName, eventDate, eventTime, platform, lecturer, status) {
 
     document.getElementById("eventTable").style.display= "none";
     document.getElementById("eventDetails").style.display= "block";
     // Example data retrieval logic (replace with actual server-side logic)
     const eventDetails = {
         eventId: eventId,
-        eventName: "Mock Interview",
-        eventType: "Mock Interview",
-        eventDate: "20/02/2025",
-        eventTime: "9:30 A.M.",
-        platform: "Zoom",
-        lecturer: "Mrs. Sandaruwani",
-        status: "Scheduled"
+        eventName: eventName,
+        eventDate: eventDate,
+        eventTime: eventTime,
+        platform: platform,
+        lecturer: lecturer,
+        status: status
     };
 
     // Populate the event details table
     document.getElementById("detail-event-id").innerText = eventDetails.eventId;
     document.getElementById("detail-event-name").innerText = eventDetails.eventName;
-    document.getElementById("detail-event-type").innerText = eventDetails.eventType;
     document.getElementById("detail-event-date").innerText = eventDetails.eventDate;
     document.getElementById("detail-event-time").innerText = eventDetails.eventTime;
     document.getElementById("detail-event-platform").innerText = eventDetails.platform;

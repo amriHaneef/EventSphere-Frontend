@@ -127,9 +127,10 @@
                     </button>
                 </td>
                 <td>
-                    <button class="view" onclick="showEventDetails('<%= event[0] %>')">
+                    <button class="view" onclick="showEventDetails('<%= event[0] %>', '<%= event[1] %>', '<%= event[2] %>', '<%= event[3] %>', '<%= event[4] %>', '<%= event[5] %>', '<%= event[6] %>')">
                         <i class="bx bx-show eye"></i>
                     </button>
+
 
                 </td>
                 <%
