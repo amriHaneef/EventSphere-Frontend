@@ -2,6 +2,8 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.lang.String" %>
 <%@ page import="com.example.eventspherefrontend.model.Announcement" %>
+<%@ page import="com.example.eventspherefrontend.model.Batch" %>
+<%@ page import="java.util.Collections" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/announcement.css">
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -40,6 +42,8 @@
                 <span class="close-btn">&times;</span>
             </div>
             <form id="announcementForm" action="${pageContext.request.contextPath}/pages/announcement" method="post">
+                <input type="hidden" name="action" value="createAnnouncement">
+
                 <label for="announcementName">Announcement Title</label>
                 <input type="text" id="announcementName" name="announcementTitle" placeholder="Enter name" required>
 
@@ -84,6 +88,8 @@
                 // Retrieve the List<Announcement> from request attributes
                 List<Announcement> announcements = (List<Announcement>) request.getAttribute("announcements");
                 if (announcements != null && !announcements.isEmpty()) {
+                    // Reverse the list to start from the last ID to the first
+                    Collections.reverse(announcements);
                 // Iterate through the List<Announcement>
                 for (Announcement announcement : announcements) {
             %>
@@ -98,8 +104,11 @@
                     if  ("admin".equalsIgnoreCase(role) || "teacher".equalsIgnoreCase(role)) {
                 %>
                 <td>
-                    <button class="delete">
-                        <i class="bx bx-plus add"></i>
+                    <button class="BatchAdd">
+                        <i class='bx bxs-book-open Batch' title="click here to add batches "></i>
+                    </button>
+                    <button class="studentAdd">
+                        <i class="bx bx-group add" title="click here to add students"></i>
                     </button>
                 </td>
                 <%
@@ -112,15 +121,71 @@
             %>
             </tbody>
         </table>
-        <!-- Popup Form -->
-        <div class="popup-overlay">
-            <div class="popup-content">
-                <span class="popup-close">&times;</span>
-                <p>Do you want to delete this announcement?</p>
-                <div class="popup-buttons">
-                    <button class="cancel-btn">Cancel</button>
-                    <button class="ok-btn">OK</button>
+<%--        -----------Student popup --------------%>
+        <div class="student-background">
+            <div class="popup-student">
+                <div class="popup-header">
+                    <h2>Add Students</h2>
+                    <span class="student-close-btn">&times;</span>
                 </div>
+                <form id="studentForm" action="${pageContext.request.contextPath}/pages/announcement" method="post">
+                    <label for="studentAnnouncementName">Announcement Title</label>
+                    <input type="text" id="studentAnnouncementName" name="studentAnnouncementName" placeholder="Enter name" disabled required>
+
+                    <input type="hidden" id="studentAnnouncementID" name="studentAnnouncementID"  >
+
+                    <label for="students">Assign Students</label>
+                    <select id="students" name="students" multiple required>
+                        <option value="student1">student 1</option>
+                        <option value="student2">student 2</option>
+                        <option value="student3">student 3</option>
+                    </select>
+
+                    <div class="buttons">
+                        <button  class="student-cancel-btn">Cancel</button>
+                        <button type="submit" name="student-submit-btn" class="student-submit-btn" value="addStudent">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+<%--        --------------batch popup-------------------%>
+        <div class="batch-background">
+            <div class="popup-batch">
+                <div class="popup-header">
+                    <h2>Add Batches</h2>
+                    <span class="batch-close-btn">&times;</span>
+                </div>
+                <form id="BatchForm" action="${pageContext.request.contextPath}/pages/announcement" method="post">
+
+                    <input type="hidden" name="action" value="batchAddAnnouncement">
+
+                    <label for="batchAnnouncementName">Announcement Title</label>
+                    <input type="text" id="batchAnnouncementName" name="batchAnnouncementName" placeholder="Enter name" disabled>
+
+                    <input type="hidden" id="batchAnnouncementID" name="batchAnnouncementID"  required>
+
+                    <label for="batches">Assign batches</label>
+                    <select id="batches" name="batches" multiple>
+                        <%
+                            // Retrieve the List<Batch> from request attributes
+                            List<Batch> batches = (List<Batch>) request.getAttribute("batches");
+
+                            // Iterate through the List<Batch>
+                            for (Batch batch : batches) {
+                        %>
+                        <option value="<%= batch.getId() %>"><%= batch.getName() %></option>
+                        <%
+                            }
+                        %>
+                    </select>
+
+                    <div class="buttons">
+                        <button  class="batch-cancel-btn">Cancel</button>
+                        <button type="submit" name="batch-submit-btn" class="batch-submit-btn" value="addBatch">Submit</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

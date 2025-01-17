@@ -97,7 +97,23 @@
         <div class="announcements">
             <a href="#" class="notif">
                 <i class="bx bx-bell"></i>
-                <span class="count">12</span>
+
+                <%
+                    // Get the current date in the same format as 'createdAt'
+                    java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
+                    String currentDate = sdf.format(new java.util.Date());
+
+                    // Filter announcements for the current date
+                    int totalCountToday = 0;
+                    for (Announcement announcement : announcements) {
+                        if (announcement.getCreatedAt().substring(0, 10).equals(currentDate)) {
+                            totalCountToday++;
+                        }else{
+                            totalCountToday = 0;
+                        }
+                    }
+                %>
+                <span class="count"><%= totalCountToday %></span>
             </a>
             <div class="mini-cart">
                 <div class="cartcontent">
@@ -107,9 +123,11 @@
                     <div class="cart-body">
                         <ul class="products mini">
                             <%
-                                if (announcements != null) {
-                                // Iterate through the List<Announcement>
-                                for (Announcement announcement : announcements) {
+                                if (announcements != null && !announcements.isEmpty()) {
+
+                                    for (Announcement announcement : announcements) {
+                                        if (announcement.getCreatedAt().substring(0, 10).equals(currentDate)) {
+                                    // Display the total count of announcements for today
                             %>
                             <li class="item">
                                 <div class="item-content">
@@ -117,6 +135,7 @@
                                 </div>
                             </li>
                             <%
+                                        }
                                     }
                                 }
                             %>
@@ -318,8 +337,13 @@
                 <ul class="task-list">
                     <%
                         if (announcements != null) {
-                        // Iterate through the List<Announcement>
-                        for (Announcement announcement : announcements) {
+                            int size = announcements.size();
+
+                            // Fetch the last 6 announcements or all if there are fewer than 6
+                            List<Announcement> lastSixAnnouncements = announcements.subList(Math.max(size - 6, 0), size);
+
+                            // Iterate through the filtered list
+                            for (Announcement announcement : lastSixAnnouncements) {
                     %>
                     <li class="completed">
                         <div class="task-title">
