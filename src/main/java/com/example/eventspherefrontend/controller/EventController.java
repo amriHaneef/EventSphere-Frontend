@@ -11,8 +11,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet(name = "AdminEventsController", urlPatterns = "/pages/events")
-public class eventcontroller extends HttpServlet {
+@WebServlet(name = "EventController", urlPatterns = "/pages/events")
+public class EventController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
