@@ -320,5 +320,6 @@
 <script src="${pageContext.request.contextPath}/js/Users.js"></script>
 <script src="${pageContext.request.contextPath}/js/DashboardHome.js"></script>
 <script src="${pageContext.request.contextPath}/js/dashboard.js"></script>
+<script src="${pageContext.request.contextPath}/js/batch.js"></script>
 </body>
 </html>

@@ -3,6 +3,7 @@
 
 <%
     String role = (String) session.getAttribute("role");
+    String name = (String) session.getAttribute("username");
 %>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/batch.css">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
@@ -28,8 +29,7 @@
     <% } %>
 </div>
 
-
-<div class="add-batch-popup" >
+<div class="add-batch-popup">
     <div class="popup-container">
         <span class="popup-close">&times;</span>
         <h3>Add Batch Details</h3>
@@ -58,7 +58,6 @@
     </div>
 </div>
 
-
 <div class="bottom-data">
     <div class="orders">
         <div class="header">
@@ -71,7 +70,7 @@
             </div>
         </div>
         <%
-            if ("admin".equalsIgnoreCase(role) || "teacher".equalsIgnoreCase(role) ) {
+            if ("admin".equalsIgnoreCase(role) || "teacher".equalsIgnoreCase(role)) {
         %>
         <table>
             <thead>
@@ -79,16 +78,12 @@
                 <th>Batch ID</th>
                 <th>Batch Name</th>
                 <th>Start Date</th>
-                <th>End Date</th>
-                <th>Assign Students</th>
-                <%
-                    if ("admin".equalsIgnoreCase(role) ) {
-                %>
-                <th>Lecturer</th>
+                <th>Created Date</th>
+<%--                <th>Assign Students</th>--%>
+                <% if ("admin".equalsIgnoreCase(role)) { %>
+                <th>Consultant</th>
                 <th>Actions</th>
-                <%
-                    }
-                %>
+                <% } %>
             </tr>
             </thead>
             <tbody>
@@ -101,35 +96,32 @@
             <tr>
                 <td><%= batch[0] %></td>
                 <td><%= batch[1] %></td>
-                <td><%= batch[2] %></td>
                 <td><%= batch[3] %></td>
-                <td><%= batch[7] %></td>
-                <%
-                    if ("admin".equalsIgnoreCase(role)) {
-                %>
-                <td><%= batch[4] %></td>
+                <td><%= batch[5] %></td>
+<%--                <td><%= (batch.length > 7) ? batch[7] : "N/A" %></td>--%>
+                <% if ("admin".equalsIgnoreCase(role)) { %>
+                <td><%= batch[2] %></td>
                 <td>
                     <button class="edit"><i class="bx bx-edit write"></i></button>
                     <button class="delete"><i class="bx bxs-trash bin"></i></button>
                 </td>
-                <%
-                    }
-                %>
+                <% } %>
             </tr>
             <%
-                    }
                 }
+            } else {
             %>
+            <tr>
+                <td colspan="7">No batches available.</td>
+            </tr>
+            <% } %>
             </tbody>
         </table>
         <%
             }
         %>
 
-        <%
-            if ("student".equalsIgnoreCase(role)) {
-        %>
-        <!-- Student Table -->
+        <% if ("student".equalsIgnoreCase(role)) { %>
         <table>
             <thead>
             <tr>
@@ -153,67 +145,14 @@
             } else {
             %>
             <tr>
-                <td colspan="8">No students available.</td>
+                <td colspan="2">No students available.</td>
             </tr>
             <% } %>
             </tbody>
         </table>
-        <%
-            }
-        %>
-
-        <!-- Popup delete Form -->
-        <div class="popup-overlay">
-            <div class="popup-content">
-                <span class="popup-close-delete">&times;</span>
-                <p>Do you want to delete this batch?</p>
-                <div class="popup-buttons">
-                    <button class="cancel-btn-delete">Cancel</button>
-                    <button class="ok-btn">OK</button>
-                </div>
-            </div>
-        </div>
+        <% } %>
     </div>
 </div>
-
-<!-- Popup Form -->
-<div class="edit-overlay">
-    <div class="edit-content">
-        <span class="edit-close">&times;</span>
-        <h3>Edit Student Details</h3>
-        <form id="editForm">
-            <div class="form-group">
-                <label for="batch-id">Batch ID</label>
-                <input type="text" id="batch-id" class="form-control" name="id" required disabled>
-            </div>
-            <div class="form-group">
-                <label for="batch-name">Batch Name</label>
-                <input type="text" id="batch-name" class="form-control" name="batch-name" required>
-            </div>
-            <div class="form-group">
-                <label for="start-date">Start Date</label>
-                <input type="email" id="start-date" class="form-control" name="start-date" required>
-            </div>
-            <div class="form-group">
-                <label for="end-date">End Date</label>
-                <input type="text" id="end-date" class="form-control" name="end-date" required>
-            </div>
-            <div class="form-group">
-                <label for="students">Assigned Students</label>
-                <input type="text" id="students" class="form-control" name="students" required disabled>
-            </div>
-            <div class="form-group">
-                <label for="lecturers">Lecturer</label>
-                <input type="text" id="lecturers" class="form-control" name="lecturers" required >
-            </div>
-            <div class="edit-buttons">
-                <button type="button" class="edit-cancel">Cancel</button>
-                <button type="submit" class="ok-btn">Save</button>
-            </div>
-        </form>
-    </div>
-</div>
-
 
 <script>
     const pageContextPath = "${pageContext.request.contextPath}";
