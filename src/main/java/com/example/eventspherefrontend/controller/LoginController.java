@@ -29,7 +29,7 @@ public class LoginController extends HttpServlet {
         String jsonPayload = String.format("{\"username\": \"%s\", \"password\": \"%s\"}", username, password);
 
         // Call the backend API for authentication
-        String apiEndpoint = "http://13.60.250.63:8081/auth/login"; // Replace with your actual API URL
+        String apiEndpoint = "http://13.60.250.63:8081/user/login"; // Replace with your actual API URL
         URL url = new URL(apiEndpoint);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("POST");
