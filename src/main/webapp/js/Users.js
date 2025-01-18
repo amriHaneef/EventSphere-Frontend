@@ -200,3 +200,24 @@ const initializeDeleteUsers = () => {
 // ------------------------ End of Batch Toggle Process ----------------------------------------------
 
 document.addEventListener('DOMContentLoaded', reinitializeUsersListeners);
+
+document.addEventListener("DOMContentLoaded", function () {
+    const studentHeads = document.querySelectorAll(".student-head");
+
+    studentHeads.forEach(head => {
+        head.addEventListener("click", function () {
+            const batchId = this.getAttribute("data-batch-id").split("-")[1]; // Extract the batch ID
+            fetch(`/pages/users?batchId=${batchId}`, {
+                method: "GET",
+                headers: {
+                    "Authorization": `Bearer ${sessionStorage.getItem("jwtToken")}`,
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data); // Use this data to update the DOM if needed
+                })
+                .catch(err => console.error(err));
+        });
+    });
+});

@@ -137,6 +137,14 @@
                             <%
                                         }
                                     }
+                            }else {
+                             %>
+                             <li class="item" >
+                                 <div class="item-content" >
+                                            <p> No announcements found for today <i class="bx bx search" style = "font-size: 14px" > </i>.</p >
+                                 </div>
+                             </li >
+                            <%
                                 }
                             %>
                         </ul>

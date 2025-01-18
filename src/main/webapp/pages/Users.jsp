@@ -1,6 +1,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.lang.String" %>
 <%@ page import="com.example.eventspherefrontend.model.Batch" %>
+<%@ page import="com.example.eventspherefrontend.model.User" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%
   // Check if 'role' is already declared;
@@ -39,7 +40,7 @@
               <form action="#" id="myForm">
                 <div class="card imgholder">
                   <label for="imgInput" class="upload">
-                    <input type="file" name="" id="imgInput">
+                    <input type="file" name="" id="imgInput" disabled>
                     <i class='bx bx-plus'></i>
                   </label>
                   <img id="imagePreview" alt="" width="200" height="200" class="img">
@@ -112,29 +113,24 @@
                       <th>Name</th>
                       <th>Email</th>
                       <th>Birthday</th>
-                      <th>Batch</th>
                       <th>Age</th>
-                      <th>Phone</th>
                       <th></th>
                       <th></th>
                   </tr>
               </thead>
               <tbody>
               <%
-                  Object studentsObject = request.getAttribute("students");
-                  List<String[]> students = (List<String[]>) studentsObject;
-                  for (String[] student : students) {
-                      String studentBatch = student[4];
-                      if (batch.getName().equals(studentBatch)) {  // Compare with batch name or id
+                  List<User> students = (List<User>) request.getAttribute("students");
+
+                  // Iterate through the List<Batch>
+                  for (User student : students) { // Compare with batch name or id
               %>
                 <tr>
-                  <td><%= student[0] %></td>
-                  <td><%= student[1] %></td>
-                  <td><%= student[2] %></td>
-                  <td><%= student[3] %></td>
-                  <td><%= student[4] %></td>
-                  <td><%= student[5] %></td>
-                  <td><%= student[6] %></td>
+                  <td><%= student.getId() %></td>
+                  <td><%= student.getName() %></td>
+                  <td><%= student.getEmail() %></td>
+                  <td><%= student.getDob().substring(0, 10) %></td>
+                  <td><%= student.getAge() %></td>
                   <td>
                       <button class="edit">
                           <i class="bx bx-edit write"></i>
@@ -148,7 +144,6 @@
                 </tr>
                 <%
                             }
-                        }
                 %>
               </tbody>
           </table>
@@ -182,17 +177,18 @@
           </thead>
           <tbody class="teacher-details">
           <%
-            // Retrieve and safely cast students
-            Object usersObject = request.getAttribute("users");
-            if (usersObject instanceof List) {
-              List<String[]> users = (List<String[]>) usersObject;
-              for (String[] user : users) {
+              // Retrieve the List<Batch> from request attributes
+              List<User> users = (List<User>) request.getAttribute("users");
+
+              // Iterate through the List<Batch>
+              for (User user : users) {
+                      if("TEACHER".equals(user.getRole())){
           %>
           <tr>
-            <td><%= user[0] %></td>
-            <td><%= user[1] %></td>
-            <td><%= user[2] %></td>
-            <td><%= user[3] %></td>
+            <td><%= user.getId() %></td>
+            <td><%= user.getName()   %></td>
+            <td><%= user.getEmail() %></td>
+            <td><%= user.getDob().substring(0, 10) %></td>
             <td>
               <button class="edit">
                 <i class="bx bx-edit write"></i>

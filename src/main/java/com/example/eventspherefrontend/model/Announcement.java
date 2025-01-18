@@ -64,7 +64,6 @@ public class Announcement {
     public List<String> getStudentIds() {
         return studentIds;
     }
-
     public void setStudentIds(List<String> studentIds) {
         this.studentIds = studentIds;
     }
@@ -75,5 +74,20 @@ public class Announcement {
 
     public void setBatchIds(List<String> batchIds) {
         this.batchIds = batchIds;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Announcement{" +
+                "announcementId='" + id + '\'' +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", createdAt='" + createdAt + '\'' +
+                ", createdBy='" + createdBy + '\'' +
+                ", role='" + role + '\'' +
+                ", batchIds='" + batchIds + '\'' +
+                ", studentIds=" + studentIds +
+                '}';
     }
 }

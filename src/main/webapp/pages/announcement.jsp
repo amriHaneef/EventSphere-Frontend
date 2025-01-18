@@ -4,6 +4,7 @@
 <%@ page import="com.example.eventspherefrontend.model.Announcement" %>
 <%@ page import="com.example.eventspherefrontend.model.Batch" %>
 <%@ page import="java.util.Collections" %>
+<%@ page import="com.example.eventspherefrontend.model.User" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/announcement.css">
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -129,6 +130,7 @@
                     <span class="student-close-btn">&times;</span>
                 </div>
                 <form id="studentForm" action="${pageContext.request.contextPath}/pages/announcement" method="post">
+                    <input type="hidden" name="action" value="studentAddAnnouncement">
                     <label for="studentAnnouncementName">Announcement Title</label>
                     <input type="text" id="studentAnnouncementName" name="studentAnnouncementName" placeholder="Enter name" disabled required>
 
@@ -136,9 +138,19 @@
 
                     <label for="students">Assign Students</label>
                     <select id="students" name="students" multiple required>
-                        <option value="student1">student 1</option>
-                        <option value="student2">student 2</option>
-                        <option value="student3">student 3</option>
+                        <%
+                            // Retrieve the List<Batch> from request attributes
+                            List<User> users = (List<User>) request.getAttribute("users");
+
+                            // Iterate through the List<Batch>
+                            for (User user : users) {
+                                if("STUDENT".equals(user.getRole())){
+                        %>
+                        <option value="<%= user.getId()%>"><%= user.getName() %></option>
+                        <%
+                                }
+                            }
+                        %>
                     </select>
 
                     <div class="buttons">

@@ -1,6 +1,7 @@
 package com.example.eventspherefrontend.service;
 
 import com.example.eventspherefrontend.model.Announcement;
+import com.example.eventspherefrontend.model.StudentAnnouncement;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -15,6 +16,7 @@ public class AnnouncementService {
     private static final String ANNOUNCEMENTS_API_URL = "http://13.60.250.63:8081/Announcement/getAll";
     private static final String CREATE_ANNOUNCEMENT_API_URL = "http://13.60.250.63:8081/Announcement/add";
     private static final String ANNOUNCEMENT_Add_Batch_API_URL = "http://13.60.250.63:8081/Announcement/addBatch";
+    private static final String ANNOUNCEMENT_Add_Student_API_URL = "http://13.60.250.63:8081/Announcement/addStudent";
 
 
     private final Gson gson = new GsonBuilder().create();
@@ -78,28 +80,84 @@ public class AnnouncementService {
         return isCreated;
     }
 
-    public boolean sendBatchAnnouncement(Announcement announcement, String jwtToken) {
+    public boolean sendBatchAnnouncement(StudentAnnouncement studentAnnouncement, String jwtToken) {
         try {
+            System.out.println("Preparing to send batch announcement...");
+
             URL url = new URL(ANNOUNCEMENT_Add_Batch_API_URL);
+            System.out.println("API URL: " + ANNOUNCEMENT_Add_Batch_API_URL);
+
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("POST");
             connection.setRequestProperty("Content-Type", "application/json");
             connection.setRequestProperty("Authorization", "Bearer " + jwtToken);
             connection.setDoOutput(true);
 
-            String jsonPayload = gson.toJson(announcement);
+            System.out.println("Request properties set. Preparing JSON payload...");
+
+            String jsonPayload = gson.toJson(studentAnnouncement);
+            System.out.println("JSON Payload: " + jsonPayload);
+
             try (OutputStream os = connection.getOutputStream()) {
                 os.write(jsonPayload.getBytes());
                 os.flush();
+                System.out.println("Payload sent to the API.");
             }
 
             int responseCode = connection.getResponseCode();
-            connection.disconnect();
+            System.out.println("Response Code: " + responseCode);
 
-            return responseCode == 200 || responseCode == 201;
+            connection.disconnect();
+            System.out.println("Connection closed.");
+
+            boolean success = responseCode == 200 || responseCode == 201;
+            System.out.println("Operation success: " + success);
+            return success;
         } catch (Exception e) {
+            System.out.println("An error occurred: " + e.getMessage());
             e.printStackTrace();
             return false;
         }
     }
+
+    public boolean sendStudentAnnouncement(StudentAnnouncement studentAnnouncement, String jwtToken) {
+        try {
+            System.out.println("Preparing to send student announcement...");
+
+            URL url = new URL(ANNOUNCEMENT_Add_Student_API_URL);
+            System.out.println("API URL: " + ANNOUNCEMENT_Add_Student_API_URL);
+
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("POST");
+            connection.setRequestProperty("Content-Type", "application/json");
+            connection.setRequestProperty("Authorization", "Bearer " + jwtToken);
+            connection.setDoOutput(true);
+
+            System.out.println("Request properties set. Preparing JSON payload...");
+
+            String jsonPayload = gson.toJson(studentAnnouncement);
+            System.out.println("JSON Payload: " + jsonPayload);
+
+            try (OutputStream os = connection.getOutputStream()) {
+                os.write(jsonPayload.getBytes());
+                os.flush();
+                System.out.println("Payload sent to the API.");
+            }
+
+            int responseCode = connection.getResponseCode();
+            System.out.println("Response Code: " + responseCode);
+
+            connection.disconnect();
+            System.out.println("Connection closed.");
+
+            boolean success = responseCode == 200 || responseCode == 201;
+            System.out.println("Operation success: " + success);
+            return success;
+        } catch (Exception e) {
+            System.out.println("An error occurred: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 }
