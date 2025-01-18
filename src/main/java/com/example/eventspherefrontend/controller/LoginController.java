@@ -25,7 +25,6 @@ public class LoginController extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-        System.out.println("Received login request with username: " + username);
 
         // Prepare JSON payload
         String jsonPayload = String.format("{\"username\": \"%s\", \"password\": \"%s\"}", username, password);
@@ -40,8 +39,6 @@ public class LoginController extends HttpServlet {
         connection.setRequestProperty("Content-Type", "application/json");
         connection.setDoOutput(true);
 
-        System.out.println("Connecting to API endpoint: " + apiEndpoint);
-
         try (OutputStream os = connection.getOutputStream()) {
             os.write(jsonPayload.getBytes());
             os.flush();
@@ -50,7 +47,6 @@ public class LoginController extends HttpServlet {
 
         // Read the API response
         int responseCode = connection.getResponseCode();
-        System.out.println("API Response Code: " + responseCode);
 
         if (responseCode == HttpURLConnection.HTTP_OK) {
             // Parse the response to get the JWT token
@@ -61,30 +57,24 @@ public class LoginController extends HttpServlet {
                     responseBody.append(line);
                 }
 
-                System.out.println("API Response Body: " + responseBody);
 
                 // Use Jackson ObjectMapper to parse the JSON response
                 ObjectMapper objectMapper = new ObjectMapper();
                 JsonNode responseJson = objectMapper.readTree(responseBody.toString());
                 String jwtToken = responseJson.get("token").asText(); // Assume the token is under "token" field
 
-                System.out.println("JWT Token received: " + jwtToken);
 
                 // Decode JWT token to get the role
                 String role = decodeRoleFromJwt(jwtToken);
-                System.out.println("Decoded role from JWT: " + role);
-
                 // Create a session and store username, token, and role
                 HttpSession session = request.getSession();
                 session.setAttribute("username", username);
                 session.setAttribute("jwtToken", jwtToken);
                 session.setAttribute("role", role);
 
-                System.out.println("Session attributes set for username: " + username);
 
                 // Redirect to the dashboard or another secured page
                 response.sendRedirect(request.getContextPath() + "/pages/Home");
-                System.out.println("Redirected to Home page.");
             }
         } else {
             // If authentication fails, redirect back to the login page with an error message

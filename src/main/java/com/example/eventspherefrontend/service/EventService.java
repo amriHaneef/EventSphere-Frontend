@@ -14,13 +14,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EventService {
-    private static final String EVENTS_API_URL = "http://13.60.250.63:8081/events/getAllEvents?eventDate=";
+    private static final String EVENTS_API_URL = "http://13.60.250.63:8081/events/getAll";
     private final Gson gson = new GsonBuilder().create();
 
     public List<Event> fetchEvents(String selectedDate, String jwtToken) {
         List<Event> events = new ArrayList<>();
         try {
-            String apiUrl = EVENTS_API_URL + selectedDate;
+            String apiUrl = EVENTS_API_URL;
             URL url = new URL(apiUrl);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");

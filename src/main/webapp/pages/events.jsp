@@ -1,5 +1,6 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.lang.String" %>
+<%@ page import="com.example.eventspherefrontend.model.Event" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%
@@ -10,6 +11,7 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/DashboardHome.css">
 
 
 <div class="header">
@@ -39,6 +41,7 @@
     <div class="popup-container">
         <span class="popup-close">&times;</span>
         <h3>Add Event Details</h3>
+
         <form id="addeventForm">
             <div class="form-group">
                 <label for="eventname">Event Name:</label>
@@ -68,6 +71,8 @@
     </div>
 </div>
 
+<button type="button"  onclick="onloading()">test</button>
+<%--event table --%>
 <div id="eventTable">
 
     <div class="bottom-data">
@@ -75,12 +80,20 @@
             <div class="header">
                 <i class="bx bx-calendar-check"></i>
                 <h3>Events</h3>
+                <div class="date-selection">
+                    <form id="date-form" action="${pageContext.request.contextPath}/pages/events" method="post">
+                        <input type="date" name="eventPageDate" class="date-input" id="date-input" value="${eventDate}">
+                        <button type="button" class="date-btn" id="submit-btn">submit</button>
+                    </form>
+                </div>
+
                 <div class="search-container">
                     <label>
                         <input type="text" id="search-bar" class="search-bar" placeholder="Search...">
                     </label>
                 </div>
             </div>
+
             <table>
                 <thead>
                 <tr>
@@ -96,27 +109,34 @@
                 </thead>
                 <tbody>
                 <%
-                    Object eventsObject = request.getAttribute("events");
-                    if (eventsObject instanceof List) {
-                        List<String[]> events = (List<String[]>) eventsObject;
-                        for (String[] event : events) {
+                    List<Event> events = (List<Event>) request.getAttribute("events");
                 %>
+                <%
+                    if (events != null && !events.isEmpty()) {
+                        for (Event event : events) {
+                %>
+
                 <tr>
-                    <td><%= event[0] %></td>
-                    <td><%= event[1] %></td>
-                    <td><%= event[2] %></td>
-                    <td><%= event[3] %></td>
-                    <td><%= event[4] %></td>
-                    <td><%= event[5] %></td>
-                    <td><%= event[6] %></td>
+                    <td ><%= event.getId() %></td>
+                    <td><%= event.getTitle() %></td>
+                    <td><%= event.getEventDate().substring(0, 10) %></td>
+                    <td><%= event.getTimePeriod().substring(0, 10) %></td>
+                    <td><%= event.getPlatform() %></td>
+                    <td><%= event.getCoordinatorName() %></td>
+                    <td><%= event.getStatus() %></td>
 
                     <%
                         if ("admin".equalsIgnoreCase(role) || "teacher".equalsIgnoreCase(role)) {
                     %>
                     <td>
+                        <button class="update" id="btnUpdate" onclick="eventsDetailsPopUp('<%= event.getId() %>')">
+                            <i class="bx bxs-pencil"></i>
+                        </button>
+
                         <button class="delete">
                             <i class="bx bxs-trash bin"></i>
                         </button>
+
                     </td>
                     <%
                         if ("teacher".equalsIgnoreCase(role)) {
@@ -127,7 +147,7 @@
                         </button>
                     </td>
                     <td>
-                        <button class="view" onclick="showEventDetails('<%= event[0] %>', '<%= event[1] %>', '<%= event[2] %>', '<%= event[3] %>', '<%= event[4] %>', '<%= event[5] %>', '<%= event[6] %>')">
+                        <button class="view" onclick="showEventDetails('<%= event.getId() %>', '<%= event.getTitle() %>', '<%= event.getEventDate().substring(0, 10) %>', '<%= event.getTimePeriod().substring(0, 10) %>', '<%= event.getPlatform() %>', '<%= event.getCoordinatorName() %>', '<%= event.getStatus() %>')">
                             <i class="bx bx-show eye"></i>
                         </button>
 
@@ -212,6 +232,7 @@
     <br>
 
     <!-- Feedback Box -->
+    <% if ("student".equalsIgnoreCase(role)) { %>
     <section>
         <div class="feedback">
             <h2 id="feedbackHeading"><i class="fa fa-comment-dots"></i> Feedback</h2>
@@ -222,11 +243,15 @@
         </div>
     </section>
 </div>
+<% } %>
 <!-- Event Details Section  -->
-<div id="eventDetails" style="display: none">
+<div id="eventData">
+  <h1>testing heading</h1>
+</div>
+<div id="detailsTab" >
     <div class ="event-details" >
         <h2>Event Details</h2>
-        <button id="backevent" onclick="backToEvent()">
+        <button id="backevent" onclick="">
             <i class="fas fa-arrow-left"></i>
         </button>
 
@@ -265,6 +290,7 @@
             </tr>
         </table>
     </div>
+
     <!-- Button to open popup -->
     <button id="markAttendanceBtn" onclick="showAttendancePopup()">Mark Attendance</button>
     <!-- Attendance Popup Form -->
@@ -293,3 +319,4 @@
 <script src="${pageContext.request.contextPath}/js/event.js"></script>
 
 <script src="${pageContext.request.contextPath}/js/dashboard.js"></script>
+<script src="${pageContext.request.contextPath}/js/eventspop.js"></script>

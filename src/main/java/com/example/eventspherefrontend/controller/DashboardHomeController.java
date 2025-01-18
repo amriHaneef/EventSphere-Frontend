@@ -28,7 +28,7 @@ public class DashboardHomeController extends HttpServlet {
         String selectedDate = request.getParameter("eventDate");
 
         if (selectedDate == null || selectedDate.isEmpty()) {
-            selectedDate = "2025-02-10"; // Default date
+            selectedDate = ""; // Default date
         }
 
         HttpSession session = request.getSession();

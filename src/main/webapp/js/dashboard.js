@@ -58,6 +58,8 @@ document.addEventListener("DOMContentLoaded", function () {
     // Get the query parameters from the URL
     const urlParams = new URLSearchParams(window.location.search);
 
+
+
     if (urlParams.get("success") === "announcement") {
         const announcementsLink = document.getElementById("announcements-link");
 
@@ -100,6 +102,51 @@ document.addEventListener("DOMContentLoaded", function () {
             })
             .catch(error => console.error("Error loading announcements:", error));
     }
+
+
+
+    if (urlParams.get("done") === "eventsLoaded") {
+        const eventsLink = document.getElementById("events-link");
+
+
+
+        if (eventsLink) {
+            // Remove active class from all other links
+            const sideLinks = document.querySelectorAll('.sidebar .side-menu li a:not(.logout)');
+            sideLinks.forEach(item => {
+                const li = item.parentElement;
+                li.classList.remove('active');
+            });
+            announcementsLink.classList.add('active'); // Add active class directly to the <li> element
+            console.log("Active class added.");
+
+            // Optionally, load the announcement page
+            loadEventPage();
+        } else {
+            console.error("events link not found!");
+        }
+    }
+
+// Function to load the announcement page dynamically
+    function loadEventPage() {
+        const eventContent = document.getElementById("main-content");
+
+        // Dynamically use context path from the hidden input
+        const contextPath = document.getElementById("pageContextPath").value;
+
+        fetch(`${contextPath}/pages/events`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Failed to load events. Status: " + response.status);
+                }
+                return response.text();
+            })
+            .then(html => {
+                eventContent.innerHTML = html;
+            })
+            .catch(error => console.error("Error loading events:", error));
+    }
+
 
 
 

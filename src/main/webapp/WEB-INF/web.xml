@@ -16,7 +16,6 @@
     <servlet-mapping>
         <servlet-name>DashboardHomeController</servlet-name>
         <url-pattern>/pages/Home</url-pattern>
-
     </servlet-mapping>
     <servlet>
         <servlet-name>studentController</servlet-name>

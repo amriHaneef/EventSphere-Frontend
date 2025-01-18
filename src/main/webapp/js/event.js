@@ -238,3 +238,56 @@ document.getElementById('attendanceForm').addEventListener('submit', function(ev
 // Initialize all functionalities on DOM content load
 document.addEventListener('DOMContentLoaded', reinitializeEventContentListeners);
 
+// document.getElementById("submit-btn").addEventListener("click", function () {
+//     const dateInput = document.getElementById("date-input").value; // Optional: Get date input
+//     const tableBody = document.querySelector("#eventTable tbody");
+//
+//     // Clear the table before loading new data
+//     tableBody.innerHTML = "";
+//
+//     // Fetch events from the API
+//     fetch(`${pageContextPath}/getEvents?date=${dateInput}`)
+//         .then(response => {
+//             if (!response.ok) {
+//                 throw new Error("Failed to fetch events");
+//             }
+//             return response.json();
+//         })
+//         .then(events => {
+//             if (events.length === 0) {
+//                 tableBody.innerHTML = `<tr><td colspan="8">No events found</td></tr>`;
+//                 return;
+//             }
+//
+//             events.forEach(event => {
+//                 const row = document.createElement("tr");
+//                 row.innerHTML = `
+//                     <td>${event[0]}</td>
+//                     <td>${event[1]}</td>
+//                     <td>${event[2]}</td>
+//                     <td>${event[3]}</td>
+//                     <td>${event[4]}</td>
+//                     <td>${event[5]}</td>
+//                     <td>${event[6]}</td>
+//                     <td>
+//                         <button class="delete"><i class="bx bxs-trash bin"></i></button>
+//                     </td>
+//                     <td>
+//                         <button class="edit"><i class="bx bx-edit write"></i></button>
+//                     </td>
+//                     <td>
+//                         <button class="view" onclick="showEventDetails('${event[0]}', '${event[1]}', '${event[2]}', '${event[3]}', '${event[4]}', '${event[5]}', '${event[6]}')">
+//                             <i class="bx bx-show eye"></i>
+//                         </button>
+//                     </td>
+//                 `;
+//                 tableBody.appendChild(row);
+//             });
+//         })
+//         .catch(error => {
+//             console.error("Error fetching events:", error);
+//             tableBody.innerHTML = `<tr><td colspan="8">Error loading events</td></tr>`;
+//         });
+// });
+//
+

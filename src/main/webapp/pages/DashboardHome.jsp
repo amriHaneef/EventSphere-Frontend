@@ -375,5 +375,6 @@
 <script src="${pageContext.request.contextPath}/js/announcement.js"></script>
 <script src="${pageContext.request.contextPath}/js/Users.js"></script>
 <script src="${pageContext.request.contextPath}/js/dashboard.js"></script>
+<script src="${pageContext.request.contextPath}/js/eventspop.js"></script>
 </body>
 </html>
