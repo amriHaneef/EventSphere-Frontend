@@ -1,7 +1,9 @@
 package com.example.eventspherefrontend.controller;
 
+import com.example.eventspherefrontend.model.Announcement;
 import com.example.eventspherefrontend.model.Event;
 import com.example.eventspherefrontend.service.EventService;
+import com.google.gson.reflect.TypeToken;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -10,6 +12,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "EventController", urlPatterns = "/pages/events")
@@ -30,7 +34,6 @@ public class EventController extends HttpServlet {
 
         HttpSession session = request.getSession();
         session.setAttribute("eventPageDate", selectedDate);
-        System.out.println("Session updated with eventPageDate: " + selectedDate);
 
         String jwtToken = (String) session.getAttribute("jwtToken");
 
@@ -54,23 +57,28 @@ public class EventController extends HttpServlet {
         String jwtToken = (String) request.getSession().getAttribute("jwtToken");
 
         if (jwtToken == null || jwtToken.isEmpty()) {
-            System.out.println("JWT Token is missing or invalid. Redirecting to login.");
             response.sendRedirect(request.getContextPath() + "/login?error=unauthorized");
             return;
         }
 
         if (selectedDate == null || selectedDate.isEmpty()) {
             selectedDate = "2025-02-10"; // Default date
-            System.out.println("Selected date was null or empty. Defaulting to: " + selectedDate);
         }
 
+        Type eventListType = new TypeToken<List<Event>>() {}.getType();
+        List<Event> allEvents = eventService.fetchAllEvents(jwtToken, eventListType);
+
+        if (allEvents == null) {
+            allEvents = new ArrayList<>();
+        }
+
+        request.setAttribute("allEvents", allEvents);
+
         try {
-            System.out.println("Fetching events for date: " + selectedDate);
             List<Event> events = eventService.fetchEvents(selectedDate, jwtToken);
 
             if (events != null && !events.isEmpty()) {
                 request.setAttribute("events", events);
-                System.out.println("Events fetched successfully. Forwarding to events.jsp.");
                 request.getRequestDispatcher("/pages/events.jsp").forward(request, response);
             } else {
                 System.out.println("No events found for the selected date.");

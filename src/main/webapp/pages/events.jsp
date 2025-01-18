@@ -80,13 +80,6 @@
             <div class="header">
                 <i class="bx bx-calendar-check"></i>
                 <h3>Events</h3>
-                <div class="date-selection">
-                    <form id="date-form" action="${pageContext.request.contextPath}/pages/events" method="post">
-                        <input type="date" name="eventPageDate" class="date-input" id="date-input" value="${eventDate}">
-                        <button type="button" class="date-btn" id="submit-btn">submit</button>
-                    </form>
-                </div>
-
                 <div class="search-container">
                     <label>
                         <input type="text" id="search-bar" class="search-bar" placeholder="Search...">
@@ -109,27 +102,27 @@
                 </thead>
                 <tbody>
                 <%
-                    List<Event> events = (List<Event>) request.getAttribute("events");
+                    List<Event> allEvents = (List<Event>) request.getAttribute("allEvents");
                 %>
                 <%
-                    if (events != null && !events.isEmpty()) {
-                        for (Event event : events) {
+                    if (allEvents != null && !allEvents.isEmpty()) {
+                        for (Event allEvent : allEvents) {
                 %>
 
                 <tr>
-                    <td ><%= event.getId() %></td>
-                    <td><%= event.getTitle() %></td>
-                    <td><%= event.getEventDate().substring(0, 10) %></td>
-                    <td><%= event.getTimePeriod().substring(0, 10) %></td>
-                    <td><%= event.getPlatform() %></td>
-                    <td><%= event.getCoordinatorName() %></td>
-                    <td><%= event.getStatus() %></td>
+                    <td ><%= allEvent.getId() %></td>
+                    <td><%= allEvent.getTitle() %></td>
+                    <td><%= allEvent.getEventDate().substring(0, 10) %></td>
+                    <td><%= allEvent.getTimePeriod().substring(0, 10) %></td>
+                    <td><%= allEvent.getPlatform() %></td>
+                    <td><%= allEvent.getCoordinatorName() %></td>
+                    <td><%= allEvent.getStatus() %></td>
 
                     <%
                         if ("admin".equalsIgnoreCase(role) || "teacher".equalsIgnoreCase(role)) {
                     %>
                     <td>
-                        <button class="update" id="btnUpdate" onclick="eventsDetailsPopUp('<%= event.getId() %>')">
+                        <button class="update" id="btnUpdate" onclick="eventsDetailsPopUp('<%= allEvent.getId() %>')">
                             <i class="bx bxs-pencil"></i>
                         </button>
 
@@ -147,7 +140,7 @@
                         </button>
                     </td>
                     <td>
-                        <button class="view" onclick="showEventDetails('<%= event.getId() %>', '<%= event.getTitle() %>', '<%= event.getEventDate().substring(0, 10) %>', '<%= event.getTimePeriod().substring(0, 10) %>', '<%= event.getPlatform() %>', '<%= event.getCoordinatorName() %>', '<%= event.getStatus() %>')">
+                        <button class="view" onclick="showEventDetails('<%= allEvent.getId() %>', '<%= allEvent.getTitle() %>', '<%= allEvent.getEventDate().substring(0, 10) %>', '<%= allEvent.getTimePeriod().substring(0, 10) %>', '<%= allEvent.getPlatform() %>', '<%= allEvent.getCoordinatorName() %>', '<%= allEvent.getStatus() %>')">
                             <i class="bx bx-show eye"></i>
                         </button>
 
