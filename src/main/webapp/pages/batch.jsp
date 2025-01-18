@@ -35,26 +35,30 @@
     <div class="popup-container">
         <span class="popup-close">&times;</span>
         <h3>Add Batch Details</h3>
-        <form id="addBatchForm">
+        <form id="addBatchForm" method="post" action="${pageContext.request.contextPath}/pages/batches">
+            <input type="hidden" name="addBatch" value="createBatch">
+
             <div class="form-group">
                 <label for="batchname">Batch Name:</label>
                 <input type="text" id="batchname" name="batchName" required>
             </div>
             <div class="form-group">
+                <label for="consultTd">consultantId:</label>
+                <input type="text" id="consultTd" name="consultant" required>
+            </div>
+
+            <div class="form-group">
                 <label for="startdate">Start Date:</label>
                 <input type="date" id="startdate" name="startDate" required>
             </div>
+
             <div class="form-group">
-                <label for="enddate">End Date:</label>
-                <input type="date" id="enddate" name="endDate" required>
-            </div>
-            <div class="form-group">
-                <label for="lecturer">Lecturer:</label>
-                <input type="text" id="lecturer" name="lecturer" required>
+                <label for="status">status:</label>
+                <input type="text" id="status" name="lecturer" required>
             </div>
             <div class="popup-buttons">
                 <button type="button" class="cancel-btn">Cancel</button>
-                <button type="submit" class="save-btn">Save</button>
+                <button type="submit"  class="save-btn">Save</button>
             </div>
         </form>
     </div>

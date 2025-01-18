@@ -34,7 +34,6 @@
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/images/favicon.ico" type="image/x-icon">
     <script>
         const role = "<%= role != null ? role : "guest" %>"; // Pass role from server-side
-        console.log("Role from JSP:", role);
     </script>
 </head>
 <body >
@@ -79,7 +78,7 @@
     </ul>
     <ul class="side-menu">
         <li>
-            <a href="#" class="logout"><i class='bx bx-log-out'></i>Logout</a>
+            <a href="${pageContext.request.contextPath}/pages/logout" class="logout"><i class='bx bx-log-out'></i>Logout</a>
         </li>
     </ul>
 </div>
@@ -152,7 +151,6 @@
 
                     <div class="cart-footer">
                         <div class="actions">
-                            <a href="#" class="primary-button">Done</a>
                         </div>
                     </div>
                 </div>
@@ -377,7 +375,6 @@
 
 <script src="${pageContext.request.contextPath}/js/DashboardHome.js"></script>
 <script src="${pageContext.request.contextPath}/js/event.js"></script>
-
 <script src="${pageContext.request.contextPath}/js/MyAccount.js"></script>
 <script src="${pageContext.request.contextPath}/js/batch.js"></script>
 <script src="${pageContext.request.contextPath}/js/students.js"></script>

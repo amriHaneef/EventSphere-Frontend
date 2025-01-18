@@ -43,7 +43,6 @@ document.querySelector('.notif').addEventListener('click', function (e) {
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    console.log("Role in JavaScript:", role);
 
     if (role.toLowerCase() === "admin") {
         document.getElementById("students-link").style.display = "none";
@@ -81,6 +80,52 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    if(urlParams.get("success") === "addBatch"){
+        const batchesLink = document.getElementById("batches-link");
+
+        // Log the element to check if it's correctly selected
+        console.log("Batches link:", batchesLink);
+
+        if (batchesLink) {
+            // Remove active class from all other links
+            const sideLinks = document.querySelectorAll('.sidebar .side-menu li a:not(.logout)');
+            sideLinks.forEach(item => {
+                const li = item.parentElement;
+                li.classList.remove('active');
+            });
+            batchesLink.classList.add('active'); // Add active class directly to the <li> element
+            console.log("Active class added.");
+
+            // Optionally, load the announcement page
+            loadBatchesPage();
+        } else {
+            console.error("Announcements link not found!");
+        }
+    }
+
+    if(urlParams.get("success") === "addUser"){
+        const usersLink = document.getElementById("users-link");
+
+        // Log the element to check if it's correctly selected
+        console.log("Batches link:", usersLink);
+
+        if (usersLink) {
+            // Remove active class from all other links
+            const sideLinks = document.querySelectorAll('.sidebar .side-menu li a:not(.logout)');
+            sideLinks.forEach(item => {
+                const li = item.parentElement;
+                li.classList.remove('active');
+            });
+            usersLink.classList.add('active'); // Add active class directly to the <li> element
+            console.log("Active class added.");
+
+            // Optionally, load the announcement page
+            loadUsersPage();
+        } else {
+            console.error("Users link not found!");
+        }
+    }
+
 // Function to load the announcement page dynamically
     function loadAnnouncementPage() {
         const announcementsContent = document.getElementById("main-content");
@@ -99,6 +144,44 @@ document.addEventListener("DOMContentLoaded", function () {
                 announcementsContent.innerHTML = html;
             })
             .catch(error => console.error("Error loading announcements:", error));
+    }
+
+    function loadBatchesPage() {
+        const batchesContent = document.getElementById("main-content");
+
+        // Dynamically use context path from the hidden input
+        const contextPath = document.getElementById("pageContextPath").value;
+
+        fetch(`${contextPath}/pages/batches`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Failed to load batches. Status: " + response.status);
+                }
+                return response.text();
+            })
+            .then(html => {
+                batchesContent.innerHTML = html;
+            })
+            .catch(error => console.error("Error loading batches:", error));
+    }
+
+    function loadUsersPage() {
+        const UsersContent = document.getElementById("main-content");
+
+        // Dynamically use context path from the hidden input
+        const contextPath = document.getElementById("pageContextPath").value;
+
+        fetch(`${contextPath}/pages/users`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Failed to load users. Status: " + response.status);
+                }
+                return response.text();
+            })
+            .then(html => {
+                UsersContent.innerHTML = html;
+            })
+            .catch(error => console.error("Error loading users:", error));
     }
 
 

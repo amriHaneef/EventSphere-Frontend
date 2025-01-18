@@ -107,9 +107,10 @@ const initializeAddUserModal = () => {
     });
 
     // Show or hide the batch field based on the user type
+    // Toggle visibility of the batch field based on user type
     document.getElementById("userType").addEventListener("change", function () {
         const batchField = document.getElementById("batchField");
-        if (this.value === "student") {
+        if (this.value === "STUDENT") {
             batchField.style.display = "block"; // Show the batch field
         } else {
             batchField.style.display = "none"; // Hide the batch field
@@ -206,18 +207,71 @@ document.addEventListener("DOMContentLoaded", function () {
 
     studentHeads.forEach(head => {
         head.addEventListener("click", function () {
-            const batchId = this.getAttribute("data-batch-id").split("-")[1]; // Extract the batch ID
-            fetch(`/pages/users?batchId=${batchId}`, {
+            // Safely extract the batch ID from the element's attribute
+            const batchId = this.getAttribute("data-batch-id")?.split("-")[1];
+            const jwtToken = sessionStorage.getItem("jwtToken");
+
+            // Log batch ID and JWT token for debugging
+            console.log(`Extracted batchId: ${batchId}`);
+            console.log(`JWT Token in sessionStorage: ${jwtToken ? jwtToken.substring(0, 10) + "..." : "null"}`);
+
+            // Validate batch ID
+            if (!batchId) {
+                console.error("Batch ID is null or undefined.");
+                alert("Error: Invalid Batch ID. Please try again.");
+                return;
+            }
+
+            // Validate JWT token
+            if (!jwtToken) {
+                console.error("JWT Token is null or undefined.");
+                alert("Error: Authorization token is missing. Please log in again.");
+                return;
+            }
+
+            // Construct the URL for the API request
+            const url = `/pages/users?batchId=${batchId}`;
+            console.log(`Making a GET request to: ${url}`);
+
+            // Perform the fetch request
+            fetch(url, {
                 method: "GET",
                 headers: {
-                    "Authorization": `Bearer ${sessionStorage.getItem("jwtToken")}`,
-                }
+                    "Authorization": `Bearer ${jwtToken}`,
+                },
             })
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data); // Use this data to update the DOM if needed
+                .then(response => {
+                    console.log(`Response status: ${response.status}`);
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
                 })
-                .catch(err => console.error(err));
+                .then(data => {
+                    console.log("Response data:", data);
+
+                    // Dynamically update the DOM based on the fetched data
+                    const studentTable = document.querySelector(`#batch-${batchId} tbody`);
+                    studentTable.innerHTML = ""; // Clear existing rows
+                    data.forEach(student => {
+                        const row = document.createElement("tr");
+                        row.innerHTML = `
+                            <td>${student.id}</td>
+                            <td>${student.name}</td>
+                            <td>${student.email}</td>
+                            <td>${student.dob ? student.dob.substring(0, 10) : "N/A"}</td>
+                        `;
+                        studentTable.appendChild(row);
+                    });
+
+                    // Show the table
+                    const tableContainer = document.querySelector(`#batch-${batchId}`);
+                    tableContainer.classList.remove("hidden");
+                })
+                .catch(err => {
+                    console.error("An error occurred:", err);
+                    alert("Failed to fetch students. Please try again later.");
+                });
         });
     });
 });

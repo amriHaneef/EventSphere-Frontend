@@ -11,6 +11,13 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/css/Users.css">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+  <style>
+      /* Hide the batch field initially */
+      /*#batchField {*/
+      /*    display: none;*/
+      /*}*/
+  </style>
+
 
     <div class="header">
       <div class="left">
@@ -37,21 +44,17 @@
               <i class='bx bx-x close'  onclick="closeModal()"></i>
             </div>
             <div class="modal-body">
-              <form action="#" id="myForm">
+              <form id="UserAddForm" action="${pageContext.request.contextPath}/pages/users" method="post" >
 
                 <div class="card imgholder">
-                  <label for="imgInput" class="upload">
-                    <input type="file" name="" id="imgInput" disabled>
-                    <i class='bx bx-plus'></i>
-                  </label>
-                  <img id="imagePreview" alt="" width="200" height="200" class="img">
+                  <img src="${pageContext.request.contextPath}/images/noprofil.jpg" id="imagePreview" alt="" width="200" height="200" class="img">
                 </div>
                 <div class="inputField">
                   <label for="name">Name:</label>
-                  <input type="text" name="" id="name" required>
+                  <input type="text" name="username" id="name" required>
 
                   <label for="email">E-mail:</label>
-                  <input type="email" name="" id="email" required>
+                  <input type="email" name="email" id="email" required>
 
                   <label for="birthday">Birthday:</label>
                   <input type="date" name="birthday" id="birthday" required>
@@ -59,26 +62,31 @@
                   <label for="age">Age:</label>
                   <input type="number" name="age" id="age" min="16" max="100" required>
 
-                  <label for="phone">Number:</label>
-                  <input type="text" name="" id="phone" minlength="11" maxlength="11" required>
+                  <label for="password">Password:</label>
+                  <input type="password" name="password" id="password"  required>
 
                   <label for="userType">User Type:</label>
-                  <select id="userType" required>
+                  <select id="userType" name="userType" required>
                     <option value="" disabled selected>Select a User Type</option>
-                    <option value="admin">Admin </option>
-                    <option value="teacher">Teacher </option>
-                    <option value="student">Student</option>
+                    <option value="ADMIN">Admin </option>
+                    <option value="TEACHER">Teacher </option>
+                    <option value="STUDENT">Student</option>
                     <!-- Add more options as needed -->
                   </select>
 
-                  <div id="batchField" style="display: none;">
+                  <div id="batchField">
                     <label for="batch">Batch:</label>
-                    <select id="batch" required>
+                      <br>
+                    <select id="batch">
                       <option value="" disabled selected>Select a batch</option>
-                      <option value="batch1">Batch 1</option>
-                      <option value="batch2">Batch 2</option>
-                      <option value="batch3">Batch 3</option>
-                      <!-- Add more options as needed -->
+                        <%
+                            List<Batch> batches = (List<Batch>) request.getAttribute("batches");
+                            for (Batch batch : batches) {
+                        %>
+                      <option value="<%= batch.getId() %>"><%= batch.getName() %></option>
+                        <%
+                            }
+                        %>
                     </select>
                   </div>
                 </div>
@@ -86,7 +94,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" onclick="closeModal()">Close</button>
-              <button type="submit" form="myForm" class="btn btn-primary submit">Submit</button>
+              <button type="submit" form="UserAddForm" class="btn btn-primary submit">Submit</button>
             </div>
           </div>
         </div>
@@ -96,13 +104,10 @@
   <div class="data">
       <div class="batch-container">
           <%
-              // Retrieve the List<Batch> from request attributes
-              List<Batch> batches = (List<Batch>) request.getAttribute("batches");
-
               // Iterate through the List<Batch>
               for (Batch batch : batches) {
           %>
-          <div class="header student-head" data-batch-id="batch-<%= String.valueOf(batch.getId()).replaceAll("[^a-zA-Z0-9-_]", "_") %>">
+          <div class="header student-head" data-batch-id="batch-<%= String.valueOf(batch.getId()).replaceAll("[^a-zA-Z0-9-_]", "_") %>" url-batch-id="<%=String.valueOf(batch.getId()) %>">
               <div class="batch" >
                   <h3>Batch: <%= batch.getName() %></h3>
               </div>
@@ -125,12 +130,12 @@
 
                   // Iterate through the List<Batch>
                   for (User student : students) { // Compare with batch name or id
+
               %>
                 <tr>
                   <td><%= student.getId() %></td>
                   <td><%= student.getName() %></td>
                   <td><%= student.getEmail() %></td>
-                  <td><%= student.getDob().substring(0, 10) %></td>
                   <td><%= student.getAge() %></td>
                   <td>
                       <button class="edit">
@@ -189,7 +194,18 @@
             <td><%= user.getId() %></td>
             <td><%= user.getName()   %></td>
             <td><%= user.getEmail() %></td>
+              <%
+                  if (user.getDob() == null || user.getDob().length() < 10) {
+                      user.setDob("N/A");
+              %>
+              <td>N/A</td>
+              <%
+                  }else{
+              %>
             <td><%= user.getDob().substring(0, 10) %></td>
+              <%
+                  }
+              %>
             <td>
               <button class="edit">
                 <i class="bx bx-edit write"></i>
