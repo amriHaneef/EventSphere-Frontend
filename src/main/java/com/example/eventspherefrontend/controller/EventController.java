@@ -24,19 +24,6 @@ public class EventController extends HttpServlet {
             return;
         }
 
-
-        // Prepare the list of events
-        List<String[]> events = new ArrayList<>();
-        events.add(new String[]{"01", "Mock Interview", "14-08-2024", "9.30 A.M", "Zoom", "Mrs.Sandaruwani", "Done"});
-        // Adding multiple events
-        events.add(new String[]{"02", "Mock Interview", "14-08-2024", "9.30 A.M", "Zoom", "Mrs.Sandaruwani", "Done"});
-        events.add(new String[]{"03", "Mock Interview", "14-08-2024", "9.30 A.M", "Zoom", "Mrs.Sandaruwani", "Done"});
-
-        // Add announcements to the request
-        request.setAttribute("events", events);
-
-
-
         // Forward the request to AdminEvents.jsp (UI page)
         request.getRequestDispatcher("/pages/events.jsp").forward(request, response);
     }
@@ -55,4 +42,4 @@ public class EventController extends HttpServlet {
 
         response.getWriter().write("Feedback submitted successfully for event ID: " + eventId);
     }
-}
+
