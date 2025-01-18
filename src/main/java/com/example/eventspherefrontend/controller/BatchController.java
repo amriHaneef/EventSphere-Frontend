@@ -19,6 +19,7 @@ import java.util.List;
 public class BatchController extends HttpServlet {
     private final BatchService batchService = new BatchService();
 
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();

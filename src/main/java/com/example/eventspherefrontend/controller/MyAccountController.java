@@ -15,6 +15,7 @@ public class MyAccountController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 
+
         // Forward the request to students.jsp
         request.getRequestDispatcher("/pages/MyAccount.jsp").forward(request, response);
     }

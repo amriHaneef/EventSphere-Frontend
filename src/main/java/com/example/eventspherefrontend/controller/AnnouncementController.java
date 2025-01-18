@@ -93,6 +93,7 @@ public class AnnouncementController extends HttpServlet {
             announcement.setCreatedBy(createdBy);
             announcement.setRole(role);
 
+
             System.out.println("JWT Token: " + jwtToken);
 
             boolean isCreated = announcementService.createAnnouncement(announcement, jwtToken);

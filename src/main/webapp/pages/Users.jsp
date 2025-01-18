@@ -38,6 +38,7 @@
             </div>
             <div class="modal-body">
               <form action="#" id="myForm">
+
                 <div class="card imgholder">
                   <label for="imgInput" class="upload">
                     <input type="file" name="" id="imgInput" disabled>

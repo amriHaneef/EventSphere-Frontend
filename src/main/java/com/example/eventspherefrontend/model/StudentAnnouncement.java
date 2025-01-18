@@ -12,6 +12,7 @@ public class StudentAnnouncement {
         return announcementId;
     }
 
+
     public void setAnnouncementId(String announcementId) {
         this.announcementId = announcementId;
     }

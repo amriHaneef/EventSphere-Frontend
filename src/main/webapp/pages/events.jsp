@@ -267,6 +267,7 @@
     </div>
     <!-- Button to open popup -->
     <button id="markAttendanceBtn" onclick="showAttendancePopup()">Mark Attendance</button>
+
     <!-- Attendance Popup Form -->
     <div class="attendance-popup">
         <div class="popup-container">

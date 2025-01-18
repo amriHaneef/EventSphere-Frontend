@@ -23,6 +23,7 @@ public class DashboardHomeController extends HttpServlet {
     private final AnnouncementService announcementService = new AnnouncementService();
     private final EventService eventService = new EventService();
 
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String selectedDate = request.getParameter("eventDate");

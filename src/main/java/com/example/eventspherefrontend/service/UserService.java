@@ -24,6 +24,7 @@ public class UserService {
      * @param type     The type for deserializing the JSON response.
      * @return A list of User objects or an empty list if an error occurs.
      */
+
     public <T> List<T> fetchUsers(String jwtToken, Type type) {
         List<T> users = new ArrayList<>();
         try {

@@ -15,6 +15,7 @@ public class HomeController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 
+
         // Forward the request to DashboardHome.jsp
         request.getRequestDispatcher("/pages/home.jsp").forward(request, response);
     }

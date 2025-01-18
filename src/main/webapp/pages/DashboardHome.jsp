@@ -370,6 +370,7 @@
         </div>
     </main>
 </div>
+
 <script>
     const pageContextPath = "${pageContext.request.contextPath}";
 </script>

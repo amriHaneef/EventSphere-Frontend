@@ -131,6 +131,7 @@ public class Event {
         this.eventDate = eventDate;
     }
 
+
     // toString
     @Override
     public String toString() {

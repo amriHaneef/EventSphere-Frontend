@@ -12,6 +12,7 @@ public class Batch {
     private String updatedAt;
     private String status;
 
+
     // Constructor
     public Batch(int id, String name, int consultantId, String consultantName, String startDate, String createdAt, String updatedAt, String status) {
         this.id = id;

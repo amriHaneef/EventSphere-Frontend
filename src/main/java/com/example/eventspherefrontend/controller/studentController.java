@@ -17,6 +17,7 @@ public class studentController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 
+
         // Prepare the list of students
         List<String[]> students = new ArrayList<>();
         students.add(new String[]{"001", "John Doe","JohnDoe@gmail.com", "24-12-2002","GAHDSE24.2"});

@@ -19,6 +19,7 @@ import java.net.URL;
 @WebServlet(name = "LoginController", urlPatterns = "/pages/login")
 public class LoginController extends HttpServlet {
 
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Get the username and password from the form

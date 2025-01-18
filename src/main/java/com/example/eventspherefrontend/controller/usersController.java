@@ -34,6 +34,7 @@ public class usersController extends HttpServlet {
             return;
         }
 
+
         // Fetch users using a TypeToken
         Type userListType = new TypeToken<List<User>>() {}.getType();
         List<User> users = userService.fetchUsers(jwtToken, userListType);

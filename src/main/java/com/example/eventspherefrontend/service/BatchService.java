@@ -33,6 +33,7 @@ public class BatchService {
                 }
                 reader.close();
 
+
                 data = gson.fromJson(jsonResponse.toString(), type);
             } else {
                 System.out.println("Failed to fetch data. HTTP response code: " + connection.getResponseCode());
