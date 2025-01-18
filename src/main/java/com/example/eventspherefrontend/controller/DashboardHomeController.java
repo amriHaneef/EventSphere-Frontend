@@ -1,5 +1,11 @@
 package com.example.eventspherefrontend.controller;
 
+import com.example.eventspherefrontend.model.Announcement;
+import com.example.eventspherefrontend.model.Event;
+import com.example.eventspherefrontend.service.AnnouncementService;
+import com.example.eventspherefrontend.service.EventService;
+import com.google.gson.reflect.TypeToken;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -8,49 +14,55 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "DashboardHomeController", urlPatterns = "/pages/Home")
 public class DashboardHomeController extends HttpServlet {
+    private final AnnouncementService announcementService = new AnnouncementService();
+    private final EventService eventService = new EventService();
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String selectedDate = request.getParameter("eventDate");
+
+        if (selectedDate == null || selectedDate.isEmpty()) {
+            selectedDate = "2025-02-10"; // Default date
+        }
+
+        HttpSession session = request.getSession();
+        session.setAttribute("eventDate", selectedDate);
+
+        response.sendRedirect(request.getContextPath() + "/pages/Home?eventDate=" + selectedDate);
+    }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        String jwtToken = (String) session.getAttribute("jwtToken");
+        String selectedDate = (String) session.getAttribute("eventDate");
 
-        // Prepare the list of announcements
-        List<String[]> events = new ArrayList<>();
-        events.add(new String[]{"001","Mock Interview", "14-08-2024","GADSE23.1","sadaruwani"});
-        // Adding multiple events
-        events.add(new String[]{"002","Mock Interview", "14-08-2024","GADSE24.1","sadaruwani"});
-        events.add(new String[]{"003","Hackathon", "15-08-2024","GADSE22.1","sadaruwani"});
-        events.add(new String[]{"004","Seminar", "16-08-2024","GADSE23.2", "Bob Johnson",});
+        if (jwtToken == null) {
+            response.sendRedirect(request.getContextPath() + "/login.jsp");
+            return;
+        }
 
-        // Add events to the request
+        if (selectedDate == null || selectedDate.isEmpty()) {
+            selectedDate = ""; // Default date
+        }
+
+        List<Event> events = eventService.fetchEvents(selectedDate, jwtToken);
+        Type announcementListType = new TypeToken<List<Announcement>>() {}.getType();
+        List<Announcement> announcements = announcementService.fetchAnnouncements(jwtToken, announcementListType);
+
+        if (announcements == null) {
+            announcements = new ArrayList<>();
+        }
+
         request.setAttribute("events", events);
-
-
-
-        // Prepare the list of announcements
-        List<String[]> announcements = new ArrayList<>();
-        announcements.add(new String[]{"Mock Interview", "John Doe", "14-08-2024",});
-        // Adding multiple announcements
-        announcements.add(new String[]{"Mock Interview", "John Doe", "14-08-2024"});
-        announcements.add(new String[]{"Hackathon", "Alice Smith", "15-08-2024"});
-        announcements.add(new String[]{"Seminar", "Bob Johnson", "16-08-2024"});
-
-        // Add announcements to the request
         request.setAttribute("announcements", announcements);
 
-
-
-        // Example: Retrieve user role (e.g., from database or session)
-        String userRole = "student"; // This should be dynamically retrieved
-
-        // Set the role in the request or session
-        HttpSession session = request.getSession();
-        if (session.getAttribute("role") == null) {
-            session.setAttribute("role", userRole);
-        }
-        // Forward the request to DashboardHome.jsp
         request.getRequestDispatcher("/pages/DashboardHome.jsp").forward(request, response);
     }
 }

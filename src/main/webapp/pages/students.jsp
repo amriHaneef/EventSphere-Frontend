@@ -2,8 +2,12 @@
 <%@ page import="java.lang.String" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%
-    //Check if 'role' is already declared;
-    String role = (String) session.getAttribute("role");
+    String username = (String) session.getAttribute("username");
+    String role = (String) session.getAttribute("role"); // Get the role from the session
+
+    if (role == null) {
+        role = "guest"; // Default role if none is set
+    }
 %>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/students.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>

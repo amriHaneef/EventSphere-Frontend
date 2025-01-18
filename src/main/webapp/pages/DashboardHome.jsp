@@ -1,6 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page import="com.example.eventspherefrontend.model.Event" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.lang.String" %>
+<%@ page import="com.example.eventspherefrontend.model.Announcement" %>
 <%
     String redirected = request.getParameter("redirected");
     if (redirected == null) {
@@ -10,8 +12,15 @@
 %>
 
 <%
-    String role = (String) session.getAttribute("role");
+    String username = (String) session.getAttribute("username");
+    String role = (String) session.getAttribute("role"); // Get the role from the session
+
+    if (role == null) {
+        role = "guest"; // Default role if none is set
+    }
 %>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,8 +32,20 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
     <title>EventSphere</title>
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/images/favicon.ico" type="image/x-icon">
+    <script>
+        const role = "<%= role != null ? role : "guest" %>"; // Pass role from server-side
+        console.log("Role from JSP:", role);
+    </script>
 </head>
 <body >
+<input type="hidden" id="pageContextPath" value="${pageContext.request.contextPath}">
+<%
+    // Retrieve the List<Announcement> from request attributes
+    List<Announcement> announcements = (List<Announcement>) request.getAttribute("announcements");
+%>
+<%
+    List<Event> events = (List<Event>) request.getAttribute("events");
+%>
 
 <!-- Sidebar -->
 <div class="sidebar ">
@@ -54,6 +75,7 @@
         <li id="accounts-link">
             <a href="#"><i class="bx bx-cog"></i>My Account</a>
         </li>
+
     </ul>
     <ul class="side-menu">
         <li>
@@ -61,6 +83,7 @@
         </li>
     </ul>
 </div>
+
 <!-- End of sidebar  -->
 
 <!-- Main content -->
@@ -74,7 +97,23 @@
         <div class="announcements">
             <a href="#" class="notif">
                 <i class="bx bx-bell"></i>
-                <span class="count">12</span>
+
+                <%
+                    // Get the current date in the same format as 'createdAt'
+                    java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
+                    String currentDate = sdf.format(new java.util.Date());
+
+                    // Filter announcements for the current date
+                    int totalCountToday = 0;
+                    for (Announcement announcement : announcements) {
+                        if (announcement.getCreatedAt().substring(0, 10).equals(currentDate)) {
+                            totalCountToday++;
+                        }else{
+                            totalCountToday = 0;
+                        }
+                    }
+                %>
+                <span class="count"><%= totalCountToday %></span>
             </a>
             <div class="mini-cart">
                 <div class="cartcontent">
@@ -83,26 +122,23 @@
                     </div>
                     <div class="cart-body">
                         <ul class="products mini">
+                            <%
+                                if (announcements != null && !announcements.isEmpty()) {
+
+                                    for (Announcement announcement : announcements) {
+                                        if (announcement.getCreatedAt().substring(0, 10).equals(currentDate)) {
+                                    // Display the total count of announcements for today
+                            %>
                             <li class="item">
                                 <div class="item-content">
-                                    <p>Mock Interview on 2024/12/30.</p>
+                                    <p><%= announcement.getTitle() %> on <%= announcement.getCreatedAt().substring(0, 10) %>.</p>
                                 </div>
                             </li>
-                            <li class="item">
-                                <div class="item-content">
-                                    <p>Mock Interview on 2024/12/30.</p>
-                                </div>
-                            </li>
-                            <li class="item">
-                                <div class="item-content">
-                                    <p>Mock Interview on 2024/12/30.</p>
-                                </div>
-                            </li>
-                            <li class="item">
-                                <div class="item-content">
-                                    <p>Mock Interview on 2024/12/30.</p>
-                                </div>
-                            </li>
+                            <%
+                                        }
+                                    }
+                                }
+                            %>
                         </ul>
                     </div>
 
@@ -210,7 +246,14 @@
             <div class="orders">
                 <div class="header">
                     <i class="bx bx-calendar-check"></i>
-                    <h3>Recent Events</h3>
+                    <h3>Events</h3>
+                    <div class="date-selection">
+                        <form id="date-form" action="${pageContext.request.contextPath}/pages/Home" method="post">
+                            <input type="date" name="eventDate" class="date-input" id="date-input" value="${eventDate}">
+                            <button type="submit" class="date-btn" id="submit-btn">submit</button>
+                        </form>
+                    </div>
+                    <div id="message"></div>
                     <div class="search-container">
                         <label>
                             <input type="text" id="search-bar" class="search-bar" placeholder="Search...">
@@ -228,24 +271,29 @@
                     </thead>
                     <tbody>
                     <%
-                        // Retrieve and safely cast events
-                        Object eventsObject = request.getAttribute("events");
-                        if (eventsObject instanceof List) {
-                            List<String[]> events = (List<String[]>) eventsObject;
-                            for (String[] event : events) {
+                        if (events != null && !events.isEmpty()) {
+                            for (Event event : events) {
                     %>
                     <tr onclick="openEventDetails(this)">
-                        <td><%= event[0] %></td>
+                        <td><%= event.getId() %></td>
                         <td>
-                            <p><%= event[1] %></p>
+                            <p><%= event.getTitle() %></p>
                         </td>
-                        <td><%= event[2] %></td>
-                        <td style="display: none"><%= event[3] %></td>
-                        <td style="display: none"><%= event[4] %></td>
-                        <td><span class="status completed">Completed</span></td>
+                        <td><%= event.getEventDate().substring(0, 10) %></td>
+                        <td style="display: none"><%= event.getPlatform()%></td>
+                        <td><span class="status completed"><%=event.getStatus()%> </span></td>
                     </tr>
                     <%
                             }
+                        }else{
+                    %>
+                    <tr>
+                        <td></td>
+                        <td colspan="1" style="text-align: center;  ">No Events Found on ${eventDate} <i class="bx bx-search" style="font-size: 14px;"></i></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <%
                         }
                     %>
                     <!-------------------------- Event Details card ------------------------------>
@@ -261,15 +309,15 @@
                                     <i class="bx bx-check"></i>
                                 </div>
                                 <div class="plan">
-                                    <span><strong>Consultant:</strong></span>
+                                    <span><strong>Date:</strong></span>
                                     <i class="bx bx-check"></i>
                                 </div>
                                 <div class="plan">
-                                    <span><strong>Participated Batch:</strong></span>
+                                    <span><strong>Platform:</strong></span>
                                     <i class="bx bx-check"></i>
                                 </div>
                                 <div class="plan">
-                                    <span><strong>Assigned Students: </strong> </span>
+                                    <span><strong>Status: </strong> </span>
                                     <i class="bx bx-check"></i>
                                 </div>
                                 <button onclick="closeEventDetails()">Done</button>
@@ -288,16 +336,19 @@
                 </div>
                 <ul class="task-list">
                     <%
-                        // Retrieve and safely cast announcements
-                        Object announcementsObject = request.getAttribute("announcements");
-                        if (announcementsObject instanceof List) {
-                            List<String[]> announcements = (List<String[]>) announcementsObject;
-                            for (String[] announcement : announcements) {
+                        if (announcements != null) {
+                            int size = announcements.size();
+
+                            // Fetch the last 6 announcements or all if there are fewer than 6
+                            List<Announcement> lastSixAnnouncements = announcements.subList(Math.max(size - 6, 0), size);
+
+                            // Iterate through the filtered list
+                            for (Announcement announcement : lastSixAnnouncements) {
                     %>
                     <li class="completed">
                         <div class="task-title">
                             <i class="bx bx-check-circle"></i>
-                            <p><%= announcement[0] %> On <%= announcement[2] %></p>
+                            <p><%= announcement.getTitle() %> On <%= announcement.getCreatedAt().substring(0, 10)  %></p>
                         </div>
                         <i class="bx bx-dots-vertical-rounded"></i>
                     </li>
@@ -314,13 +365,15 @@
 <script>
     const pageContextPath = "${pageContext.request.contextPath}";
 </script>
+
+<script src="${pageContext.request.contextPath}/js/DashboardHome.js"></script>
 <script src="${pageContext.request.contextPath}/js/event.js"></script>
-<script src="${pageContext.request.contextPath}/js/batch.js"></script>
+
 <script src="${pageContext.request.contextPath}/js/MyAccount.js"></script>
+<script src="${pageContext.request.contextPath}/js/batch.js"></script>
 <script src="${pageContext.request.contextPath}/js/students.js"></script>
 <script src="${pageContext.request.contextPath}/js/announcement.js"></script>
 <script src="${pageContext.request.contextPath}/js/Users.js"></script>
-<script src="${pageContext.request.contextPath}/js/DashboardHome.js"></script>
 <script src="${pageContext.request.contextPath}/js/dashboard.js"></script>
 </body>
 </html>

@@ -16,23 +16,13 @@ public class EventController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        // Prepare the list of events
-        List<String[]> events = new ArrayList<>();
-        events.add(new String[]{"01", "Mock Interview", "14-08-2024", "9.30 A.M", "Zoom", "Mrs.Sandaruwani", "Done"});
-        // Adding multiple events
-        events.add(new String[]{"02", "Mock Interview", "14-08-2024", "9.30 A.M", "Zoom", "Mrs.Sandaruwani", "Done"});
-        events.add(new String[]{"03", "Mock Interview", "14-08-2024", "9.30 A.M", "Zoom", "Mrs.Sandaruwani", "Done"});
-
-        // Add announcements to the request
-        request.setAttribute("events", events);
-
-
-        // Example: Retrieve user role (e.g., from database or session)
-        String userRole = "teacher"; // This should be dynamically retrieved
-
-        // Set the role in the request or session
         HttpSession session = request.getSession();
-        session.setAttribute("role", userRole);
+        String jwtToken = (String) session.getAttribute("jwtToken");
+
+        if (jwtToken == null) {
+            response.sendRedirect(request.getContextPath() + "/login.jsp");
+            return;
+        }
 
         // Forward the request to AdminEvents.jsp (UI page)
         request.getRequestDispatcher("/pages/events.jsp").forward(request, response);
@@ -52,4 +42,4 @@ public class EventController extends HttpServlet {
 
         response.getWriter().write("Feedback submitted successfully for event ID: " + eventId);
     }
-}
+
