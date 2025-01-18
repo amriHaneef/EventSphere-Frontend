@@ -33,6 +33,7 @@ public class LoginController extends HttpServlet {
 
         // Call the backend API for authentication
         String apiEndpoint = "http://13.60.250.63:8081/user/login";
+      
         URL url = new URL(apiEndpoint);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("POST");

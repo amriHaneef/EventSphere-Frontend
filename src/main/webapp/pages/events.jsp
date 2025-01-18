@@ -155,11 +155,11 @@
                         <button class="cancel-Btn">Cancel</button>
                         <button class="ok-btn">OK</button>
                     </div>
+
                 </div>
             </div>
         </div>
     </div>
-
 
     <!-- Popup Form -->
     <div class="edit-Overlay">
@@ -286,8 +286,10 @@
 
 
 </div>
+
 <script>
     const pageContextPath = "${pageContext.request.contextPath}";
 </script>
 <script src="${pageContext.request.contextPath}/js/event.js"></script>
+
 <script src="${pageContext.request.contextPath}/js/dashboard.js"></script>
