@@ -42,5 +42,5 @@ public class EventController extends HttpServlet {
 
         response.getWriter().write("Feedback submitted successfully for event ID: " + eventId);
     }
-};
+}
 
