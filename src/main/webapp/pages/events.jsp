@@ -71,7 +71,6 @@
     </div>
 </div>
 
-<button type="button"  onclick="onloading()">test</button>
 <%--event table --%>
 <div id="eventTable">
 
@@ -310,6 +309,4 @@
     const pageContextPath = "${pageContext.request.contextPath}";
 </script>
 <script src="${pageContext.request.contextPath}/js/event.js"></script>
-
 <script src="${pageContext.request.contextPath}/js/dashboard.js"></script>
-<script src="${pageContext.request.contextPath}/js/eventspop.js"></script>
