@@ -41,5 +41,5 @@ public class EventController extends HttpServlet {
         // Example: Insert feedback associated with the eventId into the database
 
         response.getWriter().write("Feedback submitted successfully for event ID: " + eventId);
-    }
+    }}
 

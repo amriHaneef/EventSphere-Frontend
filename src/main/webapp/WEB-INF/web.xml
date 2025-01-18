@@ -82,15 +82,6 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>EventController</servlet-name>
-        <servlet-class>com.example.eventspherefrontend.controller.EventController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>EventController</servlet-name>
-        <url-pattern>/pages/events</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
         <servlet-name>HomeController</servlet-name>
         <servlet-class>com.example.eventspherefrontend.controller.HomeController</servlet-class>
     </servlet>
