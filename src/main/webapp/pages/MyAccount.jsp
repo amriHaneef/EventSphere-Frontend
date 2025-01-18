@@ -34,9 +34,7 @@
                 <div class="profile">
                     <h1>Personal Info</h1>
                     <h2>Full Name</h2>
-                    <p><input type="text" placeholder=" Hassnain Haider ">
-                        <button class="btn">update</button>
-                    </p>
+                    <p>Hassnain Haider</p>
                     <h2>Birthday</h2>
                     <p><input type="text" placeholder="January 5" disabled> </p>
                     <h2>Gender</h2>

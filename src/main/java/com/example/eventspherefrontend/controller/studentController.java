@@ -29,13 +29,6 @@ public class studentController extends HttpServlet {
         request.setAttribute("students", students);
 
 
-        // Example: Retrieve user role (e.g., from database or session)
-        String userRole = "teacher"; // This should be dynamically retrieved
-
-        // Set the role in the request or session
-        HttpSession session = request.getSession();
-        session.setAttribute("role", userRole);
-
         // Forward the request to students.jsp
         request.getRequestDispatcher("/pages/students.jsp").forward(request, response);
     }

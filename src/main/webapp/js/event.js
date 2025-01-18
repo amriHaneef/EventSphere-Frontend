@@ -237,3 +237,4 @@ document.getElementById('attendanceForm').addEventListener('submit', function(ev
 
 // Initialize all functionalities on DOM content load
 document.addEventListener('DOMContentLoaded', reinitializeEventContentListeners);
+

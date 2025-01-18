@@ -2,7 +2,7 @@
 
 :root{
     --light:#f6f6f9;
-    --primary:#1976d2;
+    --primary: #125293;
     --light-primary:#cfe8ff;
     --gray:#eee;
     --dark-gray:#aaaaaa;
@@ -11,7 +11,7 @@
     --light-danger:#fecdd3;
     --warning:#fbc02d;
     --light-warning:#fff2c6;
-    --success:#388e3c;
+    --success: #27632a;
     --light-success:#bbf7d0;
     --color-light: rgba(132,139,200,0.18);
 }

@@ -1,5 +1,6 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.lang.String" %>
+<%@ page import="com.example.eventspherefrontend.model.Batch" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%
   // Check if 'role' is already declared;
@@ -93,19 +94,18 @@
   <div class="data">
       <div class="batch-container">
           <%
-              // Retrieve and safely cast batches
-              Object batchesObject = request.getAttribute("batches");
-              if (batchesObject instanceof List) {
-                  List<String[]> batches = (List<String[]>) batchesObject;
-                  for (String[] batch : batches) {
-                      String assignedBatch = batch[0];
+              // Retrieve the List<Batch> from request attributes
+              List<Batch> batches = (List<Batch>) request.getAttribute("batches");
+
+              // Iterate through the List<Batch>
+              for (Batch batch : batches) {
           %>
-          <div class="header student-head" data-batch-id="batch-<%= batch[0].replaceAll("[^a-zA-Z0-9-_]", "_") %>">
+          <div class="header student-head" data-batch-id="batch-<%= String.valueOf(batch.getId()).replaceAll("[^a-zA-Z0-9-_]", "_") %>">
               <div class="batch" >
-                  <h3>Batch: <%= batch[0] %></h3>
+                  <h3>Batch: <%= batch.getName() %></h3>
               </div>
           </div>
-          <table id="batch-<%= batch[0].replaceAll("[^a-zA-Z0-9-_]", "_") %>" class="student-details hidden">
+          <table id="batch-<%= String.valueOf(batch.getId()).replaceAll("[^a-zA-Z0-9-_]", "_") %>" class="student-details hidden">
               <thead>
                   <tr>
                       <th>ID</th>
@@ -121,13 +121,11 @@
               </thead>
               <tbody>
               <%
-                  // Retrieve and safely cast students
                   Object studentsObject = request.getAttribute("students");
-                  if (studentsObject instanceof List) {
-                      List<String[]> students = (List<String[]>) studentsObject;
-                      for (String[] student : students) {
-                          String studentBatch = student[4];
-                          if (assignedBatch.equals(studentBatch)){
+                  List<String[]> students = (List<String[]>) studentsObject;
+                  for (String[] student : students) {
+                      String studentBatch = student[4];
+                      if (batch.getName().equals(studentBatch)) {  // Compare with batch name or id
               %>
                 <tr>
                   <td><%= student[0] %></td>
@@ -151,14 +149,13 @@
                 <%
                             }
                         }
-                    }
                 %>
               </tbody>
           </table>
           <%
-                  }
               }
           %>
+
       </div>
   </div>
 
