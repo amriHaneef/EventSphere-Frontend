@@ -109,7 +109,7 @@
                     <td ><%= event.getId() %></td>
                     <td><%= event.getTitle() %></td>
                     <td><%= event.getEventDate().substring(0, 10) %></td>
-                    <td><%= event.getTimePeriod().substring(0, 10) %></td>
+                    <td><%= event.getTimePeriod() %></td>
                     <td><%= event.getPlatform() %></td>
                     <td><%= event.getCoordinatorName() %></td>
                     <td><%= event.getStatus() %></td>
@@ -187,10 +187,6 @@
                 <div class="form-group">
                     <label for="event-Platform">Platform:</label>
                     <input type="text" id="event-Platform" class="form-control" name="platform" required>
-                </div>
-                <div class="form-group">
-                    <label for="lecturer-name">Lecturer:</label>
-                    <input type="text" id="lecturer-name" class="form-control" name="lecturername" required>
                 </div>
                 <div class="form-group">
                     <label for="event-status">Status:</label>
