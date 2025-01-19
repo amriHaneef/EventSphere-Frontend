@@ -11,6 +11,13 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/css/Users.css">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+  <style>
+      /* Hide the batch field initially */
+      /*#batchField {*/
+      /*    display: none;*/
+      /*}*/
+  </style>
+
 
     <div class="header">
       <div class="left">
@@ -37,21 +44,17 @@
               <i class='bx bx-x close'  onclick="closeModal()"></i>
             </div>
             <div class="modal-body">
-              <form action="#" id="myForm">
+              <form id="UserAddForm" action="${pageContext.request.contextPath}/pages/users" method="post" >
 
                 <div class="card imgholder">
-                  <label for="imgInput" class="upload">
-                    <input type="file" name="" id="imgInput" disabled>
-                    <i class='bx bx-plus'></i>
-                  </label>
-                  <img id="imagePreview" alt="" width="200" height="200" class="img">
+                  <img src="${pageContext.request.contextPath}/images/noprofil.jpg" id="imagePreview" alt="" width="200" height="200" class="img">
                 </div>
                 <div class="inputField">
                   <label for="name">Name:</label>
-                  <input type="text" name="" id="name" required>
+                  <input type="text" name="username" id="name" required>
 
                   <label for="email">E-mail:</label>
-                  <input type="email" name="" id="email" required>
+                  <input type="email" name="email" id="email" required>
 
                   <label for="birthday">Birthday:</label>
                   <input type="date" name="birthday" id="birthday" required>
@@ -59,34 +62,39 @@
                   <label for="age">Age:</label>
                   <input type="number" name="age" id="age" min="16" max="100" required>
 
-                  <label for="phone">Number:</label>
-                  <input type="text" name="" id="phone" minlength="11" maxlength="11" required>
+                  <label for="password">Password:</label>
+                  <input type="password" name="password" id="password"  required>
 
                   <label for="userType">User Type:</label>
-                  <select id="userType" required>
+                  <select id="userType" name="userType" required>
                     <option value="" disabled selected>Select a User Type</option>
-                    <option value="admin">Admin </option>
-                    <option value="teacher">Teacher </option>
-                    <option value="student">Student</option>
+                    <option value="ADMIN">Admin </option>
+                    <option value="TEACHER">Teacher </option>
+                    <option value="STUDENT">Student</option>
                     <!-- Add more options as needed -->
                   </select>
 
-                  <div id="batchField" style="display: none;">
-                    <label for="batch">Batch:</label>
-                    <select id="batch" required>
-                      <option value="" disabled selected>Select a batch</option>
-                      <option value="batch1">Batch 1</option>
-                      <option value="batch2">Batch 2</option>
-                      <option value="batch3">Batch 3</option>
-                      <!-- Add more options as needed -->
-                    </select>
-                  </div>
+<%--                  <div id="batchField">--%>
+<%--                    <label for="batch">Batch:</label>--%>
+<%--                      <br>--%>
+<%--                    <select id="batch">--%>
+<%--                      <option value="" disabled selected>Select a batch</option>--%>
+<%--                        <%--%>
+<%--                            List<Batch> batches = (List<Batch>) request.getAttribute("batches");--%>
+<%--                            for (Batch batch : batches) {--%>
+<%--                        %>--%>
+<%--                      <option value="<%= batch.getId() %>"><%= batch.getName() %></option>--%>
+<%--                        <%--%>
+<%--                            }--%>
+<%--                        %>--%>
+<%--                    </select>--%>
+<%--                  </div>--%>
                 </div>
               </form>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" onclick="closeModal()">Close</button>
-              <button type="submit" form="myForm" class="btn btn-primary submit">Submit</button>
+              <button type="submit" form="UserAddForm" class="btn btn-primary submit">Submit</button>
             </div>
           </div>
         </div>
@@ -96,13 +104,11 @@
   <div class="data">
       <div class="batch-container">
           <%
-              // Retrieve the List<Batch> from request attributes
               List<Batch> batches = (List<Batch>) request.getAttribute("batches");
-
               // Iterate through the List<Batch>
               for (Batch batch : batches) {
           %>
-          <div class="header student-head" data-batch-id="batch-<%= String.valueOf(batch.getId()).replaceAll("[^a-zA-Z0-9-_]", "_") %>">
+          <div class="header student-head" data-batch-id="batch-<%= String.valueOf(batch.getId()).replaceAll("[^a-zA-Z0-9-_]", "_") %>" url-batch-id="<%=String.valueOf(batch.getId()) %>">
               <div class="batch" >
                   <h3>Batch: <%= batch.getName() %></h3>
               </div>
@@ -125,12 +131,12 @@
 
                   // Iterate through the List<Batch>
                   for (User student : students) { // Compare with batch name or id
+
               %>
                 <tr>
                   <td><%= student.getId() %></td>
                   <td><%= student.getName() %></td>
                   <td><%= student.getEmail() %></td>
-                  <td><%= student.getDob().substring(0, 10) %></td>
                   <td><%= student.getAge() %></td>
                   <td>
                       <button class="edit">
@@ -138,7 +144,7 @@
                       </button>
                   </td>
                   <td>
-                      <button class="delete">
+                      <button class="delete" data-user-id="<%= student.getId()%>">
                           <i class="bx bxs-trash bin"></i>
                       </button>
                   </td>
@@ -189,18 +195,39 @@
             <td><%= user.getId() %></td>
             <td><%= user.getName()   %></td>
             <td><%= user.getEmail() %></td>
+              <%
+                  if (user.getDob() == null || user.getDob().length() < 10) {
+                      user.setDob("N/A");
+              %>
+              <td>N/A</td>
+              <%
+                  }else{
+              %>
             <td><%= user.getDob().substring(0, 10) %></td>
+              <%
+                  }
+              %>
             <td>
               <button class="edit">
                 <i class="bx bx-edit write"></i>
               </button>
             </td>
             <td>
-              <button class="delete">
-                <i class="bx bxs-trash bin"></i>
-              </button>
+                <button class="delete" >
+                    <i class="bx bxs-trash bin"></i>
+                </button>
             </td>
           </tr>
+          <div class="delete-overlay">
+              <div class="delete-content">
+                  <span class="delete-close">&times;</span>
+                  <p>Do you want to delete this announcement?</p>
+                  <div class="delete-buttons">
+                      <button class="cancel-btn-delete">Cancel</button>
+                      <button class="ok-btn-delete" data-user-id="<%= user.getId()%>">OK</button>
+                  </div>
+              </div>
+          </div>
           <%
               }
             }
@@ -208,16 +235,7 @@
           </tbody>
             </table>
             </div>
-            <div class="delete-overlay">
-                <div class="delete-content">
-                    <span class="delete-close">&times;</span>
-                    <p>Do you want to delete this announcement?</p>
-                    <div class="delete-buttons">
-                        <button class="cancel-btn-delete">Cancel</button>
-                        <button class="ok-btn-delete">OK</button>
-                    </div>
-                </div>
-            </div>
+
             <!-- Popup Form -->
             <div class="popup-overlay">
           <div class="popup-content">
@@ -252,7 +270,85 @@
           </div>
         </div>
         </div>
-    </div>
+
+
+
+
+        <div class="orders">
+            <div class="header">
+                  <i class="bx bx-group"></i>
+                  <h3>Admin Details</h3>
+                  <div class="search-container">
+                <label>
+                    <input type="text" id="search-bar" class="search-bar" placeholder="Search...">
+                </label>
+            </div>
+        <table>
+          <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Birthday</th>
+            <th></th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody class="teacher-details">
+          <%
+              // Iterate through the List<Batch>
+              for (User user : users) {
+                      if("ADMIN".equals(user.getRole())){
+          %>
+          <tr>
+            <td><%= user.getId() %></td>
+            <td><%= user.getName()   %></td>
+            <td><%= user.getEmail() %></td>
+              <%
+                  if (user.getDob() == null || user.getDob().length() < 10) {
+                      user.setDob("N/A");
+              %>
+              <td>N/A</td>
+              <%
+                  }else{
+              %>
+            <td><%= user.getDob().substring(0, 10) %></td>
+              <%
+                  }
+              %>
+            <td>
+              <button class="edit">
+                <i class="bx bx-edit write"></i>
+              </button>
+            </td>
+            <td>
+                <button class="delete" >
+                    <i class="bx bxs-trash bin"></i>
+                </button>
+            </td>
+          </tr>
+          <div class="delete-overlay">
+              <div class="delete-content">
+                  <span class="delete-close">&times;</span>
+                  <p>Do you want to delete this announcement?</p>
+                  <div class="delete-buttons">
+                      <button class="cancel-btn-delete">Cancel</button>
+                      <button class="ok-btn-delete" data-user-id="<%= user.getId()%>">OK</button>
+                  </div>
+              </div>
+          </div>
+          <%
+              }
+            }
+          %>
+          </tbody>
+            </table>
+            </div>
+
+
+        </div>
+        </div>
+
 
 <script>
   const pageContextPath = "${pageContext.request.contextPath}";

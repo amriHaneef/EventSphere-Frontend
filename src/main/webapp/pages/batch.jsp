@@ -1,5 +1,6 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.example.eventspherefrontend.model.Batch" %>
+<%@ page import="com.example.eventspherefrontend.model.User" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%
@@ -35,26 +36,30 @@
     <div class="popup-container">
         <span class="popup-close">&times;</span>
         <h3>Add Batch Details</h3>
-        <form id="addBatchForm">
+        <form id="addBatchForm" method="post" action="${pageContext.request.contextPath}/pages/batches">
+            <input type="hidden" name="addBatch" value="createBatch">
+
             <div class="form-group">
                 <label for="batchname">Batch Name:</label>
                 <input type="text" id="batchname" name="batchName" required>
             </div>
             <div class="form-group">
+                <label for="consultTd">consultantId:</label>
+                <input type="text" id="consultTd" name="consultant" required>
+            </div>
+
+            <div class="form-group">
                 <label for="startdate">Start Date:</label>
                 <input type="date" id="startdate" name="startDate" required>
             </div>
+
             <div class="form-group">
-                <label for="enddate">End Date:</label>
-                <input type="date" id="enddate" name="endDate" required>
-            </div>
-            <div class="form-group">
-                <label for="lecturer">Lecturer:</label>
-                <input type="text" id="lecturer" name="lecturer" required>
+                <label for="status">status:</label>
+                <input type="text" id="status" name="lecturer" required>
             </div>
             <div class="popup-buttons">
                 <button type="button" class="cancel-btn">Cancel</button>
-                <button type="submit" class="save-btn">Save</button>
+                <button type="submit"  class="save-btn">Save</button>
             </div>
         </form>
     </div>
@@ -164,28 +169,19 @@
             </thead>
             <tbody>
             <%
-                Object studentData = request.getAttribute("batches");
-                if (studentData instanceof List) {
-                    List<String[]> students = (List<String[]>) studentData;
-                    for (String[] student : students) {
+                List<User> students = (List<User>) request.getAttribute("students");
+                for (User student : students) {
             %>
             <tr>
-                <td><%= student[5] %></td>
-                <td><%= student[6] %></td>
+                <td><%= student.getId() %></td>
+                <td><%= student.getName() %></td>
             </tr>
             <%
                 }
-            } else {
+            }
             %>
-            <tr>
-                <td colspan="8">No students available.</td>
-            </tr>
-            <% } %>
             </tbody>
         </table>
-        <%
-            }
-        %>
 
         <!-- Popup delete Form -->
         <div class="popup-overlay">
