@@ -178,12 +178,8 @@
             </tr>
             <%
                 }
-            } else {
+            }
             %>
-            <tr>
-                <td colspan="8">No students available.</td>
-            </tr>
-            <% } %>
             </tbody>
         </table>
 

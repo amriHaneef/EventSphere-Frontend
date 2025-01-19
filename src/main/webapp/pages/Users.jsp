@@ -74,21 +74,21 @@
                     <!-- Add more options as needed -->
                   </select>
 
-                  <div id="batchField">
-                    <label for="batch">Batch:</label>
-                      <br>
-                    <select id="batch">
-                      <option value="" disabled selected>Select a batch</option>
-                        <%
-                            List<Batch> batches = (List<Batch>) request.getAttribute("batches");
-                            for (Batch batch : batches) {
-                        %>
-                      <option value="<%= batch.getId() %>"><%= batch.getName() %></option>
-                        <%
-                            }
-                        %>
-                    </select>
-                  </div>
+<%--                  <div id="batchField">--%>
+<%--                    <label for="batch">Batch:</label>--%>
+<%--                      <br>--%>
+<%--                    <select id="batch">--%>
+<%--                      <option value="" disabled selected>Select a batch</option>--%>
+<%--                        <%--%>
+<%--                            List<Batch> batches = (List<Batch>) request.getAttribute("batches");--%>
+<%--                            for (Batch batch : batches) {--%>
+<%--                        %>--%>
+<%--                      <option value="<%= batch.getId() %>"><%= batch.getName() %></option>--%>
+<%--                        <%--%>
+<%--                            }--%>
+<%--                        %>--%>
+<%--                    </select>--%>
+<%--                  </div>--%>
                 </div>
               </form>
             </div>
@@ -104,6 +104,7 @@
   <div class="data">
       <div class="batch-container">
           <%
+              List<Batch> batches = (List<Batch>) request.getAttribute("batches");
               // Iterate through the List<Batch>
               for (Batch batch : batches) {
           %>
@@ -143,7 +144,7 @@
                       </button>
                   </td>
                   <td>
-                      <button class="delete">
+                      <button class="delete" data-user-id="<%= student.getId()%>">
                           <i class="bx bxs-trash bin"></i>
                       </button>
                   </td>
@@ -212,11 +213,21 @@
               </button>
             </td>
             <td>
-              <button class="delete">
-                <i class="bx bxs-trash bin"></i>
-              </button>
+                <button class="delete" >
+                    <i class="bx bxs-trash bin"></i>
+                </button>
             </td>
           </tr>
+          <div class="delete-overlay">
+              <div class="delete-content">
+                  <span class="delete-close">&times;</span>
+                  <p>Do you want to delete this announcement?</p>
+                  <div class="delete-buttons">
+                      <button class="cancel-btn-delete">Cancel</button>
+                      <button class="ok-btn-delete" data-user-id="<%= user.getId()%>">OK</button>
+                  </div>
+              </div>
+          </div>
           <%
               }
             }
@@ -224,16 +235,7 @@
           </tbody>
             </table>
             </div>
-            <div class="delete-overlay">
-                <div class="delete-content">
-                    <span class="delete-close">&times;</span>
-                    <p>Do you want to delete this announcement?</p>
-                    <div class="delete-buttons">
-                        <button class="cancel-btn-delete">Cancel</button>
-                        <button class="ok-btn-delete">OK</button>
-                    </div>
-                </div>
-            </div>
+
             <!-- Popup Form -->
             <div class="popup-overlay">
           <div class="popup-content">
@@ -268,7 +270,85 @@
           </div>
         </div>
         </div>
-    </div>
+
+
+
+
+        <div class="orders">
+            <div class="header">
+                  <i class="bx bx-group"></i>
+                  <h3>Admin Details</h3>
+                  <div class="search-container">
+                <label>
+                    <input type="text" id="search-bar" class="search-bar" placeholder="Search...">
+                </label>
+            </div>
+        <table>
+          <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Birthday</th>
+            <th></th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody class="teacher-details">
+          <%
+              // Iterate through the List<Batch>
+              for (User user : users) {
+                      if("ADMIN".equals(user.getRole())){
+          %>
+          <tr>
+            <td><%= user.getId() %></td>
+            <td><%= user.getName()   %></td>
+            <td><%= user.getEmail() %></td>
+              <%
+                  if (user.getDob() == null || user.getDob().length() < 10) {
+                      user.setDob("N/A");
+              %>
+              <td>N/A</td>
+              <%
+                  }else{
+              %>
+            <td><%= user.getDob().substring(0, 10) %></td>
+              <%
+                  }
+              %>
+            <td>
+              <button class="edit">
+                <i class="bx bx-edit write"></i>
+              </button>
+            </td>
+            <td>
+                <button class="delete" >
+                    <i class="bx bxs-trash bin"></i>
+                </button>
+            </td>
+          </tr>
+          <div class="delete-overlay">
+              <div class="delete-content">
+                  <span class="delete-close">&times;</span>
+                  <p>Do you want to delete this announcement?</p>
+                  <div class="delete-buttons">
+                      <button class="cancel-btn-delete">Cancel</button>
+                      <button class="ok-btn-delete" data-user-id="<%= user.getId()%>">OK</button>
+                  </div>
+              </div>
+          </div>
+          <%
+              }
+            }
+          %>
+          </tbody>
+            </table>
+            </div>
+
+
+        </div>
+        </div>
+
 
 <script>
   const pageContextPath = "${pageContext.request.contextPath}";

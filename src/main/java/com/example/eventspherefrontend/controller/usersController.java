@@ -150,4 +150,35 @@ public class usersController extends HttpServlet {
         // Forward the request to Users.jsp
         request.getRequestDispatcher("/pages/Users.jsp").forward(request, response);
     }
+
+    @Override
+    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        String jwtToken = (String) session.getAttribute("jwtToken");
+        String userId = request.getParameter("userId");
+
+        if (jwtToken == null || userId == null) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            response.getWriter().write("Invalid request. JWT Token or User ID is missing.");
+            return;
+        }
+
+        try {
+            UserService userService = new UserService();
+            boolean isDeleted = userService.deleteUser(Integer.parseInt(userId), jwtToken);
+
+            if (isDeleted) {
+                response.setStatus(HttpServletResponse.SC_OK);
+            } else {
+                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            response.getWriter().write("An error occurred while deleting the user.");
+        }
+    }
+
+
+
 }

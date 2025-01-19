@@ -108,4 +108,28 @@ public class UserService {
             return false;
         }
     }
+
+
+    public boolean deleteUser(int userId, String jwtToken) {
+        try {
+            URL url = new URL("http://13.60.250.63:8081/user/remove/" + userId);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("DELETE");
+            connection.setRequestProperty("Authorization", "Bearer " + jwtToken);
+
+            int responseCode = connection.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK || responseCode == HttpURLConnection.HTTP_NO_CONTENT) {
+                System.out.println("User deleted successfully.");
+                return true;
+            } else {
+                System.out.println("Failed to delete user. HTTP response code: " + responseCode);
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
 }

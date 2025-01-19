@@ -133,6 +133,9 @@ function closeModal() {
 
 // ---------------------- End of Add User Popup Modal Form -------------------------------------------
 
+
+
+
 // --------------------------- Batch Toggle Process --------------------------------------------------
 function initializeBatchToggle() {
     const batchHeaders = document.querySelectorAll(".student-head");
@@ -169,11 +172,10 @@ const initializeDeleteUsers = () => {
     const deleteOverlay = document.querySelector('.delete-overlay');
     const closeBtn = document.querySelector('.delete-close');
     const cancelBtn = document.querySelector('.cancel-btn-delete');
-    const okBtn = document.querySelector('.ok-btn-delete');
 
     deleteButtons.forEach((deleteButton) => {
         deleteButton.addEventListener('click', () => {
-            deleteOverlay.style.display = 'flex';
+            deleteOverlay.style.display = 'block';
             deleteOverlay.style.opacity = '1';
         });
     });
@@ -188,11 +190,6 @@ const initializeDeleteUsers = () => {
         deleteOverlay.style.opacity = '0';
     });
 
-    okBtn.addEventListener('click', () => {
-        console.log('Announcement Deleted');
-        deleteOverlay.style.display = 'none';
-        deleteOverlay.style.opacity = '0';
-    });
 };
 
 
@@ -274,4 +271,41 @@ document.addEventListener("DOMContentLoaded", function () {
                 });
         });
     });
+
+
+
+    document.querySelectorAll('.delete').forEach(button => {
+        button.addEventListener('click', function () {
+            const userId = this.getAttribute('data-user-id');
+            if (confirm('Are you sure you want to delete this user?')) {
+                deleteUser(userId);
+            }
+        });
+    });
+
+    function deleteUser(userId) {
+        fetch(`http://13.60.250.63:8081/user/remove/${userId}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${sessionStorage.getItem('jwtToken')}`, // Replace with your method of storing the JWT token
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => {
+                if (response.ok) {
+                    alert('User deleted successfully!');
+                    window.location.reload(); // Refresh the page to show updated user list
+                } else {
+                    response.text().then(error => {
+                        console.error('Failed to delete user:', error);
+                        alert('Failed to delete user.');
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error deleting user:', error);
+                alert('An error occurred while deleting the user.');
+            });
+    }
+
 });
