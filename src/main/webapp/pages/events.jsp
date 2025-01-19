@@ -1,9 +1,11 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.lang.String" %>
+<%@ page import="com.example.eventspherefrontend.model.Event" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%
     String role = (String) session.getAttribute("role");
+    String name = (String) session.getAttribute("username");
 %>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/event.css">
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -39,10 +41,14 @@
     <div class="popup-container">
         <span class="popup-close">&times;</span>
         <h3>Add Event Details</h3>
-        <form id="addeventForm">
+        <form id="addeventForm" action="${pageContext.request.contextPath}/pages/events" method="post">
             <div class="form-group">
                 <label for="eventname">Event Name:</label>
                 <input type="text" id="eventname" name="eventName" required>
+            </div>
+            <div class="form-group">
+                <label for="eventType">Event Type:</label>
+                <input type="text" id="eventType" name="eventType" required>
             </div>
             <div class="form-group">
                 <label for="date">Date:</label>
@@ -58,7 +64,7 @@
             </div>
             <div class="form-group">
                 <label for="lecturername">Lecturer:</label>
-                <input type="text" id="lecturername" name="lecturername" required>
+                <input type="text" id="lecturername" name="lecturername"  required>
             </div>
             <div class="popup-buttons">
                 <button type="button" class="cancel-btn">Cancel</button>
@@ -96,19 +102,17 @@
                 </thead>
                 <tbody>
                 <%
-                    Object eventsObject = request.getAttribute("events");
-                    if (eventsObject instanceof List) {
-                        List<String[]> events = (List<String[]>) eventsObject;
-                        for (String[] event : events) {
+                    List<Event> events = (List<Event>) request.getAttribute("events");
+                        for (Event event : events) {
                 %>
                 <tr>
-                    <td><%= event[0] %></td>
-                    <td><%= event[1] %></td>
-                    <td><%= event[2] %></td>
-                    <td><%= event[3] %></td>
-                    <td><%= event[4] %></td>
-                    <td><%= event[5] %></td>
-                    <td><%= event[6] %></td>
+                    <td ><%= event.getId() %></td>
+                    <td><%= event.getTitle() %></td>
+                    <td><%= event.getEventDate().substring(0, 10) %></td>
+                    <td><%= event.getTimePeriod().substring(0, 10) %></td>
+                    <td><%= event.getPlatform() %></td>
+                    <td><%= event.getCoordinatorName() %></td>
+                    <td><%= event.getStatus() %></td>
 
                     <%
                         if ("admin".equalsIgnoreCase(role) || "teacher".equalsIgnoreCase(role)) {
@@ -127,11 +131,9 @@
                         </button>
                     </td>
                     <td>
-                        <button class="view" onclick="showEventDetails('<%= event[0] %>', '<%= event[1] %>', '<%= event[2] %>', '<%= event[3] %>', '<%= event[4] %>', '<%= event[5] %>', '<%= event[6] %>')">
+                        <button class="view" onclick="showEventDetails('<%= event.getId() %>', '<%= event.getTitle() %>', '<%= event.getEventDate().substring(0, 10) %>', '<%= event.getTimePeriod().substring(0, 10) %>', '<%= event.getPlatform() %>', '<%= event.getCoordinatorName() %>', '<%= event.getStatus() %>')">
                             <i class="bx bx-show eye"></i>
                         </button>
-
-
                     </td>
                     <%
                         }
@@ -141,7 +143,6 @@
                     %>
                 </tr>
                 <%
-                        }
                     }
                 %>
                 </tbody>
@@ -166,7 +167,7 @@
         <div class="edit-Content">
             <span class="edit-Close">&times;</span>
             <h3>Edit Student Details</h3>
-            <form id="editeventForm">
+            <form id="editeventForm" action="">
                 <div class="form-group">
                     <label for="event-id">Event Id:</label>
                     <input type="text" id="event-id" class="form-control" name="eventid" required>

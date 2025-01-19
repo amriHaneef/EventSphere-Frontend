@@ -127,7 +127,7 @@ body.dark{
 
 .content main .header .modal-content {
     padding: 20px;
-    max-height: 90vh; /* Restrict content height */
+    max-height: 95vh; /* Restrict content height */
     overflow-y: auto; /* Enable scrolling if content is too long */
 }
 

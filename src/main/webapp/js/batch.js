@@ -36,7 +36,6 @@ const initializeAddBatches = () => {
     const addBatchPopup = document.querySelector('.add-batch-popup');
     const closeAddPopupButton = document.querySelector('.popup-close');
     const cancelAddPopupButton = document.querySelector('.cancel-btn');
-    const addBatchForm = document.querySelector('#addBatchForm');
 
     if (addButton && addBatchPopup) {
         addButton.addEventListener('click', () => {
@@ -59,14 +58,6 @@ const initializeAddBatches = () => {
         cancelAddPopupButton.addEventListener('click', closePopup);
     }
 
-    // Handle form submission
-    if (addBatchForm) {
-        addBatchForm.addEventListener('submit', (e) => {
-            e.preventDefault(); // Prevent default form submission
-            console.log('Add Batch Form submitted!');
-            closePopup();
-        });
-    }
 };
 
 

@@ -98,4 +98,12 @@
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/pages/login</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>LogoutController</servlet-name>
+        <servlet-class>com.example.eventspherefrontend.controller.LogoutController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LogoutController</servlet-name>
+        <url-pattern>/pages/logout</url-pattern>
+    </servlet-mapping>
 </web-app>

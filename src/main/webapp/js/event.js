@@ -37,7 +37,6 @@ const initializeAddEvents = () => {
     const addEventPopup = document.querySelector('.add-event-popup');
     const closeAddPopupButton = document.querySelector('.popup-close');
     const cancelAddPopupButton = document.querySelector('.cancel-btn');
-    const addEventForm = document.querySelector('#addeventForm');
 
     if (addButton && addEventPopup) {
         addButton.addEventListener('click', () => {
@@ -59,13 +58,6 @@ const initializeAddEvents = () => {
         cancelAddPopupButton.addEventListener('click', closePopup);
     }
 
-    if (addEventForm) {
-        addEventForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            console.log('Add Event Form submitted!');
-            closePopup();
-        });
-    }
 };
 
 // Initialize Delete Events functionality

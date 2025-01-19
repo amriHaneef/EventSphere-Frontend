@@ -1,9 +1,13 @@
 package com.example.eventspherefrontend.controller;
 
 import com.example.eventspherefrontend.model.Announcement;
+import com.example.eventspherefrontend.model.Batch;
 import com.example.eventspherefrontend.model.Event;
+import com.example.eventspherefrontend.model.User;
 import com.example.eventspherefrontend.service.AnnouncementService;
+import com.example.eventspherefrontend.service.BatchService;
 import com.example.eventspherefrontend.service.EventService;
+import com.example.eventspherefrontend.service.UserService;
 import com.google.gson.reflect.TypeToken;
 
 import jakarta.servlet.ServletException;
@@ -21,7 +25,9 @@ import java.util.List;
 @WebServlet(name = "DashboardHomeController", urlPatterns = "/pages/Home")
 public class DashboardHomeController extends HttpServlet {
     private final AnnouncementService announcementService = new AnnouncementService();
+    private final BatchService batchService = new BatchService();
     private final EventService eventService = new EventService();
+    private final UserService userService = new UserService();
 
 
     @Override
@@ -42,18 +48,22 @@ public class DashboardHomeController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         String jwtToken = (String) session.getAttribute("jwtToken");
-        String selectedDate = (String) session.getAttribute("eventDate");
 
-        if (jwtToken == null) {
-            response.sendRedirect(request.getContextPath() + "/login.jsp");
-            return;
+
+        Type eventListType = new TypeToken<List<Event>>() {}.getType();
+        List<Event> events = eventService.fetchAllEvents(jwtToken, eventListType);
+
+        if (events == null) {
+            events = new ArrayList<>();
         }
 
-        if (selectedDate == null || selectedDate.isEmpty()) {
-            selectedDate = ""; // Default date
+        Type batchListType = new TypeToken<List<Batch>>() {}.getType();
+        List<Batch> batches = batchService.fetchBatches(jwtToken, batchListType);
+
+        if (batches == null) {
+            batches = new ArrayList<>();
         }
 
-        List<Event> events = eventService.fetchEvents(selectedDate, jwtToken);
         Type announcementListType = new TypeToken<List<Announcement>>() {}.getType();
         List<Announcement> announcements = announcementService.fetchAnnouncements(jwtToken, announcementListType);
 
@@ -61,8 +71,18 @@ public class DashboardHomeController extends HttpServlet {
             announcements = new ArrayList<>();
         }
 
+        // Fetch users using a TypeToken
+        Type userListType = new TypeToken<List<User>>() {}.getType();
+        List<User> users = userService.fetchUsers(jwtToken, userListType);
+
+        if (users == null) {
+            users = new ArrayList<>(); // Fallback to an empty list if the API call fails
+        }
+
         request.setAttribute("events", events);
+        request.setAttribute("batches", batches);
         request.setAttribute("announcements", announcements);
+        request.setAttribute("users", users);
 
         request.getRequestDispatcher("/pages/DashboardHome.jsp").forward(request, response);
     }

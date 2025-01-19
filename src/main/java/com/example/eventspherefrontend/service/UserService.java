@@ -6,7 +6,9 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.BufferedReader;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -14,7 +16,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserService {
-    private static final String USERS_API_URL = "http://13.60.250.63:8081/user/getAll"; // Replace with actual API endpoint
+    private static final String USERS_API_URL = "http://13.60.250.63:8081/user/getAll";
+    private static final String ADD_USER_API_URL = "http://13.60.250.63:8081/user/register"; // Replace with actual API endpoint
+    // Replace with actual API endpoint
     private final Gson gson = new GsonBuilder().create();
 
     /**
@@ -54,4 +58,78 @@ public class UserService {
         }
         return users;
     }
+
+    public boolean addUser(User user, String jwtToken) {
+        try {
+            URL url = new URL(ADD_USER_API_URL);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("POST");
+            connection.setRequestProperty("Content-Type", "application/json");
+            connection.setRequestProperty("Authorization", "Bearer " + jwtToken);
+            connection.setDoOutput(true);
+
+            // Convert the User object to JSON
+            String userJson = gson.toJson(user);
+
+            // Write the JSON to the request body
+            System.out.println("User JSON Payload: " + userJson);
+
+            // Write the JSON to the request body
+            try (OutputStream os = connection.getOutputStream()) {
+                byte[] input = userJson.getBytes("utf-8");
+                os.write(input, 0, input.length);
+            }
+
+            // Get the response code
+            int responseCode = connection.getResponseCode();
+
+            // Check the response code
+            // Check the response code
+            if (responseCode == HttpURLConnection.HTTP_OK || responseCode == HttpURLConnection.HTTP_CREATED) {
+                return true;
+            } else {
+                // Read the response body to get more information about the failure
+                InputStream errorStream = connection.getErrorStream();
+                if (errorStream != null) {
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(errorStream));
+                    StringBuilder errorResponse = new StringBuilder();
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        errorResponse.append(line);
+                    }
+                    System.out.println("Error Response: " + errorResponse.toString());
+                }
+                System.out.println("Failed to add user. HTTP response code: " + responseCode);
+                return false;
+            }
+
+        }   catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
+    public boolean deleteUser(int userId, String jwtToken) {
+        try {
+            URL url = new URL("http://13.60.250.63:8081/user/remove/" + userId);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("DELETE");
+            connection.setRequestProperty("Authorization", "Bearer " + jwtToken);
+
+            int responseCode = connection.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK || responseCode == HttpURLConnection.HTTP_NO_CONTENT) {
+                System.out.println("User deleted successfully.");
+                return true;
+            } else {
+                System.out.println("Failed to delete user. HTTP response code: " + responseCode);
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
 }
