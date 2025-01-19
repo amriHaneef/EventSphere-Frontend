@@ -38,7 +38,6 @@ public class EventController extends HttpServlet {
             String date = request.getParameter("Date");
             String time = request.getParameter("time");
             String platform = request.getParameter("platform");
-            String lecturerName = request.getParameter("lecturername");
             // Get the current date and time
             String currentDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"));
 
@@ -50,7 +49,6 @@ public class EventController extends HttpServlet {
             newEvent.setEventDate(date);
             newEvent.setTimePeriod(time);
             newEvent.setPlatform(platform);
-            newEvent.setCoordinatorName(lecturerName);
             newEvent.setStatus("ACTIVE");
             // Set the current date and time as the createdAt value
             newEvent.setCreatedAt(currentDateTime);  // Assuming there's a setCreatedAt method in the Event class
