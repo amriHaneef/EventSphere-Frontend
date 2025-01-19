@@ -1,6 +1,7 @@
 package com.example.eventspherefrontend.controller;
 
 import com.example.eventspherefrontend.model.Batch;
+import com.example.eventspherefrontend.model.User;
 import com.example.eventspherefrontend.service.BatchService;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -72,6 +73,7 @@ public class BatchController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         String jwtToken = (String) session.getAttribute("jwtToken");
+        String batchId = request.getParameter("batchId");
 
         if (jwtToken == null) {
             response.sendRedirect(request.getContextPath() + "/login.jsp");
@@ -85,6 +87,15 @@ public class BatchController extends HttpServlet {
             batches = new ArrayList<>();
         }
 
+        // Fetch batch-related students using the BatchService
+        Type studentListType = new TypeToken<List<User>>() {}.getType();
+        List<User> students = batchService.fetchBatchStudents(jwtToken, batchId, studentListType);
+
+        if (students == null) {
+            students = new ArrayList<>();
+        }
+
+        request.setAttribute("students", students);
         request.setAttribute("batches", batches);
         request.getRequestDispatcher("/pages/batch.jsp").forward(request, response);
     }

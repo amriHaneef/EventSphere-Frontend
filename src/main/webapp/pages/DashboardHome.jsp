@@ -3,6 +3,8 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.lang.String" %>
 <%@ page import="com.example.eventspherefrontend.model.Announcement" %>
+<%@ page import="com.example.eventspherefrontend.model.User" %>
+<%@ page import="com.example.eventspherefrontend.model.Batch" %>
 <%
     String redirected = request.getParameter("redirected");
     if (redirected == null) {
@@ -212,13 +214,27 @@
             <!-- -------------------End Of Sales--------------------  -->
             <!-- --------------------------------------------End Of Insight---------------------------------------------------  -->
         </div>
+        <%
+            if  ("admin".equalsIgnoreCase(role)) {
+        %>
         <ul class="insights">
             <a href="#">
                 <li>
                     <i class="bx bx-group"></i>
                     <span class="info">
+                        <%
+                            int totalCountUsers = 0;
+                            List<User> users = (List<User>) request.getAttribute("users");
+                            if (users != null) {
+                                for (User user : users) {
+                                    totalCountUsers++;
+                                }
+                            }else{
+                                totalCountUsers = 0;
+                            }
+                        %>
                                 <h3>
-                                    1,074
+                                    <%= totalCountUsers%>
                                 </h3>
                                 <p>Users</p>
                             </span>
@@ -228,8 +244,14 @@
                 <li >
                     <i class="bx bx-calendar-check"></i>
                     <span class="info">
+                        <%
+                            int totalCountEvents = 0;
+                            for (Event event : events) {
+                                totalCountEvents++;
+                            }
+                        %>
                                 <h3>
-                                    1,074
+                                    <%= totalCountEvents%>
                                 </h3>
                                 <p>Events</p>
                             </span>
@@ -239,27 +261,47 @@
                 <li>
                     <i class='bx bxs-book-open'></i>
                     <span class="info">
+                        <%
+                            int totalCountBatches = 0;
+                            List<Batch> batches = (List<Batch>) request.getAttribute("batches");
+                            for (Batch batch : batches) {
+                                totalCountBatches++;
+                            }
+                        %>
                                 <h3>
-                                    1,074
+                                    <%= totalCountBatches%>
                                 </h3>
                                 <p>Batches</p>
                             </span>
                 </li>
             </a>
+            <a href="#">
+                <li>
+                    <i class='bx bxs-megaphone'></i>
+                    <span class="info">
+                        <%
+                            int totalCountAnnouncements = 0;
+                            for (Announcement announcement : announcements) {
+                                totalCountAnnouncements++;
+                            }
+                        %>
+                                <h3>
+                                    <%= totalCountAnnouncements %>
+                                </h3>
+                                <p>Announcements</p>
+                            </span>
+                </li>
+            </a>
         </ul>
+        <%
+            }
+        %>
         <!-- End of Insights  -->
         <div class="bottom-data">
             <div class="orders">
                 <div class="header">
                     <i class="bx bx-calendar-check"></i>
                     <h3>Events</h3>
-                    <div class="date-selection">
-                        <form id="date-form" action="${pageContext.request.contextPath}/pages/Home" method="post">
-                            <input type="date" name="eventDate" class="date-input" id="date-input" value="${eventDate}">
-                            <button type="submit" class="date-btn" id="submit-btn">submit</button>
-                        </form>
-                    </div>
-                    <div id="message"></div>
                     <div class="search-container">
                         <label>
                             <input type="text" id="search-bar" class="search-bar" placeholder="Search...">

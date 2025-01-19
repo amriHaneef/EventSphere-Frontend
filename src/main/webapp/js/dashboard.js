@@ -126,6 +126,27 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    if(urlParams.get("success") === "addEvent"){
+        const eventsLink = document.getElementById("events-link");
+
+
+        if (eventsLink) {
+            // Remove active class from all other links
+            const sideLinks = document.querySelectorAll('.sidebar .side-menu li a:not(.logout)');
+            sideLinks.forEach(item => {
+                const li = item.parentElement;
+                li.classList.remove('active');
+            });
+            eventsLink.classList.add('active'); // Add active class directly to the <li> element
+            console.log("Active class added.");
+
+            // Optionally, load the announcement page
+            loadEventsPage();
+        } else {
+            console.error("events link not found!");
+        }
+    }
+
 // Function to load the announcement page dynamically
     function loadAnnouncementPage() {
         const announcementsContent = document.getElementById("main-content");
@@ -182,6 +203,25 @@ document.addEventListener("DOMContentLoaded", function () {
                 UsersContent.innerHTML = html;
             })
             .catch(error => console.error("Error loading users:", error));
+    }
+
+    function loadEventsPage() {
+            const eventsContent = document.getElementById("main-content");
+
+            // Dynamically use context path from the hidden input
+            const contextPath = document.getElementById("pageContextPath").value;
+
+            fetch(`${contextPath}/pages/events`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Failed to load events. Status: " + response.status);
+                    }
+                    return response.text();
+                })
+                .then(html => {
+                    eventsContent.innerHTML = html;
+                })
+                .catch(error => console.error("Error loading events:", error));
     }
 
 
