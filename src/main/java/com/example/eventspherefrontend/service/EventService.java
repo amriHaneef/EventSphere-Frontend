@@ -63,13 +63,12 @@ public class EventService {
 
             // Create JSON payload using String.format
             String jsonPayload = String.format(
-                    "{\"title\": \"%s\", \"type\": \"%s\", \"eventDate\": \"%s\", \"timePeriod\": \"%s\", \"platform\": \"%s\", \"coordinatorName\": \"%s\", \"status\": \"%s\", \"createdAt\":\"%s\"}",
+                    "{\"title\": \"%s\", \"type\": \"%s\", \"eventDate\": \"%s\", \"timePeriod\": \"%s\", \"platform\": \"%s\", \"status\": \"%s\", \"createdAt\":\"%s\"}",
                     event.getTitle(),
                     event.getType(),
                     event.getEventDate(),
                     event.getTimePeriod(),
                     event.getPlatform(),
-                    event.getCoordinatorName(),
                     event.getStatus(),
                     event.getCreatedAt()
             );
